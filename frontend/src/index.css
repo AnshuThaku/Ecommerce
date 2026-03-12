@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+
+/* ── Browser autofill: keep dark background ─────────────────────── */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #ffffff;
+  /* Overrides the forced yellow/blue with a dark bg matching our forms */
+  -webkit-box-shadow: 0 0 0 1000px #1a1a1a inset;
+  transition: background-color 5000s ease-in-out 0s;
+  caret-color: #ffffff;
+}
+
+/* ── Browser autofill: float the label up (peer-placeholder-shown fix) */
+input:-webkit-autofill ~ label,
+input:-webkit-autofill:hover ~ label,
+input:-webkit-autofill:focus ~ label {
+  top: 0.5rem !important;         /* top-2 */
+  font-size: 0.625rem !important; /* text-[10px] */
+  font-weight: 600 !important;
+  letter-spacing: 0.1em !important;
+  color: #C8A253 !important;
+}
