@@ -24,6 +24,9 @@ import AdminLayout             from './layouts/AdminLayout';
 import AdminProducts           from './pages/Admin/AdminProducts';
 import AdminOrders             from './pages/Admin/AdminOrders';
 import AdminUsers              from './pages/Admin/AdminUsers';
+import OrderSuccess from './pages/orderSuccess';
+import SearchResults from './pages/SearchResult';
+import Home from './pages/Home/Home';
 
 function App() {
   return (
@@ -36,12 +39,16 @@ function App() {
           <Route path="/register"         element={<CustomerRegister />} />
           
           {/* ShopHome is now public, accessible to anyone */}
-          <Route path="/"                 element={<ShopHome />} />
+          <Route path="/"                 element={<Home />} />
           <Route path="/shop"             element={<ShopHome />} />
           <Route path="/products"         element={<ShopHome />} />
           <Route path="/cart"             element={<Cart />} />
-          <Route path="/:product_name/p/:id" element={<ProductDetails />} />
-          <Route path="/product/:id"      element={<ProductDetails />} />
+          
+          {/* 👇 SEO FRIENDLY URLs (AMAZON STYLE) 👇 */}
+          <Route path="/:category/:brand/:product_name/p/:id" element={<ProductDetails />} />
+          <Route path="/:category/:product_name/p/:id" element={<ProductDetails />} /> {/* Fallback if no brand */}
+          <Route path="/product/:id"      element={<ProductDetails />} /> {/* Legacy route for safety */}
+
           {/* ── First-time password setup (both roles) ──────── */}
           <Route
             path="/update-password"
@@ -93,6 +100,13 @@ function App() {
           <Route path="/orders" element={
             <ProtectedRoute roles={['customer']}>
               <div className="text-white p-10">My Orders</div>
+            </ProtectedRoute>
+          } />
+        
+          <Route path="/search" element={<SearchResults />} />
+          <Route path='/order-success' element={
+            <ProtectedRoute roles={['customer']}>
+              <OrderSuccess/>
             </ProtectedRoute>
           } />
         </Routes>

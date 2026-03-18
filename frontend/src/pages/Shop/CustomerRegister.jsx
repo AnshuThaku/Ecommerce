@@ -3,6 +3,9 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import Toast from '../../components/Toast';
 import { useAuth } from '../../context/AuthContext';
+import ReCAPTCHA from 'react-google-recaptcha';
+
+const recaptchaRef = React.createRef();
 
 const Field = ({ label, ...props }) => (
   <div className="relative mb-5">
@@ -39,7 +42,7 @@ export default function CustomerRegister() {
         // Auto log in after successful signup
         login(response.data.token, response.data.user);
         setToast({ type: 'success', message: 'Registration successful! Welcome.' });
-        setTimeout(() => navigate('/shop'), 1200); // Redirect to shop dashboard
+        setTimeout(() => navigate('/'), 1200); // Redirect to shop dashboard
       }
     } catch (err) {
       setToast({ type: 'error', message: err.response?.data?.error || 'Registration failed.' });
@@ -76,6 +79,14 @@ export default function CustomerRegister() {
               {loading ? 'Creating Account...' : 'Sign Up'}
             </button>
           </form>
+          <ReCAPTCHA
+  ref={recaptchaRef}
+  sitekey={import.meta.env.VITE_GOOGLE_SITE_KEY}
+  onChange={(token) => setCaptchaToken(token)}
+  theme="dark"
+/>
+            
+            
 
           <p className="text-center text-sm text-zinc-500 mt-6">
             Already have an account?{' '}
@@ -86,5 +97,6 @@ export default function CustomerRegister() {
         </div>
       </div>
     </div>
+    
   );
 }

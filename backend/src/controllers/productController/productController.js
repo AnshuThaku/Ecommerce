@@ -2,53 +2,37 @@ const Product = require('../../models/product/productModel');
 const wrapAsync = require('../../utils/errorHandler/wrapAsync');
 const ExpressError = require('../../utils/errorHandler/expressError');
 const { PutObjectCommand, DeleteObjectCommand } = require("@aws-sdk/client-s3");
-const r2 = require("../../config/cloudConfig/cloudConfig");
+const mongoose = require('mongoose');
+const r2 = require("../../config/cloudConfig");
 
 // @desc    Create new product
 // @route   POST /api/products/admin/product/new
 // @access  Private (Admin/Company)
 exports.createProduct = wrapAsync(async (req, res, next) => {
-  const{name,description,price,category} = req.body;
+  console.log("--- BACKEND DATA RECEIVED ---");
+  console.log("Req Files:", req.files);
+  const { name, description, price, category, brand, stock, isActive, discountPrice } = req.body;
 
   if (!name || !description || !price || !category) {
     throw new ExpressError(400, 'Name, description, price, and category are required.');
   }
-  let productData = { ...req.body };
-  
-  // Set seller from authenticated user
-  productData.seller = req.user._id;
 
-  // Separate main images and variant images from req.files
-  const mainImages = req.files?.filter(f => f.fieldname === 'images') || [];
-  const variantImageFiles = req.files?.filter(f => f.fieldname.startsWith('variantImage_')) || [];
+  let productData = {
+    name,
+    description,
+    price: Number(price),
+    discountPrice: discountPrice ? Number(discountPrice) : 0,
+    category,
+    brand,
+    stock: stock ? Number(stock) : 1,
+    isActive: isActive === 'true' || isActive === true,
+    seller: req.user._id,
+    images: [], 
+    variants: [] 
+  };
 
-  // Handle main product images upload
-  if (mainImages.length > 0) {
-    const uploadedImages = [];
-    
-    for (const file of mainImages) {
-      const folderName = "ProductDetails";
-      const cleanFileName = `${Date.now()}-${file.originalname.replace(/\s+/g, "-").toLowerCase()}`;
-      const key = `${folderName}/${cleanFileName}`;
+  const variantImageFiles = req.files?.filter(f => f.fieldname.startsWith('variantImages_')) || [];
 
-      await r2.send(new PutObjectCommand({
-        Bucket: process.env.R2_BUCKET_NAME,
-        Key: key,
-        Body: file.buffer,
-        ContentType: file.mimetype,
-      }));
-
-      const fileUrl = `${process.env.R2_PUBLIC_URL}/${key}`;
-      uploadedImages.push({
-        public_id: key,
-        url: fileUrl
-      });
-    }
-    
-    productData.images = uploadedImages;
-  }
-
-  // Handle variants with images
   if (req.body.variants) {
     const variantsData = JSON.parse(req.body.variants);
     const processedVariants = [];
@@ -58,38 +42,44 @@ exports.createProduct = wrapAsync(async (req, res, next) => {
       const variant = {
         color: v.color,
         size: v.size,
-        stock: v.stock || 0,
-        price: v.price || null
+        stock: v.stock ? Number(v.stock) : 0,
+        price: v.price ? Number(v.price) : null,
+        images: []
       };
 
-      // Check if this variant has a new image
-      if (v.hasNewImage) {
-        const variantFile = variantImageFiles.find(f => f.fieldname === `variantImage_${i}`);
-        if (variantFile) {
-          const key = `ProductVariants/${Date.now()}-${variantFile.originalname.replace(/\s+/g, "-").toLowerCase()}`;
-          
-          await r2.send(new PutObjectCommand({
-            Bucket: process.env.R2_BUCKET_NAME,
-            Key: key,
-            Body: variantFile.buffer,
-            ContentType: variantFile.mimetype,
-          }));
+      const thisVariantImages = variantImageFiles.filter(f => {
+        const match = f.fieldname.match(/^variantImages_(\d+)_(\d+)$/);
+        return match && parseInt(match[1]) === i;
+      });
 
-          variant.image = {
-            public_id: key,
-            url: `${process.env.R2_PUBLIC_URL}/${key}`
-          };
-        }
+      for (const variantFile of thisVariantImages) {
+        const key = `ProductVariants/${Date.now()}-${Math.random().toString(36).substr(2, 5)}-${variantFile.originalname.replace(/\s+/g, "-").toLowerCase()}`;
+        
+        await r2.send(new PutObjectCommand({
+          Bucket: process.env.R2_BUCKET_NAME,
+          Key: key,
+          Body: variantFile.buffer,
+          ContentType: variantFile.mimetype,
+        }));
+
+        variant.images.push({
+          public_id: key,
+          url: `${process.env.R2_PUBLIC_URL}/${key}`
+        });
       }
 
       processedVariants.push(variant);
     }
 
     productData.variants = processedVariants;
+
+    // MAIN LOGIC: Set first variant's first image as main product image
+    if (processedVariants.length > 0 && processedVariants[0].images?.length > 0) {
+      productData.images = [processedVariants[0].images[0]];
+    }
   }
 
   const product = await Product.create(productData);
-
   res.status(201).json({ success: true, product });
 });
 
@@ -97,11 +87,8 @@ exports.createProduct = wrapAsync(async (req, res, next) => {
 // @route   GET /api/products
 // @access  Public
 exports.getAllProducts = wrapAsync(async (req, res, next) => {
-  // Yahan hum feature add kar sakte hain jaise Search, Filter, Pagination
-  const products = await Product.find({ isActive: true }).populate({
-    path: 'reviews',
-    select: 'rating',
-  }); 
+  // 🛠️ FIX: Removed .populate('reviews') to prevent 500 error
+  const products = await Product.find({ isActive: true }); 
 
   res.status(200).json({
     success: true,
@@ -113,18 +100,22 @@ exports.getAllProducts = wrapAsync(async (req, res, next) => {
 // @desc    Get single product details
 // @route   GET /api/products/:id
 // @access  Public
+// @desc    Get single product details
+// @route   GET /api/products/:id
+// @access  Public
 exports.getProductDetails = wrapAsync(async (req, res, next) => {
-  const product = await Product.findById(req.params.id).populate({
-    path: 'reviews',
-    select: 'rating comment createdAt user',
-    populate: {
-      path: 'user',
-      select: 'name _id' // Sirf name (_id is always selected by default, adding just to be explicit) aur koi private data (email, password) nahi!
-    }
-  });
+  const { id } = req.params;
+
+  // 🛡️ SHIELD: Pehle check karo ki ID ka format asli MongoDB ID jaisa hai ya nahi
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return next(new ExpressError(400, 'Invalid Product ID format'));
+  }
+
+  // 🛠️ FIND: Ab bina kisi dar ke product dhoondo (Bina populate ke)
+  const product = await Product.findById(id);
 
   if (!product) {
-    return next(new ExpressError('Product not found', 404));
+    return next(new ExpressError(404, 'Product not found'));
   }
 
   res.status(200).json({
@@ -137,10 +128,8 @@ exports.getProductDetails = wrapAsync(async (req, res, next) => {
 // @route   GET /api/products/admin/products
 // @access  Private (Admin)
 exports.getAdminProducts = wrapAsync(async (req, res, next) => {
-  const products = await Product.find().populate({
-    path: 'reviews',
-    select: 'rating',
-  });
+  // 🛠️ FIX: Removed .populate('reviews')
+  const products = await Product.find();
 
   res.status(200).json({
     success: true,
@@ -153,48 +142,26 @@ exports.getAdminProducts = wrapAsync(async (req, res, next) => {
 // @route   PUT /api/products/admin/product/:id
 // @access  Private (Admin/Company)
 exports.updateProduct = wrapAsync(async (req, res, next) => {
+  console.log("--- BACKEND DATA RECEIVED ---");
+  console.log("Req Files:", req.files);
   let product = await Product.findById(req.params.id);
   if (!product) return next(new ExpressError('Product not found', 404));
 
-  // Separate main images and variant images from req.files
-  const mainImages = req.files?.filter(f => f.fieldname === 'images') || [];
-  const variantImageFiles = req.files?.filter(f => f.fieldname.startsWith('variantImage_')) || [];
+  const { name, description, price, category, brand, stock, isActive, discountPrice } = req.body;
+  
+  let updateData = {
+    name,
+    description,
+    price: Number(price),
+    discountPrice: discountPrice ? Number(discountPrice) : 0,
+    category,
+    brand,
+    stock: stock ? Number(stock) : 1,
+    isActive: isActive === 'true' || isActive === true,
+  };
 
-  // Logic for handling multiple new main image uploads during update
-  if (mainImages.length > 0) {
-    // 1. Delete all old images from R2 if they exist
-    if (product.images && product.images.length > 0) {
-      for (const img of product.images) {
-        if (img.public_id) {
-          await r2.send(new DeleteObjectCommand({
-            Bucket: process.env.R2_BUCKET_NAME,
-            Key: img.public_id,
-          }));
-        }
-      }
-    }
+  const variantImageFiles = req.files?.filter(f => f.fieldname.startsWith('variantImages_')) || [];
 
-    // 2. Upload new images
-    const uploadedImages = [];
-    for (const file of mainImages) {
-      const key = `ProductDetails/${Date.now()}-${file.originalname.replace(/\s+/g, "-").toLowerCase()}`;
-      await r2.send(new PutObjectCommand({
-        Bucket: process.env.R2_BUCKET_NAME,
-        Key: key,
-        Body: file.buffer,
-        ContentType: file.mimetype,
-      }));
-      
-      uploadedImages.push({
-        public_id: key,
-        url: `${process.env.R2_PUBLIC_URL}/${key}`
-      });
-    }
-    
-    req.body.images = uploadedImages;
-  }
-
-  // Handle variants with images
   if (req.body.variants) {
     const variantsData = JSON.parse(req.body.variants);
     const processedVariants = [];
@@ -204,49 +171,46 @@ exports.updateProduct = wrapAsync(async (req, res, next) => {
       const variant = {
         color: v.color,
         size: v.size,
-        stock: v.stock || 0,
-        price: v.price || null
+        stock: v.stock ? Number(v.stock) : 0,
+        price: v.price ? Number(v.price) : null,
+        images: v.existingImages || [] 
       };
 
-      // Check if this variant has a new image
-      if (v.hasNewImage) {
-        const variantFile = variantImageFiles.find(f => f.fieldname === `variantImage_${i}`);
-        if (variantFile) {
-          // Delete old variant image if exists
-          if (v.existingImage?.public_id) {
-            await r2.send(new DeleteObjectCommand({
-              Bucket: process.env.R2_BUCKET_NAME,
-              Key: v.existingImage.public_id,
-            }));
-          }
+      const thisVariantImages = variantImageFiles.filter(f => {
+        const match = f.fieldname.match(/^variantImages_(\d+)_(\d+)$/);
+        return match && parseInt(match[1]) === i;
+      });
 
-          const key = `ProductVariants/${Date.now()}-${variantFile.originalname.replace(/\s+/g, "-").toLowerCase()}`;
-          
-          await r2.send(new PutObjectCommand({
-            Bucket: process.env.R2_BUCKET_NAME,
-            Key: key,
-            Body: variantFile.buffer,
-            ContentType: variantFile.mimetype,
-          }));
+      for (const variantFile of thisVariantImages) {
+        const key = `ProductVariants/${Date.now()}-${Math.random().toString(36).substr(2, 5)}-${variantFile.originalname.replace(/\s+/g, "-").toLowerCase()}`;
+        
+        await r2.send(new PutObjectCommand({
+          Bucket: process.env.R2_BUCKET_NAME,
+          Key: key,
+          Body: variantFile.buffer,
+          ContentType: variantFile.mimetype,
+        }));
 
-          variant.image = {
-            public_id: key,
-            url: `${process.env.R2_PUBLIC_URL}/${key}`
-          };
-        }
-      } else if (v.existingImage) {
-        // Keep existing image
-        variant.image = v.existingImage;
+        variant.images.push({
+          public_id: key,
+          url: `${process.env.R2_PUBLIC_URL}/${key}`
+        });
       }
 
       processedVariants.push(variant);
     }
 
-    req.body.variants = processedVariants;
+    updateData.variants = processedVariants;
+
+    if (processedVariants.length > 0 && processedVariants[0].images?.length > 0) {
+      updateData.images = [processedVariants[0].images[0]];
+    } else {
+      updateData.images = [];
+    }
   }
 
-  product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
+  product = await Product.findByIdAndUpdate(req.params.id, updateData, {
+   returnDocument: 'after', // Updated document wapas milega
     runValidators: true,
   });
 
@@ -263,10 +227,7 @@ exports.deleteProduct = wrapAsync(async (req, res, next) => {
     return next(new ExpressError('Product not found', 404));
   }
 
-  // 1. Agar images cloud se hatani hongi, toh logic idhar likhna padega
-  // Cloudinary destroy logic yahan aayega future mein
-
-  // 2. Document delete karo
+  // TODO: Add cloud destruction logic later if needed
   await product.deleteOne();
 
   res.status(200).json({
@@ -275,4 +236,28 @@ exports.deleteProduct = wrapAsync(async (req, res, next) => {
   });
 });
 
+/**
+ * @desc    Toggle Featured Status of a Product
+ * @route   PATCH /api/v1/products/admin/product/:id/feature
+ * @access  Private (Admin Only)
+ */
+exports.toggleFeaturedStatus = wrapAsync(async (req, res, next) => {
+    // 1. Product dhoondo
+    const product = await Product.findById(req.params.id);
 
+    if (!product) {
+        return next(new ExpressError(404, 'Product not found'));
+    }
+
+    // 2. Toggle the boolean value (Agar true hai toh false, false hai toh true)
+    product.isFeatured = !product.isFeatured;
+    
+    // 3. Save it
+    await product.save();
+
+    res.status(200).json({
+        success: true,
+        message: `Product is now ${product.isFeatured ? 'Featured' : 'Unfeatured'}`,
+        isFeatured: product.isFeatured
+    });
+});

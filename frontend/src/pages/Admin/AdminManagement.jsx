@@ -22,7 +22,7 @@ function CreateAdminModal({ onClose, onSuccess }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-white/70 flex items-center justify-center z-50 p-4">
       <div className="bg-[#111] border border-[#C8A253]/20 rounded-2xl w-full max-w-md p-8">
         <h2 className="text-xl font-serif text-[#C8A253] mb-6">Create Admin Account</h2>
 

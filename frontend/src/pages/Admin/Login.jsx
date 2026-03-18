@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Toast from '../../components/Toast';
 import { useAuth } from '../../context/AuthContext';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const Field = ({ label, ...props }) => (
   <div className="relative">
@@ -61,14 +62,16 @@ const PasswordField = ({ label, ...props }) => {
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const [captchaToken, setCaptchaToken] = useState(''); 
   const [toast, setToast] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
+  
+  const recaptchaRef = useRef(null); 
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  // Role-based redirect logic
   const redirectByRole = (user) => {
     const { role, isFirstLogin } = user;
     if (role === 'super-admin') {
@@ -76,22 +79,34 @@ const Login = () => {
     } else if (role === 'admin') {
       navigate(isFirstLogin ? '/update-password' : '/admin/dashboard');
     } else {
-      navigate('/shop');
+      navigate('/');
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!captchaToken) {
+      setToast({ type: 'error', message: 'Please complete the reCAPTCHA.' });
+      return;
+    }
+
     setLoading(true);
     try {
-      const response = await axios.post('/api/auth/login', formData);
+      const payload = { ...formData, captchaToken };
+      const response = await axios.post('/api/auth/login', payload);
+      
       if (response.data.success) {
-        login(response.data.token, response.data.user); // updates AuthContext + localStorage
+        login(response.data.token, response.data.user);
         setToast({ type: 'success', message: 'Login successful! Redirecting...' });
         setTimeout(() => redirectByRole(response.data.user), 1200);
       }
     } catch (err) {
       setToast({ type: 'error', message: err.response?.data?.error || 'Login failed. Please try again.' });
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+        setCaptchaToken('');
+      }
     } finally {
       setLoading(false);
     }
@@ -102,18 +117,26 @@ const Login = () => {
       <Toast toast={toast} onClose={() => setToast(null)} />
 
       <div className="w-full max-w-md">
-        {/* Header */}
         <div className="text-center mb-10">
           <p className="text-[#C8A253] text-xs tracking-[0.4em] uppercase mb-3">Admin Portal</p>
           <h1 className="text-4xl font-serif text-white">Truee <span className="text-[#C8A253]">Luxury</span></h1>
           <p className="text-zinc-500 text-sm mt-2">Sign in to your admin account</p>
         </div>
 
-        {/* Card */}
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 shadow-2xl">
           <form onSubmit={handleSubmit} className="space-y-5">
             <Field label="Admin Email" name="email" type="email" value={formData.email} onChange={handleChange} required />
             <PasswordField label="Password" name="password" value={formData.password} onChange={handleChange} required />
+
+            {/* This is the ONLY place the ReCAPTCHA should be */}
+            <div className="flex justify-center pt-2 pb-1">
+              <ReCAPTCHA
+  ref={recaptchaRef}
+  sitekey={import.meta.env.VITE_GOOGLE_SITE_KEY}
+  onChange={(token) => setCaptchaToken(token)}
+  theme="dark"
+/>
+            </div>
 
             <button
               type="submit"

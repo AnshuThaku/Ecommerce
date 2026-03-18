@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axiosInstance from '../../utils/axiosInstance';
 import Toast from '../../components/Toast';
 
 const STEPS = ['Core Details', 'Tax Info', 'Address', 'Bank Details', 'Founder'];
@@ -72,7 +72,7 @@ const CompanySetup = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post('/api/company/register', formData);
+      const response = await axiosInstance.post('/company/register', formData);
       if (response.data.success) setSubmitted(true);
     } catch (error) {
       console.error('Error saving company:', error.response?.data || error.message);

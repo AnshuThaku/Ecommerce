@@ -35,28 +35,34 @@ const productSchema = new mongoose.Schema(
       maxLength: [4, 'Stock cannot exceed 4 characters'],
       default: 1
     },
-    images: [
-      {
-        public_id: {
-          type: String,
-          required: true
-        },
-        url: {
-          type: String,
-          required: true
+    // FIX: Main images ko array format mein update kiya jisme default empty hai
+    images: {
+      type: [
+        {
+          public_id: {
+            type: String,
+            required: true
+          },
+          url: {
+            type: String,
+            required: true
+          }
         }
-      }
-    ],
+      ],
+      default: []
+    },
     variants: [
       {
         color: { type: String },
         size: { type: String },
         stock: { type: Number, default: 0 },
         price: { type: Number },
-        image: {
-          public_id: { type: String },
-          url: { type: String }
-        }
+        images: [
+          {
+            public_id: { type: String },
+            url: { type: String }
+          }
+        ]
       }
     ],
     seller: {
@@ -73,11 +79,22 @@ const productSchema = new mongoose.Schema(
     isActive: {
       type: Boolean,
       default: true
-    }
+    },
+  
+soldCount: { 
+  type: Number, 
+  default: 0 // Default 0 rahega, order hone par badhega
+},
+isFeatured: {
+    type: Boolean,
+    default: false
+},
   },
   { timestamps: true }
+
 );
+productSchema.index({ name: 'text', description: 'text', brand: 'text' });
 
-const Product = mongoose.model('Product', productSchema);
-
+// ✅ Sahi Tarika (Crash-proof)
+const Product = mongoose.models.Product || mongoose.model('Product', productSchema);
 module.exports = Product;

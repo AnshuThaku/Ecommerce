@@ -1,4 +1,4 @@
-const transporter = require('../../config/mailConfig/mailConfig');
+const transporter = require('../../config/mailConfig');
 const sendWelcomeEmail = async (companyEmail, founderName, tempPassword) => {
   await transporter.sendMail({
     from: `"Truee Luxury Support" <${process.env.EMAIL_USER}>`,

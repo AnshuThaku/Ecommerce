@@ -2,25 +2,21 @@ import axios from 'axios';
 
 const api = axios.create({ 
   baseURL: '/api',
-  withCredentials: true // This is crucial: instructs Axios to send the HTTP-only cookie to the backend 
+  withCredentials: true 
 });
 
-// We no longer need the request interceptor to attach 'Authorization: Bearer' 
-// because cookies are sent automatically by the browser!
-
-// Global 401 handler — redirect to login
 api.interceptors.response.use(
   (res) => res,
   (err) => {
-    if (err.response?.status === 401) {
+    // 🚨 401 handler ko sirf tabhi trigger karo jab user logged in hone ki koshish kar raha ho
+    // Agar history track fail hoti hai (401), toh user ko login pe mat bhejo warna loop ban jayega
+    if (err.response?.status === 401 && !err.config.url.includes('/history')) {
       localStorage.removeItem('authUser');
       window.location.href = '/login';
     }
     return Promise.reject(err);
   }
 );
-
-
 
 api.interceptors.request.use((config) => {
   const guestId = localStorage.getItem('guestId');

@@ -47,9 +47,8 @@ exports.registerCompany = wrapAsync(async (req, res) => {
   const newCompany = new CompanyProfile({
     ...formData
   });
-    const savedCompany = await newCompany.save();
-    newCompanyId = savedCompany._id;
-await newCompany.save();
+  const savedCompany = await newCompany.save();
+  newCompanyId = savedCompany._id;
 
   try {
     await emailService.sendWelcomeEmail(companyEmail, founderName, tempPassword);
