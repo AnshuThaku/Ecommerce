@@ -257,208 +257,208 @@
 //   );
 // }
 
-import React, { useState, useEffect } from 'react';
-import { 
-  Heart, Eye, ShoppingCart, ArrowRight, X, ShieldCheck, Star, Award 
-} from 'lucide-react';
+// import React, { useState, useEffect } from 'react';
+// import { 
+//   Heart, Eye, ShoppingCart, ArrowRight, X, ShieldCheck, Star, Award 
+// } from 'lucide-react';
 
-/**
- * MOCK DATA - Aapki original images ke saath
- */
-const trendingProducts = [
-  {
-    id: 1,
-    brand: "Marshall",
-    name: "Stanmore III Bluetooth",
-    price: 41999,
-    originalPrice: 49999,
-    discount: "16% off",
-    rating: 4.8,
-    ratingCount: "2,450",
-    description: "Experience the legend with Stanmore III. Re-engineered for a wider soundstage, delivering home-filling Marshall signature sound with a more immersive experience.",
-    image: "images.jpg",
-    hoverImage: "images.jpg",
-    tag: "Bestseller",
-    colors: [
-      { code: "#1a1a1a", img: "images.jpg" }, 
-      { code: "#e5d1b1", img: "downl.jpg" }, 
-      { code: "#4a3728", img: "download.jpg" }  
-    ]
-  },
-  {
-    id: 2,
-    brand: "Devialet",
-    name: "Phantom I 108 dB",
-    price: 288000, 
-    originalPrice: 320000,
-    discount: "10% off",
-    rating: 4.9,
-    ratingCount: "842",
-    description: "The ultimate connected speaker. Hear every detail brought to life with unthinkable clarity by a Grade I Titanium tweeter. Ultra-deep bass in its purest form.",
-    image: "img1.jpg",
-    hoverImage: "img1.jpg",
-    tag: "Iconic",
-    colors: [
-      { code: "#ffffff", img: "img3.jpg" }, 
-      { code: "#222222", img: "img2.jpg" }, 
-      { code: "#d4af37", img: "img1.jpg" }  
-    ]
-  },
-  {
-    id: 3,
-    brand: "Dyson",
-    name: "Airwrap™ Multi-styler",
-    price: 45908,
-    originalPrice: 49900,
-    discount: "8% off",
-    rating: 4.7,
-    ratingCount: "5,120",
-    description: "Dry. Curl. Shape. Smooth and hide flyaways. With no extreme heat. Re-engineered attachments harness Enhanced Coanda airflow to create your styles.",
-    image: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=600",
-    hoverImage: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&q=80&w=600",
-    tag: "New",
-    colors: [
-      { code: "#b31b3e", img: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=600" }, 
-      { code: "#1e3a5f", img: "https://images.unsplash.com/photo-1595475241949-0d021200d5c7?auto=format&fit=crop&q=80&w=600" }, 
-      { code: "#555555", img: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&q=80&w=600" }  
-    ]
-  },
-  {
-    id: 4,
-    brand: "Withings",
-    name: "ScanWatch Horizon",
-    price: 50399,
-    originalPrice: 59999,
-    discount: "16% off",
-    rating: 4.6,
-    ratingCount: "324",
-    description: "The world's most advanced health-tracking hybrid smartwatch. Features a rotating bezel, stainless steel case, and sapphire glass.",
-    image: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&q=80&w=600",
-    hoverImage: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=600",
-    tag: "",
-    colors: [
-      { code: "#122836", img: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&q=80&w=600" }, 
-      { code: "#2d5a27", img: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?auto=format&fit=crop&q=80&w=600" }, 
-      { code: "#e0e0e0", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=600" }  
-    ]
-  }
-];
+// /**
+//  * MOCK DATA - Aapki original images ke saath
+//  */
+// const trendingProducts = [
+//   {
+//     id: 1,
+//     brand: "Marshall",
+//     name: "Stanmore III Bluetooth",
+//     price: 41999,
+//     originalPrice: 49999,
+//     discount: "16% off",
+//     rating: 4.8,
+//     ratingCount: "2,450",
+//     description: "Experience the legend with Stanmore III. Re-engineered for a wider soundstage, delivering home-filling Marshall signature sound with a more immersive experience.",
+//     image: "images.jpg",
+//     hoverImage: "images.jpg",
+//     tag: "Bestseller",
+//     colors: [
+//       { code: "#1a1a1a", img: "images.jpg" }, 
+//       { code: "#e5d1b1", img: "downl.jpg" }, 
+//       { code: "#4a3728", img: "download.jpg" }  
+//     ]
+//   },
+//   {
+//     id: 2,
+//     brand: "Devialet",
+//     name: "Phantom I 108 dB",
+//     price: 288000, 
+//     originalPrice: 320000,
+//     discount: "10% off",
+//     rating: 4.9,
+//     ratingCount: "842",
+//     description: "The ultimate connected speaker. Hear every detail brought to life with unthinkable clarity by a Grade I Titanium tweeter. Ultra-deep bass in its purest form.",
+//     image: "img1.jpg",
+//     hoverImage: "img1.jpg",
+//     tag: "Iconic",
+//     colors: [
+//       { code: "#ffffff", img: "img3.jpg" }, 
+//       { code: "#222222", img: "img2.jpg" }, 
+//       { code: "#d4af37", img: "img1.jpg" }  
+//     ]
+//   },
+//   {
+//     id: 3,
+//     brand: "Dyson",
+//     name: "Airwrap™ Multi-styler",
+//     price: 45908,
+//     originalPrice: 49900,
+//     discount: "8% off",
+//     rating: 4.7,
+//     ratingCount: "5,120",
+//     description: "Dry. Curl. Shape. Smooth and hide flyaways. With no extreme heat. Re-engineered attachments harness Enhanced Coanda airflow to create your styles.",
+//     image: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=600",
+//     hoverImage: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&q=80&w=600",
+//     tag: "New",
+//     colors: [
+//       { code: "#b31b3e", img: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=600" }, 
+//       { code: "#1e3a5f", img: "https://images.unsplash.com/photo-1595475241949-0d021200d5c7?auto=format&fit=crop&q=80&w=600" }, 
+//       { code: "#555555", img: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&q=80&w=600" }  
+//     ]
+//   },
+//   {
+//     id: 4,
+//     brand: "Withings",
+//     name: "ScanWatch Horizon",
+//     price: 50399,
+//     originalPrice: 59999,
+//     discount: "16% off",
+//     rating: 4.6,
+//     ratingCount: "324",
+//     description: "The world's most advanced health-tracking hybrid smartwatch. Features a rotating bezel, stainless steel case, and sapphire glass.",
+//     image: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&q=80&w=600",
+//     hoverImage: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=600",
+//     tag: "",
+//     colors: [
+//       { code: "#122836", img: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&q=80&w=600" }, 
+//       { code: "#2d5a27", img: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?auto=format&fit=crop&q=80&w=600" }, 
+//       { code: "#e0e0e0", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=600" }  
+//     ]
+//   }
+// ];
 
-const formatPrice = (amount) => {
-  return new Intl.NumberFormat('en-IN', {
-    style: 'currency',
-    currency: 'INR',
-    maximumFractionDigits: 0
-  }).format(amount);
-};
+// const formatPrice = (amount) => {
+//   return new Intl.NumberFormat('en-IN', {
+//     style: 'currency',
+//     currency: 'INR',
+//     maximumFractionDigits: 0
+//   }).format(amount);
+// };
 
-const QuickViewModal = ({ product, onClose }) => {
-  if (!product) return null;
+// const QuickViewModal = ({ product, onClose }) => {
+//   if (!product) return null;
 
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
-      <div 
-        className="absolute inset-0 bg-black/70 backdrop-blur-md" 
-        onClick={onClose}
-      />
-      <div className="relative bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl flex flex-col md:flex-row gap-6 animate-in fade-in zoom-in duration-300">
+//   return (
+//     <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
+//       <div 
+//         className="absolute inset-0 bg-black/70 backdrop-blur-md" 
+//         onClick={onClose}
+//       />
+//       <div className="relative bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl flex flex-col md:flex-row gap-6 animate-in fade-in zoom-in duration-300">
 
-        <button 
-          onClick={onClose}
-          className="absolute top-6 right-6 p-2 rounded-full bg-gray-100 hover:bg-black hover:text-white transition-all z-10"
-        >
-          <X className="w-5 h-5" />
-        </button>
+//         <button 
+//           onClick={onClose}
+//           className="absolute top-6 right-6 p-2 rounded-full bg-gray-100 hover:bg-black hover:text-white transition-all z-10"
+//         >
+//           <X className="w-5 h-5" />
+//         </button>
 
-        {/* Image Section */}
-        <div className="md:w-1/2 bg-[#f9f9f9] p-8 md:p-12 flex items-center justify-center">
-          <img 
-            src={product.image} 
-            alt={product.name} 
-            className="w-full h-auto max-h-[420px] min-w-[260px] max-w-[420px] object-contain mix-blend-multiply transition-all duration-500 hover:scale-105"
-            onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=600" }}
-          />
-        </div>
+//         {/* Image Section */}
+//         <div className="md:w-1/2 bg-[#f9f9f9] p-8 md:p-12 flex items-center justify-center">
+//           <img 
+//             src={product.image} 
+//             alt={product.name} 
+//             className="w-full h-auto max-h-[420px] min-w-[260px] max-w-[420px] object-contain mix-blend-multiply transition-all duration-500 hover:scale-105"
+//             onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=600" }}
+//           />
+//         </div>
 
-<div className="md:w-1/2 p-8 md:p-14 md:pl-20 flex flex-col justify-center">
-  {/* Brand */}
-  <p className="text-[11px] uppercase tracking-[0.5em] font-bold text-[#d3b574] mb-3">
-    {product.brand}
-  </p>
+// <div className="md:w-1/2 p-8 md:p-14 md:pl-20 flex flex-col justify-center">
+//   {/* Brand */}
+//   <p className="text-[11px] uppercase tracking-[0.5em] font-bold text-[#d3b574] mb-3">
+//     {product.brand}
+//   </p>
 
-  {/* Product Name */}
-  <h2 className="text-4xl font-serif italic text-black mb-4 leading-snug">
-    {product.name}
-  </h2>
+//   {/* Product Name */}
+//   <h2 className="text-4xl font-serif italic text-black mb-4 leading-snug">
+//     {product.name}
+//   </h2>
 
-  {/* Rating */}
-  <div className="flex items-center gap-3 mb-6">
-    <div className="flex items-center bg-green-600 text-white px-2 py-1 rounded text-[12px] font-bold">
-      {product.rating}
-      <Star className="w-3 h-3 ml-1 fill-white" />
-    </div>
+//   {/* Rating */}
+//   <div className="flex items-center gap-3 mb-6">
+//     <div className="flex items-center bg-green-600 text-white px-2 py-1 rounded text-[12px] font-bold">
+//       {product.rating}
+//       <Star className="w-3 h-3 ml-1 fill-white" />
+//     </div>
 
-    <span className="text-[12px] text-gray-400 font-bold uppercase tracking-widest">
-      ({product.ratingCount} Ratings)
-    </span>
-  </div>
+//     <span className="text-[12px] text-gray-400 font-bold uppercase tracking-widest">
+//       ({product.ratingCount} Ratings)
+//     </span>
+//   </div>
 
-  {/* Price Section */}
-  <div className="flex items-center gap-3 mb-6 flex-wrap">
+//   {/* Price Section */}
+//   <div className="flex items-center gap-3 mb-6 flex-wrap">
 
-    <span className="text-2xl font-extrabold text-black">
-      {formatPrice(product.price)}
-    </span>
+//     <span className="text-2xl font-extrabold text-black">
+//       {formatPrice(product.price)}
+//     </span>
 
-    <span className="text-lg text-gray-400 line-through">
-      {formatPrice(product.originalPrice)}
-    </span>
+//     <span className="text-lg text-gray-400 line-through">
+//       {formatPrice(product.originalPrice)}
+//     </span>
 
-    <span className="text-lg font-bold text-green-600">
-      {product.discount}
-    </span>
+//     <span className="text-lg font-bold text-green-600">
+//       {product.discount}
+//     </span>
 
-  </div>
+//   </div>
 
-  {/* Description */}
-  <p className="text-[12px] text-gray-500 leading-relaxed mb-8 font-medium">
-    {product.description}
-  </p>
+//   {/* Description */}
+//   <p className="text-[12px] text-gray-500 leading-relaxed mb-8 font-medium">
+//     {product.description}
+//   </p>
 
-  {/* Button + Features */}
-  <div className="space-y-6">
+//   {/* Button + Features */}
+//   <div className="space-y-6">
 
-    <button className="group relative w-full max-w-[200px] h-10 rounded-full bg-black px-6 text-[10px] align-baseline  font-black uppercase tracking-[0.2em] text-white transition-all hover:bg-[#d3b574] hover:text-black shadow-lg active:scale-95">
-      <span className="relative z-10 flex items-center justify-center gap-2">
-        <ShoppingCart className="w-4 h-4" />
-        <span>Add To Bag</span>
-      </span>
-    </button>
+//     <button className="group relative w-full max-w-[200px] h-10 rounded-full bg-black px-6 text-[10px] align-baseline  font-black uppercase tracking-[0.2em] text-white transition-all hover:bg-[#d3b574] hover:text-black shadow-lg active:scale-95">
+//       <span className="relative z-10 flex items-center justify-center gap-2">
+//         <ShoppingCart className="w-4 h-4" />
+//         <span>Add To Bag</span>
+//       </span>
+//     </button>
 
-  </div>
+//   </div>
 
-</div>
-      </div>
-    </div>
-  );
-};
+// </div>
+//       </div>
+//     </div>
+//   );
+// };
 
-export default function App() {
-  const [selectedProduct, setSelectedProduct] = useState(null);
+// export default function App() {
+//   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  return (
-    <div className="min-h-screen bg-white">
-      <section className="pt-24 pb-20 px-6 md:px-12 bg-white">
-        <div className="max-w-[1440px] mx-auto">
-          {selectedProduct && (
-            <QuickViewModal 
-              product={selectedProduct} 
-              onClose={() => setSelectedProduct(null)} 
-            />
-          )}
-        </div>
-      </section>
-    </div>
-  );
-}
+//   return (
+//     <div className="min-h-screen bg-white">
+//       <section className="pt-24 pb-20 px-6 md:px-12 bg-white">
+//         <div className="max-w-[1440px] mx-auto">
+//           {selectedProduct && (
+//             <QuickViewModal 
+//               product={selectedProduct} 
+//               onClose={() => setSelectedProduct(null)} 
+//             />
+//           )}
+//         </div>
+//       </section>
+//     </div>
+//   );
+// }
 
