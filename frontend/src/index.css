@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
-body {
+/* body {
   cursor: none;
-}
+} */
 
 .cursor-dot {
   width: 8px;

@@ -31,6 +31,11 @@ exports.createProduct = wrapAsync(async (req, res, next) => {
     variants: [] 
   };
 
+  // ⚡ NAYA LOGIC 1: Flash Deal String ko JSON Object me convert karna
+  if (req.body.flashDeal) {
+    productData.flashDeal = JSON.parse(req.body.flashDeal);
+  }
+
   const variantImageFiles = req.files?.filter(f => f.fieldname.startsWith('variantImages_')) || [];
 
   if (req.body.variants) {
@@ -87,7 +92,6 @@ exports.createProduct = wrapAsync(async (req, res, next) => {
 // @route   GET /api/products
 // @access  Public
 exports.getAllProducts = wrapAsync(async (req, res, next) => {
-  // 🛠️ FIX: Removed .populate('reviews') to prevent 500 error
   const products = await Product.find({ isActive: true }); 
 
   res.status(200).json({
@@ -97,10 +101,7 @@ exports.getAllProducts = wrapAsync(async (req, res, next) => {
   });
 });
 
-// @desc    Get single product details
-// @route   GET /api/products/:id
-// @access  Public
-// @desc    Get single product details
+// @desc    Get single product details & Related Deals
 // @route   GET /api/products/:id
 // @access  Public
 exports.getProductDetails = wrapAsync(async (req, res, next) => {
@@ -111,16 +112,52 @@ exports.getProductDetails = wrapAsync(async (req, res, next) => {
     return next(new ExpressError(400, 'Invalid Product ID format'));
   }
 
-  // 🛠️ FIND: Ab bina kisi dar ke product dhoondo (Bina populate ke)
+  // 🛠️ FIND: Product dhoondo
   const product = await Product.findById(id);
 
   if (!product) {
     return next(new ExpressError(404, 'Product not found'));
   }
 
+  // ⚡ NAYA LOGIC 2: THE "DEAL ZONE ISOLATION" LOGIC
+  const currentTime = new Date();
+  
+  // Check if current product has an active flash deal right now
+  const isDealActive = 
+      product.flashDeal && 
+      product.flashDeal.isActive === true && 
+      new Date(product.flashDeal.startTime) <= currentTime && 
+      new Date(product.flashDeal.endTime) > currentTime;
+
+  let relatedProducts = [];
+
+  if (isDealActive) {
+      // Agar user Deal dekh raha hai, toh use niche sirf baaki Deals hi dikhao
+      relatedProducts = await Product.find({
+          _id: { $ne: product._id }, // Same product hatane ke liye
+          isActive: true,
+          "flashDeal.isActive": true,
+          "flashDeal.startTime": { $lte: currentTime },
+          "flashDeal.endTime": { $gt: currentTime }
+      })
+      .limit(4)
+      .select('name brand category price discountPrice flashDeal images variants');
+  } else {
+      // Normal product hai toh same category ke normal products dikhao
+      relatedProducts = await Product.find({
+          _id: { $ne: product._id },
+          isActive: true,
+          category: product.category 
+      })
+      .limit(4)
+      .select('name brand category price discountPrice images variants flashDeal');
+  }
+
   res.status(200).json({
     success: true,
     product,
+    isDealActive, // Frontend is flag se timer on karega
+    relatedProducts
   });
 });
 
@@ -128,7 +165,6 @@ exports.getProductDetails = wrapAsync(async (req, res, next) => {
 // @route   GET /api/products/admin/products
 // @access  Private (Admin)
 exports.getAdminProducts = wrapAsync(async (req, res, next) => {
-  // 🛠️ FIX: Removed .populate('reviews')
   const products = await Product.find();
 
   res.status(200).json({
@@ -159,6 +195,11 @@ exports.updateProduct = wrapAsync(async (req, res, next) => {
     stock: stock ? Number(stock) : 1,
     isActive: isActive === 'true' || isActive === true,
   };
+
+  // ⚡ NAYA LOGIC 3: Flash Deal update karte waqt Parse karna
+  if (req.body.flashDeal) {
+    updateData.flashDeal = JSON.parse(req.body.flashDeal);
+  }
 
   const variantImageFiles = req.files?.filter(f => f.fieldname.startsWith('variantImages_')) || [];
 
@@ -211,7 +252,7 @@ exports.updateProduct = wrapAsync(async (req, res, next) => {
 
   product = await Product.findByIdAndUpdate(req.params.id, updateData, {
    returnDocument: 'after', // Updated document wapas milega
-    runValidators: true,
+   runValidators: true,
   });
 
   res.status(200).json({ success: true, product });
@@ -227,7 +268,6 @@ exports.deleteProduct = wrapAsync(async (req, res, next) => {
     return next(new ExpressError('Product not found', 404));
   }
 
-  // TODO: Add cloud destruction logic later if needed
   await product.deleteOne();
 
   res.status(200).json({
@@ -242,17 +282,13 @@ exports.deleteProduct = wrapAsync(async (req, res, next) => {
  * @access  Private (Admin Only)
  */
 exports.toggleFeaturedStatus = wrapAsync(async (req, res, next) => {
-    // 1. Product dhoondo
     const product = await Product.findById(req.params.id);
 
     if (!product) {
         return next(new ExpressError(404, 'Product not found'));
     }
 
-    // 2. Toggle the boolean value (Agar true hai toh false, false hai toh true)
     product.isFeatured = !product.isFeatured;
-    
-    // 3. Save it
     await product.save();
 
     res.status(200).json({

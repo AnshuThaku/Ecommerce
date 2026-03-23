@@ -29,6 +29,21 @@ exports.getHomePageData = wrapAsync(async (req, res) => {
     // Zaroori fields jo frontend ko card render karne ke liye chahiye hi chahiye
     const requiredFields = 'name price discountPrice images variants category brand stock ratings';
 
+    // ⚡ THE BRUTE FORCE LOGIC: MongoDB ke strict filters bypass karein
+    // 1. Saare active products utha lo jinki detail chahiye
+    const allActiveProducts = await Product.find({ isActive: true })
+        .select(`${requiredFields} flashDeal`)
+        .lean(); // lean() data ko pure JS object bana deta hai taaki filter aasan ho
+
+    // 2. Pure JavaScript se khud dhundo kahan deal on hai
+    const flashDeals = allActiveProducts
+        .filter(p => {
+            // Check: flashDeal object hona chahiye, aur isActive 'true' hona chahiye 
+            // (kabhi string 'true' save ho jata hai toh dono check kar lenge)
+            return p.flashDeal && (p.flashDeal.isActive === true || p.flashDeal.isActive === 'true');
+        })
+        .slice(0, 4); // Sirf top 4 deals front page ke liye nikal lo
+
     // Section A: Featured Products
     const featured = await Product.find({ isFeatured: true, isActive: true })
         .limit(5)
@@ -52,6 +67,7 @@ exports.getHomePageData = wrapAsync(async (req, res) => {
     res.status(200).json({
         success: true,
         data: {
+            flashDeals,         // ⚡ Ab ye 100% data pass karega
             recentlyViewed: recentlyViewed || [],
             recommended: recommended || [],
             featured,

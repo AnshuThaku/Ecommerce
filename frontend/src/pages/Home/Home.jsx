@@ -6,6 +6,7 @@ import { useAuth } from '../../context/AuthContext';
 import Header from './Header';
 import Hero   from './Hero';
 import BrandsMarquee from './BrandsMarquee';
+import ProductSlide  from './ProductSlide'; // 👈 NAYA SLIDER IMPORT KIYA
 import ProductGrid   from './Productcard'; 
 import Footer from './Footer';
 import Cursor from './Cursor';
@@ -15,6 +16,7 @@ export default function Home() {
   
   // State for API Data
   const [homeData, setHomeData] = useState({ 
+    flashDeals: [], // ⚡ Added Flash Deals
     trending: [], 
     recommended: [], 
     recentlyViewed: [],
@@ -79,12 +81,26 @@ export default function Home() {
 
       <BrandsMarquee />
 
+      {/* 👇 NAYA CATEGORY SLIDER YAHAN LAGA HAI 👇 */}
+      <ProductSlide />
+
+      {/* ⚡ 4. LIGHTNING DEALS SECTION ⚡ */}
+      {homeData.flashDeals?.length > 0 && (
+        <ProductGrid 
+          title="Lightning" 
+          subtitle="Deals" 
+          products={homeData.flashDeals} 
+        />
+      )}
+
       {/* 5. TRENDING SECTION */}
-      <ProductGrid 
-        title="Trending" 
-        subtitle="Now" 
-        products={homeData.trending} 
-      />
+      {homeData.trending?.length > 0 && (
+        <ProductGrid 
+          title="Trending" 
+          subtitle="Now" 
+          products={homeData.trending} 
+        />
+      )}
 
       {/* 6. RECOMMENDED SECTION */}
       {homeData.recommended?.length > 0 && (

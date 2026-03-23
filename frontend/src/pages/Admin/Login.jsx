@@ -1,21 +1,25 @@
 import React, { useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useNavigate, Link } from 'react-router-dom';
+import axiosInstance from '../../utils/axiosInstance'; 
 import Toast from '../../components/Toast';
 import { useAuth } from '../../context/AuthContext';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { Eye, EyeOff, Lock, Mail, ArrowRight, User } from 'lucide-react';
 
-const Field = ({ label, ...props }) => (
-  <div className="relative">
+const Field = ({ label, icon: Icon, ...props }) => (
+  <div className="relative group">
+    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-[#C8A253] transition-colors duration-300">
+      {Icon && <Icon size={18} />}
+    </div>
     <input
       {...props}
       id={props.name}
       placeholder=" "
-      className="peer w-full bg-transparent border border-zinc-700 rounded-lg px-4 pt-5 pb-2 text-white text-sm focus:outline-none focus:border-[#C8A253] transition-all duration-300 placeholder-transparent"
+      className="peer w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-12 pt-6 pb-2 text-white text-sm focus:outline-none focus:border-[#C8A253]/50 focus:bg-zinc-900 transition-all duration-300 placeholder-transparent"
     />
     <label
       htmlFor={props.name}
-      className="absolute left-4 top-2 text-[10px] font-semibold tracking-widest text-[#C8A253] uppercase transition-all duration-300 cursor-text peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-sm peer-placeholder-shown:text-zinc-500 peer-placeholder-shown:font-normal peer-placeholder-shown:tracking-normal peer-focus:top-2 peer-focus:text-[10px] peer-focus:font-semibold peer-focus:tracking-widest peer-focus:text-[#C8A253]"
+      className="absolute left-12 top-2 text-[10px] font-bold tracking-[0.2em] text-[#C8A253] uppercase transition-all duration-300 cursor-text peer-placeholder-shown:top-[18px] peer-placeholder-shown:text-sm peer-placeholder-shown:text-zinc-500 peer-placeholder-shown:font-medium peer-placeholder-shown:tracking-normal peer-focus:top-2 peer-focus:text-[10px] peer-focus:font-bold peer-focus:tracking-[0.2em] peer-focus:text-[#C8A253]"
     >
       {label}
     </label>
@@ -25,36 +29,29 @@ const Field = ({ label, ...props }) => (
 const PasswordField = ({ label, ...props }) => {
   const [show, setShow] = useState(false);
   return (
-    <div className="relative">
+    <div className="relative group">
+      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-[#C8A253] transition-colors duration-300">
+        <Lock size={18} />
+      </div>
       <input
         {...props}
         id={props.name}
         type={show ? 'text' : 'password'}
         placeholder=" "
-        className="peer w-full bg-transparent border border-zinc-700 rounded-lg px-4 pt-5 pb-2 pr-11 text-white text-sm focus:outline-none focus:border-[#C8A253] transition-all duration-300 placeholder-transparent"
+        className="peer w-full bg-zinc-900/50 border border-zinc-800 rounded-xl px-12 pt-6 pb-2 pr-12 text-white text-sm focus:outline-none focus:border-[#C8A253]/50 focus:bg-zinc-900 transition-all duration-300 placeholder-transparent"
       />
       <label
         htmlFor={props.name}
-        className="absolute left-4 top-2 text-[10px] font-semibold tracking-widest text-[#C8A253] uppercase transition-all duration-300 cursor-text peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-sm peer-placeholder-shown:text-zinc-500 peer-placeholder-shown:font-normal peer-placeholder-shown:tracking-normal peer-focus:top-2 peer-focus:text-[10px] peer-focus:font-semibold peer-focus:tracking-widest peer-focus:text-[#C8A253]"
+        className="absolute left-12 top-2 text-[10px] font-bold tracking-[0.2em] text-[#C8A253] uppercase transition-all duration-300 cursor-text peer-placeholder-shown:top-[18px] peer-placeholder-shown:text-sm peer-placeholder-shown:text-zinc-500 peer-placeholder-shown:font-medium peer-placeholder-shown:tracking-normal peer-focus:top-2 peer-focus:text-[10px] peer-focus:font-bold peer-focus:tracking-[0.2em] peer-focus:text-[#C8A253]"
       >
         {label}
       </label>
       <button
         type="button"
         onClick={() => setShow((s) => !s)}
-        className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-[#C8A253] transition-colors duration-200 focus:outline-none"
-        tabIndex={-1}
+        className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-600 hover:text-[#C8A253] transition-colors"
       >
-        {show ? (
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-          </svg>
-        ) : (
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-          </svg>
-        )}
+        {show ? <EyeOff size={18} /> : <Eye size={18} />}
       </button>
     </div>
   );
@@ -62,13 +59,12 @@ const PasswordField = ({ label, ...props }) => {
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
-  const [captchaToken, setCaptchaToken] = useState(''); 
+  const [captchaToken, setCaptchaToken] = useState('');
   const [toast, setToast] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
-  
-  const recaptchaRef = useRef(null); 
+  const recaptchaRef = useRef(null);
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -79,82 +75,112 @@ const Login = () => {
     } else if (role === 'admin') {
       navigate(isFirstLogin ? '/update-password' : '/admin/dashboard');
     } else {
-      navigate('/');
+      navigate('/'); // Customers go to Home
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     if (!captchaToken) {
-      setToast({ type: 'error', message: 'Please complete the reCAPTCHA.' });
+      setToast({ type: 'error', message: 'Verification required. Please check the reCAPTCHA.' });
       return;
     }
 
     setLoading(true);
     try {
-      const payload = { ...formData, captchaToken };
-      const response = await axios.post('/api/auth/login', payload);
-      
+      const response = await axiosInstance.post('/auth/login', { ...formData, captchaToken });
       if (response.data.success) {
         login(response.data.token, response.data.user);
-        setToast({ type: 'success', message: 'Login successful! Redirecting...' });
-        setTimeout(() => redirectByRole(response.data.user), 1200);
+        setToast({ type: 'success', message: 'Success! Redirecting to your account...' });
+        setTimeout(() => redirectByRole(response.data.user), 1500);
       }
     } catch (err) {
-      setToast({ type: 'error', message: err.response?.data?.error || 'Login failed. Please try again.' });
-      if (recaptchaRef.current) {
-        recaptchaRef.current.reset();
-        setCaptchaToken('');
-      }
+      setToast({ type: 'error', message: err.response?.data?.error || 'Authentication failed.' });
+      recaptchaRef.current?.reset();
+      setCaptchaToken('');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center p-6 relative overflow-hidden font-sans">
+      {/* Background Decorative Glow */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#C8A253]/5 blur-[120px] rounded-full" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#C8A253]/5 blur-[120px] rounded-full" />
+
       <Toast toast={toast} onClose={() => setToast(null)} />
 
-      <div className="w-full max-w-md">
-        <div className="text-center mb-10">
-          <p className="text-[#C8A253] text-xs tracking-[0.4em] uppercase mb-3">Admin Portal</p>
-          <h1 className="text-4xl font-serif text-white">Truee <span className="text-[#C8A253]">Luxury</span></h1>
-          <p className="text-zinc-500 text-sm mt-2">Sign in to your admin account</p>
+      <div className="w-full max-w-[440px] z-10">
+        {/* Logo Section */}
+        <div className="text-center mb-12">
+          <div className="inline-block px-4 py-1.5 border border-[#C8A253]/20 rounded-full mb-6 bg-[#C8A253]/5">
+            <p className="text-[#C8A253] text-[9px] font-black tracking-[0.5em] uppercase">Secure Access</p>
+          </div>
+          <h1 className="text-5xl font-serif italic text-white mb-2">Truee <span className="text-[#C8A253]">Luxury</span></h1>
+          <p className="text-zinc-500 text-sm font-medium tracking-wide">Sign in to manage your collection & account</p>
         </div>
 
-        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 shadow-2xl">
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <Field label="Admin Email" name="email" type="email" value={formData.email} onChange={handleChange} required />
-            <PasswordField label="Password" name="password" value={formData.password} onChange={handleChange} required />
+        {/* Login Form Container */}
+        <div className="bg-zinc-900/40 backdrop-blur-xl border border-zinc-800/50 rounded-[2rem] p-10 shadow-2xl">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <Field 
+              label="Email Address" 
+              name="email" 
+              type="email" 
+              icon={Mail}
+              value={formData.email} 
+              onChange={handleChange} 
+              required 
+            />
+            
+            <PasswordField 
+              label="Password" 
+              name="password" 
+              value={formData.password} 
+              onChange={handleChange} 
+              required 
+            />
 
-            {/* This is the ONLY place the ReCAPTCHA should be */}
-            <div className="flex justify-center pt-2 pb-1">
+            {/* ReCAPTCHA */}
+            <div className="flex justify-center py-2 rounded-xl bg-black/20 border border-zinc-800/30 overflow-hidden scale-90 sm:scale-100">
               <ReCAPTCHA
-  ref={recaptchaRef}
-  sitekey={import.meta.env.VITE_GOOGLE_SITE_KEY}
-  onChange={(token) => setCaptchaToken(token)}
-  theme="dark"
-/>
+                ref={recaptchaRef}
+                sitekey={import.meta.env.VITE_GOOGLE_SITE_KEY}
+                onChange={(token) => setCaptchaToken(token)}
+                theme="dark"
+              />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full mt-2 py-3 rounded-xl bg-[#C8A253] text-[#0A0A0A] text-sm font-bold tracking-widest uppercase hover:bg-[#d4af6b] active:scale-95 transition-all duration-300 shadow-[0_4px_24px_rgba(200,162,83,0.25)] disabled:opacity-60 disabled:cursor-not-allowed"
+              className="group relative w-full overflow-hidden py-4 rounded-xl bg-[#C8A253] text-[#0A0A0A] text-xs font-black tracking-[0.2em] uppercase transition-all duration-500 hover:shadow-[0_0_30px_rgba(200,162,83,0.4)] disabled:opacity-50 active:scale-[0.98]"
             >
-              {loading ? (
-                <span className="flex items-center justify-center gap-2">
-                  <svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
-                  </svg>
-                  Authenticating...
-                </span>
-              ) : 'Secure Login'}
+              <span className="relative z-10 flex items-center justify-center gap-3">
+                {loading ? 'Processing...' : 'Sign In'}
+                {!loading && <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />}
+              </span>
             </button>
           </form>
+
+          {/* Signup Link */}
+          <div className="mt-10 pt-8 border-t border-zinc-800/50 text-center">
+            <p className="text-zinc-500 text-xs font-medium">
+              New to Truee Luxury?
+            </p>
+            <Link 
+              to="/register" 
+              className="inline-block mt-3 text-[#C8A253] text-xs font-bold uppercase tracking-widest hover:text-white transition-colors border-b border-[#C8A253]/30 hover:border-white pb-1"
+            >
+              Create An Account
+            </Link>
+          </div>
         </div>
+
+        <p className="mt-8 text-center text-zinc-600 text-[10px] font-bold uppercase tracking-[0.3em]">
+          &copy; 2026 Truee Luxury Operations
+        </p>
       </div>
     </div>
   );

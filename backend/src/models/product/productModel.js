@@ -89,6 +89,22 @@ isFeatured: {
     type: Boolean,
     default: false
 },
+flashDeal: {
+    isActive: { 
+      type: Boolean, 
+      default: false 
+    },
+    dealPrice: { 
+      type: Number, 
+      default: 0 
+    },
+    startTime: { 
+      type: Date 
+    },
+    endTime: { 
+      type: Date 
+    }
+  }
   },
   { timestamps: true }
 

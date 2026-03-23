@@ -1,7 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider }        from './context/AuthContext';
 import ProtectedRoute          from './components/ProtectedRoute';
+import 'aos/dist/aos.css'; // AOS CSS
 
+// ── Auth & Onboarding
 import Login                   from './pages/Admin/Login';
 import SetupPassword           from './pages/Admin/SetPassword';
 import CompanyRegistration     from './pages/Admin/CompanyRegistration';
@@ -11,6 +13,9 @@ import CustomerRegister        from './pages/Shop/CustomerRegister';
 import ShopHome                from './pages/Shop/ShopHome';
 import ProductDetails          from './pages/Shop/ProductDetails';
 import Cart                    from './pages/Shop/Cart';
+import OrderSuccess            from './pages/orderSuccess';
+import SearchResults           from './pages/SearchResult';
+import Home                    from './pages/Home/Home';
 
 // ── Super-Admin
 import SuperAdminLayout        from './layouts/SuperAdminLayout';
@@ -24,9 +29,7 @@ import AdminLayout             from './layouts/AdminLayout';
 import AdminProducts           from './pages/Admin/AdminProducts';
 import AdminOrders             from './pages/Admin/AdminOrders';
 import AdminUsers              from './pages/Admin/AdminUsers';
-import OrderSuccess from './pages/orderSuccess';
-import SearchResults from './pages/SearchResult';
-import Home from './pages/Home/Home';
+
 
 function App() {
   return (
@@ -38,11 +41,13 @@ function App() {
           <Route path="/login"            element={<Login />} />
           <Route path="/register"         element={<CustomerRegister />} />
           
-          {/* ShopHome is now public, accessible to anyone */}
+          {/* ShopHome & Public Pages */}
           <Route path="/"                 element={<Home />} />
           <Route path="/shop"             element={<ShopHome />} />
           <Route path="/products"         element={<ShopHome />} />
-          <Route path="/cart"             element={<Cart />} />
+          
+          {/* 👇 Hamara main Checkpost ab Cart hi hai 👇 */}
+          <Route path="/cart"             element={<Cart />} /> 
           
           {/* 👇 SEO FRIENDLY URLs (AMAZON STYLE) 👇 */}
           <Route path="/:category/:brand/:product_name/p/:id" element={<ProductDetails />} />
@@ -104,11 +109,14 @@ function App() {
           } />
         
           <Route path="/search" element={<SearchResults />} />
+          
+          {/* Order Success Route (Cart se redirect yahan hoga) */}
           <Route path='/order-success' element={
             <ProtectedRoute roles={['customer']}>
               <OrderSuccess/>
             </ProtectedRoute>
           } />
+          
         </Routes>
       </BrowserRouter>
     </AuthProvider>
