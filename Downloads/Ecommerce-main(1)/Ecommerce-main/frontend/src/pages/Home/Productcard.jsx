@@ -715,8 +715,11 @@ window.dispatchEvent(new CustomEvent('cartUpdated', {
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         onClick={(e) => e.stopPropagation()}
-        className={`relative bg-white overflow-y-auto transition-all duration-500 ease-in-out ${expand ? 'w-full max-w-full h-[100vh] rounded-none shadow-none' : 'w-full max-w-[850px] max-h-[90vh] rounded-[24px] shadow-2xl'}`}
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', scrollBehavior: 'smooth', margin: '0 auto' }}
+className={`relative bg-white overflow-y-auto transition-all duration-500 ease-in-out ${
+  expand 
+    ? 'w-full h-[100vh] rounded-none shadow-none px-4 md:px-10' 
+    : 'w-full max-w-[95%] md:max-w-[1100px] max-h-[90vh] rounded-[24px] shadow-2xl px-4'
+}`}        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', scrollBehavior: 'smooth', margin: '0 auto' }}
       >
         <style>{`.hide-scroll::-webkit-scrollbar { display: none; }`}</style>
         
@@ -724,7 +727,7 @@ window.dispatchEvent(new CustomEvent('cartUpdated', {
           <X className="w-5 h-5 text-gray-800" />
         </button>
 
-        <div className={`w-full max-w-[850px] mx-auto transition-all duration-500 ease-in-out ${expand ? 'pt-10 md:pt-16 pb-20' : 'pt-4 pb-4 md:pt-6 md:pb-6'}`}>
+        <div className={`w-full max-w-[1400px] mx-auto transition-all duration-500 ease-in-out ${expand ? 'pt-10 md:pt-16 pb-20' : 'pt-4 pb-4 md:pt-6 md:pb-6'}`}>
           
           {loadingDetails && !expand && (
             <div className="absolute top-4 left-4 z-50 flex items-center gap-2 bg-white/80 px-3 py-1 rounded-full shadow-sm">
@@ -835,8 +838,7 @@ window.dispatchEvent(new CustomEvent('cartUpdated', {
                   <button 
                     onClick={handleAddToCart}
                     disabled={isAddingToCart || fullProduct.stock < 1}
-                    className="flex-1 hover:bg-[#c4a66a] shadow-lg active:scale-95 transition-all rounded-xl bg-[#d3b574] flex items-center justify-center gap-2 font-black uppercase tracking-widest text-black disabled:opacity-50 disabled:cursor-not-allowed"
-                    style={{ height: '44px', fontSize: '12px' }}
+                    className="w-full sm:w-auto px-8 hover:bg-[#c4a66a] shadow-lg active:scale-95 transition-all rounded-xl bg-[#d3b574] flex items-center justify-center gap-2 font-black uppercase tracking-widest text-black disabled:opacity-50 disabled:cursor-not-allowed"                    style={{ height: '44px', fontSize: '12px' }}
                   >
                     {isAddingToCart ? (
                        <span>Processing...</span>
