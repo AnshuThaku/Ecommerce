@@ -7,6 +7,7 @@ import Header from './Header';
 import Hero   from './Hero';
 import BrandsMarquee from './BrandsMarquee';
 import ProductGrid   from './Productcard'; 
+import Productslide   from './Productslide'; 
 import Footer from './Footer';
 import Cursor from './Cursor';
 
@@ -77,7 +78,6 @@ export default function Home() {
         featuredProducts={homeData.featured} 
       />
 
-      <BrandsMarquee />
 
       {/* 5. TRENDING SECTION */}
       <ProductGrid 
@@ -85,7 +85,8 @@ export default function Home() {
         subtitle="Now" 
         products={homeData.trending} 
       />
-
+       <Productslide/>
+       <BrandsMarquee />
       {/* 6. RECOMMENDED SECTION */}
       {homeData.recommended?.length > 0 && (
         <ProductGrid 

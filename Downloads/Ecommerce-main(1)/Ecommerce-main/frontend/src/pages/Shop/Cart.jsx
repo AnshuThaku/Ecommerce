@@ -1,258 +1,464 @@
-import React, { useEffect, useState } from 'react';
-import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
-import axiosInstance from '../../utils/axiosInstance';
-import { Link, useNavigate } from 'react-router-dom'; // useNavigate add kiya
-import Toast from '../../components/Toast';
+// import React, { useEffect, useState } from 'react';
+// import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
+// import axiosInstance from '../../utils/axiosInstance';
+// import { Link, useNavigate } from 'react-router-dom'; // useNavigate add kiya
+// import Toast from '../../components/Toast';
 
-export default function Cart() {
-  const [cartItems, setCartItems] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [isCheckingOut, setIsCheckingOut] = useState(false); // Checkout loading spinner ke liye
-  const [toastMessage, setToastMessage] = useState(null);
-  const navigate = useNavigate(); // Redirect karne ke liye
+// export default function Cart() {
+//   const [cartItems, setCartItems] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [isCheckingOut, setIsCheckingOut] = useState(false); // Checkout loading spinner ke liye
+//   const [toastMessage, setToastMessage] = useState(null);
+//   const navigate = useNavigate(); // Redirect karne ke liye
 
-  const showToast = (type, message) => {
-    setToastMessage({ type, message });
-  };
+//   const showToast = (type, message) => {
+//     setToastMessage({ type, message });
+//   };
 
-  const fetchCart = async () => {
-    try {
-      const { data } = await axiosInstance.get('/cart');
-      if (data && data.items) {
-        const detailedItems = await Promise.all(
-          data.items.map(async (item) => {
-            try {
-              const res = await axiosInstance.get(`/products/${item.product}`);
-              return { ...item, productDetails: res.data.product };
-            } catch (err) {
-              return { ...item, productDetails: { name: 'Unknown', price: 0, images: [] } };
-            }
-          })
-        );
-        setCartItems(detailedItems);
-      } else {
-        setCartItems([]);
-      }
-    } catch (error) {
-      if (error.response?.status !== 404) {
-        showToast('error', 'Failed to load cart');
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+//   const fetchCart = async () => {
+//     try {
+//       const { data } = await axiosInstance.get('/cart');
+//       if (data && data.items) {
+//         const detailedItems = await Promise.all(
+//           data.items.map(async (item) => {
+//             try {
+//               const res = await axiosInstance.get(`/products/${item.product}`);
+//               return { ...item, productDetails: res.data.product };
+//             } catch (err) {
+//               return { ...item, productDetails: { name: 'Unknown', price: 0, images: [] } };
+//             }
+//           })
+//         );
+//         setCartItems(detailedItems);
+//       } else {
+//         setCartItems([]);
+//       }
+//     } catch (error) {
+//       if (error.response?.status !== 404) {
+//         showToast('error', 'Failed to load cart');
+//       }
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
 
-  useEffect(() => {
-    fetchCart();
-  }, []);
+//   useEffect(() => {
+//     fetchCart();
+//   }, []);
 
-  const updateQuantity = async (productId, currentQuantity, change) => {
-    if (change === 1) { 
-      try {
-        await axiosInstance.post('/cart/add', { productId, quantity: 1 });
-        fetchCart(); 
-      } catch (error) {
-        showToast('error', 'Failed to update quantity');
-      }
-    } else if (change === -1 && currentQuantity > 1) { 
-      showToast('info', 'Quantity decrease endpoint needed in backend.');
-    }
-  };
+//   const updateQuantity = async (productId, currentQuantity, change) => {
+//     if (change === 1) { 
+//       try {
+//         await axiosInstance.post('/cart/add', { productId, quantity: 1 });
+//         fetchCart(); 
+//       } catch (error) {
+//         showToast('error', 'Failed to update quantity');
+//       }
+//     } else if (change === -1 && currentQuantity > 1) { 
+//       showToast('info', 'Quantity decrease endpoint needed in backend.');
+//     }
+//   };
 
-  const removeItem = async (productId) => {
-    showToast('info', 'Remove item endpoint needs to be mapped in backend');
-  };
+//   const removeItem = async (productId) => {
+//     showToast('info', 'Remove item endpoint needs to be mapped in backend');
+//   };
 
-  const getItemPrice = (item) => {
-    const product = item.productDetails;
-    if (product?.discountPrice && product.discountPrice > 0) {
-      return product.price - product.discountPrice;
-    }
-    return product?.price || 0;
-  };
+//   const getItemPrice = (item) => {
+//     const product = item.productDetails;
+//     if (product?.discountPrice && product.discountPrice > 0) {
+//       return product.price - product.discountPrice;
+//     }
+//     return product?.price || 0;
+//   };
 
-  const subtotal = cartItems.reduce(
-    (acc, curr) => acc + getItemPrice(curr) * curr.quantity,
-    0
-  );
+//   const subtotal = cartItems.reduce(
+//     (acc, curr) => acc + getItemPrice(curr) * curr.quantity,
+//     0
+//   );
 
-  const totalSavings = cartItems.reduce((acc, curr) => {
-    const product = curr.productDetails;
-    if (product?.discountPrice && product.discountPrice > 0) {
-      return acc + product.discountPrice * curr.quantity;
-    }
-    return acc;
-  }, 0);
+//   const totalSavings = cartItems.reduce((acc, curr) => {
+//     const product = curr.productDetails;
+//     if (product?.discountPrice && product.discountPrice > 0) {
+//       return acc + product.discountPrice * curr.quantity;
+//     }
+//     return acc;
+//   }, 0);
 
-  // --- INSTANT CHECKOUT LOGIC ---
-  const handleCheckout = async () => {
-    setIsCheckingOut(true);
-    try {
-      // Backend ko order create karne ke liye exact waisa data bhejenge jaisa Order Model ko chahiye
-      const checkoutItems = cartItems.map(item => ({
-        product: item.product, 
-        productId: item.product, 
-        name: item.productDetails?.name || 'Luxury Item',
-        image: item.productDetails?.variants?.[0]?.images?.[0]?.url || item.productDetails?.images?.[0]?.url || '',
-        price: getItemPrice(item),
-        quantity: item.quantity
-      }));
+//   // --- INSTANT CHECKOUT LOGIC ---
+//   const handleCheckout = async () => {
+//     setIsCheckingOut(true);
+//     try {
+//       // Backend ko order create karne ke liye exact waisa data bhejenge jaisa Order Model ko chahiye
+//       const checkoutItems = cartItems.map(item => ({
+//         product: item.product, 
+//         productId: item.product, 
+//         name: item.productDetails?.name || 'Luxury Item',
+//         image: item.productDetails?.variants?.[0]?.images?.[0]?.url || item.productDetails?.images?.[0]?.url || '',
+//         price: getItemPrice(item),
+//         quantity: item.quantity
+//       }));
 
-      const payload = {
-        cartItems: checkoutItems,
-        totalAmount: subtotal
-      };
+//       const payload = {
+//         cartItems: checkoutItems,
+//         totalAmount: subtotal
+//       };
 
-      // API Call to create dummy order
-      const response = await axiosInstance.post('/orders/instant-checkout', payload);
+//       // API Call to create dummy order
+//       const response = await axiosInstance.post('/orders/instant-checkout', payload);
       
-      if (response.data.success) {
-        // Agar success hua toh sidha Order Success page par bhejo ID ke sath
-        navigate('/order-success', { state: { orderId: response.data.orderId } });
-      }
-    } catch (error) {
-      showToast('error', error.response?.data?.error || 'Checkout Failed. Please try again.');
-    } finally {
-      setIsCheckingOut(false);
-    }
-  };
+//       if (response.data.success) {
+//         // Agar success hua toh sidha Order Success page par bhejo ID ke sath
+//         navigate('/order-success', { state: { orderId: response.data.orderId } });
+//       }
+//     } catch (error) {
+//       showToast('error', error.response?.data?.error || 'Checkout Failed. Please try again.');
+//     } finally {
+//       setIsCheckingOut(false);
+//     }
+//   };
 
-  if (loading) return <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center text-xl animate-pulse text-[#C8A253] font-serif">Curating your cart...</div>;
+//   if (loading) return <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center text-xl animate-pulse text-[#C8A253] font-serif">Curating your cart...</div>;
+
+//   return (
+//     <div className="bg-[#0A0A0A] min-h-screen text-white pt-24 pb-12 px-6">
+//       <Toast toast={toastMessage} onClose={() => setToastMessage(null)} />
+//       <div className="max-w-6xl mx-auto">
+//         <h1 className="text-4xl font-serif text-[#C8A253] mb-8 flex items-center gap-3">
+//           <ShoppingBag className="w-8 h-8" /> Your Cart
+//         </h1>
+
+//         {cartItems.length === 0 ? (
+//           <div className="text-center py-20 bg-[#111] rounded-2xl border border-zinc-800 shadow-2xl">
+//             <ShoppingBag className="w-16 h-16 mx-auto text-[#C8A253] mb-4 opacity-50" />
+//             <h2 className="text-2xl font-serif mb-2 text-white">Your cart is empty</h2>
+//             <p className="text-zinc-500 mb-8">Looks like you haven't added any luxury items yet.</p>
+//             <Link to="/shop" className="inline-block bg-[#C8A253] text-[#0A0A0A] px-8 py-3 rounded-full font-bold tracking-widest uppercase hover:bg-[#d4af6b] transition-all">
+//               Continue Shopping
+//             </Link>
+//           </div>
+//         ) : (
+//           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+//             <div className="lg:col-span-2 space-y-6">
+//               {cartItems.map((item) => {
+//                 const product = item.productDetails;
+//                 const hasDiscount = product?.discountPrice && product.discountPrice > 0;
+//                 const itemImage = product?.variants?.[0]?.images?.[0]?.url || product?.images?.[0]?.url || 'https://placehold.co/200x200/111/C8A253?text=Boutique';
+//                 const itemTotal = getItemPrice(item) * item.quantity;
+//                 const discountPercent = hasDiscount ? Math.round((product.discountPrice / product.price) * 100) : 0;
+                
+//                 return (
+//                 <div key={item._id} className="flex gap-6 p-6 bg-[#111] rounded-2xl border border-zinc-800 hover:border-[#C8A253]/30 transition-colors">
+//                   <div className="w-28 h-28 bg-white rounded-xl p-2 flex-shrink-0">
+//                     <img 
+//                       src={itemImage} 
+//                       alt={product?.name}
+//                       className="w-full h-full object-contain"
+//                     />
+//                   </div>
+                  
+//                   <div className="flex-1 flex flex-col justify-between">
+//                     <div className="flex justify-between items-start gap-4">
+//                       <div>
+//                         <h3 className="font-serif text-lg text-white line-clamp-1">{product?.name}</h3>
+//                         <p className="text-xs text-zinc-500 tracking-wider uppercase mt-1">{product?.category}</p>
+//                       </div>
+//                       <button 
+//                         onClick={() => removeItem(item.product)} 
+//                         className="text-zinc-600 hover:text-red-500 transition-colors bg-zinc-900 p-2 rounded-full"
+//                       >
+//                         <Trash2 className="w-4 h-4" />
+//                       </button>
+//                     </div>
+                    
+//                     <div className="flex justify-between items-end">
+//                       <div>
+//                         {hasDiscount ? (
+//                           <div className="flex items-center gap-2 flex-wrap">
+//                             <span className="text-xl font-semibold text-[#C8A253]">₹{itemTotal}</span>
+//                             <span className="text-sm text-zinc-500 line-through">₹{product.price * item.quantity}</span>
+//                             <span className="text-[10px] font-bold text-green-500 bg-green-500/10 px-1.5 py-0.5 rounded">{discountPercent}% OFF</span>
+//                           </div>
+//                         ) : (
+//                           <span className="text-xl font-semibold text-[#C8A253]">₹{itemTotal}</span>
+//                         )}
+//                         <p className="text-xs text-zinc-500 mt-1">₹{getItemPrice(item)} each</p>
+//                       </div>
+                      
+//                       <div className="flex items-center gap-4 bg-zinc-900 border border-zinc-700 rounded-full px-3 py-1.5">
+//                         <button 
+//                           onClick={() => updateQuantity(item.product, item.quantity, -1)}
+//                           className="text-zinc-400 hover:text-[#C8A253] transition-colors"
+//                         >
+//                           <Minus className="w-4 h-4" />
+//                         </button>
+//                         <span className="w-6 text-center text-sm font-medium">{item.quantity}</span>
+//                         <button 
+//                           onClick={() => updateQuantity(item.product, item.quantity, 1)}
+//                           className="text-zinc-400 hover:text-[#C8A253] transition-colors"
+//                         >
+//                           <Plus className="w-4 h-4" />
+//                         </button>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 </div>
+//               )})}
+//             </div>
+
+//             <div className="lg:col-span-1">
+//               <div className="bg-[#111] p-8 rounded-2xl border border-zinc-800 sticky top-24 shadow-2xl">
+//                 <h3 className="text-xl font-serif text-[#C8A253] mb-6">Order Summary</h3>
+                
+//                 <div className="space-y-4 text-zinc-400 mb-8">
+//                   <div className="flex justify-between">
+//                     <span>Subtotal ({cartItems.length} items)</span>
+//                     <span className="text-white">₹{subtotal}</span>
+//                   </div>
+//                   {totalSavings > 0 && (
+//                     <div className="flex justify-between text-green-500">
+//                       <span>Discount Saved</span>
+//                       <span>-₹{totalSavings}</span>
+//                     </div>
+//                   )}
+//                   <div className="flex justify-between">
+//                     <span>Shipping</span>
+//                     <span className="text-white">Free Premium</span>
+//                   </div>
+//                 </div>
+                
+//                 <div className="border-t border-zinc-800 pt-6 mb-8 flex justify-between items-center">
+//                   <span className="text-lg text-white">Grand Total</span>
+//                   <span className="text-3xl font-serif text-[#C8A253]">₹{subtotal}</span>
+//                 </div>
+                
+//                 <button 
+//                   onClick={handleCheckout}
+//                   disabled={isCheckingOut || cartItems.length === 0}
+//                   className="w-full py-4 flex items-center justify-center gap-2 bg-[#C8A253] text-[#0A0A0A] rounded-xl font-bold tracking-widest uppercase hover:bg-[#d4af6b] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+//                 >
+//                   {isCheckingOut ? (
+//                     <>
+//                       <svg className="animate-spin h-5 w-5 text-[#0A0A0A]" viewBox="0 0 24 24" fill="none">
+//                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+//                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+//                       </svg>
+//                       Processing...
+//                     </>
+//                   ) : (
+//                     'Secure Checkout'
+//                   )}
+//                 </button>
+//               </div>
+//             </div>
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// }
+
+import React, { useState, useEffect } from 'react';
+import { 
+  Heart, Eye, ShoppingCart, ArrowRight, X, ShieldCheck, Star, Award 
+} from 'lucide-react';
+
+/**
+ * MOCK DATA - Aapki original images ke saath
+ */
+const trendingProducts = [
+  {
+    id: 1,
+    brand: "Marshall",
+    name: "Stanmore III Bluetooth",
+    price: 41999,
+    originalPrice: 49999,
+    discount: "16% off",
+    rating: 4.8,
+    ratingCount: "2,450",
+    description: "Experience the legend with Stanmore III. Re-engineered for a wider soundstage, delivering home-filling Marshall signature sound with a more immersive experience.",
+    image: "images.jpg",
+    hoverImage: "images.jpg",
+    tag: "Bestseller",
+    colors: [
+      { code: "#1a1a1a", img: "images.jpg" }, 
+      { code: "#e5d1b1", img: "downl.jpg" }, 
+      { code: "#4a3728", img: "download.jpg" }  
+    ]
+  },
+  {
+    id: 2,
+    brand: "Devialet",
+    name: "Phantom I 108 dB",
+    price: 288000, 
+    originalPrice: 320000,
+    discount: "10% off",
+    rating: 4.9,
+    ratingCount: "842",
+    description: "The ultimate connected speaker. Hear every detail brought to life with unthinkable clarity by a Grade I Titanium tweeter. Ultra-deep bass in its purest form.",
+    image: "img1.jpg",
+    hoverImage: "img1.jpg",
+    tag: "Iconic",
+    colors: [
+      { code: "#ffffff", img: "img3.jpg" }, 
+      { code: "#222222", img: "img2.jpg" }, 
+      { code: "#d4af37", img: "img1.jpg" }  
+    ]
+  },
+  {
+    id: 3,
+    brand: "Dyson",
+    name: "Airwrap™ Multi-styler",
+    price: 45908,
+    originalPrice: 49900,
+    discount: "8% off",
+    rating: 4.7,
+    ratingCount: "5,120",
+    description: "Dry. Curl. Shape. Smooth and hide flyaways. With no extreme heat. Re-engineered attachments harness Enhanced Coanda airflow to create your styles.",
+    image: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=600",
+    hoverImage: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&q=80&w=600",
+    tag: "New",
+    colors: [
+      { code: "#b31b3e", img: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&q=80&w=600" }, 
+      { code: "#1e3a5f", img: "https://images.unsplash.com/photo-1595475241949-0d021200d5c7?auto=format&fit=crop&q=80&w=600" }, 
+      { code: "#555555", img: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&q=80&w=600" }  
+    ]
+  },
+  {
+    id: 4,
+    brand: "Withings",
+    name: "ScanWatch Horizon",
+    price: 50399,
+    originalPrice: 59999,
+    discount: "16% off",
+    rating: 4.6,
+    ratingCount: "324",
+    description: "The world's most advanced health-tracking hybrid smartwatch. Features a rotating bezel, stainless steel case, and sapphire glass.",
+    image: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&q=80&w=600",
+    hoverImage: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=600",
+    tag: "",
+    colors: [
+      { code: "#122836", img: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&q=80&w=600" }, 
+      { code: "#2d5a27", img: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?auto=format&fit=crop&q=80&w=600" }, 
+      { code: "#e0e0e0", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=600" }  
+    ]
+  }
+];
+
+const formatPrice = (amount) => {
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0
+  }).format(amount);
+};
+
+const QuickViewModal = ({ product, onClose }) => {
+  if (!product) return null;
 
   return (
-    <div className="bg-[#0A0A0A] min-h-screen text-white pt-24 pb-12 px-6">
-      <Toast toast={toastMessage} onClose={() => setToastMessage(null)} />
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-serif text-[#C8A253] mb-8 flex items-center gap-3">
-          <ShoppingBag className="w-8 h-8" /> Your Cart
-        </h1>
+    <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
+      <div 
+        className="absolute inset-0 bg-black/70 backdrop-blur-md" 
+        onClick={onClose}
+      />
+      <div className="relative bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl flex flex-col md:flex-row gap-6 animate-in fade-in zoom-in duration-300">
 
-        {cartItems.length === 0 ? (
-          <div className="text-center py-20 bg-[#111] rounded-2xl border border-zinc-800 shadow-2xl">
-            <ShoppingBag className="w-16 h-16 mx-auto text-[#C8A253] mb-4 opacity-50" />
-            <h2 className="text-2xl font-serif mb-2 text-white">Your cart is empty</h2>
-            <p className="text-zinc-500 mb-8">Looks like you haven't added any luxury items yet.</p>
-            <Link to="/shop" className="inline-block bg-[#C8A253] text-[#0A0A0A] px-8 py-3 rounded-full font-bold tracking-widest uppercase hover:bg-[#d4af6b] transition-all">
-              Continue Shopping
-            </Link>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <div className="lg:col-span-2 space-y-6">
-              {cartItems.map((item) => {
-                const product = item.productDetails;
-                const hasDiscount = product?.discountPrice && product.discountPrice > 0;
-                const itemImage = product?.variants?.[0]?.images?.[0]?.url || product?.images?.[0]?.url || 'https://placehold.co/200x200/111/C8A253?text=Boutique';
-                const itemTotal = getItemPrice(item) * item.quantity;
-                const discountPercent = hasDiscount ? Math.round((product.discountPrice / product.price) * 100) : 0;
-                
-                return (
-                <div key={item._id} className="flex gap-6 p-6 bg-[#111] rounded-2xl border border-zinc-800 hover:border-[#C8A253]/30 transition-colors">
-                  <div className="w-28 h-28 bg-white rounded-xl p-2 flex-shrink-0">
-                    <img 
-                      src={itemImage} 
-                      alt={product?.name}
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-                  
-                  <div className="flex-1 flex flex-col justify-between">
-                    <div className="flex justify-between items-start gap-4">
-                      <div>
-                        <h3 className="font-serif text-lg text-white line-clamp-1">{product?.name}</h3>
-                        <p className="text-xs text-zinc-500 tracking-wider uppercase mt-1">{product?.category}</p>
-                      </div>
-                      <button 
-                        onClick={() => removeItem(item.product)} 
-                        className="text-zinc-600 hover:text-red-500 transition-colors bg-zinc-900 p-2 rounded-full"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-                    
-                    <div className="flex justify-between items-end">
-                      <div>
-                        {hasDiscount ? (
-                          <div className="flex items-center gap-2 flex-wrap">
-                            <span className="text-xl font-semibold text-[#C8A253]">₹{itemTotal}</span>
-                            <span className="text-sm text-zinc-500 line-through">₹{product.price * item.quantity}</span>
-                            <span className="text-[10px] font-bold text-green-500 bg-green-500/10 px-1.5 py-0.5 rounded">{discountPercent}% OFF</span>
-                          </div>
-                        ) : (
-                          <span className="text-xl font-semibold text-[#C8A253]">₹{itemTotal}</span>
-                        )}
-                        <p className="text-xs text-zinc-500 mt-1">₹{getItemPrice(item)} each</p>
-                      </div>
-                      
-                      <div className="flex items-center gap-4 bg-zinc-900 border border-zinc-700 rounded-full px-3 py-1.5">
-                        <button 
-                          onClick={() => updateQuantity(item.product, item.quantity, -1)}
-                          className="text-zinc-400 hover:text-[#C8A253] transition-colors"
-                        >
-                          <Minus className="w-4 h-4" />
-                        </button>
-                        <span className="w-6 text-center text-sm font-medium">{item.quantity}</span>
-                        <button 
-                          onClick={() => updateQuantity(item.product, item.quantity, 1)}
-                          className="text-zinc-400 hover:text-[#C8A253] transition-colors"
-                        >
-                          <Plus className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )})}
-            </div>
+        <button 
+          onClick={onClose}
+          className="absolute top-6 right-6 p-2 rounded-full bg-gray-100 hover:bg-black hover:text-white transition-all z-10"
+        >
+          <X className="w-5 h-5" />
+        </button>
 
-            <div className="lg:col-span-1">
-              <div className="bg-[#111] p-8 rounded-2xl border border-zinc-800 sticky top-24 shadow-2xl">
-                <h3 className="text-xl font-serif text-[#C8A253] mb-6">Order Summary</h3>
-                
-                <div className="space-y-4 text-zinc-400 mb-8">
-                  <div className="flex justify-between">
-                    <span>Subtotal ({cartItems.length} items)</span>
-                    <span className="text-white">₹{subtotal}</span>
-                  </div>
-                  {totalSavings > 0 && (
-                    <div className="flex justify-between text-green-500">
-                      <span>Discount Saved</span>
-                      <span>-₹{totalSavings}</span>
-                    </div>
-                  )}
-                  <div className="flex justify-between">
-                    <span>Shipping</span>
-                    <span className="text-white">Free Premium</span>
-                  </div>
-                </div>
-                
-                <div className="border-t border-zinc-800 pt-6 mb-8 flex justify-between items-center">
-                  <span className="text-lg text-white">Grand Total</span>
-                  <span className="text-3xl font-serif text-[#C8A253]">₹{subtotal}</span>
-                </div>
-                
-                <button 
-                  onClick={handleCheckout}
-                  disabled={isCheckingOut || cartItems.length === 0}
-                  className="w-full py-4 flex items-center justify-center gap-2 bg-[#C8A253] text-[#0A0A0A] rounded-xl font-bold tracking-widest uppercase hover:bg-[#d4af6b] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isCheckingOut ? (
-                    <>
-                      <svg className="animate-spin h-5 w-5 text-[#0A0A0A]" viewBox="0 0 24 24" fill="none">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                      </svg>
-                      Processing...
-                    </>
-                  ) : (
-                    'Secure Checkout'
-                  )}
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+        {/* Image Section */}
+        <div className="md:w-1/2 bg-[#f9f9f9] p-8 md:p-12 flex items-center justify-center">
+          <img 
+            src={product.image} 
+            alt={product.name} 
+            className="w-full h-auto max-h-[420px] min-w-[260px] max-w-[420px] object-contain mix-blend-multiply transition-all duration-500 hover:scale-105"
+            onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=600" }}
+          />
+        </div>
+
+<div className="md:w-1/2 p-8 md:p-14 md:pl-20 flex flex-col justify-center">
+  {/* Brand */}
+  <p className="text-[11px] uppercase tracking-[0.5em] font-bold text-[#d3b574] mb-3">
+    {product.brand}
+  </p>
+
+  {/* Product Name */}
+  <h2 className="text-4xl font-serif italic text-black mb-4 leading-snug">
+    {product.name}
+  </h2>
+
+  {/* Rating */}
+  <div className="flex items-center gap-3 mb-6">
+    <div className="flex items-center bg-green-600 text-white px-2 py-1 rounded text-[12px] font-bold">
+      {product.rating}
+      <Star className="w-3 h-3 ml-1 fill-white" />
+    </div>
+
+    <span className="text-[12px] text-gray-400 font-bold uppercase tracking-widest">
+      ({product.ratingCount} Ratings)
+    </span>
+  </div>
+
+  {/* Price Section */}
+  <div className="flex items-center gap-3 mb-6 flex-wrap">
+
+    <span className="text-2xl font-extrabold text-black">
+      {formatPrice(product.price)}
+    </span>
+
+    <span className="text-lg text-gray-400 line-through">
+      {formatPrice(product.originalPrice)}
+    </span>
+
+    <span className="text-lg font-bold text-green-600">
+      {product.discount}
+    </span>
+
+  </div>
+
+  {/* Description */}
+  <p className="text-[12px] text-gray-500 leading-relaxed mb-8 font-medium">
+    {product.description}
+  </p>
+
+  {/* Button + Features */}
+  <div className="space-y-6">
+
+    <button className="group relative w-full max-w-[200px] h-10 rounded-full bg-black px-6 text-[10px] align-baseline  font-black uppercase tracking-[0.2em] text-white transition-all hover:bg-[#d3b574] hover:text-black shadow-lg active:scale-95">
+      <span className="relative z-10 flex items-center justify-center gap-2">
+        <ShoppingCart className="w-4 h-4" />
+        <span>Add To Bag</span>
+      </span>
+    </button>
+
+  </div>
+
+</div>
       </div>
     </div>
   );
+};
+
+export default function App() {
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  return (
+    <div className="min-h-screen bg-white">
+      <section className="pt-24 pb-20 px-6 md:px-12 bg-white">
+        <div className="max-w-[1440px] mx-auto">
+          {selectedProduct && (
+            <QuickViewModal 
+              product={selectedProduct} 
+              onClose={() => setSelectedProduct(null)} 
+            />
+          )}
+        </div>
+      </section>
+    </div>
+  );
 }
+

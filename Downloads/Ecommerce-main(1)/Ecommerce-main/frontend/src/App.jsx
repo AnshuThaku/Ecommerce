@@ -9,7 +9,7 @@ import CompanyRegistration     from './pages/Admin/CompanyRegistration';
 // ── Shop / Customers
 import CustomerRegister        from './pages/Shop/CustomerRegister';
 import ShopHome                from './pages/Shop/ShopHome';
-import ProductDetails          from './pages/Shop/ProductDetails';
+// import ProductDetails          from './pages/Shop/ProductDetails';
 import Cart                    from './pages/Shop/Cart';
 
 // ── Super-Admin
@@ -26,6 +26,7 @@ import AdminOrders             from './pages/Admin/AdminOrders';
 import AdminUsers              from './pages/Admin/AdminUsers';
 import OrderSuccess from './pages/orderSuccess';
 import SearchResults from './pages/SearchResult';
+import Account from './pages/Account';
 import Home from './pages/Home/Home';
 
 function App() {
@@ -44,10 +45,11 @@ function App() {
           <Route path="/products"         element={<ShopHome />} />
           <Route path="/cart"             element={<Cart />} />
           
-          {/* 👇 SEO FRIENDLY URLs (AMAZON STYLE) 👇 */}
-          <Route path="/:category/:brand/:product_name/p/:id" element={<ProductDetails />} />
-          <Route path="/:category/:product_name/p/:id" element={<ProductDetails />} /> {/* Fallback if no brand */}
-          <Route path="/product/:id"      element={<ProductDetails />} /> {/* Legacy route for safety */}
+          👇 SEO FRIENDLY URLs (AMAZON STYLE) 👇
+          {/* <Route path="/:category/:brand/:product_name/p/:id" element={<ProductDetails />} /> */}
+          {/* <Route path="/:category/:product_name/p/:id" element={<ProductDetails />} /> Fallback if no brand */}
+          {/* <Route path="/product/:id"      element={<ProductDetails />} />  */}
+          <Route path="/account"          element={<Account/>} />  {/* Legacy route for safety */}
 
           {/* ── First-time password setup (both roles) ──────── */}
           <Route

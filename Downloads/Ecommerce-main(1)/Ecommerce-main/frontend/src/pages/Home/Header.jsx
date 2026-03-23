@@ -1,3 +1,6 @@
+
+
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, ShoppingBag, ChevronDown, Palette, Menu, X, User, LogOut } from "lucide-react";
 import { Link, useNavigate } from 'react-router-dom';
@@ -25,19 +28,35 @@ export default function Header() {
   const theme = themes[currentTheme];
 
   // ── FETCH REAL CART COUNT ──
-  useEffect(() => {
-    const fetchCartData = async () => {
-      try {
-        const { data } = await axiosInstance.get('/cart');
-        if (data.success) {
-          setCartCount(data.cart?.items?.length || 0);
-        }
-      } catch (err) {
-        setCartCount(0); // User not logged in
+ useEffect(() => {
+  const fetchCartData = async () => {
+    try {
+      const { data } = await axiosInstance.get('/cart');
+      if (data.success) {
+        setCartCount(data.cart?.items?.length || 0);
       }
-    };
-    fetchCartData();
-  }, [user]);
+    } catch (err) {
+      setCartCount(0);
+    }
+  };
+
+  fetchCartData();
+
+  // ✅ UPDATED LISTENER
+  const handleCartUpdate = (e) => {
+    if (e.detail?.increase) {
+      // 👉 Direct count increase
+      setCartCount(prev => prev + e.detail.increase);
+    } else {
+      // fallback: API call
+      fetchCartData();
+    }
+  };
+
+  window.addEventListener('cartUpdated', handleCartUpdate);
+
+  return () => window.removeEventListener('cartUpdated', handleCartUpdate);
+}, [user]);
 
   const handleLogout = () => {
     logout();
@@ -133,12 +152,13 @@ export default function Header() {
           {/* USER ACCOUNT LOGIC */}
           {user ? (
             <div className="group relative">
-              <button className="nav-link">
+                <button className="nav-link" onClick={() => navigate("/account")}>
+
                 My Account <ChevronDown size={11} />
               </button>
               <div className="absolute top-full left-0 mt-2 w-48 bg-[#1A1A1A] border border-zinc-800 rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                <Link to="/profile" className="block px-4 py-2 text-xs text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors">Profile</Link>
-                <Link to="/orders" className="block px-4 py-2 text-xs text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors">My Orders</Link>
+                <Link to="/account" className="block px-4 py-2 text-xs text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors">Profile</Link>
+                <Link to="/Cart" className="block px-4 py-2 text-xs text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors">My Orders</Link>
                 <button onClick={handleLogout} className="w-full text-left block px-4 py-2 text-xs text-red-400 hover:bg-zinc-800 transition-colors">Logout</button>
               </div>
             </div>
