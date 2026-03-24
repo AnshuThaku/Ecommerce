@@ -79,7 +79,7 @@ export default function Home() {
         featuredProducts={homeData.featured} 
       />
 
-      <BrandsMarquee />
+     
 
       {/* 👇 NAYA CATEGORY SLIDER YAHAN LAGA HAI 👇 */}
       <ProductSlide />
@@ -93,15 +93,16 @@ export default function Home() {
         />
       )}
 
-      {/* 5. TRENDING SECTION */}
-      {homeData.trending?.length > 0 && (
+        {/* 7. RECENTLY VIEWED */}
+      {homeData.recentlyViewed?.length > 0 && (
         <ProductGrid 
-          title="Trending" 
-          subtitle="Now" 
-          products={homeData.trending} 
+          title="Recently" 
+          subtitle="Viewed" 
+          products={homeData.recentlyViewed} 
         />
       )}
 
+      
       {/* 6. RECOMMENDED SECTION */}
       {homeData.recommended?.length > 0 && (
         <ProductGrid 
@@ -111,14 +112,17 @@ export default function Home() {
         />
       )}
 
-      {/* 7. RECENTLY VIEWED */}
-      {homeData.recentlyViewed?.length > 0 && (
+      {/* 5. TRENDING SECTION */}
+      {homeData.trending?.length > 0 && (
         <ProductGrid 
-          title="Recently" 
-          subtitle="Viewed" 
-          products={homeData.recentlyViewed} 
+          title="Trending" 
+          subtitle="Now" 
+          products={homeData.trending} 
         />
       )}
+
+
+    
 
       {/* 8. NEW ARRIVALS */}
       {homeData.newArrivals?.length > 0 && (
