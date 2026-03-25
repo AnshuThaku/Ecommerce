@@ -1,6 +1,6 @@
 const Product = require('../../models/product/productModel');
 const History = require('../../models/History/HistoryModel');
-const recommendationService = require('../../services/recomendationservice'); // Ensure correct path
+const recommendationService = require('../../services/recomendationservice'); 
 const wrapAsync = require('../../utils/errorHandler/wrapAsync');
 
 /**
@@ -15,51 +15,55 @@ exports.getHomePageData = wrapAsync(async (req, res) => {
 
     const identity = { userId, guestId };
 
+    // Missing 'flashDeal' field fixed here
+    const requiredFields = 'name price discountPrice images variants category brand stock ratings soldCount flashDeal';
+
     // ---------------------------------------------------------
     // 2. PERSONALIZED SECTIONS (Based on User/Guest Behavior)
     // ---------------------------------------------------------
     
-    const recentlyViewed = await recommendationService.getRecentlyViewed(identity);
-    const recommended = await recommendationService.getPersonalizedProducts(identity);
+    // Engine se data aayega. Ab isme duplication (Set logic se) already fix ho chuka hai.
+    let recentlyViewed = await recommendationService.getRecentlyViewed(identity);
+    let recommended = await recommendationService.getPersonalizedProducts(identity);
+
+    // 🚫 MAINE YAHAN SE "FALLBACK LOGIC" HATA DIYA HAI. 🚫
+    // Ab agar naya user hoga -> recommended array [] jayega -> Frontend is section ko hide kar dega.
 
     // ---------------------------------------------------------
     // 3. GLOBAL SECTIONS (Defaults for Everyone/New Users)
     // ---------------------------------------------------------
     
-    // Zaroori fields jo frontend ko card render karne ke liye chahiye hi chahiye
-    const requiredFields = 'name price discountPrice images variants category brand stock ratings';
-
-    // ⚡ THE BRUTE FORCE LOGIC: MongoDB ke strict filters bypass karein
     // 1. Saare active products utha lo jinki detail chahiye
     const allActiveProducts = await Product.find({ isActive: true })
-        .select(`${requiredFields} flashDeal`)
-        .lean(); // lean() data ko pure JS object bana deta hai taaki filter aasan ho
+        .select(requiredFields)
+        .lean(); 
 
     // 2. Pure JavaScript se khud dhundo kahan deal on hai
     const flashDeals = allActiveProducts
         .filter(p => {
-            // Check: flashDeal object hona chahiye, aur isActive 'true' hona chahiye 
-            // (kabhi string 'true' save ho jata hai toh dono check kar lenge)
             return p.flashDeal && (p.flashDeal.isActive === true || p.flashDeal.isActive === 'true');
         })
-        .slice(0, 4); // Sirf top 4 deals front page ke liye nikal lo
+        .slice(0, 4); 
 
     // Section A: Featured Products
     const featured = await Product.find({ isFeatured: true, isActive: true })
         .limit(5)
-        .select(requiredFields);
+        .select(requiredFields)
+        .lean();
 
     // Section B: Trending Now
     const trending = await Product.find({ isActive: true })
         .sort({ soldCount: -1 })
         .limit(8)
-        .select(requiredFields);
+        .select(requiredFields)
+        .lean();
 
     // Section C: New Arrivals
     const newArrivals = await Product.find({ isActive: true })
         .sort({ createdAt: -1 })
         .limit(4)
-        .select(requiredFields);
+        .select(requiredFields)
+        .lean();
 
     // ---------------------------------------------------------
     // 4. COMBINED RESPONSE
@@ -67,9 +71,9 @@ exports.getHomePageData = wrapAsync(async (req, res) => {
     res.status(200).json({
         success: true,
         data: {
-            flashDeals,         // ⚡ Ab ye 100% data pass karega
-            recentlyViewed: recentlyViewed || [],
-            recommended: recommended || [],
+            flashDeals,         
+            recentlyViewed: recentlyViewed || [], 
+            recommended: recommended || [], // Naye user ke liye ye empty jayega
             featured,
             trending,
             newArrivals
