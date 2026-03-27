@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import Toast from '../../components/Toast';
 import { useAuth } from '../../context/AuthContext';
 import ReCAPTCHA from 'react-google-recaptcha';
-
-const recaptchaRef = React.createRef();
 
 const Field = ({ label, ...props }) => (
   <div className="relative mb-5">
@@ -28,24 +26,46 @@ export default function CustomerRegister() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', password: '' });
   const [toast, setToast] = useState(null);
   const [loading, setLoading] = useState(false);
+  
+  // ⚡ FIX 1: Captcha Token ki state add kardi
+  const [captchaToken, setCaptchaToken] = useState(null); 
+  const recaptchaRef = useRef();
+
   const navigate = useNavigate();
-  const { login } = useAuth(); // We can automatically log them in using context
+  const { login } = useAuth(); 
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // ⚡ FIX 2: Check karein ki user ne captcha fill kiya hai ya nahi
+    if (!captchaToken) {
+      setToast({ type: 'error', message: 'Please complete the reCAPTCHA verification.' });
+      return;
+    }
+
     setLoading(true);
     try {
-      const response = await axios.post('/api/auth/register', formData);
+      // ⚡ FIX 3: Backend ko formData ke sath captchaToken bhi bhejna hai
+      const response = await axios.post('/api/auth/register', {
+        ...formData,
+        captchaToken: captchaToken // Backend me ye key check kar lena (captchaToken ya token)
+      });
+
       if (response.data.success) {
-        // Auto log in after successful signup
         login(response.data.token, response.data.user);
         setToast({ type: 'success', message: 'Registration successful! Welcome.' });
-        setTimeout(() => navigate('/'), 1200); // Redirect to shop dashboard
+        setTimeout(() => navigate('/'), 1200); 
       }
     } catch (err) {
       setToast({ type: 'error', message: err.response?.data?.error || 'Registration failed.' });
+      
+      // ⚡ FIX 4: Agar error aaye toh captcha reset kar do taaki user dobara bhar sake
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+        setCaptchaToken(null);
+      }
     } finally {
       setLoading(false);
     }
@@ -71,22 +91,24 @@ export default function CustomerRegister() {
             <Field label="Phone Number" name="phone" type="tel" value={formData.phone} onChange={handleChange} />
             <Field label="Password" name="password" type="password" required value={formData.password} onChange={handleChange} />
 
+            {/* ReCAPTCHA Form ke andar rakhna zyada better hai */}
+            <div className="mb-5 flex justify-center">
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey={import.meta.env.VITE_GOOGLE_SITE_KEY}
+                onChange={(token) => setCaptchaToken(token)}
+                theme="dark"
+              />
+            </div>
+
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#C8A253] hover:bg-[#b08d44] text-[#0A0A0A] font-bold py-3.5 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 mt-2"
+              className="w-full bg-[#C8A253] hover:bg-[#b08d44] text-[#0A0A0A] font-bold py-3.5 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Creating Account...' : 'Sign Up'}
             </button>
           </form>
-          <ReCAPTCHA
-  ref={recaptchaRef}
-  sitekey={import.meta.env.VITE_GOOGLE_SITE_KEY}
-  onChange={(token) => setCaptchaToken(token)}
-  theme="dark"
-/>
-            
-            
 
           <p className="text-center text-sm text-zinc-500 mt-6">
             Already have an account?{' '}
@@ -97,6 +119,5 @@ export default function CustomerRegister() {
         </div>
       </div>
     </div>
-    
   );
 }
