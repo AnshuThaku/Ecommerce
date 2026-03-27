@@ -35,6 +35,8 @@ export default function ProductCard({ product, onQuickView }) {
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
   const cardImages = getAllImages(product);
 
+  // Yeh useEffect images ko har 3 second mein change karta hai.
+  // Animation (ease-in) ispar ProductGrid.jsx ki CSS se apply ho raha hai (.animate-card-fade-in)
   useEffect(() => {
     let interval;
     if (cardImages.length > 1) {
@@ -72,10 +74,13 @@ export default function ProductCard({ product, onQuickView }) {
     <div
       data-aos="fade-up"
       onClick={() => onQuickView(product)}
-      className={`group relative flex flex-col bg-white rounded-2xl overflow-hidden transition-all duration-500 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.25)] hover:shadow-[0_30px_50px_-10px_rgba(0,0,0,0.4)] hover:-translate-y-2 w-full h-full cursor-pointer 
+      /* ⚡ UPDATED SHADOW:
+         - shadow-[0_8px_30px_rgba(0,0,0,0.12)] pehle se dark aur tight.
+         - hover par shadow slightly change hota hai depth ke liye. ⚡ */
+      className={`group relative flex flex-col bg-white rounded-2xl overflow-hidden transition-all duration-500 shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] hover:-translate-y-2 w-full h-full cursor-pointer 
         ${isDealActive ? 'border border-red-500/20' : ''}`}
     >
-      <div className="relative h-[350px] sm:h-[380px] bg-gray-100 overflow-hidden rounded-2xl cursor-pointer w-full">
+      <div className="relative h-[350px] sm:h-[320px] bg-gray-100 overflow-hidden rounded-2xl cursor-pointer w-full">
         {isDealActive && (
           <div className="absolute top-4 left-4 z-50 bg-red-600 text-white text-[9px] font-black px-3 py-1 flex items-center gap-1 uppercase tracking-widest rounded-sm shadow-xl">
             <Zap className="w-3 h-3 fill-current" /> Lightning Deal
@@ -83,6 +88,10 @@ export default function ProductCard({ product, onQuickView }) {
         )}
 
         <div className="absolute inset-0 w-full h-full p-4 sm:p-6 transition-transform duration-1000 group-hover:scale-105">
+          {/* ⚡ IMAGE ANIMATION: 
+            Ye className="animate-card-fade-in" us ease-in animation ko trigger karta hai.
+            Iski definition ProductGrid.jsx ke 'injectAOSStyles' function ke andar hai.
+          */}
           <img 
             key={currentImgIndex} 
             src={cardImages[currentImgIndex]} 

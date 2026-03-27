@@ -13,6 +13,7 @@ import ProductGrid   from '../Product/ProductGrid'; // 👈 NAYA GRID COMPONENT 
 import Footer from './Footer';
 import Cursor from './Cursor';
 import SaleCategories from '../../components/SaleCategories';
+import BrandsSection from '../../components/Brands';
 
 export default function Home() {
   const { user } = useAuth();
@@ -148,6 +149,8 @@ export default function Home() {
       )}
 
         <SaleCategories/>
+
+        <BrandsSection />
 
       <Footer />
       
