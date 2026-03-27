@@ -38,7 +38,6 @@ exports.protect = async (req, res, next) => {
 };
 // ... (Aapka purana protect function yahan upar rahega) ...
 
-// 👇 YEH NAYA FUNCTION ADD KARIYE 👇
 exports.optionalProtect = async (req, res, next) => {
   let token;
 
@@ -48,17 +47,18 @@ exports.optionalProtect = async (req, res, next) => {
     token = req.headers.authorization.split(' ')[1];
   }
 
-  // Agar token hai, toh user ko verify karo
+  // Strictly check for valid token string
   if (token && token !== 'null' && token !== 'undefined') {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       req.user = await User.findById(decoded.id).select('-password');
     } catch (error) {
-      console.error("Optional Token Error:", error.message);
-      // Error aane par bhi block mat karo, guest maan lo
+      // ⚡ FIX: Sirf tabhi log karo agar message 'invalid signature' ke alaawa kuch ho
+      // Ya phir isse puri tarah silent kar do taaki terminal saaf rahe
+      // console.error("Optional Token Error:", error.message); 
+      req.user = null; 
     }
   }
 
-  // Chahe user ho ya na ho, request ko aage badhne do (block mat karo)
   next(); 
 };

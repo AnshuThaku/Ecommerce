@@ -11,6 +11,7 @@ import ProductSlide  from './ProductSlide'; // 👈 NAYA SLIDER IMPORT KIYA
 import ProductGrid   from './Productcard'; 
 import Footer from './Footer';
 import Cursor from './Cursor';
+import SaleCategories from '../../components/SaleCategories';
 
 export default function Home() {
   const { user } = useAuth();
@@ -139,6 +140,8 @@ export default function Home() {
         />
       )}
 
+        <SaleCategories/>
+
       <Footer />
       
       <style dangerouslySetInnerHTML={{__html: `
@@ -150,6 +153,9 @@ export default function Home() {
           to { opacity: 1; transform: scale(1); }
         }
       `}} />
+
+    
     </div>
+
   );
 }
