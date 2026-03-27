@@ -9,7 +9,7 @@ import Hero   from './Hero';
 import Hero2  from './Hero2';
 import BrandsMarquee from './BrandsMarquee';
 import ProductSlide  from './ProductSlide'; // 👈 NAYA SLIDER IMPORT KIYA
-import ProductGrid   from './Productcard'; 
+import ProductGrid   from '../Product/ProductGrid'; // 👈 NAYA GRID COMPONENT IMPORT KIYA
 import Footer from './Footer';
 import Cursor from './Cursor';
 import SaleCategories from '../../components/SaleCategories';
