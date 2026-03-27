@@ -1,12 +1,14 @@
+
+
 // import { useState, useEffect, useCallback } from "react";
 // import { ChevronLeft, ChevronRight } from "lucide-react";
-// import { useNavigate } from "react-router-dom"; // 👈 Navigation ke liye import
+// import { useNavigate } from "react-router-dom";
 
 // export default function Hero({ accentColor = "#d3b574", bg = "#121212", featuredProducts = [] }) {
 //   const [current, setCurrent] = useState(0);
 //   const [animating, setAnimating] = useState(false);
 //   const [hoveredBtn, setHoveredBtn] = useState(false);
-//   const navigate = useNavigate(); // 👈 Hook initialize kiya
+//   const navigate = useNavigate();
 
 //   // ── LOGIC: Safely get the image from product variants ──
 //   const getProductImg = (p) => {
@@ -24,20 +26,20 @@
 //   };
 
 //   // ── LOGIC: Map Featured Products (with Fallback if Admin hasn't set any) ──
-//   const displayItems = featuredProducts.length > 0 
+//   const displayItems = featuredProducts.length > 0
 //     ? featuredProducts.map(p => ({
-//         id: p._id,
-//         image: getProductImg(p),
-//         title: p.name,
-//         subtitle: p.brand || "Exclusive Selection",
-//         url: createProductUrl(p)
-//       }))
+//       id: p._id,
+//       image: getProductImg(p),
+//       title: p.name,
+//       subtitle: p.brand || "Exclusive Selection",
+//       url: createProductUrl(p)
+//     }))
 //     : [
-//         // Default images agar database khali ho
-//         { id: 1, image: "/preview(1).png", title: "HOME LINE III", subtitle: "Bring the big stage home", url: "/shop" },
-//         { id: 2, image: "/canvass.png", title: "ARTISAN CANVAS", subtitle: "Crafted for perfection", url: "/shop" },
-//         { id: 3, image: "/canvas.png", title: "MODERN LUXURY", subtitle: "Elevate your space", url: "/shop" }
-//       ];
+//       // Default images agar database khali ho
+//       { id: 1, image: "/preview(1).png", title: "HOME LINE III", subtitle: "Bring the big stage home", url: "/shop" },
+//       { id: 2, image: "/canvass.png", title: "ARTISAN CANVAS", subtitle: "Crafted for perfection", url: "/shop" },
+//       { id: 3, image: "/canvas.png", title: "MODERN LUXURY", subtitle: "Elevate your space", url: "/shop" }
+//     ];
 
 //   const goTo = useCallback((index) => {
 //     if (animating || displayItems.length === 0) return;
@@ -65,7 +67,7 @@
 //     if (displayItems.length > 1) {
 //       const timer = setInterval(() => {
 //         next();
-//       }, 5000); // 👈 3000ms se 5000ms kar diya taaki user text padh sake
+//       }, 5000);
 //       return () => clearInterval(timer);
 //     }
 //   }, [next, displayItems.length]);
@@ -73,57 +75,62 @@
 //   return (
 //     <div
 //       style={{
-//         fontFamily: "'Montserrat', sans-serif",
+//         fontFamily: "'Inter', sans-serif",
 //         background: bg,
 //         transition: "background 0.7s",
 //         color: "white",
-//         paddingBottom: 40,
-//         marginBottom: "100px",
-//         minHeight: "100vh",
+//         height: "80vh", /* 👈 CHANGED: 100dvh se 80vh kar diya taaki screen height kam le */
+//         width: "100%",
 //         overflow: "hidden",
 //         position: "relative",
+//         display: "flex",
+//         flexDirection: "column",
+//         justifyContent: "space-between",
+//         boxSizing: "border-box",
+//         padding: "4vh 4vw",
 //       }}
 //     >
 //       <style>{`
-//         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&family=Great+Vibes&display=swap');
-        
-//         .text-reveal {
-//           transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-//           transform: translateY(${animating ? "40px" : "0"});
-//           opacity: ${animating ? "0" : "1"};
-//         }
+//         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Great+Vibes&display=swap');
+//         
+//         .text-reveal {
+//           transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+//           transform: translateY(${animating ? "20px" : "0"});
+//           opacity: ${animating ? "0" : "1"};
+//         }
 
-//         .glow-effect {
-//           position: absolute;
-//           width: 500px;
-//           height: 500px;
-//           background: ${accentColor};
-//           filter: blur(180px);
-//           opacity: 0.04;
-//           border-radius: 50%;
-//           pointer-events: none;
-//           top: 50%;
-//           left: 50%;
-//           transform: translate(-50%, -50%);
-//           animation: floatGlow 8s ease-in-out infinite;
-//         }
+//         .glow-effect {
+//           position: absolute;
+//           width: 50vh;
+//           height: 50vh;
+//           background: ${accentColor};
+//           filter: blur(150px);
+//           opacity: 0.04;
+//           border-radius: 50%;
+//           pointer-events: none;
+//           top: 50%;
+//           left: 50%;
+//           transform: translate(-50%, -50%);
+//           animation: floatGlow 8s ease-in-out infinite;
+//         }
 
-//         @keyframes floatGlow {
-//           0% { transform: translate(-50%, -50%) scale(1); }
-//           50% { transform: translate(-48%, -52%) scale(1.1); }
-//           100% { transform: translate(-50%, -50%) scale(1); }
-//         }
-//       `}</style>
+//         @keyframes floatGlow {
+//           0% { transform: translate(-50%, -50%) scale(1); }
+//           50% { transform: translate(-48%, -52%) scale(1.1); }
+//           100% { transform: translate(-50%, -50%) scale(1); }
+//         }
+//       `}</style>
 
 //       {/* Background Glow */}
 //       <div className="glow-effect" />
 
 //       {/* Header */}
-//       <div style={{ position: "relative", paddingTop: 48, paddingLeft: 64, paddingBottom: 40, zIndex: 10 }}>
-//         <div 
-//           style={{ 
-//             fontSize: 36, 
-//             opacity: 0.9, 
+//       <div style={{ position: "relative", zIndex: 10 }}>
+//         <div
+//           style={{
+//             fontSize: "clamp(24px, 4vw, 36px)",
+//             opacity: 0.9,
+//             fontWeight: 600,
 //             textShadow: "0 4px 24px rgba(0,0,0,0.4)",
 //             background: "linear-gradient(90deg, #d3b574, #f5e6c4, #d3b574)",
 //             WebkitBackgroundClip: "text",
@@ -134,14 +141,22 @@
 //         </div>
 //       </div>
 
-//       {/* Slider */}
-//       <div style={{ display: "flex", alignItems: "center", justifyContent: "center", marginTop: 40 }}>
-//         <button onClick={prev} style={{ background: "none", border: "none", color: "white", cursor: "pointer", opacity: 0.7 }}>
-//           <ChevronLeft size={44} />
+//       {/* Responsive Slider Section */}
+//       <div style={{
+//         flex: 1,
+//         display: "flex",
+//         alignItems: "center",
+//         justifyContent: "space-between",
+//         width: "100%",
+//         minHeight: 0
+//       }}>
+
+//         <button onClick={prev} style={{ background: "none", border: "none", color: "white", cursor: "pointer", opacity: 0.7, zIndex: 10 }}>
+//           <ChevronLeft size="clamp(28px, 5vw, 44px)" />
 //         </button>
 
-//         <div style={{ width: "760px", height: "380px", position: "relative" }}>
-//           {/* 👇 Mapping Dynamic Items Instead of Hardcoded Images 👇 */}
+//         {/* Dynamic Image Wrapper - Changed maxHeight for better mobile view */}
+//         <div style={{ width: "100%", height: "100%", maxWidth: "450px", maxHeight: "min(450px, 45vh)", position: "relative", margin: "0 auto" }}>
 //           {displayItems.map((item, index) => (
 //             <img
 //               key={item.id}
@@ -149,64 +164,92 @@
 //               alt={item.title}
 //               style={{
 //                 position: "absolute",
+//                 top: 0,
+//                 left: 0,
 //                 width: "100%",
 //                 height: "100%",
 //                 objectFit: "contain",
 //                 opacity: index === current ? 1 : 0,
-//                 transform:
-//                   index === current
-//                     ? "scale(1) rotate(0deg)"
-//                     : "scale(1.1) rotate(-2deg)",
+//                 transform: index === current ? "scale(1) rotate(0deg)" : "scale(1.05) rotate(-2deg)",
 //                 transition: "all 0.8s ease",
 //               }}
 //             />
 //           ))}
 //         </div>
 
-//         <button onClick={next} style={{ background: "none", border: "none", color: "white", cursor: "pointer", opacity: 0.7 }}>
-//           <ChevronRight size={44} />
+//         <button onClick={next} style={{ background: "none", border: "none", color: "white", cursor: "pointer", opacity: 0.7, zIndex: 10 }}>
+//           <ChevronRight size="clamp(28px, 5vw, 44px)" />
 //         </button>
 //       </div>
 
-//       {/* Dynamic Text Reveal */}
-//       <div className="text-reveal" style={{ textAlign: "center", marginTop: 40 }}>
-//         <h2 style={{ fontSize: 48, textTransform: "uppercase" }}>{displayItems[current]?.title}</h2>
-//         <p style={{ color: "#888", textTransform: "uppercase", letterSpacing: "2px" }}>{displayItems[current]?.subtitle}</p>
-//       </div>
+//       {/* Bottom Section: Dynamic Text Reveal & Button */}
+//       <div className="bottom-section" style={{
+//         display: "flex",
+//         flexDirection: "column",
+//         alignItems: "center",
+//         justifyContent: "center",
+//         width: "100%",
+//         position: "relative",
+//         zIndex: 10,
+//         gap: "20px"
+//       }}>
 
-//       {/* Button with Dynamic Navigation */}
-//       <div style={{ display: "flex", justifyContent: "flex-end", padding: 40 }}>
-//         <button
-//           onClick={() => navigate(displayItems[current]?.url)} // 👈 Redirect to Specific Product
-//           onMouseEnter={() => setHoveredBtn(true)}
-//           onMouseLeave={() => setHoveredBtn(false)}
-//           style={{
-//             border: `1px solid ${accentColor}`,
-//             color: hoveredBtn ? "#000" : accentColor,
-//             background: hoveredBtn ? accentColor : "transparent",
-//             padding: "12px 30px",
-//             transition: "all 0.5s",
-//             cursor: "pointer",
-//             transform: hoveredBtn
-//               ? "translateY(-5px) scale(1.05)"
-//               : "translateY(0) scale(1)",
-//           }}
-//         >
-//           Shop Now
-//         </button>
+//         {/* Text */}
+//         <div className="text-reveal" style={{ textAlign: "center" }}>
+//           <h2 style={{
+//             fontSize: "clamp(20px, 4vw, 36px)",
+//             textTransform: "uppercase",
+//             margin: "0 0 8px 0"
+//           }}>
+//             {displayItems[current]?.title}
+//           </h2>
+//           <p style={{
+//             color: "#888",
+//             textTransform: "uppercase",
+//             letterSpacing: "2px",
+//             margin: 0,
+//             fontSize: "clamp(10px, 1.5vw, 14px)"
+//           }}>
+//             {displayItems[current]?.subtitle}
+//           </p>
+//         </div>
+
+//         {/* Button - Isko center align kar diya hai */}
+//         <div>
+//           <button
+//             onClick={() => navigate(displayItems[current]?.url)}
+//             onMouseEnter={() => setHoveredBtn(true)}
+//             onMouseLeave={() => setHoveredBtn(false)}
+//             style={{
+//               border: `1px solid ${accentColor}`,
+//               color: hoveredBtn ? "#000" : accentColor,
+//               background: hoveredBtn ? accentColor : "transparent",
+//               padding: "12px 24px",
+//               fontSize: "clamp(14px, 1.5vw, 16px)",
+//               transition: "all 0.5s",
+//               cursor: "pointer",
+//               whiteSpace: "nowrap",
+//               transform: hoveredBtn ? "translateY(-3px) scale(1.02)" : "translateY(0) scale(1)",
+//             }}
+//           >
+//             Shop Now
+//           </button>
+//         </div>
+
 //       </div>
 //     </div>
 //   );
 // }
+
 import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useNavigate } from "react-router-dom"; // 👈 Navigation ke liye import
+import { useNavigate } from "react-router-dom";
 
 export default function Hero({ accentColor = "#d3b574", bg = "#121212", featuredProducts = [] }) {
   const [current, setCurrent] = useState(0);
   const [animating, setAnimating] = useState(false);
   const [hoveredBtn, setHoveredBtn] = useState(false);
-  const navigate = useNavigate(); // 👈 Hook initialize kiya
+  const navigate = useNavigate();
 
   // ── LOGIC: Safely get the image from product variants ──
   const getProductImg = (p) => {
@@ -224,20 +267,20 @@ export default function Hero({ accentColor = "#d3b574", bg = "#121212", featured
   };
 
   // ── LOGIC: Map Featured Products (with Fallback if Admin hasn't set any) ──
-  const displayItems = featuredProducts.length > 0 
+  const displayItems = featuredProducts.length > 0
     ? featuredProducts.map(p => ({
-        id: p._id,
-        image: getProductImg(p),
-        title: p.name,
-        subtitle: p.brand || "Exclusive Selection",
-        url: createProductUrl(p)
-      }))
+      id: p._id,
+      image: getProductImg(p),
+      title: p.name,
+      subtitle: p.brand || "Exclusive Selection",
+      url: createProductUrl(p)
+    }))
     : [
-        // Default images agar database khali ho
-        { id: 1, image: "/preview(1).png", title: "HOME LINE III", subtitle: "Bring the big stage home", url: "/shop" },
-        { id: 2, image: "/canvass.png", title: "ARTISAN CANVAS", subtitle: "Crafted for perfection", url: "/shop" },
-        { id: 3, image: "/canvas.png", title: "MODERN LUXURY", subtitle: "Elevate your space", url: "/shop" }
-      ];
+      // Default images agar database khali ho
+      { id: 1, image: "/preview(1).png", title: "HOME LINE III", subtitle: "Bring the big stage home", url: "/shop" },
+      { id: 2, image: "/canvass.png", title: "ARTISAN CANVAS", subtitle: "Crafted for perfection", url: "/shop" },
+      { id: 3, image: "/canvas.png", title: "MODERN LUXURY", subtitle: "Elevate your space", url: "/shop" }
+    ];
 
   const goTo = useCallback((index) => {
     if (animating || displayItems.length === 0) return;
@@ -265,7 +308,7 @@ export default function Hero({ accentColor = "#d3b574", bg = "#121212", featured
     if (displayItems.length > 1) {
       const timer = setInterval(() => {
         next();
-      }, 5000); // 👈 5000ms
+      }, 5000);
       return () => clearInterval(timer);
     }
   }, [next, displayItems.length]);
@@ -273,23 +316,24 @@ export default function Hero({ accentColor = "#d3b574", bg = "#121212", featured
   return (
     <div
       style={{
-        fontFamily: "'Montserrat', sans-serif",
+        fontFamily: "'Inter', sans-serif",
         background: bg,
         transition: "background 0.7s",
         color: "white",
-        height: "100dvh", /* 👈 Screen ke exact 100% height (Mobile pe address bar ko bhi manage karega) */
+        height: "80vh", /* 👈 CHANGED: 100dvh se 80vh kar diya taaki screen height kam le */
         width: "100%",
-        overflow: "hidden", /* 👈 Scroll ko permanently gayab karega */
+        overflow: "hidden",
         position: "relative",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between", /* Top se bottom tak content ko properly stretch karega */
+        justifyContent: "space-between",
         boxSizing: "border-box",
-        padding: "4vh 4vw", /* Responsive padding */
+        /* 👈 CHANGED HERE: Top padding ko 16vh kar diya navbar clear karne ke liye, baki 4vw/4vh same hai */
+        padding: "16vh 4vw 4vh 4vw",
       }}
     >
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&family=Great+Vibes&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Great+Vibes&display=swap');
         
         .text-reveal {
           transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
@@ -317,15 +361,6 @@ export default function Hero({ accentColor = "#d3b574", bg = "#121212", featured
           50% { transform: translate(-48%, -52%) scale(1.1); }
           100% { transform: translate(-50%, -50%) scale(1); }
         }
-
-        /* Mobile Adjustments for Button */
-        @media (max-width: 768px) {
-          .bottom-section {
-            flex-direction: column !important;
-            align-items: center !important;
-            gap: 20px;
-          }
-        }
       `}</style>
 
       {/* Background Glow */}
@@ -333,10 +368,10 @@ export default function Hero({ accentColor = "#d3b574", bg = "#121212", featured
 
       {/* Header */}
       <div style={{ position: "relative", zIndex: 10 }}>
-        <div 
-          style={{ 
-            fontSize: "clamp(24px, 4vw, 36px)", /* 👈 Screen ke hisab se text size */
-            opacity: 0.9, 
+        <div
+          style={{
+            fontSize: "clamp(24px, 4vw, 36px)",
+            opacity: 0.9,
             fontWeight: 600,
             textShadow: "0 4px 24px rgba(0,0,0,0.4)",
             background: "linear-gradient(90deg, #d3b574, #f5e6c4, #d3b574)",
@@ -349,21 +384,21 @@ export default function Hero({ accentColor = "#d3b574", bg = "#121212", featured
       </div>
 
       {/* Responsive Slider Section */}
-      <div style={{ 
-        flex: 1, /* 👈 Bachi hui sari height ye container le lega */
-        display: "flex", 
-        alignItems: "center", 
-        justifyContent: "space-between", 
-        width: "100%", 
-        minHeight: 0 /* Important flexbox property to prevent overflow */
+      <div style={{
+        flex: 1,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        width: "100%",
+        minHeight: 0
       }}>
-        
+
         <button onClick={prev} style={{ background: "none", border: "none", color: "white", cursor: "pointer", opacity: 0.7, zIndex: 10 }}>
-          <ChevronLeft size={44} />
+          <ChevronLeft size="clamp(28px, 5vw, 44px)" />
         </button>
 
-        {/* Dynamic Image Wrapper */}
-        <div style={{ width: "100%", height: "100%", maxWidth: "800px", position: "relative" }}>
+        {/* Dynamic Image Wrapper - Changed maxHeight for better mobile view */}
+        <div style={{ width: "100%", height: "100%", maxWidth: "450px", maxHeight: "min(450px, 45vh)", position: "relative", margin: "0 auto" }}>
           {displayItems.map((item, index) => (
             <img
               key={item.id}
@@ -375,7 +410,7 @@ export default function Hero({ accentColor = "#d3b574", bg = "#121212", featured
                 left: 0,
                 width: "100%",
                 height: "100%",
-                objectFit: "contain", /* 👈 Image ko stretch kiye bina fit rakhega */
+                objectFit: "contain",
                 opacity: index === current ? 1 : 0,
                 transform: index === current ? "scale(1) rotate(0deg)" : "scale(1.05) rotate(-2deg)",
                 transition: "all 0.8s ease",
@@ -385,45 +420,44 @@ export default function Hero({ accentColor = "#d3b574", bg = "#121212", featured
         </div>
 
         <button onClick={next} style={{ background: "none", border: "none", color: "white", cursor: "pointer", opacity: 0.7, zIndex: 10 }}>
-          <ChevronRight size={44} />
+          <ChevronRight size="clamp(28px, 5vw, 44px)" />
         </button>
       </div>
 
       {/* Bottom Section: Dynamic Text Reveal & Button */}
-      <div className="bottom-section" style={{ 
-        display: "flex", 
-        justifyContent: "space-between", 
-        alignItems: "flex-end", 
-        width: "100%", 
-        position: "relative", 
-        zIndex: 10 
+      <div className="bottom-section" style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
+        position: "relative",
+        zIndex: 10,
+        gap: "20px"
       }}>
-        
-        {/* Placeholder div to keep title strictly centered on desktop */}
-        <div style={{ flex: 1, display: "none" }} className="spacer-div" />
 
         {/* Text */}
-        <div className="text-reveal" style={{ textAlign: "center", flex: 2 }}>
-          <h2 style={{ 
-            fontSize: "clamp(28px, 5vw, 48px)", /* 👈 Mobile aur desktop size auto adjust */
-            textTransform: "uppercase", 
-            margin: "0 0 8px 0" 
+        <div className="text-reveal" style={{ textAlign: "center" }}>
+          <h2 style={{
+            fontSize: "clamp(20px, 4vw, 36px)",
+            textTransform: "uppercase",
+            margin: "0 0 8px 0"
           }}>
             {displayItems[current]?.title}
           </h2>
-          <p style={{ 
-            color: "#888", 
-            textTransform: "uppercase", 
-            letterSpacing: "2px", 
-            margin: 0, 
-            fontSize: "clamp(12px, 2vw, 16px)" 
+          <p style={{
+            color: "#888",
+            textTransform: "uppercase",
+            letterSpacing: "2px",
+            margin: 0,
+            fontSize: "clamp(10px, 1.5vw, 14px)"
           }}>
             {displayItems[current]?.subtitle}
           </p>
         </div>
 
-        {/* Button */}
-        <div style={{ flex: 1, display: "flex", justifyContent: "flex-end" }}>
+        {/* Button - Isko center align kar diya hai */}
+        <div>
           <button
             onClick={() => navigate(displayItems[current]?.url)}
             onMouseEnter={() => setHoveredBtn(true)}
