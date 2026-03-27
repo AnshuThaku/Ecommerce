@@ -87,40 +87,39 @@
 //         flexDirection: "column",
 //         justifyContent: "space-between",
 //         boxSizing: "border-box",
-//         /* 👈 CHANGED HERE: Top padding ko 16vh kar diya navbar clear karne ke liye, baki 4vw/4vh same hai */
-//         padding: "16vh 4vw 4vh 4vw",
+//         padding: "4vh 4vw",
 //       }}
 //     >
 //       <style>{`
-//         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Great+Vibes&display=swap');
-        
-//         .text-reveal {
-//           transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-//           transform: translateY(${animating ? "20px" : "0"});
-//           opacity: ${animating ? "0" : "1"};
-//         }
+//         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Great+Vibes&display=swap');
+//         
+//         .text-reveal {
+//           transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+//           transform: translateY(${animating ? "20px" : "0"});
+//           opacity: ${animating ? "0" : "1"};
+//         }
 
-//         .glow-effect {
-//           position: absolute;
-//           width: 50vh;
-//           height: 50vh;
-//           background: ${accentColor};
-//           filter: blur(150px);
-//           opacity: 0.04;
-//           border-radius: 50%;
-//           pointer-events: none;
-//           top: 50%;
-//           left: 50%;
-//           transform: translate(-50%, -50%);
-//           animation: floatGlow 8s ease-in-out infinite;
-//         }
+//         .glow-effect {
+//           position: absolute;
+//           width: 50vh;
+//           height: 50vh;
+//           background: ${accentColor};
+//           filter: blur(150px);
+//           opacity: 0.04;
+//           border-radius: 50%;
+//           pointer-events: none;
+//           top: 50%;
+//           left: 50%;
+//           transform: translate(-50%, -50%);
+//           animation: floatGlow 8s ease-in-out infinite;
+//         }
 
-//         @keyframes floatGlow {
-//           0% { transform: translate(-50%, -50%) scale(1); }
-//           50% { transform: translate(-48%, -52%) scale(1.1); }
-//           100% { transform: translate(-50%, -50%) scale(1); }
-//         }
-//       `}</style>
+//         @keyframes floatGlow {
+//           0% { transform: translate(-50%, -50%) scale(1); }
+//           50% { transform: translate(-48%, -52%) scale(1.1); }
+//           100% { transform: translate(-50%, -50%) scale(1); }
+//         }
+//       `}</style>
 
 //       {/* Background Glow */}
 //       <div className="glow-effect" />

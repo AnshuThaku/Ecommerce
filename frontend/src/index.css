@@ -1,4 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
+
+/* ── 1. Global Font Setup ───────────────────────────────────────── */
+html, body {
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* ── 2. Hide Scrollbar Utilities (For Categories & Sliders) ─────── */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
 /* body {
   cursor: none;
@@ -26,6 +41,7 @@
   z-index: 9998;
   transform: translate(-50%, -50%);
 }
+
 @keyframes slideIn {
   from { transform: translateX(-100%); }
   to   { transform: translateX(0); }
@@ -52,7 +68,6 @@ input:-webkit-autofill:focus ~ label {
   letter-spacing: 0.1em !important;
   color: #C8A253 !important;
 }
-
 
 .counter {
   font-size: 16px;
