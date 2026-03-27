@@ -6,6 +6,7 @@ import { useAuth } from '../../context/AuthContext';
 import Header from './Header';
 import Hero   from './Hero';
 // import Hero1  from './Hero1';
+import Hero2  from './Hero2';
 import BrandsMarquee from './BrandsMarquee';
 import ProductSlide  from './ProductSlide'; // 👈 NAYA SLIDER IMPORT KIYA
 import ProductGrid   from './Productcard'; 
@@ -81,6 +82,12 @@ export default function Home() {
         featuredProducts={homeData.featured} 
       />
       {/* <Hero1
+        accentColor="#d3b574" 
+        bg="#121212" 
+        featuredProducts={homeData.featured} 
+      /> */}
+
+      {/* <Hero2
         accentColor="#d3b574" 
         bg="#121212" 
         featuredProducts={homeData.featured} 
