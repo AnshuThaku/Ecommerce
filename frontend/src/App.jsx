@@ -11,7 +11,6 @@ import CustomerRegister        from './pages/Shop/CustomerRegister';
 // ── Public Shop Pages
 import Home                    from './pages/Home/Home';
 import ShopHome                from './pages/Shop/ShopHome';
-import ProductDetails          from './pages/Shop/ProductDetails'; // 👈 Product Page Route
 import Cart                    from './pages/Shop/Cart';
 import SearchResults           from './pages/SearchResult';
 
@@ -49,10 +48,7 @@ function App() {
           <Route path="/cart"             element={<Cart />} />
           <Route path="/search"           element={<SearchResults />} />
           
-          {/* ⚡ SEO FRIENDLY PRODUCT URLs ⚡ */}
-          <Route path="/:category/:brand/:name/p/:id" element={<ProductDetails />} />
-          <Route path="/:category/:name/p/:id"        element={<ProductDetails />} />
-          <Route path="/product/:id"                  element={<ProductDetails />} /> 
+        
           
           {/* ── Customer Private Routes ───────────────────────────── */}
           <Route path="/profile" element={
