@@ -276,7 +276,7 @@ export default function HeroAlternate({ accentColor = "#d3b574", bg = "#111111" 
     timeoutRef.current = setTimeout(() => {
       setIsTransitioning(true);
       setCurrentIndex((prevIndex) => prevIndex + 1);
-    }, 4500);
+    }, 2000);
     return () => resetTimeout();
   }, [currentIndex]);
 
