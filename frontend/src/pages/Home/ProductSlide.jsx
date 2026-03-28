@@ -102,7 +102,7 @@ export default function ProductSlide() {
   </div>
 
   {/* MAIN HEADING */}
-  <h2 className="text-3xl md:text-4xl font-serif italic text-black text-center">
+  <h2 className="text-3xl md:text-4xl font-extrabold text-black text-center">
     Shop By <span className="text-[#d3b574]">Category</span>
   </h2>
 
@@ -122,7 +122,7 @@ export default function ProductSlide() {
         {/* CARDS */}
         <div 
           ref={sliderRef}
-          className="flex overflow-x-auto gap-4 py-10 px-4 snap-x hide-scrollbar"
+          className="flex overflow-x-auto gap-4 py-2 px-4 snap-x hide-scrollbar"
         >
           {loading ? (
             [1,2,3,4,5].map(i => (
