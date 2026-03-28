@@ -40,14 +40,14 @@ export default function BrandsSection() {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* ⚡ Centered Heading: Brands ⚡ */}
-        <div className="flex flex-col items-center justify-center mb-16 text-center">
+        <div className="flex flex-col items-center justify-center mb-6 text-center">
           <h2 className="text-3xl font-bold text-black leading-none" style={{ fontFamily: "'Inter', sans-serif" }}>
             Brands
           </h2>
         </div>
 
         {/* ⚡ LOGO GRID (Pure Text & CSS Based) ⚡ */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-y-12 sm:gap-y-16 gap-x-8 lg:gap-x-12 px-4 lg:px-12 max-w-[1400px] mx-auto items-center justify-items-center">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-y-12 sm:gap-y-3 gap-x-8 lg:gap-x-12 px-4 lg:px-12 max-w-[1400px] mx-auto items-center justify-items-center">
           {brands.map((brand) => (
             <div key={brand.id} className="w-full flex items-center justify-center h-20 hover:scale-105 transition-transform duration-300 cursor-pointer grayscale hover:grayscale-0 opacity-80 hover:opacity-100">
               

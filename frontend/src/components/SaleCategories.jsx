@@ -73,7 +73,7 @@ export default function SaleCategories() {
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         
-        <h2 className="text-3xl md:text-4xl font-semibold text-center text-black mb-12 tracking-tight">
+        <h2 className="text-3xl md:text-4xl font-semibold text-center text-black mb-4 tracking-tight">
           Categories
         </h2>
 
@@ -83,7 +83,7 @@ export default function SaleCategories() {
             <button
               key={brand}
               onClick={() => setActiveBrand(brand)}
-              className={`shrink-0 px-8 py-3 text-[11px] md:text-xs font-bold tracking-widest uppercase transition-all duration-300 rounded-sm bg-white shadow-[0_8px_20px_-4px_rgba(255,0,0,0.2)] hover:shadow-[0_12px_25px_-4px_rgba(255,0,0,0.35)] hover:-translate-y-1 ${
+              className={`shrink-0 px-8 py-3 text-[11px] md:text-xs font-bold tracking-widest uppercase transition-all duration-300 rounded-sm bg-white shadow-[0_4px_20px_rgba(0,0,0,0.20)] hover:shadow-[0_12px_25px_-4px_rgba(0,0,0,0.35)] hover:-translate-y-1 ${
                 activeBrand === brand
                   ? 'text-black scale-105 border-b-[3px] border-red-500' 
                   : 'text-gray-500' 
@@ -105,7 +105,7 @@ export default function SaleCategories() {
                 to={`/product/${product._id}`} 
                 key={product._id} 
                 /* ⚡ THE FIX: Hover wali deeper bottom shadow ab default apply kar di hai ⚡ */
-                className="group relative bg-white rounded-[2rem] p-5 flex flex-col justify-between cursor-pointer transition-all duration-500 hover:-translate-y-2 shadow-[0_30px_50px_-10px_rgba(0,0,0,0.25)] w-full max-w-[260px] h-[380px] overflow-hidden"
+                className="group relative bg-white rounded-[2rem] p-5 flex flex-col justify-between cursor-pointer transition-all duration-500 hover:-translate-y-2 shadow-[0_4px_20px_rgba(0,0,0,0.20)] w-full max-w-[260px] h-[380px] overflow-hidden"
               >
                 
                 {/* Sale Ribbon */}
@@ -114,7 +114,7 @@ export default function SaleCategories() {
                 </div>
 
                 {/* Product Image */}
-                <div className="flex-1 w-full relative flex items-center justify-center mt-6 mb-4">
+                <div className="flex-1 w-full relative flex items-center justify-center mt-6 mb-2">
                   <img 
                     src={getMainImage(product)} 
                     alt={product.name} 
