@@ -14,10 +14,7 @@ import Footer from './Footer';
 import Cursor from './Cursor';
 import SaleCategories from '../../components/SaleCategories';
 import BrandsSection from '../../components/Brands';
-import Newsletter from '../../components/Newsletter';
-import NewsLetter1 from '../../components/NewsLetter1';
 import Newsletter2 from '../../components/Newsletter2';
-import Hero1 from './Hero1';
 
 export default function Home() {
   const { user } = useAuth();
@@ -80,17 +77,13 @@ export default function Home() {
       <Cursor />
       <Header />
 
-      {/* 👇 3. Hero Slider - Ab yeh Featured Products use karega 👇 */}
-      {/* <Hero 
+      👇 3. Hero Slider - Ab yeh Featured Products use karega 👇 */}
+      
+      {<Hero1
         accentColor="#d3b574" 
         bg="#121212" 
         featuredProducts={homeData.featured} 
-      />
-      {/* <Hero1
-        accentColor="#d3b574" 
-        bg="#121212" 
-        featuredProducts={homeData.featured} 
-      /> */}
+      /> }
 
       {/* <Hero2
         accentColor="#d3b574" 
