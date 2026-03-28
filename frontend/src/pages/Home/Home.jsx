@@ -4,8 +4,8 @@ import { useAuth } from '../../context/AuthContext';
 
 // ── NAYE UI COMPONENTS IMPORT ──
 import Header from './Header';
-import Hero   from './Hero';
-// import Hero1  from './Hero1';
+// import Hero   from './Hero';
+import Hero1  from './Hero1';
 import Hero2  from './Hero2';
 import BrandsMarquee from './BrandsMarquee';
 import ProductSlide  from './ProductSlide'; // 👈 NAYA SLIDER IMPORT KIYA
@@ -85,12 +85,12 @@ export default function Home() {
         accentColor="#d3b574" 
         bg="#121212" 
         featuredProducts={homeData.featured} 
-      /> */}
-      <Hero1
+      />
+      {/* <Hero1
         accentColor="#d3b574" 
         bg="#121212" 
         featuredProducts={homeData.featured} 
-      />
+      /> */}
 
       {/* <Hero2
         accentColor="#d3b574" 

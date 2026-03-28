@@ -116,7 +116,7 @@ export default function ProductCard({ product, onQuickView }) {
           {/* Price Layout - Centered */}
           <div className="flex items-center justify-center gap-2">
             {discountPercentage > 0 && (
-              <span className="text-black text-[18px] sm:text-[20px] font-bold">-{discountPercentage}%</span>
+              <span className="text-blue-600   text-[18px] sm:text-[20px] font-bold">-{discountPercentage}%</span>
             )}
             <span className="text-[18px] sm:text-[20px] font-medium text-black">{formatPrice(displayPrice)}</span>
           </div>
