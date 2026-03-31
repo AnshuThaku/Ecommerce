@@ -58,6 +58,7 @@ export default function ShopHome() {
     setSearchTerm(''); setPriceRange(maxPriceLimit);
   };
 
+<<<<<<< HEAD
   const filteredProducts = useMemo(() => {
     return products.filter(p => {
       if (!p) return false;
@@ -78,6 +79,23 @@ export default function ShopHome() {
       return 0;
     });
   }, [products, selectedCategories, selectedColors, selectedRating, selectedDiscount, priceRange, searchTerm, sortOrder]);
+=======
+  const HeaderNav = () => (
+    <nav className="fixed top-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <Link to="/" className="flex items-center flex-shrink-0 hover:opacity-90 transition-opacity">
+         <img src="/Truee_Luxury_Logo.png" alt="Logo"  className="h-8 md:h-10 object-contain" />
+        </Link>
+        <div className="flex-1 max-w-xl px-4 md:px-8 hidden md:block">
+           <SearchBar />
+        </div>
+        <div className="flex items-center gap-4 flex-shrink-0">
+          <Link to="/" className="text-[11px] font-black text-gray-500 hover:text-[#d3b574] transition-colors uppercase tracking-widest">Back to Home</Link>
+        </div>
+      </div>
+    </nav>
+  );
+>>>>>>> d5a3c1a257fbde41902391e48c7ad8a4e6ff459b
 
   return (
     <div className="min-h-screen bg-[var(--theme-bg-light)] pt-[70px]">
