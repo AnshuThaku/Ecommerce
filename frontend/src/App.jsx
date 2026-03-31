@@ -10,12 +10,12 @@ import { useServerTheme } from './hooks/useServerTheme';
 import Login from './pages/Admin/Login';
 import SetupPassword from './pages/Admin/SetPassword';
 import CompanyRegistration from './pages/Admin/CompanyRegistration';
-import CustomerRegister from './pages/Shop/CustomerRegister';
+import CustomerRegister from './pages/CustomerRegister';
 
 // ── Public Shop Pages
 import Home from './pages/Home/Home';
 import ShopHome from './pages/Shop/ShopHome';
-import Cart from './pages/Shop/Cart';
+import Cart from './pages/Cart';
 import SearchResults from './pages/SearchResult';
 
 // ── Customer Protected Pages

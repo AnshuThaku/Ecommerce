@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import Toast from '../../components/Toast';
-import { useAuth } from '../../context/AuthContext';
+import Toast from '../components/Toast';
+import { useAuth } from '../context/AuthContext';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 const Field = ({ label, ...props }) => (

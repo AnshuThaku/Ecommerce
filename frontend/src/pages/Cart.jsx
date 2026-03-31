@@ -223,9 +223,9 @@
 // }
 import React, { useEffect, useState } from 'react';
 import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
-import axiosInstance from '../../utils/axiosInstance';
+import axiosInstance from '../utils/axiosInstance';
 import { Link, useNavigate } from 'react-router-dom';
-import Toast from '../../components/Toast';
+import Toast from '../components/Toast';
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
