@@ -123,6 +123,11 @@ export default function Home() {
         bg="var(--theme-bg-light)" 
         featuredProducts={homeData.featured} 
       />
+      {/* <Hero1 
+        accentColor="var(--theme-primary)" 
+        bg="var(--theme-bg-light)" 
+        featuredProducts={homeData.featured} 
+      /> */}
 
       <ProductSlide />
       <Banner products={homeData.featured} />

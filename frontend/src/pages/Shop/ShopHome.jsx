@@ -58,7 +58,7 @@ export default function ShopHome() {
     setSearchTerm(''); setPriceRange(maxPriceLimit);
   };
 
-<<<<<<< HEAD
+
   const filteredProducts = useMemo(() => {
     return products.filter(p => {
       if (!p) return false;
@@ -79,7 +79,6 @@ export default function ShopHome() {
       return 0;
     });
   }, [products, selectedCategories, selectedColors, selectedRating, selectedDiscount, priceRange, searchTerm, sortOrder]);
-=======
   const HeaderNav = () => (
     <nav className="fixed top-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -95,7 +94,7 @@ export default function ShopHome() {
       </div>
     </nav>
   );
->>>>>>> d5a3c1a257fbde41902391e48c7ad8a4e6ff459b
+
 
   return (
     <div className="min-h-screen bg-[var(--theme-bg-light)] pt-[70px]">

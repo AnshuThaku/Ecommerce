@@ -112,3 +112,4 @@ const Banner = ({ products = [] }) => {
 };
 
 export default Banner;
+
