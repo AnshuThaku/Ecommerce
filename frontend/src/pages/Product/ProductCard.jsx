@@ -210,7 +210,7 @@ export default function ProductCard({ product, onQuickView }) {
     <div
       data-aos="fade-up"
       onClick={() => onQuickView(product)}
-      className="group relative flex flex-col bg-white rounded-3xl overflow-hidden transition-all duration-500 shadow-lg hover:shadow-2xl hover:-translate-y-2 w-full h-full cursor-pointer border border-transparent"
+      className="group relative   cursor-pointer flex flex-col bg-white rounded-3xl overflow-hidden transition-all duration-500 shadow-lg hover:shadow-2xl hover:-translate-y-2 w-full h-full cursor-pointer border border-transparent "
       style={{ 
         borderColor: isDealActive ? 'var(--theme-primary)' : 'transparent' 
       }}

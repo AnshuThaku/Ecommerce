@@ -393,7 +393,7 @@ export default function QuickViewModal({ product, onClose }) {
   const specs = fullProduct?.details?.specs || [{ label: "Brand", value: fullProduct?.brand || "Exclusive" }, { label: "Category", value: fullProduct?.category || "Luxury" }];
 
   return (
-    <div className={`fixed inset-0 z-[99999] flex transition-all duration-500 ease-in-out ${expand ? 'bg-white items-start p-0' : 'bg-black/70 backdrop-blur-sm items-center justify-center p-4'}`} onClick={onClose}>
+    <div className={`fixed inset-0 z-[99999]    cursor-pointer  flex transition-all duration-500 ease-in-out ${expand ? 'bg-white items-start p-0' : 'bg-black/70 backdrop-blur-sm items-center justify-center p-4'}`} onClick={onClose}>
       <Toast toast={toastMessage} onClose={() => setToastMessage(null)} />
       
       <div 
