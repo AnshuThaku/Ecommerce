@@ -2,8 +2,39 @@
 @import "tailwindcss";
 
 /* ── 1. Global Font Setup ───────────────────────────────────────── */
+
+/* Normal Days */
+:root {
+  /* Normal Luxury Look (Aapka Original) */
+  --primary-bg: #121212;     /* Dark Navbar Background */
+  --text-main: #999999;      /* Greyish Links */
+  --accent: #d3b574;         /* Luxury Gold for Badge/Icons */
+  --border-color: #1a1a1a;   /* Subtle Border */
+}
+
+/* Holi: Jab trigger hoga tab Pinkish Shades */
+[data-theme='holi'] {
+  --primary-bg: #fff5f8;
+  --text-main: #c2185b;
+  --accent: #ff4081;
+  --border-color: #ffc1e3;
+}
+
+/* Diwali ke din automatically ye active hoga */
+[data-theme='diwali'] {
+  --primary-bg: #0f172a;
+  --text-main: #fcd34d;
+  --accent: #fb923c;
+}
+
+
+body {
+  overflow-x: hidden;
+}
 html, body {
-  font-family: 'Inter', sans-serif !important;
+  font-family: 'Inter', sans-serif  !important;
+   overflow-x: hidden;
+   width:  100%;
 }
 
 /* ── 2. Hide Scrollbar Utilities (For Categories & Sliders) ─────── */
@@ -15,9 +46,7 @@ html, body {
   scrollbar-width: none;
 }
 
-/* body {
-  cursor: none;
-} */
+*/
 
 .cursor-dot {
   width: 8px;

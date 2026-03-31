@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 
 // ── NAYE UI COMPONENTS IMPORT ──
 import Header from './Header';
-// import Hero   from './Hero';
+import Hero   from './Hero';
 import Hero1  from './Hero1';
 import Hero2  from './Hero2';
 import BrandsMarquee from './BrandsMarquee';
@@ -12,8 +12,10 @@ import ProductSlide  from './ProductSlide'; // 👈 NAYA SLIDER IMPORT KIYA
 import ProductGrid   from '../Product/ProductGrid'; // 👈 NAYA GRID COMPONENT IMPORT KIYA
 import Footer from './Footer';
 import Cursor from './Cursor';
+import Banner from './Banner';
 import SaleCategories from '../../components/SaleCategories';
 import BrandsSection from '../../components/Brands';
+import Newsletter2 from '../../components/Newsletter2';
 
 export default function Home() {
   const { user } = useAuth();
@@ -76,13 +78,8 @@ export default function Home() {
       <Cursor />
       <Header />
 
-      {/* 👇 3. Hero Slider - Ab yeh Featured Products use karega 👇 */}
-      {/* <Hero 
-        accentColor="#d3b574" 
-        bg="#121212" 
-        featuredProducts={homeData.featured} 
-      /> */}
-      { <Hero1
+      
+      {<Hero1
         accentColor="#d3b574" 
         bg="#121212" 
         featuredProducts={homeData.featured} 
@@ -107,6 +104,8 @@ export default function Home() {
           products={homeData.flashDeals} 
         />
       )}
+
+      <Banner products={homeData.featured} />
 
         {/* 7. RECENTLY VIEWED */}
       {homeData.recentlyViewed?.length > 0 && (
@@ -151,6 +150,8 @@ export default function Home() {
         <SaleCategories/>
 
         <BrandsSection />
+
+        <Newsletter2/>
 
       <Footer />
       

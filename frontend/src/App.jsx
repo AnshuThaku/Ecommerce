@@ -117,3 +117,105 @@ function App() {
 }
 
 export default App;
+
+// import { useEffect } from 'react';
+// import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// import { AuthProvider } from './context/AuthContext';
+// import ProtectedRoute from './components/ProtectedRoute';
+
+// // ── Pages Imports (Same as before)
+// import Login from './pages/Admin/Login';
+// import SetupPassword from './pages/Admin/SetPassword';
+// import CompanyRegistration from './pages/Admin/CompanyRegistration';
+// import CustomerRegister from './pages/Shop/CustomerRegister';
+// import Home from './pages/Home/Home';
+// import ShopHome from './pages/Shop/ShopHome';
+// import Cart from './pages/Shop/Cart';
+// import SearchResults from './pages/SearchResult';
+// import OrderSuccess from './pages/orderSuccess';
+// import ProfilePage from './pages/Profile/ProfilePage';
+// import SuperAdminLayout from './layouts/SuperAdminLayout';
+// import AdminDashboard from './pages/Admin/AdminDashboard';
+// import AdminManagement from './pages/Admin/AdminManagement';
+// import CompanyProfileEdit from './pages/Admin/CompanyProfileEdit';
+// import Analytics from './pages/Admin/Analytics';
+// import AdminLayout from './layouts/AdminLayout';
+// import AdminProducts from './pages/Admin/AdminProducts';
+// import AdminOrders from './pages/Admin/AdminOrders';
+// import AdminUsers from './pages/Admin/AdminUsers';
+
+// function App() {
+//   // ── Automatic Festival Switcher ────────────────────────────────
+//   useEffect(() => {
+//     const today = new Date();
+//     const month = today.getMonth() + 1; 
+//     const date = today.getDate();
+
+//     let theme = 'default';
+
+//     // Holi: March 3 & 4
+//     if (month === 3 && (date === 3 || date === 4)) {
+//       theme = 'holi';
+//     } 
+//     // Diwali: November 8 to 12
+//     else if (month === 11 && date >= 8 && date <= 12) {
+//       theme = 'diwali';
+//     }
+
+//     // Yeh line poori website ko theme ka signal deti hai
+//     document.documentElement.setAttribute('data-theme', theme);
+//   }, []);
+
+//   return (
+//     <AuthProvider>
+//       <BrowserRouter>
+//         <Routes>
+//           <Route path="/company/register" element={<CompanyRegistration />} />
+//           <Route path="/login"            element={<Login />} />
+//           <Route path="/register"         element={<CustomerRegister />} />
+//           <Route path="/"                 element={<Home />} />
+//           <Route path="/shop"             element={<ShopHome />} />
+//           <Route path="/products"         element={<ShopHome />} />
+//           <Route path="/cart"             element={<Cart />} />
+//           <Route path="/search"           element={<SearchResults />} />
+          
+//           <Route path="/profile" element={
+//             <ProtectedRoute roles={['customer']}><ProfilePage /></ProtectedRoute>
+//           } /> 
+//           <Route path="/orders" element={
+//             <ProtectedRoute roles={['customer']}><div className="text-white p-10">My Orders</div></ProtectedRoute>
+//           } />
+//           <Route path='/order-success' element={
+//             <ProtectedRoute roles={['customer']}><OrderSuccess/></ProtectedRoute>
+//           } />
+
+//           <Route path="/superadmin" element={
+//               <ProtectedRoute roles={['super-admin']}><SuperAdminLayout /></ProtectedRoute>
+//             }>
+//             <Route path="dashboard"       element={<AdminDashboard />} />
+//             <Route path="manage-admins"   element={<AdminManagement />} />
+//             <Route path="company-profile" element={<CompanyProfileEdit />} />
+//             <Route path="analytics"       element={<Analytics />} />
+//           </Route>
+
+//           <Route path="/admin" element={
+//               <ProtectedRoute roles={['admin']}><AdminLayout /></ProtectedRoute>
+//             }>
+//             <Route path="dashboard" element={<AdminDashboard />} />
+//             <Route path="products"  element={<AdminProducts />} />
+//             <Route path="orders"    element={<AdminOrders />} />
+//             <Route path="users"     element={<AdminUsers />} />
+//           </Route>
+
+//           <Route path="/unauthorized" element={
+//             <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center">
+//               <p className="text-[#C8A253] font-serif text-xl">Access Denied</p>
+//             </div>
+//           } />
+//         </Routes>
+//       </BrowserRouter>
+//     </AuthProvider>
+//   );
+// }
+
+// export default App;
