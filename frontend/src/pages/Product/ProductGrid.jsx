@@ -1,9 +1,133 @@
+// import React, { useState, useEffect, useRef } from 'react';
+// import ProductCard from './ProductCard'; 
+// import QuickViewModal from './QuickModel'; 
+// import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+// // AOS Styles
+// const injectAOSStyles = () => {
+//   if (!document.getElementById('custom-aos-styles')) {
+//     const style = document.createElement('style');
+//     style.id = 'custom-aos-styles';
+//     style.innerHTML = `
+//       [data-aos="fade-up"] {
+//         opacity: 0;
+//         transform: translateY(120px) scale(0.95);
+//         transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+//       }
+//       [data-aos="fade-up"].aos-animate {
+//         opacity: 1;
+//         transform: translateY(0) scale(1);
+//       }
+//       .hide-scrollbar::-webkit-scrollbar { display: none; }
+//       .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+//       @keyframes cardImageFadeIn {
+//         from { opacity: 0; }
+//         to { opacity: 1; }
+//       }
+//       .animate-card-fade-in {
+//         animation: cardImageFadeIn 0.8s ease-in forwards;
+//       }
+//     `;
+//     document.head.appendChild(style);
+//   }
+// };
+
+// export default function ProductGrid({ title, subtitle, products }) {
+//   const [selectedProduct, setSelectedProduct] = useState(null);
+//   const sliderRef = useRef(null);
+
+//   useEffect(() => {
+//     injectAOSStyles();
+//     const observer = new IntersectionObserver((entries) => {
+//       entries.forEach(entry => {
+//         if (entry.isIntersecting) {
+//           entry.target.classList.add('aos-animate');
+//           observer.unobserve(entry.target); 
+//         }
+//       });
+//     }, { threshold: 0.1 }); 
+
+//     setTimeout(() => {
+//       document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
+//     }, 100);
+
+//     return () => observer.disconnect();
+//   }, [products]);
+
+//   useEffect(() => {
+//     if (selectedProduct) {
+//       document.body.style.overflow = 'hidden';
+//     } else {
+//       document.body.style.overflow = 'unset';
+//     }
+//     return () => { document.body.style.overflow = 'unset'; }
+//   }, [selectedProduct]);
+
+//   // Button click par scroll karne ka function
+//   const scroll = (direction) => {
+//     if (sliderRef.current) {
+//       const scrollAmount = direction === 'left' ? -350 : 350; 
+//       sliderRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+//     }
+//   };
+
+//   if (!products || products.length === 0) return null;
+
+//   const isLightning = title?.toLowerCase().includes('lightning');
+
+//   return (
+//     <section className="bg-theme-bg-light py-12 sm:py-20 font-sans selection:bg-theme-primary selection:text-theme-text-light relative transition-colors duration-500">
+//       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+        
+//         <div className="flex flex-col items-center justify-center mb-3 sm:mb-4 text-center">
+//           <div className="flex items-center justify-center space-x-3 sm:space-x-4 mb-3 sm:mb-4">
+//             <div className={`w-8 sm:w-12 h-[2px] transition-colors duration-500 ${isLightning ? 'bg-red-600' : 'bg-theme-primary'}`}></div>
+//             <span className={`text-[9px] sm:text-[10px] uppercase tracking-[0.4em] font-black transition-colors duration-500 ${isLightning ? 'text-red-600 animate-pulse' : 'text-theme-primary'}`}>
+//               {isLightning ? 'Limited Time Offer' : 'Exclusively Curated'}
+//             </span>
+//             <div className={`w-8 sm:w-12 h-[2px] transition-colors duration-500 ${isLightning ? 'bg-red-600' : 'bg-theme-primary'}`}></div>
+//           </div>
+          
+//           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-theme-text-main tracking-tight transition-colors duration-500" style={{ fontFamily: "'Inter', sans-serif" }}>
+//             {title} <span className="text-gray-400 font-medium ml-2">{subtitle}</span>
+//           </h2>
+//         </div>
+
+//         <div className="relative group">
+//           <button onClick={() => scroll('left')} className="absolute -left-2 md:-left-5 top-1/2 -translate-y-1/2 z-50 bg-white border border-gray-100 shadow-lg hover:shadow-xl hover:scale-110 text-black hover:text-theme-primary rounded-full w-10 h-10 transition-all duration-300 opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center cursor-pointer">
+//             <ChevronLeft size={20} strokeWidth={3} className="-ml-0.5" />
+//           </button>
+
+//           <div ref={sliderRef} className="flex flex-nowrap overflow-x-auto overflow-y-hidden justify-start items-stretch gap-4 sm:gap-6 pt-6 pb-10 hide-scrollbar snap-x px-2 scroll-smooth" style={{ touchAction: 'pan-x' }}>
+            
+//             {/* ⚡ YAHAN THI GALTI: Mapping wapas add kar di gayi hai */}
+//             {products.map((p) => (
+//               <div key={p._id || Math.random()} className="w-[280px] sm:w-[300px] shrink-0 snap-start">
+//                 <ProductCard product={p} onQuickView={setSelectedProduct} />
+//               </div>
+//             ))}
+            
+//           </div>
+
+//           <button onClick={() => scroll('right')} className="absolute -right-2 md:-right-5 top-1/2 -translate-y-1/2 z-50 bg-white border border-gray-100 shadow-lg hover:shadow-xl hover:scale-110 text-black hover:text-theme-primary rounded-full w-10 h-10 transition-all duration-300 opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center cursor-pointer">
+//             <ChevronRight size={20} strokeWidth={3} className="-mr-0.5" />
+//           </button>
+//         </div>
+
+//       </div>
+
+//       {/* ⚡ QuickView Modal bhi wapas add kiya hai taaki product click karne pe popup khule */}
+//       {selectedProduct && <QuickViewModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />}
+//     </section>
+//   );
+// }
 import React, { useState, useEffect, useRef } from 'react';
 import ProductCard from './ProductCard'; 
 import QuickViewModal from './QuickModel'; 
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useServerTheme } from "../../hooks/useServerTheme"; // Hook Import kiya
 
-// AOS Styles
+// AOS Styles ko touch nahi kiya, wo waise hi kaam karenge
 const injectAOSStyles = () => {
   if (!document.getElementById('custom-aos-styles')) {
     const style = document.createElement('style');
@@ -20,19 +144,15 @@ const injectAOSStyles = () => {
       }
       .hide-scrollbar::-webkit-scrollbar { display: none; }
       .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-      @keyframes cardImageFadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-      .animate-card-fade-in {
-        animation: cardImageFadeIn 0.8s ease-in forwards;
-      }
     `;
     document.head.appendChild(style);
   }
 };
 
 export default function ProductGrid({ title, subtitle, products }) {
+  // 🎨 Theme Hook ko call kiya taaki variables load ho jayein
+  useServerTheme();
+
   const [selectedProduct, setSelectedProduct] = useState(null);
   const sliderRef = useRef(null);
 
@@ -54,16 +174,6 @@ export default function ProductGrid({ title, subtitle, products }) {
     return () => observer.disconnect();
   }, [products]);
 
-  useEffect(() => {
-    if (selectedProduct) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => { document.body.style.overflow = 'unset'; }
-  }, [selectedProduct]);
-
-  // Button click par scroll karne ka function
   const scroll = (direction) => {
     if (sliderRef.current) {
       const scrollAmount = direction === 'left' ? -350 : 350; 
@@ -76,47 +186,46 @@ export default function ProductGrid({ title, subtitle, products }) {
   const isLightning = title?.toLowerCase().includes('lightning');
 
   return (
-    <section className="bg-theme-bg-light py-12 sm:py-20 font-sans selection:bg-theme-primary selection:text-theme-text-light relative transition-colors duration-500">
+    <section className="bg-[var(--theme-bg-light)] py-12 sm:py-20 font-sans transition-colors duration-500 relative">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="flex flex-col items-center justify-center mb-3 sm:mb-4 text-center">
+          {/* Top Line & Label - Now using Theme Primary */}
           <div className="flex items-center justify-center space-x-3 sm:space-x-4 mb-3 sm:mb-4">
-            <div className={`w-8 sm:w-12 h-[2px] transition-colors duration-500 ${isLightning ? 'bg-red-600' : 'bg-theme-primary'}`}></div>
-            <span className={`text-[9px] sm:text-[10px] uppercase tracking-[0.4em] font-black transition-colors duration-500 ${isLightning ? 'text-red-600 animate-pulse' : 'text-theme-primary'}`}>
+            <div className="w-8 sm:w-12 h-[2px] bg-[var(--theme-primary)] transition-colors duration-500"></div>
+            <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.4em] font-black text-[var(--theme-primary)] animate-pulse transition-colors duration-500">
               {isLightning ? 'Limited Time Offer' : 'Exclusively Curated'}
             </span>
-            <div className={`w-8 sm:w-12 h-[2px] transition-colors duration-500 ${isLightning ? 'bg-red-600' : 'bg-theme-primary'}`}></div>
+            <div className="w-8 sm:w-12 h-[2px] bg-[var(--theme-primary)] transition-colors duration-500"></div>
           </div>
           
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-theme-text-main tracking-tight transition-colors duration-500" style={{ fontFamily: "'Inter', sans-serif" }}>
-            {title} <span className="text-gray-400 font-medium ml-2">{subtitle}</span>
+          {/* Main Title - Integrated with Theme Text & Primary */}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[var(--theme-text-main)] tracking-tight transition-colors duration-500" style={{ fontFamily: "'Inter', sans-serif" }}>
+            {title} <span className="text-[var(--theme-primary)] font-medium ml-2">{subtitle}</span>
           </h2>
         </div>
 
         <div className="relative group">
-          <button onClick={() => scroll('left')} className="absolute -left-2 md:-left-5 top-1/2 -translate-y-1/2 z-50 bg-white border border-gray-100 shadow-lg hover:shadow-xl hover:scale-110 text-black hover:text-theme-primary rounded-full w-10 h-10 transition-all duration-300 opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center cursor-pointer">
-            <ChevronLeft size={20} strokeWidth={3} className="-ml-0.5" />
+          {/* Left Arrow - Theme Color on Hover */}
+          <button onClick={() => scroll('left')} className="absolute -left-2 md:-left-5 top-1/2 -translate-y-1/2 z-50 bg-white shadow-lg hover:text-[var(--theme-primary)] rounded-full w-10 h-10 transition-all duration-300 opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center cursor-pointer">
+            <ChevronLeft size={20} strokeWidth={3} />
           </button>
 
-          <div ref={sliderRef} className="flex flex-nowrap overflow-x-auto overflow-y-hidden justify-start items-stretch gap-4 sm:gap-6 pt-6 pb-10 hide-scrollbar snap-x px-2 scroll-smooth" style={{ touchAction: 'pan-x' }}>
-            
-            {/* ⚡ YAHAN THI GALTI: Mapping wapas add kar di gayi hai */}
+          <div ref={sliderRef} className="flex flex-nowrap overflow-x-auto overflow-y-hidden gap-4 sm:gap-6 pt-6 pb-10 hide-scrollbar snap-x px-2 scroll-smooth">
             {products.map((p) => (
               <div key={p._id || Math.random()} className="w-[280px] sm:w-[300px] shrink-0 snap-start">
                 <ProductCard product={p} onQuickView={setSelectedProduct} />
               </div>
             ))}
-            
           </div>
 
-          <button onClick={() => scroll('right')} className="absolute -right-2 md:-right-5 top-1/2 -translate-y-1/2 z-50 bg-white border border-gray-100 shadow-lg hover:shadow-xl hover:scale-110 text-black hover:text-theme-primary rounded-full w-10 h-10 transition-all duration-300 opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center cursor-pointer">
-            <ChevronRight size={20} strokeWidth={3} className="-mr-0.5" />
+          {/* Right Arrow - Theme Color on Hover */}
+          <button onClick={() => scroll('right')} className="absolute -right-2 md:-right-5 top-1/2 -translate-y-1/2 z-50 bg-white shadow-lg hover:text-[var(--theme-primary)] rounded-full w-10 h-10 transition-all duration-300 opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center cursor-pointer">
+            <ChevronRight size={20} strokeWidth={3} />
           </button>
         </div>
-
       </div>
 
-      {/* ⚡ QuickView Modal bhi wapas add kiya hai taaki product click karne pe popup khule */}
       {selectedProduct && <QuickViewModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />}
     </section>
   );
