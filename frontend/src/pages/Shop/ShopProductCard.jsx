@@ -1,94 +1,108 @@
 import React from 'react';
-import { Heart, Eye, ShoppingCart, Zap } from 'lucide-react';
-import axiosInstance from '../../utils/axiosInstance';
+import { Heart, Eye, Zap } from 'lucide-react';
 
-export default function ShopProductCard({ product, onQuickView, showToast }) {
+export default function ShopProductCard({ product, onQuickView }) {
   if (!product) return null;
 
   const isDealActive = product?.flashDeal?.isActive && new Date(product.flashDeal.endTime).getTime() > Date.now();
   const displayPrice = isDealActive ? product?.flashDeal?.dealPrice : (product?.price - (product?.discountPrice || 0));
-
-  const handleAddToCart = async (e) => {
-    e.stopPropagation();
-    try {
-      await axiosInstance.post('/cart/add', { productId: product?._id, quantity: 1 });
-      window.dispatchEvent(new CustomEvent('cartUpdated', { detail: { increase: 1 } }));
-      showToast('success', 'Added to Luxury Cart');
-    } catch (err) {
-      showToast('error', 'Please login first');
-    }
-  };
+  
+  const discountPercentage = product?.price && product.price > 0 && product?.discountPrice 
+    ? Math.round((product.discountPrice / product.price) * 100) 
+    : 0;
 
   return (
     <div
-      className="group relative flex flex-col bg-white rounded-xl overflow-hidden transition-all duration-300 shadow-sm hover:shadow-lg border border-gray-200 cursor-pointer w-full"
-      style={{ height: '360px' }}
+      className="group relative flex flex-col bg-white rounded-[2rem] overflow-hidden transition-all duration-500 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_16px_40px_rgba(0,0,0,0.12)] hover:-translate-y-2 w-full cursor-pointer border border-transparent h-[380px] xl:h-[460px]"
+      style={{ borderColor: isDealActive ? 'var(--theme-primary)' : 'transparent' }}
       onClick={() => onQuickView(product)}
     >
-      <div className="relative bg-[#f5f5f5] overflow-hidden flex items-center justify-center" style={{ height: '220px', minHeight: '220px' }}>
-        
+      {/* ── Image Section ── */}
+      <div 
+        className="relative h-[300px] xl:h-[340px] w-full overflow-hidden transition-colors duration-700 shrink-0 flex items-center justify-center p-6"
+        style={{ backgroundColor: 'var(--theme-bg-light)' }}
+      >
+        {/* Brand Pill */}
+        <div className="absolute top-5 right-5 z-20">
+           <p 
+            className="text-[10px] uppercase tracking-widest font-bold bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full shadow-sm"
+            style={{ color: 'var(--theme-text-main)' }}
+           >
+             {product?.brand || product?.category || 'Exclusive'}
+           </p>
+        </div>
+
+        {/* Flash Deal Badge */}
         {isDealActive && (
-          <div className="absolute top-3 left-3 z-10 bg-red-600 text-white text-[8px] font-black px-2 py-[3px] uppercase tracking-widest rounded-sm flex items-center gap-1">
-            <Zap size={9} fill="currentColor" /> Flash Deal
+          <div 
+            className="absolute top-5 left-5 z-20 text-white text-[10px] font-bold px-3 py-1.5 flex items-center gap-1 uppercase rounded-full shadow-lg"
+            style={{ backgroundColor: 'var(--theme-primary)' }}
+          >
+            <Zap className="w-3 h-3 fill-current" /> Deal
           </div>
         )}
 
-        <div className="absolute right-3 top-3 flex flex-col gap-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <button
-            onClick={(e) => e.stopPropagation()}
-            className="w-8 h-8 bg-white shadow-md rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors"
-          >
-            <Heart size={14} />
-          </button>
-          <button
-            onClick={(e) => { e.stopPropagation(); onQuickView(product); }}
-            className="w-8 h-8 bg-white shadow-md rounded-full flex items-center justify-center text-gray-400 hover:text-[var(--theme-primary)] transition-colors"
-          >
-            <Eye size={14} />
-          </button>
-        </div>
-
-        <img
-          src={product?.variants?.[0]?.images?.[0]?.url || product?.images?.[0]?.url}
-          alt={product?.name}
-          className="object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
-          style={{ maxHeight: '180px', maxWidth: '80%' }}
+        {/* Product Image */}
+        <img 
+          src={product?.variants?.[0]?.images?.[0]?.url || product?.images?.[0]?.url || 'https://placehold.co/400x400/f9f9f9/C8A253?text=No+Image'} 
+          alt={product?.name} 
+          className="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-110" 
         />
 
-        {/* ⚡ Added Dynamic Color Vars For Hover Add To Cart */}
-        <button
-          onClick={handleAddToCart}
-          className="absolute bottom-0 left-0 w-full h-10 bg-[var(--theme-primary)] backdrop-blur-sm text-[var(--theme-bg-dark)] text-[10px] font-black uppercase tracking-[0.18em] translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex items-center justify-center gap-2 z-30 hover:bg-[var(--theme-bg-dark)] hover:text-[var(--theme-primary)]"
-        >
-          <ShoppingCart size={13} /> Add To Cart
-        </button>
+        {/* Hover Actions (Heart & Eye) */}
+        <div className="absolute right-5 bottom-5 flex flex-col gap-3 z-20 opacity-0 group-hover:opacity-100 transition-all duration-400 translate-x-4 group-hover:translate-x-0">
+          <button 
+            onClick={(e) => { e.stopPropagation(); /* Wishlist Logic */ }} 
+            className="w-10 h-10 bg-white/95 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform" 
+            style={{ color: 'var(--theme-primary)' }}
+          >
+            <Heart size={16} />
+          </button>
+          <button 
+            onClick={(e) => { e.stopPropagation(); onQuickView(product); }} 
+            className="w-10 h-10 bg-white/95 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform" 
+            style={{ color: 'var(--theme-primary)' }}
+          >
+            <Eye size={16} />
+          </button>
+        </div>
       </div>
 
-      <div className="flex flex-col flex-1 px-3 py-3 bg-white">
-        <p className="text-[9px] font-bold text-[var(--theme-primary)] uppercase tracking-[0.25em] mb-1 truncate">
-          {product?.brand || 'Exclusive'}
-        </p>
-
-        <h4 className="text-[12.5px] font-medium text-[var(--theme-bg-dark)] leading-snug mb-2 line-clamp-2" style={{ minHeight: '36px' }}>
+      {/* ── Text Info Section ── */}
+      <div className="p-6 text-center flex flex-col items-center flex-grow bg-white z-20">
+        
+        <h4 
+          className="text-[15px] font-bold mb-3 transition-colors duration-300 line-clamp-2 w-full px-2"
+          style={{ color: 'var(--theme-text-main)', minHeight: '44px' }}
+          onMouseEnter={(e) => e.target.style.color = 'var(--theme-primary)'}
+          onMouseLeave={(e) => e.target.style.color = 'var(--theme-text-main)'}
+        >
           {product?.name}
         </h4>
 
-        <div className="mt-auto flex items-baseline gap-2">
-          <span className={`text-[17px] font-extrabold leading-none ${isDealActive ? 'text-red-600' : 'text-[var(--theme-bg-dark)]'}`}>
-            ₹{displayPrice?.toLocaleString('en-IN')}
-          </span>
+        <div className="flex flex-col items-center gap-1.5 mt-auto w-full">
+          <div className="flex items-center justify-center gap-3">
+            {discountPercentage > 0 && !isDealActive && (
+              <span className="text-xl font-black" style={{ color: 'var(--theme-primary)' }}>
+                -{discountPercentage}%
+              </span>
+            )}
+            <span 
+              className={`text-2xl font-black ${isDealActive ? 'text-red-600' : ''}`} 
+              style={{ color: isDealActive ? '' : 'var(--theme-text-main)' }}
+            >
+              ₹{displayPrice?.toLocaleString('en-IN')}
+            </span>
+          </div>
+          
           {(product?.discountPrice > 0 || isDealActive) && (
-            <span className="text-[11px] text-gray-400 line-through">
-              ₹{product?.price?.toLocaleString('en-IN')}
-            </span>
-          )}
-          {product?.discountPrice > 0 && !isDealActive && (
-            <span className="text-[11px] font-semibold text-green-600">
-              {Math.round((product.discountPrice / product.price) * 100)}% off
-            </span>
+              <div className="text-[11px] text-gray-400 font-semibold uppercase tracking-widest mt-1">
+                M.R.P.: <span className="line-through">₹{product?.price?.toLocaleString('en-IN')}</span>
+              </div>
           )}
         </div>
       </div>
+      
     </div>
   );
 }
