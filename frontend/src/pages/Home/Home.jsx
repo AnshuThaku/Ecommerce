@@ -3,7 +3,9 @@ import axiosInstance from '../../utils/axiosInstance';
 import { useAuth } from '../../context/AuthContext';
 import Header from './Header';
 import Hero1  from './Hero1';
+import { useServerTheme } from "../../hooks/useServerTheme"; // Ek aur '../' add kiya hai
 import Hero2  from './Hero2';
+import Banner  from './Banner';
 import ProductSlide  from './ProductSlide';
 import ProductGrid   from '../Product/ProductGrid';
 import Footer from './Footer';
@@ -48,7 +50,9 @@ export default function Home() {
       <Cursor />
       <Header />
       <Hero2 accentColor="var(--theme-primary)" bg="var(--theme-bg-light)" featuredProducts={homeData.featured} />
-      <ProductSlide />
++      <ProductSlide />
+      <Banner products={homeData.featured} />
+
       {homeData.flashDeals?.length > 0 && <ProductGrid title="Lightning" subtitle="Deals" products={homeData.flashDeals} />}
       {homeData.recentlyViewed?.length > 0 && <ProductGrid title="Recently" subtitle="Viewed" products={homeData.recentlyViewed} />}
       {homeData.recommended?.length > 0 && <ProductGrid title="Personalized" subtitle="For You" products={homeData.recommended} />}

@@ -1,41 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
-/* ⚡ Yahan Tailwind ko naye classes sikhayein ⚡ */
-@theme {
-  --color-theme-bg: var(--theme-bg-light);
-  --color-theme-dark: var(--theme-bg-dark);
-  --color-theme-primary: var(--theme-primary);
-  --color-theme-text: var(--theme-text-main);
-  --color-theme-text-light: var(--theme-text-light);
-}
-
-:root {
-  /* Default Colors (If JS takes time to load) */
-  --theme-bg-light: #f4f7f6;
-  --theme-bg-dark: #2c3e50;
-  --theme-primary: #3498db;
-  --theme-text-main: #333333;
-  --theme-text-light: #ffffff;
-  --theme-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-/* ── 1. Global Setup ── */
+/* ── 1. Global Font Setup ───────────────────────────────────────── */
 html, body {
   font-family: 'Inter', sans-serif !important;
+}
+
+/* ── 2. Hide Scrollbar Utilities (For Categories & Sliders) ─────── */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* 1. Body aur HTML ko horizontal scroll se rokne ke liye */
+html, body {
+  max-width: 100%;
   overflow-x: hidden;
-  width: 100%;
-  
-  /* Dynamic Main Background & Text */
-  background-color: var(--theme-bg-light) !important;
-  color: var(--theme-text-main); 
-  transition: background-color 0.5s ease, color 0.5s ease;
+  margin: 0;
+  padding: 0;
+  /* Smooth scrolling ke liye (Optional) */
+  scroll-behavior: smooth;
 }
 
-#root, .app-container {
-  background-color: transparent !important;
+/* 2. Sabhi elements ko border-box mein rakhne ke liye taaki padding width na badhaye */
+* {
+  box-sizing: border-box;
 }
 
+/* 3. Root container ko bhi fix karein */
+#root {
+  max-width: 100%;
+  overflow-x: hidden;
+}
 /* ── 2. Helper Classes & Components ── */
 
 /* Hero Gradient ke liye class */
@@ -43,7 +37,10 @@ html, body {
   background: var(--theme-gradient);
 }
 
-/* Custom Cursor */
+/* body {
+  cursor: none;
+} */
+
 .cursor-dot {
   width: 8px;
   height: 8px;

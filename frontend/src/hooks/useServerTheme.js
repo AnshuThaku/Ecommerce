@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { festivalThemes } from '../themeConfig';
+import { festivalThemes } from '../ThemeConfig';
 
 export const useServerTheme = () => {
   useEffect(() => {

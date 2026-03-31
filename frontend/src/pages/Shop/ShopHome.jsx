@@ -5,7 +5,7 @@ import ShopSidebar from './ShopSidebar';
 import ShopProductCard from './ShopProductCard';
 import QuickViewModal from '../Product/QuickModel';
 import Footer from '../Home/Footer'; 
-import Logo from "../../../public/Truee_Luxury_Logo.png";
+import Toast from '../../components/Toast';
 import { ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -14,7 +14,9 @@ export default function ShopHome() {
   const [loading, setLoading] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  // Filters State
+  const [toastMessage, setToastMessage] = useState(null);
+  const showToast = (type, message) => setToastMessage({ type, message });
+
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedColors, setSelectedColors] = useState([]);
@@ -36,20 +38,19 @@ export default function ShopHome() {
           setMaxPriceLimit(maxP);
           setPriceRange(maxP);
         }
-      } catch (e) { console.error(e); }
-      finally { setLoading(false); }
+      } catch (e) { 
+        console.error(e);
+        showToast('error', 'Failed to load catalogue');
+      } finally { 
+        setLoading(false); 
+      }
     };
     fetchAll();
   }, []);
 
-  // ⚡ HANDLERS WITH DESELECT LOGIC
   const handleCategoryToggle = (cat) => setSelectedCategories(prev => prev.includes(cat) ? prev.filter(c => c !== cat) : [...prev, cat]);
   const handleColorToggle = (color) => setSelectedColors(prev => prev.includes(color) ? prev.filter(c => c !== color) : [...prev, color]);
-  
-  // Rating Toggle
   const handleRatingChange = (val) => setSelectedRating(prev => prev === val ? null : val);
-  
-  // Discount Toggle
   const handleDiscountChange = (val) => setSelectedDiscount(prev => prev === val ? null : val);
 
   const clearFilters = () => {
@@ -57,7 +58,6 @@ export default function ShopHome() {
     setSearchTerm(''); setPriceRange(maxPriceLimit);
   };
 
-  // Advanced Memoized Filtering
   const filteredProducts = useMemo(() => {
     return products.filter(p => {
       if (!p) return false;
@@ -80,18 +80,20 @@ export default function ShopHome() {
   }, [products, selectedCategories, selectedColors, selectedRating, selectedDiscount, priceRange, searchTerm, sortOrder]);
 
   return (
-    <div className="min-h-screen bg-theme-bg-light pt-[70px]">
+    <div className="min-h-screen bg-[var(--theme-bg-light)] pt-[70px]">
+      <Toast toast={toastMessage} onClose={() => setToastMessage(null)} />
+
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[var(--theme-bg-dark)] border-b border-white/5 h-[70px] flex items-center px-4 sm:px-8">
         <div className="max-w-[1600px] w-full mx-auto flex items-center justify-between gap-10">
-          <Link to="/"><img src={Logo} alt="Logo" className="h-10" /></Link>
+          <Link to="/"><img src="/Truee_Luxury_Logo.png" alt="Logo" className="h-10" /></Link>
           <div className="flex-1 max-w-xl hidden md:block"><SearchBar onSearch={setSearchTerm} /></div>
-          <Link to="/" className="text-[10px] font-black text-white/50 hover:text-theme-primary uppercase tracking-widest transition-colors">Back to Home</Link>
+          <Link to="/" className="text-[10px] font-black text-white/50 hover:text-[var(--theme-primary)] uppercase tracking-widest transition-colors">Back to Home</Link>
         </div>
       </nav>
 
       <div className="bg-[var(--theme-bg-dark)] py-12 px-8 border-b border-white/5">
         <div className="max-w-[1600px] mx-auto text-white">
-          <h1 className="text-4xl font-serif mb-2">Luxury <span className="text-theme-primary italic">Catalogue</span></h1>
+          <h1 className="text-4xl font-serif mb-2">Luxury <span className="text-[var(--theme-primary)] italic">Catalogue</span></h1>
           <div className="flex items-center gap-2 text-[10px] uppercase tracking-widest opacity-40">
             <Link to="/">Home</Link> <ChevronRight size={10} /> <span>Shop</span>
           </div>
@@ -106,9 +108,9 @@ export default function ShopHome() {
           selectedColors={selectedColors}
           onColorToggle={handleColorToggle}
           selectedRating={selectedRating}
-          onRatingChange={handleRatingChange} // ⚡ Passing toggle logic
+          onRatingChange={handleRatingChange} 
           selectedDiscount={selectedDiscount}
-          onDiscountChange={handleDiscountChange} // ⚡ Passing toggle logic
+          onDiscountChange={handleDiscountChange} 
           priceRange={priceRange}
           setPriceRange={setPriceRange}
           maxPriceLimit={maxPriceLimit}
@@ -118,7 +120,7 @@ export default function ShopHome() {
         <div className="flex-1 w-full">
           <div className="flex justify-between items-center mb-8 px-2">
             <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Found {filteredProducts.length} Results</p>
-            <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} className="bg-transparent text-[11px] font-bold uppercase tracking-widest border-b border-theme-primary focus:outline-none cursor-pointer">
+            <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} className="bg-transparent text-[11px] font-bold uppercase tracking-widest border-b border-[var(--theme-primary)] focus:outline-none cursor-pointer">
               <option value="newest">Newest</option>
               <option value="price-asc">Price: Low-High</option>
               <option value="price-desc">Price: High-Low</option>
@@ -126,10 +128,10 @@ export default function ShopHome() {
           </div>
 
           {loading ? (
-            <div className="w-full py-24 flex justify-center"><div className="w-10 h-10 border-4 border-gray-100 border-t-theme-primary rounded-full animate-spin"></div></div>
+            <div className="w-full py-24 flex justify-center"><div className="w-10 h-10 border-4 border-gray-100 border-t-[var(--theme-primary)] rounded-full animate-spin"></div></div>
           ) : (
             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredProducts.map(p => <ShopProductCard key={p._id} product={p} onQuickView={setSelectedProduct} />)}
+              {filteredProducts.map(p => <ShopProductCard key={p._id} product={p} onQuickView={setSelectedProduct} showToast={showToast} />)}
             </div>
           )}
         </div>
