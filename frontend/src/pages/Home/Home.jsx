@@ -69,6 +69,7 @@ import Header from './Header';
 import Hero1  from './Hero1';
 import { useServerTheme } from "../../hooks/useServerTheme"; 
 import Hero2  from './Hero2';
+import Hero  from './Hero';
 import Banner  from './Banner';
 import ProductSlide  from './ProductSlide';
 import ProductGrid   from '../Product/ProductGrid';
@@ -118,11 +119,16 @@ export default function Home() {
       <Header />
       
       {/* Dynamic Hero with Theme Colors */}
-      <Hero2 
+      <Hero
         accentColor="var(--theme-primary)" 
         bg="var(--theme-bg-light)" 
         featuredProducts={homeData.featured} 
       />
+      {/* <Hero2 
+        accentColor="var(--theme-primary)" 
+        bg="var(--theme-bg-light)" 
+        featuredProducts={homeData.featured} 
+      /> */}
       {/* <Hero1 
         accentColor="var(--theme-primary)" 
         bg="var(--theme-bg-light)" 
@@ -130,7 +136,6 @@ export default function Home() {
       /> */}
 
       <ProductSlide />
-      <Banner products={homeData.featured} />
 
       {/* Headings will now follow the theme automatically via CSS variables */}
       <div className="text-[var(--theme-text-main)]">
@@ -154,6 +159,8 @@ export default function Home() {
           <ProductGrid title="New" subtitle="Arrivals" products={homeData.newArrivals} />
         )}
       </div>
+      <Banner products={homeData.featured} />
+
 
       <SaleCategories />
       <BrandsSection />
