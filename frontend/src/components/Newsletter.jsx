@@ -17,7 +17,7 @@ export default function Newsletter() {
   };
 
   return (
-    <section className="bg-[#0A0A0A] py-20 sm:py-28 relative overflow-hidden selection:bg-[#d3b574] selection:text-black">
+    <section className="bg-[#0A0A0A] py-20 sm:py-28 relative overflow-hidden selection:bg-magic-primary selection:text-black">
       
       {/* Subtle Background Glow for Luxury Feel */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#d3b574] opacity-[0.03] rounded-full blur-[120px] pointer-events-none"></div>
@@ -27,13 +27,13 @@ export default function Newsletter() {
         {/* Top Minimal Line */}
         <div className="flex items-center justify-center space-x-4 mb-6">
           <div className="w-12 h-[1px] bg-[#d3b574]"></div>
-          <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#d3b574]">The Inner Circle</span>
+          <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-magic-primary">The Inner Circle</span>
           <div className="w-12 h-[1px] bg-[#d3b574]"></div>
         </div>
 
         {/* Heading & Subtitle */}
         <h2 className="text-3xl sm:text-5xl font-serif text-white mb-4 leading-tight">
-          Unlock True <span className="italic text-[#d3b574]">Luxury</span>
+          Unlock True <span className="italic text-magic-primary">Luxury</span>
         </h2>
         <p className="text-gray-400 text-sm sm:text-base font-light tracking-wide mb-10 max-w-lg mx-auto">
           Subscribe to receive exclusive access to limited-time releases, private sales, and the latest in premium audio and tech.
@@ -49,7 +49,7 @@ export default function Newsletter() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email address"
-              className="w-full bg-transparent border-b border-gray-600 px-2 py-3 text-white text-sm focus:outline-none focus:border-[#d3b574] transition-colors placeholder-gray-600 peer"
+              className="w-full bg-transparent border-b border-gray-600 px-2 py-3 text-white text-sm focus:outline-none focus:border-magic-primary transition-colors placeholder-gray-600 peer"
             />
             {/* Animated Bottom Line */}
             <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-[#d3b574] transition-all duration-500 peer-focus:w-full"></div>
@@ -67,7 +67,7 @@ export default function Newsletter() {
 
         {/* Success Message Feedback */}
         {isSubmitted && (
-          <p className="text-[#d3b574] text-xs tracking-widest uppercase mt-6 animate-in fade-in slide-in-from-bottom-2">
+          <p className="text-magic-primary text-xs tracking-widest uppercase mt-6 animate-in fade-in slide-in-from-bottom-2">
             Welcome to the club.
           </p>
         )}

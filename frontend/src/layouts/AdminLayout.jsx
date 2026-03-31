@@ -7,6 +7,7 @@ const nav = [
   { to: '/admin/products',  label: 'Products' },
   { to: '/admin/orders',    label: 'Orders' },
   { to: '/admin/users',     label: 'Users' },
+  { to: '/admin/theme', label: 'Theme Manager' },
 ];
 
 function Sidebar({ user, onLogout, onClose }) {

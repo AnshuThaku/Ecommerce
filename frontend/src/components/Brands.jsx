@@ -36,7 +36,7 @@ const brands = [
  * ========================================= */
 export default function BrandsSection() {
   return (
-    <section className="bg-white py-16 sm:py-24 selection:bg-[#d3b574] selection:text-black">
+    <section className="bg-white py-16 sm:py-24 selection:bg-magic-primary selection:text-black">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* ⚡ Centered Heading: Brands ⚡ */}

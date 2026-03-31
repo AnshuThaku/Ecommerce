@@ -1,9 +1,9 @@
-
 import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-export default function Hero({ accentColor = "#d3b574", bg = "#121212", featuredProducts = [] }) {
+// ⚡ THEME UPDATE: Removed hardcoded defaults, now using CSS variables
+export default function Hero({ featuredProducts = [] }) {
   const [current, setCurrent] = useState(0);
   const [animating, setAnimating] = useState(false);
   const [hoveredBtn, setHoveredBtn] = useState(false);
@@ -27,16 +27,13 @@ export default function Hero({ accentColor = "#d3b574", bg = "#121212", featured
   const getDesktopImg = (p) => {
     if (p.variants?.[0]?.images?.[0]?.url) return p.variants[0].images[0].url;
     if (p.images?.[0]?.url) return p.images[0].url;
-    return "/preview(1).png"; // Fallback image
+    return "/preview(1).png"; 
   };
 
   // ── LOGIC: Get Mobile Image (2nd Image) ──
   const getMobileImg = (p) => {
-    // Check for the 2nd image for mobile view
     if (p.variants?.[0]?.images?.[1]?.url) return p.variants[0].images[1].url;
     if (p.images?.[1]?.url) return p.images[1].url;
-    
-    // Agar dusri image nahi hai, toh pehli wali hi return kar do
     return getDesktopImg(p); 
   };
 
@@ -51,31 +48,26 @@ export default function Hero({ accentColor = "#d3b574", bg = "#121212", featured
   // ── LOGIC: Map Featured Products ──
   const displayItems = featuredProducts.length > 0
     ? featuredProducts.map(p => ({
-      id: p._id,
-      desktopImage: getDesktopImg(p),
-      mobileImage: getMobileImg(p),
-      title: p.name,
-      subtitle: p.brand || "Exclusive Selection",
-      url: createProductUrl(p)
-    }))
+        id: p._id,
+        desktopImage: getDesktopImg(p),
+        mobileImage: getMobileImg(p),
+        title: p.name,
+        subtitle: p.brand || "Exclusive Selection",
+        url: createProductUrl(p)
+      }))
     : [
-      // Default images agar database khali ho (Demo ke liye alag mobile images set hain)
-      { id: 1, desktopImage: "/preview(1).png", mobileImage: "/mobile-preview(1).png", title: "HOME LINE III", subtitle: "Bring the big stage home", url: "/shop" },
-      { id: 2, desktopImage: "/canvass.png", mobileImage: "/mobile-canvass.png", title: "ARTISAN CANVAS", subtitle: "Crafted for perfection", url: "/shop" },
-      { id: 3, desktopImage: "/canvas.png", mobileImage: "/mobile-canvas.png", title: "MODERN LUXURY", subtitle: "Elevate your space", url: "/shop" }
-    ];
+        { id: 1, desktopImage: "/preview(1).png", mobileImage: "/mobile-preview(1).png", title: "HOME LINE III", subtitle: "Bring the big stage home", url: "/shop" },
+        { id: 2, desktopImage: "/canvass.png", mobileImage: "/mobile-canvass.png", title: "ARTISAN CANVAS", subtitle: "Crafted for perfection", url: "/shop" },
+        { id: 3, desktopImage: "/canvas.png", mobileImage: "/mobile-canvas.png", title: "MODERN LUXURY", subtitle: "Elevate your space", url: "/shop" }
+      ];
 
   const goTo = useCallback((index) => {
     if (displayItems.length === 0) return;
-    
-    // ── CHANGES: Click karte hi turant image change hogi bina delay ke ──
     setCurrent(index);
-    
-    // Text reveal animation ke liye state update
     setAnimating(true);
     setTimeout(() => {
       setAnimating(false);
-    }, 400); // 600ms se kam karke 400ms kar diya snappy feel ke liye
+    }, 400); 
   }, [displayItems.length]);
 
   const prev = () => {
@@ -103,9 +95,10 @@ export default function Hero({ accentColor = "#d3b574", bg = "#121212", featured
     <div
       style={{
         fontFamily: "'Inter', sans-serif",
-        background: bg,
-        transition: "background 0.7s",
-        color: "white",
+        // ⚡ THEME UPDATE: background and colors are now dynamic
+        background: "var(--theme-bg-light)", 
+        transition: "background 0.7s, color 0.7s",
+        color: "var(--theme-text-main)",
         height: "80vh",
         width: "100%",
         overflow: "hidden",
@@ -130,9 +123,10 @@ export default function Hero({ accentColor = "#d3b574", bg = "#121212", featured
           position: absolute;
           width: 50vh;
           height: 50vh;
-          background: ${accentColor};
+          /* ⚡ THEME UPDATE: Glow matches theme primary color */
+          background: var(--theme-primary);
           filter: blur(150px);
-          opacity: 0.04;
+          opacity: 0.06;
           border-radius: 50%;
           pointer-events: none;
           top: 50%;
@@ -158,8 +152,9 @@ export default function Hero({ accentColor = "#d3b574", bg = "#121212", featured
             fontSize: "clamp(24px, 4vw, 36px)",
             opacity: 0.9,
             fontWeight: 600,
-            textShadow: "0 4px 24px rgba(0,0,0,0.4)",
-            background: "linear-gradient(90deg, #d3b574, #f5e6c4, #d3b574)",
+            textShadow: "0 4px 24px rgba(0,0,0,0.1)",
+            // ⚡ THEME UPDATE: Gradient uses theme primary colors
+            background: "linear-gradient(90deg, var(--theme-primary), var(--theme-text-main), var(--theme-primary))",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent"
           }}
@@ -168,7 +163,7 @@ export default function Hero({ accentColor = "#d3b574", bg = "#121212", featured
         </div>
       </div>
 
-      {/* Responsive Slider Section */}
+      {/* Slider Section */}
       <div style={{
         flex: 1,
         display: "flex",
@@ -178,17 +173,14 @@ export default function Hero({ accentColor = "#d3b574", bg = "#121212", featured
         minHeight: 0
       }}>
 
-        {/* ── CHANGES: Button ka z-index aur padding badha diya taaki easily click ho sake ── */}
-        <button onClick={prev} style={{ background: "none", border: "none", color: "white", cursor: "pointer", opacity: 0.7, zIndex: 50, padding: "10px" }}>
+        <button onClick={prev} style={{ background: "none", border: "none", color: "var(--theme-text-main)", cursor: "pointer", opacity: 0.7, zIndex: 50, padding: "10px" }}>
           <ChevronLeft size="clamp(28px, 5vw, 44px)" />
         </button>
 
-        {/* Dynamic Image Wrapper */}
         <div style={{ width: "100%", height: "100%", maxWidth: "450px", maxHeight: "min(450px, 45vh)", position: "relative", margin: "0 auto" }}>
           {displayItems.map((item, index) => (
             <img
               key={item.id}
-              // ── MAGIC HAPPENS HERE: Screen size ke according image set hogi ──
               src={isMobile ? item.mobileImage : item.desktopImage}
               alt={item.title}
               style={{
@@ -206,8 +198,7 @@ export default function Hero({ accentColor = "#d3b574", bg = "#121212", featured
           ))}
         </div>
 
-        {/* ── CHANGES: Button ka z-index aur padding badha diya taaki easily click ho sake ── */}
-        <button onClick={next} style={{ background: "none", border: "none", color: "white", cursor: "pointer", opacity: 0.7, zIndex: 50, padding: "10px" }}>
+        <button onClick={next} style={{ background: "none", border: "none", color: "var(--theme-text-main)", cursor: "pointer", opacity: 0.7, zIndex: 50, padding: "10px" }}>
           <ChevronRight size="clamp(28px, 5vw, 44px)" />
         </button>
       </div>
@@ -224,17 +215,18 @@ export default function Hero({ accentColor = "#d3b574", bg = "#121212", featured
         gap: "20px"
       }}>
 
-        {/* Text */}
         <div className="text-reveal" style={{ textAlign: "center" }}>
           <h2 style={{
             fontSize: "clamp(20px, 4vw, 36px)",
             textTransform: "uppercase",
-            margin: "0 0 8px 0"
+            margin: "0 0 8px 0",
+            color: "var(--theme-text-main)"
           }}>
             {displayItems[current]?.title}
           </h2>
           <p style={{
-            color: "#888",
+            color: "var(--theme-text-main)",
+            opacity: 0.6,
             textTransform: "uppercase",
             letterSpacing: "2px",
             margin: 0,
@@ -244,16 +236,16 @@ export default function Hero({ accentColor = "#d3b574", bg = "#121212", featured
           </p>
         </div>
 
-        {/* Button */}
         <div>
           <button
             onClick={() => navigate(displayItems[current]?.url)}
             onMouseEnter={() => setHoveredBtn(true)}
             onMouseLeave={() => setHoveredBtn(false)}
             style={{
-              border: `1px solid ${accentColor}`,
-              color: hoveredBtn ? "#000" : accentColor,
-              background: hoveredBtn ? accentColor : "transparent",
+              // ⚡ THEME UPDATE: Button colors now dynamic
+              border: `1px solid var(--theme-primary)`,
+              color: hoveredBtn ? "var(--theme-text-light)" : "var(--theme-primary)",
+              background: hoveredBtn ? "var(--theme-primary)" : "transparent",
               padding: "12px 24px",
               fontSize: "clamp(14px, 1.5vw, 16px)",
               transition: "all 0.5s",
@@ -265,7 +257,6 @@ export default function Hero({ accentColor = "#d3b574", bg = "#121212", featured
             Shop Now
           </button>
         </div>
-
       </div>
     </div>
   );

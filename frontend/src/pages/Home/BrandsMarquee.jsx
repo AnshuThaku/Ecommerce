@@ -7,23 +7,23 @@ const priorityBrands = [
 ];
 
 export default function BrandsMarquee() {
+  
+  // Wrapper: Poori width aur clean spacing ke liye
+  // ⚡ THEME UPDATE: bg-white ko bg-theme-bg-light kar diya
   return (
-    /* Wrapper: Poori width aur clean spacing ke liye */
-    <div className="w-full bg-white block" style={{ width: '100%', display: 'block' }}>
+    <div className="w-full bg-theme-bg-light block transition-colors duration-500" style={{ width: '100%', display: 'block' }}>
       
       {/* Forced Spacer: Productcard se gap banaye rakhne ke liye */}
       <div style={{ height: '120px', width: '100%', display: 'block' }}></div>
       
-      {/* Black Marquee Strip 
-          Padding ko 90px se kam karke 65px kar diya hai taaki thickness aur kam ho jaye.
-      */}
+      {/* ⚡ THEME UPDATE: Black bg ko bg-theme-bg-dark kar diya */}
       <div 
-        className="relative overflow-hidden bg-[#0a0a0a]" 
+        className="relative overflow-hidden bg-theme-bg-dark transition-colors duration-500" 
         style={{ 
           paddingTop: '60px', 
           paddingBottom: '60px', 
-          borderTop: '1px solid #111', 
-          borderBottom: '1px solid #111',
+          borderTop: '1px solid rgba(255,255,255,0.05)', 
+          borderBottom: '1px solid rgba(255,255,255,0.05)',
           width: '100%',
           display: 'block'
         }}
@@ -47,15 +47,21 @@ export default function BrandsMarquee() {
           }
         `}</style>
 
-        {/* Side Gradients: Smooth fading transitions */}
-        <div className="absolute top-0 left-0 w-[300px] h-full bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/95 to-transparent z-10 pointer-events-none" />
-        <div className="absolute top-0 right-0 w-[300px] h-full bg-gradient-to-l from-[#0a0a0a] via-[#0a0a0a]/95 to-transparent z-10 pointer-events-none" />
+        {/* ⚡ THEME UPDATE: Gradients ab directly theme ke bg-dark variable se merge honge */}
+        <div 
+          className="absolute top-0 left-0 w-[300px] h-full z-10 pointer-events-none transition-colors duration-500" 
+          style={{ background: 'linear-gradient(to right, var(--theme-bg-dark), transparent)' }}
+        />
+        <div 
+          className="absolute top-0 right-0 w-[300px] h-full z-10 pointer-events-none transition-colors duration-500" 
+          style={{ background: 'linear-gradient(to left, var(--theme-bg-dark), transparent)' }}
+        />
 
         <div className="brands-track opacity-50 hover:opacity-100 transition-opacity duration-700">
           {[...priorityBrands, ...priorityBrands, ...priorityBrands].map((brand, i) => (
             <span 
               key={i} 
-              className="text-white uppercase tracking-[0.3em] cursor-default font-medium"
+              className="text-theme-text-light uppercase tracking-[0.3em] cursor-default font-medium transition-colors duration-500"
               style={{ 
                 fontFamily: "'Playfair Display', serif",
                 fontSize: "clamp(24px, 3.5vw, 36px)" 

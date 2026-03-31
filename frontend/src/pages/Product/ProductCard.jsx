@@ -1,8 +1,6 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Heart, Eye, Star, Zap, Clock } from 'lucide-react';
+import { Heart, Eye, Star, Zap, Clock, ShoppingBag } from 'lucide-react';
 
 const DEFAULT_IMG = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=600";
 
@@ -70,14 +68,14 @@ export default function ProductCard({ product, onQuickView }) {
   const discountPercentage = Math.round(((product.price - displayPrice) / product.price) * 100);
 
   return (
-    <div
+   <div
       data-aos="fade-up"
       onClick={() => onQuickView(product)}
       className={`group relative flex flex-col bg-white rounded-2xl overflow-hidden transition-all duration-500 shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] hover:-translate-y-2 w-full h-full cursor-pointer 
         ${isDealActive ? 'border border-red-500/20' : ''}`}
     >
       <div className="relative h-[350px] sm:h-[320px] bg-gray-100 overflow-hidden rounded-2xl cursor-pointer w-full">
-        {/* Brand Name Tag - Top Right Corner */}
+        {/* Brand Name Tag */}
         <div className="absolute top-4 right-4 z-50">
            <p className="text-[9px] uppercase tracking-[0.2em] font-black text-gray-500 bg-white/60 backdrop-blur-sm px-2 py-1 rounded-sm">{product.brand || product.category}</p>
         </div>
@@ -88,6 +86,7 @@ export default function ProductCard({ product, onQuickView }) {
           </div>
         )}
 
+        {/* Hover zoom exactly wahi */}
         <div className="absolute inset-0 w-full h-full p-4 sm:p-6 transition-transform duration-1000 group-hover:scale-105">
           <img 
             key={currentImgIndex} 
@@ -97,6 +96,7 @@ export default function ProductCard({ product, onQuickView }) {
           />
         </div>
 
+        {/* Action icons exactly wahi */}
         <div className="absolute right-4 top-1/2 -translate-y-1/2 flex flex-col space-y-2 z-50 opacity-0 group-hover:opacity-100 transition-opacity">
           <button className="w-9 h-9 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center shadow-xl hover:bg-black hover:text-white transition-all">
             <Heart className="w-3.5 h-3.5" />
@@ -109,28 +109,28 @@ export default function ProductCard({ product, onQuickView }) {
 
       <div className="p-4 sm:p-5 bg-white text-center flex flex-col items-center">
         
-        
-        <h4 className="text-[13px] sm:text-[14px] font-medium text-gray-900 mb-1 group-hover:text-[#d3b574] transition-colors truncate w-full">{product.name}</h4>
+        {/* Title Hover Color */}
+        <h4 className="text-[13px] sm:text-[14px] font-medium text-gray-900 mb-1 group-hover:text-theme-primary transition-colors truncate w-full">{product.name}</h4>
 
         <div className="flex flex-col items-center gap-0.5 w-full">
-          {/* Price Layout - Centered */}
+          {/* Price Layout */}
           <div className="flex items-center justify-center gap-2">
             {discountPercentage > 0 && (
-              <span className="text-blue-600   text-[18px] sm:text-[20px] font-bold">-{discountPercentage}%</span>
+              <span className="text-theme-primary text-[18px] sm:text-[20px] font-bold">-{discountPercentage}%</span>
             )}
             <span className="text-[18px] sm:text-[20px] font-medium text-black">{formatPrice(displayPrice)}</span>
           </div>
           
           {(product.discountPrice > 0 || isDealActive) && (
-            <div className="text-[11px] sm:text-[12px] text-gray-500 font-['Inter']">
-              M.R.P.: <span className="line-through">{formatPrice(product.price)}</span>
-            </div>
+             <div className="text-[11px] sm:text-[12px] text-gray-500 font-['Inter']">
+               M.R.P.: <span className="line-through">{formatPrice(product.price)}</span>
+             </div>
           )}
 
           {isDealActive && timeLeft && (
-            <div className="text-red-500 text-[8px] sm:text-[9px] font-bold uppercase tracking-widest flex items-center gap-1 mt-2 bg-red-50 px-2 py-0.5 rounded-full border border-red-100">
-              <Clock className="w-3 h-3" /> Ends in {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
-            </div>
+             <div className="text-red-500 text-[8px] sm:text-[9px] font-bold uppercase tracking-widest flex items-center gap-1 mt-2 bg-red-50 px-2 py-0.5 rounded-full border border-red-100">
+               <Clock className="w-3 h-3" /> Ends in {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
+             </div>
           )}
         </div>
       </div>

@@ -4,11 +4,13 @@ export default function Footer() {
   return (
     <footer
       style={{
-        background: "linear-gradient(180deg, #121212 0%, #1a1a1a 100%)",
-        color: "white",
+        // ⚡ THEME UPDATE: Background now uses theme-bg-dark
+        background: "var(--theme-bg-dark)",
+        color: "var(--theme-text-light)",
         paddingTop: "96px",
         paddingBottom: "48px",
         fontFamily: "'Montserrat', sans-serif",
+        transition: "background 0.5s ease, color 0.5s ease"
       }}
     >
       <style>{`
@@ -21,7 +23,8 @@ export default function Footer() {
           transition: color 0.3s ease, transform 0.3s ease;
         }
         .footer-link:hover {
-          color: white;
+          /* ⚡ THEME UPDATE: Hover text color */
+          color: var(--theme-text-light);
           transform: translateY(-2px);
         }
 
@@ -36,7 +39,7 @@ export default function Footer() {
 
         .newsletter-input {
           background: none;
-          color: white;
+          color: var(--theme-text-light);
           padding: 12px 16px;
           font-size: 12px;
           border: none;
@@ -45,8 +48,9 @@ export default function Footer() {
         }
 
         .newsletter-button {
-          background: #d3b574;
-          color: #121212;
+          /* ⚡ THEME UPDATE: Button background and text color linked to theme */
+          background: var(--theme-primary);
+          color: var(--theme-bg-dark);
           font-weight: 700;
           text-transform: uppercase;
           padding: 12px 24px;
@@ -85,7 +89,8 @@ export default function Footer() {
               <div style={{ display: "flex", gap: "2px", marginBottom: "8px" }}>
                 <div style={{ width: "2px", height: "16px", backgroundColor: "#666" }}></div>
                 <div style={{ width: "2px", height: "24px", backgroundColor: "#666" }}></div>
-                <div style={{ width: "2px", height: "32px", backgroundColor: "white" }}></div>
+                {/* ⚡ THEME UPDATE: Main logo bar matches text-light */}
+                <div style={{ width: "2px", height: "32px", backgroundColor: "var(--theme-text-light)" }}></div>
                 <div style={{ width: "2px", height: "24px", backgroundColor: "#666" }}></div>
                 <div style={{ width: "2px", height: "16px", backgroundColor: "#666" }}></div>
               </div>
@@ -95,6 +100,7 @@ export default function Footer() {
                   fontFamily: "'Playfair Display', serif",
                   letterSpacing: "0.1em",
                   margin: "8px 0 0 0",
+                  color: "var(--theme-text-light)"
                 }}
               >
                 Truee.in
@@ -115,7 +121,8 @@ export default function Footer() {
             {/* Newsletter on Left */}
             <div style={{ marginTop: "32px" }}>
               <h4 className="footer-heading" style={{ marginBottom: "16px" }}>Subscribe to Our Newsletter</h4>
-              <div style={{ display: "flex", maxWidth: "400px" }}>
+              {/* ⚡ THEME UPDATE: Border color linked to primary */}
+              <div style={{ display: "flex", maxWidth: "400px", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "2px" }}>
                 <input
                   type="email"
                   placeholder="Enter your email"
