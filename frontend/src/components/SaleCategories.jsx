@@ -22,7 +22,6 @@ export default function SaleCategories() {
           setSaleProducts(discountedProducts);
 
           const fetchedBrands = [...new Set(discountedProducts.map((p) => p.brand?.toUpperCase()).filter(Boolean))];
-          // ⚡ 'ALL' ko starting mein zaroor rakha hai
           setBrands(['ALL', ...fetchedBrands]);
         }
       } catch (error) {
@@ -55,13 +54,15 @@ export default function SaleCategories() {
   };
 
   if (loading) {
-    return <div className="w-full py-20 flex justify-center"><div className="w-10 h-10 border-4 border-gray-200 border-t-red-500 rounded-full animate-spin"></div></div>;
+    // ⚡ THEME UPDATE: Spinner color updated to primary
+    return <div className="w-full py-20 flex justify-center"><div className="w-10 h-10 border-4 border-gray-200 border-t-[var(--theme-primary)] rounded-full animate-spin"></div></div>;
   }
 
   if (saleProducts.length === 0) return null;
 
   return (
-    <section className="py-20 bg-[#fafafa]" style={{ fontFamily: "'Inter', sans-serif" }}>
+    // ⚡ THEME UPDATE: bg-[#fafafa] changed to bg-theme-bg-light
+    <section className="py-20 bg-theme-bg-light transition-colors duration-500" style={{ fontFamily: "'Inter', sans-serif" }}>
       
       <style>
         {`
@@ -73,19 +74,21 @@ export default function SaleCategories() {
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         
-        <h2 className="text-3xl md:text-4xl font-semibold text-center text-black mb-4 tracking-tight">
+        {/* ⚡ THEME UPDATE: text-black to text-theme-text-main */}
+        <h2 className="text-3xl md:text-4xl font-semibold text-center text-theme-text-main mb-4 tracking-tight transition-colors duration-500">
           Categories
         </h2>
 
-        {/* ⚡ Brands Tabs setup (Fixed previously to not cut off ALL) ⚡ */}
+        {/* Brands Tabs */}
         <div className="flex flex-nowrap overflow-x-auto items-center gap-4 md:gap-6 mb-16 py-4 px-4 sm:px-8 hide-scrollbar snap-x">
           {brands.map((brand) => (
             <button
               key={brand}
               onClick={() => setActiveBrand(brand)}
+              // ⚡ THEME UPDATE: Active state colors (border and text) mapped to theme variables
               className={`shrink-0 px-8 py-3 text-[11px] md:text-xs font-bold tracking-widest uppercase transition-all duration-300 rounded-sm bg-white shadow-[0_4px_20px_rgba(0,0,0,0.20)] hover:shadow-[0_12px_25px_-4px_rgba(0,0,0,0.35)] hover:-translate-y-1 ${
                 activeBrand === brand
-                  ? 'text-black scale-105 border-b-[3px] border-red-500' 
+                  ? 'text-theme-text-main scale-105 border-b-[3px] border-[var(--theme-primary)]' 
                   : 'text-gray-500' 
               }`}
             >
@@ -104,12 +107,13 @@ export default function SaleCategories() {
               <Link 
                 to={`/product/${product._id}`} 
                 key={product._id} 
-                /* ⚡ THE FIX: Hover wali deeper bottom shadow ab default apply kar di hai ⚡ */
                 className="group relative bg-white rounded-[2rem] p-5 flex flex-col justify-between cursor-pointer transition-all duration-500 hover:-translate-y-2 shadow-[0_4px_20px_rgba(0,0,0,0.20)] w-full max-w-[260px] h-[380px] overflow-hidden"
               >
                 
-                {/* Sale Ribbon */}
-                <div className="absolute top-1 -left-13 w-[140px] bg-[#ff2a2a] text-white text-[12px] font-black py-2.5 text-center tracking-widest -rotate-45 z-10 shadow-sm">
+                {/* Sale Ribbon 
+                    ⚡ THEME UPDATE: Ribbon color updated to primary
+                */}
+                <div className="absolute top-1 -left-13 w-[1400px] bg-[var(--theme-primary)] text-theme-text-light text-[12px] font-black py-2.5 text-center tracking-widest -rotate-45 z-10 shadow-sm">
                   SALE!
                 </div>
 
@@ -124,12 +128,14 @@ export default function SaleCategories() {
 
                 {/* Details Section */}
                 <div className="w-full mt-auto pb-1 text-center">
-                  <h3 className="text-[14px] font-bold text-gray-900 mb-2 px-1 mx-auto break-words whitespace-normal leading-snug" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                  {/* ⚡ THEME UPDATE: Title color */}
+                  <h3 className="text-[14px] font-bold text-theme-text-main mb-2 px-1 mx-auto break-words whitespace-normal leading-snug transition-colors duration-500" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                     {product.name}
                   </h3>
 
                   <div className="flex items-center justify-center gap-1 mb-3 mt-1">
                     {[...Array(5)].map((_, i) => (
+                      // ⚡ THEME UPDATE: Star stroke can optionally use primary, but kept gold for standard rating feel
                       <Star key={i} className="w-3.5 h-3.5 text-[#f5b041]" strokeWidth={1.5} fill="transparent" />
                     ))}
                   </div>
@@ -138,7 +144,8 @@ export default function SaleCategories() {
                     <span className="text-gray-400 line-through font-medium">
                       {formatPrice(product.price)}
                     </span>
-                    <span className="text-gray-900 font-black">
+                    {/* ⚡ THEME UPDATE: Price color */}
+                    <span className="text-theme-text-main font-black transition-colors duration-500">
                       {formatPrice(finalPrice)}
                     </span>
                   </div>

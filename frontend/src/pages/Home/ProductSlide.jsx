@@ -1,5 +1,3 @@
-
-
 import React, { useRef, useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -94,16 +92,20 @@ export default function ProductSlide() {
   
   {/* TOP LINE + TEXT */}
   <div className="flex items-center gap-3 mb-2">
-    <span className="w-10 h-[1px] bg-[#d3b574]"></span>
-    <p className="text-[10px] tracking-[0.3em] text-[#d3b574] uppercase font-semibold">
+    {/* ⚡ UPDATE: Line color changed to dynamic theme color */}
+    <span className="w-10 h-[1px] bg-[var(--theme-primary)]"></span>
+    {/* ⚡ UPDATE: text-magic-primary changed to text-[var(--theme-primary)] */}
+    <p className="text-[10px] tracking-[0.3em] text-[var(--theme-primary)] uppercase font-semibold">
       Shop By Category
     </p>
-    <span className="w-10 h-[1px] bg-[#d3b574]"></span>
+    {/* ⚡ UPDATE: Line color changed to dynamic theme color */}
+    <span className="w-10 h-[1px] bg-[var(--theme-primary)]"></span>
   </div>
 
   {/* MAIN HEADING */}
   <h2 className="text-3xl md:text-4xl font-extrabold text-black text-center">
-    Shop By <span className="text-[#d3b574]">Category</span>
+    {/* ⚡ UPDATE: text-magic-primary changed to text-[var(--theme-primary)] */}
+    Shop By <span className="text-[var(--theme-primary)]">Category</span>
   </h2>
 
 </div>
@@ -114,7 +116,8 @@ export default function ProductSlide() {
         {/* LEFT ARROW */}
         <button 
           onClick={slideLeft}
-          className="absolute left-0 top-1/2 -translate-y-1/2 translate-x-[-20%] z-10 w-10 h-10 rounded-full bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition hover:bg-[#d3b574] hover:text-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] hidden md:flex"
+          // ⚡ UPDATE: hover:bg-[#d3b574] changed to hover:bg-[var(--theme-primary)]
+          className="absolute left-0 top-1/2 -translate-y-1/2 translate-x-[-20%] z-10 w-10 h-10 rounded-full bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition hover:bg-[var(--theme-primary)] hover:text-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] hidden md:flex"
         >
           <ChevronLeft className="w-5 h-5 rotate-[-15deg]" />
         </button>
@@ -158,7 +161,8 @@ export default function ProductSlide() {
         {/* RIGHT ARROW */}
         <button 
           onClick={slideRight}
-          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-[20%] z-30 w-10 h-10 rounded-full bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition hover:bg-[#d3b574] hover:text-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] hidden md:flex"
+          // ⚡ UPDATE: hover:bg-[#d3b574] changed to hover:bg-[var(--theme-primary)]
+          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-[20%] z-30 w-10 h-10 rounded-full bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition hover:bg-[var(--theme-primary)] hover:text-white shadow-[0_5px_15px_rgba(0,0,0,0.1)] hidden md:flex"
         >
           <ChevronRight className="w-5 h-5 rotate-[15deg]" />
         </button>

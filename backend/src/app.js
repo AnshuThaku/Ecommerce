@@ -22,6 +22,7 @@ app.use("/api/cart",     require("./routes/addTocart/addTocartRoutes"));
 app.use("/api/orders",   require("./routes/orderRoutes/orderRoutes"));
 app.use("/api/history",  require("./routes/historyroutes/historyRoutes"));
 app.use("/api/home",  require("./routes/homeRoutes/homeroutes"));
+app.use("/api/theme",  require("./routes/Theme/ThemeRoutes"));
 
 app.use(errorMiddleware);
 

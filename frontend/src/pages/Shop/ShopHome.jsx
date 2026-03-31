@@ -556,7 +556,7 @@ export default function ShopHome() {
 
           <div className="absolute right-3 top-3 z-20 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
             <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); }} className="w-8 h-8 bg-white/90 backdrop-blur-md rounded-full shadow-md flex items-center justify-center hover:bg-red-50 text-gray-400 hover:text-red-500 transition-all"><Heart className="w-4 h-4" /></button>
-            <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); navigate(createProductUrl(product)); }} className="w-8 h-8 bg-white/90 backdrop-blur-md rounded-full shadow-md flex items-center justify-center hover:bg-[#d3b574]/10 text-gray-500 hover:text-[#d3b574] transition-all"><Eye className="w-4 h-4" /></button>
+            <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); navigate(createProductUrl(product)); }} className="w-8 h-8 bg-white/90 backdrop-blur-md rounded-full shadow-md flex items-center justify-center hover:bg-[#d3b574]/10 text-gray-500 hover:text-magic-primary transition-all"><Eye className="w-4 h-4" /></button>
           </div>
 
           <button 
@@ -576,8 +576,8 @@ export default function ShopHome() {
         </div>
 
         <div className="p-4 bg-white text-center flex flex-col flex-1 border-t border-gray-50">
-          <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-[#d3b574] mb-1">{product.brand || product.category}</p>
-          <h4 className="text-[12px] font-medium text-black mb-2 group-hover:text-[#d3b574] transition-colors line-clamp-1 w-full">{product.name}</h4>
+          <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-magic-primary mb-1">{product.brand || product.category}</p>
+          <h4 className="text-[12px] font-medium text-black mb-2 group-hover:text-magic-primary transition-colors line-clamp-1 w-full">{product.name}</h4>
           
           <div className="flex flex-col items-center justify-center gap-1 w-full mt-auto">
             <div className="flex items-baseline gap-2">
@@ -595,35 +595,24 @@ export default function ShopHome() {
     );
   };
 
- const HeaderNav = () => (
-  <nav className="fixed top-0 left-0 right-0 z-40 bg-[#121212]/95 backdrop-blur-md border-b border-[#1a1a1a] shadow-sm">
-    <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      
-      {/* Logo */}
-      <Link to="/" className="flex items-center flex-shrink-0 hover:opacity-90 transition-opacity">
-<img src="/Truee_Luxury_Logo.png" alt="Truee Luxury Logo" className="h-8 md:h-10 object-contain" />      </Link>
-
-      {/* Search */}
-      <div className="flex-1 max-w-xl px-4 md:px-8 hidden md:block">
-        <SearchBar />
-      </div>
-
-      {/* Right */}
-      <div className="flex items-center gap-4 flex-shrink-0">
-        <Link 
-          to="/" 
-          className="text-[11px] font-black text-zinc-500 hover:text-[#d3b574] transition-colors uppercase tracking-widest"
-        >
-          Back to Home
+  const HeaderNav = () => (
+    <nav className="fixed top-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <Link to="/" className="flex items-center flex-shrink-0 hover:opacity-90 transition-opacity">
+          <img src={Logo} alt="Truee Luxury Logo" className="h-8 md:h-10 object-contain" />
         </Link>
+        <div className="flex-1 max-w-xl px-4 md:px-8 hidden md:block">
+           <SearchBar />
+        </div>
+        <div className="flex items-center gap-4 flex-shrink-0">
+          <Link to="/" className="text-[11px] font-black text-gray-500 hover:text-[#d3b574] transition-colors uppercase tracking-widest">Back to Home</Link>
+        </div>
       </div>
-
-    </div>
-  </nav>
-);
+    </nav>
+  );
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900 font-sans selection:bg-[#d3b574] selection:text-black pt-16">
+    <div className="min-h-screen bg-gray-50 text-gray-900 font-sans selection:bg-magic-primary selection:text-black pt-16">
       <Toast toast={toastMessage} onClose={() => setToastMessage(null)} />
       <HeaderNav />
 
@@ -634,7 +623,7 @@ export default function ShopHome() {
                 {selectedCategory === 'All' ? 'Curated Collection' : selectedCategory}
               </h1>
               <p className="text-xs text-gray-500 flex items-center gap-1.5">
-                 <Link to="/" className="hover:text-[#d3b574] transition-colors font-medium">Home</Link> <ChevronRight size={12}/> <span>Shop</span> {selectedCategory !== 'All' && <><ChevronRight size={12}/> <span className="text-black font-medium">{selectedCategory}</span></>}
+                 <Link to="/" className="hover:text-magic-primary transition-colors font-medium">Home</Link> <ChevronRight size={12}/> <span>Shop</span> {selectedCategory !== 'All' && <><ChevronRight size={12}/> <span className="text-black font-medium">{selectedCategory}</span></>}
               </p>
            </div>
            <div className="md:hidden w-full mt-4"><SearchBar /></div>
@@ -653,8 +642,8 @@ export default function ShopHome() {
               <div className="space-y-2.5">
                 {categories.map(cat => (
                   <label key={cat} className="flex items-center gap-3 cursor-pointer group">
-                    <input type="radio" name="category" value={cat} checked={selectedCategory === cat} onChange={handleCategoryChange} className="w-3.5 h-3.5 text-[#d3b574] bg-gray-50 border-gray-200 focus:ring-[#d3b574] cursor-pointer" />
-                    <span className={`text-[13px] transition-colors ${selectedCategory === cat ? 'font-bold text-black' : 'text-gray-600 group-hover:text-[#d3b574]'}`}>{cat}</span>
+                    <input type="radio" name="category" value={cat} checked={selectedCategory === cat} onChange={handleCategoryChange} className="w-3.5 h-3.5 text-magic-primary bg-gray-50 border-gray-200 focus:ring-[#d3b574] cursor-pointer" />
+                    <span className={`text-[13px] transition-colors ${selectedCategory === cat ? 'font-bold text-black' : 'text-gray-600 group-hover:text-magic-primary'}`}>{cat}</span>
                   </label>
                 ))}
               </div>
@@ -666,7 +655,7 @@ export default function ShopHome() {
                <div className="space-y-4">
                   <div className="flex justify-between items-center text-[11px] font-bold text-gray-600">
                      <span>₹0</span>
-                     <span className="text-[#d3b574] bg-[#d3b574]/10 px-2 py-0.5 rounded">Up to ₹{priceRange.toLocaleString('en-IN')}</span>
+                     <span className="text-magic-primary bg-[#d3b574]/10 px-2 py-0.5 rounded">Up to ₹{priceRange.toLocaleString('en-IN')}</span>
                   </div>
                   <input 
                     type="range" 
@@ -699,8 +688,8 @@ export default function ShopHome() {
                   { value: 'price-desc', label: 'Price: High to Low' }
                 ].map(sort => (
                   <label key={sort.value} className="flex items-center gap-3 cursor-pointer group">
-                    <input type="radio" name="sort" value={sort.value} checked={sortOrder === sort.value} onChange={(e) => setSortOrder(e.target.value)} className="w-3.5 h-3.5 text-[#d3b574] bg-gray-50 border-gray-200 focus:ring-[#d3b574] cursor-pointer" />
-                    <span className={`text-[13px] transition-colors ${sortOrder === sort.value ? 'font-bold text-black' : 'text-gray-600 group-hover:text-[#d3b574]'}`}>{sort.label}</span>
+                    <input type="radio" name="sort" value={sort.value} checked={sortOrder === sort.value} onChange={(e) => setSortOrder(e.target.value)} className="w-3.5 h-3.5 text-magic-primary bg-gray-50 border-gray-200 focus:ring-[#d3b574] cursor-pointer" />
+                    <span className={`text-[13px] transition-colors ${sortOrder === sort.value ? 'font-bold text-black' : 'text-gray-600 group-hover:text-magic-primary'}`}>{sort.label}</span>
                   </label>
                 ))}
               </div>
@@ -729,7 +718,7 @@ export default function ShopHome() {
             <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm overflow-hidden relative">
               <div className="absolute top-0 left-0 w-0.5 bg-[#d3b574] h-full"></div>
               <h2 className="text-xl md:text-2xl font-serif text-black mb-6 flex items-center gap-2 font-medium">
-                 <Sparkles className="text-[#d3b574] w-5 h-5" /> Recommended For You
+                 <Sparkles className="text-magic-primary w-5 h-5" /> Recommended For You
               </h2>
               <div className="flex gap-4 md:gap-5 overflow-x-auto pb-2 hide-scrollbar snap-x">
                 {recommended.map((product, index) => (
@@ -762,7 +751,6 @@ export default function ShopHome() {
       </main>
 
       <Footer accentColor="#d3b574" bg="#111" textColor="white" />
-      <style dangerouslySetInnerHTML={{__html: `.hide-scrollbar::-webkit-scrollbar { display: none; } .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; } html { scroll-behavior: smooth; }`}} />
     </div>
   );
 } 
