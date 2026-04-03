@@ -98,7 +98,7 @@
 //             <ChevronLeft size={20} strokeWidth={3} className="-ml-0.5" />
 //           </button>
 
-//           <div ref={sliderRef} className="flex flex-nowrap overflow-x-auto overflow-y-hidden justify-start items-stretch gap-4 sm:gap-6 pt-6 pb-10 hide-scrollbar snap-x px-2 scroll-smooth" style={{ touchAction: 'pan-x' }}>
+//           <div ref={sliderRef} className="flex flex-nowrap overflow-x-auto overflow-y-hidden justify-start items-stretch gap-4 sm:gap-6 pt-2 pb-10 hide-scrollbar snap-x px-2 scroll-smooth" style={{ touchAction: 'pan-x' }}>
             
 //             {/* ⚡ YAHAN THI GALTI: Mapping wapas add kar di gayi hai */}
 //             {products.map((p) => (
@@ -186,7 +186,7 @@ export default function ProductGrid({ title, subtitle, products }) {
   const isLightning = title?.toLowerCase().includes('lightning');
 
   return (
-    <section className="bg-[var(--theme-bg-light)] py-12 sm:py-20 font-sans transition-colors duration-500 relative">
+    <section className="bg-[var(--theme-bg-light)] pb-10 pt-5 font-sans transition-colors duration-500 relative">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="flex flex-col items-center justify-center mb-3 sm:mb-4 text-center">

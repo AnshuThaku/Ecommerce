@@ -88,7 +88,7 @@
 //     <div className="bg-white py-12 w-full border-y border-gray-100">
       
 //       {/* HEADING (Center Aligned) */}
-//      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 mb-10 flex flex-col items-center">
+//      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 mb-4 flex flex-col items-center">
   
 //   {/* TOP LINE + TEXT */}
 //   <div className="flex items-center gap-3 mb-2">
@@ -125,7 +125,7 @@
 //         {/* CARDS */}
 //         <div 
 //           ref={sliderRef}
-//           className="flex overflow-x-auto gap-4 py-2 px-4 snap-x hide-scrollbar"
+//           className="flex overflow-x-auto gap-4 px-6 pt-2 pb-6 snap-x hide-scrollbar"
 //         >
 //           {loading ? (
 //             [1,2,3,4,5].map(i => (
@@ -264,7 +264,7 @@ export default function ProductSlide() {
   };
 
   return (
-    <div className="bg-white py-16 w-full border-y border-gray-50">
+    <div className="bg-white pt-2 w-full border-t border-gray-50">
       
       {/* HEADING SECTION */}
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 mb-6 flex flex-col items-center">
@@ -295,7 +295,7 @@ export default function ProductSlide() {
         {/* CARDS CONTAINER - (Padding fixed here to remove the grey line) */}
         <div 
           ref={sliderRef}
-          className="flex overflow-x-auto gap-4 pt-10 pb-16 px-6 snap-x hide-scrollbar scroll-smooth"
+          className="flex overflow-x-auto gap-4 px-6 py-6 snap-x hide-scrollbar scroll-smooth"
         >
           {loading ? (
             [1,2,3,4,5,6].map(i => (

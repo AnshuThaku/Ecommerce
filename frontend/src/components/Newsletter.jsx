@@ -17,8 +17,7 @@ export default function Newsletter() {
   };
 
   return (
-    <section className="bg-[#0A0A0A] py-20 sm:py-28 relative overflow-hidden selection:bg-magic-primary selection:text-black">
-      
+    <section className="bg-[#0A0A0A] h-screen w-full flex items-center justify-center relative overflow-hidden selection:bg-magic-primary selection:text-black">
       {/* Subtle Background Glow for Luxury Feel */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#d3b574] opacity-[0.03] rounded-full blur-[120px] pointer-events-none"></div>
 

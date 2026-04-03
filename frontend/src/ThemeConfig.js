@@ -1,14 +1,15 @@
 // themeConfig.js
 export const festivalThemes = {
+  // ⚡ Updated to Apple Luxury Theme
   default: {
     name: "Default",
-    bgLight: "#f4f7f6",      // Light greyish background
-    bgDark: "#2c3e50",       // Dark blue footer/navbar
-    primary: "#3498db",      // Standard blue button/accent
-    textMain: "#333333",
-    textLight: "#ffffff",
-    heroGradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-    greeting: "Welcome to Our Platform"
+    bgLight: "#f5f5f7",      // Apple's signature off-white/light-gray
+    bgDark: "#1d1d1f",       // Sleek dark gray (almost black)
+    primary: "#c8a253",      // Luxury Gold accent
+    textMain: "#1d1d1f",     // Deep gray for reading text (easier on eyes than pure black)
+    textLight: "#ffffff",    // Clean white text for dark areas
+    heroGradient: "linear-gradient(135deg, #1d1d1f 0%, #3a3a3c 100%)", // Premium dark metallic gradient
+    greeting: "Experience True Luxury. Welcome to our Exclusive Catalogue."
   },
   diwali: {
     name: "Diwali",
@@ -30,7 +31,6 @@ export const festivalThemes = {
     heroGradient: "linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%)",
     greeting: "🌙 Eid Mubarak! Celebrate with Our Exclusive Deals 🌙"
   },
-  // 👇 Holi Theme added here
   holi: {
     name: "Holi",
     bgLight: "#fff0f5",      // Very soft pink (Lavender blush)
@@ -38,7 +38,7 @@ export const festivalThemes = {
     primary: "#ff4081",      // Vibrant pink/magenta (Gulaal color)
     textMain: "#2a0845",     // Very dark purple for high readability
     textLight: "#ffffff",    // Clean white text for dark areas
-    heroGradient: "linear-gradient(135deg, #ff0844 0%, #ffb199 33%, #4facfe 66%, #00f2fe 100%)", // Multi-color splash (Red -> Orange -> Blue -> Cyan)
+    heroGradient: "linear-gradient(135deg, #ff0844 0%, #ffb199 33%, #4facfe 66%, #00f2fe 100%)", // Multi-color splash
     greeting: "🌈 Happy Holi! Add Colors to Your Life with Our Sale 🌈"
   }
 };

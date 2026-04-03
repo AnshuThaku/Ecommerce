@@ -63,13 +63,13 @@ export default function SaleCategories() {
   };
 
   if (loading) {
-    return <div className="w-full py-20 flex justify-center"><div className="w-10 h-10 border-4 border-gray-200 border-t-[var(--theme-primary)] rounded-full animate-spin"></div></div>;
+    return <div className="w-full py-20 flex justify-center"><div className="w-10 h-10 border-4 border-gray-200 border-t-black rounded-full animate-spin"></div></div>;
   }
 
   if (saleProducts.length === 0) return null;
 
   return (
-    <section className="py-20 bg-theme-bg-light transition-colors duration-500" style={{ fontFamily: "'Inter', sans-serif" }}>
+    <section className="py-10 bg-gray-50 transition-colors duration-500" style={{ fontFamily: "'Inter', sans-serif" }}>
       
       <style>
         {`
@@ -80,10 +80,10 @@ export default function SaleCategories() {
       </style>
 
       {/* Wrapper */}
-      <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 relative">
-        
-        <h2 className="text-3xl md:text-4xl font-semibold text-center text-theme-text-main mb-8 tracking-tight transition-colors duration-500">
-          Categories
+      <div className="w-full max-w-[89%] mx-auto px-4 sm:px-6 lg:px-8 relative">
+
+        <h2 className="text-3xl md:text-4xl font-[900] text-center text-black mb-8 tracking-wider uppercase">
+          CATEGORIES
         </h2>
 
         {/* ⚡ THE FIX: Removed max-w-4xl and mx-auto, made it w-full to stretch edge-to-edge ⚡ */}
@@ -92,7 +92,7 @@ export default function SaleCategories() {
           {/* Left Arrow */}
           <button 
             onClick={() => scroll('left')} 
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-xl hover:shadow-2xl text-gray-600 hover:text-theme-primary rounded-full w-12 h-12 transition-all duration-300 opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center cursor-pointer border border-gray-100 -ml-4"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-xl hover:shadow-2xl text-gray-600 hover:text-black rounded-full w-12 h-12 transition-all duration-300 opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center cursor-pointer border border-gray-100 -ml-4"
           >
             <ChevronLeft size={24} strokeWidth={2.5} className="-ml-1" />
           </button>
@@ -105,7 +105,7 @@ export default function SaleCategories() {
                 onClick={() => setActiveBrand(brand)}
                 className={`shrink-0 px-8 py-3 text-[11px] md:text-xs font-bold tracking-widest uppercase transition-all duration-300 rounded-sm bg-white shadow-[0_4px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_25px_-4px_rgba(0,0,0,0.30)] hover:-translate-y-1 ${
                   activeBrand === brand
-                    ? 'text-theme-text-main scale-105 border-b-[3px] border-[var(--theme-primary)]' 
+                    ? 'text-black scale-105 border-b-[3px] border-black' 
                     : 'text-gray-500' 
                 }`}
               >
@@ -117,7 +117,7 @@ export default function SaleCategories() {
           {/* Right Arrow */}
           <button 
             onClick={() => scroll('right')} 
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-xl hover:shadow-2xl text-gray-600 hover:text-theme-primary rounded-full w-12 h-12 transition-all duration-300 opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center cursor-pointer border border-gray-100 -mr-4"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white shadow-xl hover:shadow-2xl text-gray-600 hover:text-black rounded-full w-12 h-12 transition-all duration-300 opacity-0 group-hover:opacity-100 hidden md:flex items-center justify-center cursor-pointer border border-gray-100 -mr-4"
           >
             <ChevronRight size={24} strokeWidth={2.5} className="-mr-1" />
           </button>
@@ -133,16 +133,21 @@ export default function SaleCategories() {
               <Link 
                 to={`/product/${product._id}`} 
                 key={product._id} 
-                className="group relative bg-white rounded-[2rem] p-5 flex flex-col justify-between cursor-pointer transition-all duration-500 hover:-translate-y-2 shadow-[0_4px_20px_rgba(0,0,0,0.15)] w-full max-w-[280px] h-[400px] overflow-hidden"
+                className="group relative bg-white overflow-hidden rounded-[2rem] p-5 flex flex-col justify-between cursor-pointer transition-all duration-500 hover:-translate-y-2 shadow-[0_4px_20px_rgba(0,0,0,0.15)] w-full max-w-[280px] h-[400px]"
               >
                 
-                {/* Sale Ribbon */}
-                <div className="absolute top-2 -left-12 w-[140px] bg-[var(--theme-primary)] text-theme-bg-dark text-[12px] font-black py-2.5 text-center tracking-widest -rotate-45 z-10 shadow-md">
-                  SALE!
+                {/* Sale Tag */}
+                <div 
+                  className="absolute top-0 left-0 bg-black text-white text-[10px] md:text-xs font-black px-4 py-1.5 uppercase tracking-widest z-10 shadow-sm"
+                  style={{
+                    borderBottomRightRadius: "1rem"
+                  }}
+                >
+                  SALE
                 </div>
 
                 {/* Product Image */}
-                <div className="flex-1 w-full relative flex items-center justify-center mt-8 mb-4">
+                <div className="flex-1 w-full relative flex items-center justify-center mt-6 mb-4">
                   <img 
                     src={getMainImage(product)} 
                     alt={product.name} 
@@ -152,7 +157,7 @@ export default function SaleCategories() {
 
                 {/* Details Section */}
                 <div className="w-full mt-auto pb-2 text-center">
-                  <h3 className="text-[14px] font-bold text-theme-text-main mb-3 px-2 mx-auto break-words whitespace-normal leading-snug transition-colors duration-500" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                  <h3 className="text-[14px] font-bold text-black mb-3 px-2 mx-auto break-words whitespace-normal leading-snug transition-colors duration-500" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                     {product.name}
                   </h3>
 
@@ -166,7 +171,7 @@ export default function SaleCategories() {
                     <span className="text-gray-400 line-through font-medium">
                       {formatPrice(product.price)}
                     </span>
-                    <span className="text-theme-text-main font-black transition-colors duration-500 text-[16px]">
+                    <span className="text-black font-black transition-colors duration-500 text-[16px]">
                       {formatPrice(finalPrice)}
                     </span>
                   </div>

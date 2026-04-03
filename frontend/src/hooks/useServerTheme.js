@@ -5,7 +5,7 @@ export const useServerTheme = () => {
   useEffect(() => {
     const fetchCurrentTheme = async () => {
       try {
-        const response = await fetch('https://bocws.opserv.in/new/vo/theme.php');
+        const response = await fetch();
         if (!response.ok) throw new Error('Network error');
         
         const data = await response.json();

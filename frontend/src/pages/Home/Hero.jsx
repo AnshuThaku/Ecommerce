@@ -66,7 +66,7 @@
 
 //   return (
 //     <div
-//       onClick={handleContainerClick}
+//       
 //       style={{
 //         fontFamily: "'Inter', sans-serif",
 //         background: bg,
@@ -277,7 +277,8 @@ export default function Hero({ featuredProducts = [] }) {
         image: getProductImg(p),
         title: p.name,
         subtitle: p.brand || "Exclusive Selection",
-        url: createProductUrl(p)
+        url: createProductUrl(p),
+        category: p.category
       }))
     : [
         { id: 1, image: "/preview(1).png", title: "HOME LINE III", subtitle: "Bring the big stage home", url: "/shop" },
@@ -313,7 +314,7 @@ export default function Hero({ featuredProducts = [] }) {
 
   return (
     <div
-      onClick={handleContainerClick}
+      
       style={{
         fontFamily: "'Inter', sans-serif",
         background: "var(--theme-bg-dark, #121212)", // ⚡ Integrated
@@ -367,13 +368,14 @@ export default function Hero({ featuredProducts = [] }) {
         zIndex: 10, pointerEvents: "none"
       }}>
         <div style={{
-          fontSize: "clamp(24px, 4vw, 36px)",
+          fontFamily: "'Playfair Display', serif",
+          fontSize: "clamp(24px, 3vw, 36px)",
           opacity: 0.9,
-          fontWeight: 600,
-          textShadow: "0 4px 24px rgba(0,0,0,0.8)",
-          // Yahan text color ko server se map kar diya
-          color: "var(--theme-primary, #d3b574)",
-          letterSpacing: "1px"
+          fontWeight: 400,
+          textTransform: "uppercase",
+          textShadow: "0 4px 20px rgba(0,0,0,0.8)",
+          color: "var(--theme-text-light, #ffffff)",
+          letterSpacing: "4px"
         }}>
           {/* Dynamic Greeting if available or default text */}
           True Luxury
@@ -417,22 +419,28 @@ export default function Hero({ featuredProducts = [] }) {
           onMouseLeave={() => setHoveredBtn(false)}
           onClick={(e) => {
             e.stopPropagation();
-            if (displayItems[current]?.url) navigate(displayItems[current].url);
+            if (displayItems[current]?.category) {
+              navigate('/shop', { state: { category: displayItems[current].category } });
+            } else if (displayItems[current]?.url) {
+              navigate(displayItems[current].url);
+            }
           }}
           style={{
-            border: `1px solid var(--theme-primary, #d3b574)`, // ⚡ Integrated
-            color: hoveredBtn ? "var(--theme-bg-dark, #000)" : "var(--theme-primary, #d3b574)", // ⚡ Integrated
-            background: hoveredBtn ? "var(--theme-primary, #d3b574)" : "rgba(0,0,0,0.5)", // ⚡ Integrated
-            backdropFilter: "blur(4px)",
-            padding: "10px 18px", 
-            fontSize: "clamp(12px, 1.2vw, 14px)", 
-            fontWeight: 500,
+            border: `1.5px solid var(--theme-primary, #d3b574)`, 
+            color: hoveredBtn ? "var(--theme-bg-dark, #000)" : "var(--theme-primary, #d3b574)", 
+            background: hoveredBtn ? "var(--theme-primary, #d3b574)" : "rgba(18, 18, 18, 0.4)", 
+            backdropFilter: "blur(8px)",
+            padding: "12px 36px", 
+            fontSize: "clamp(11px, 1.2vw, 13px)", 
+            fontWeight: 700,
             textTransform: "uppercase",
-            letterSpacing: "1.5px",
-            transition: "all 0.5s",
+            letterSpacing: "4px",
+            boxShadow: hoveredBtn ? "0 8px 32px rgba(0,0,0,0.5)" : "0 4px 15px rgba(0,0,0,0.3)",
+            transition: "all 0.5s cubic-bezier(0.25, 1, 0.5, 1)",
             cursor: "pointer",
             whiteSpace: "nowrap",
-            transform: hoveredBtn ? "translateY(-3px) scale(1.02)" : "translateY(0) scale(1)",
+            transform: hoveredBtn ? "translateY(-5px) scale(1.02)" : "translateY(0) scale(1)",
+            borderRadius: "30px"
           }}
         >
           Shop Now

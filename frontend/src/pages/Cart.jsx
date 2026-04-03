@@ -1,246 +1,20 @@
-// import React, { useEffect, useState } from 'react';
-// import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
-// import axiosInstance from '../../utils/axiosInstance';
-// import { Link, useNavigate } from 'react-router-dom'; // useNavigate add kiya
-// import Toast from '../../components/Toast';
+import React, { useEffect, useState } from "react";
+import { Minus, Plus, Trash2, X, ShoppingBag } from "lucide-react";
+import axiosInstance from "../utils/axiosInstance";
+import { useNavigate } from "react-router-dom";
+import Toast from "../components/Toast";
 
-// export default function Cart() {
-//   const [cartItems, setCartItems] = useState([]);
-//   const [loading, setLoading] = useState(true);
-//   const [isCheckingOut, setIsCheckingOut] = useState(false); // Checkout loading spinner ke liye
-//   const [toastMessage, setToastMessage] = useState(null);
-//   const navigate = useNavigate(); // Redirect karne ke liye
-
-//   const showToast = (type, message) => {
-//     setToastMessage({ type, message });
-//   };
-
-//   const fetchCart = async () => {
-//     try {
-//       const { data } = await axiosInstance.get('/cart');
-//       if (data && data.items) {
-//         const detailedItems = await Promise.all(
-//           data.items.map(async (item) => {
-//             try {
-//               const res = await axiosInstance.get(`/products/${item.product}`);
-//               return { ...item, productDetails: res.data.product };
-//             } catch (err) {
-//               return { ...item, productDetails: { name: 'Unknown', price: 0, images: [] } };
-//             }
-//           })
-//         );
-//         setCartItems(detailedItems);
-//       } else {
-//         setCartItems([]);
-//       }
-//     } catch (error) {
-//       if (error.response?.status !== 404) {
-//         showToast('error', 'Failed to load cart');
-//       }
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchCart();
-//   }, []);
-
-//   const updateQuantity = async (productId, currentQuantity, change) => {
-//     if (change === 1) { 
-//       try {
-//         await axiosInstance.post('/cart/add', { productId, quantity: 1 });
-//         fetchCart(); 
-//       } catch (error) {
-//         showToast('error', 'Failed to update quantity');
-//       }
-//     } else if (change === -1 && currentQuantity > 1) { 
-//       showToast('info', 'Quantity decrease endpoint needed in backend.');
-//     }
-//   };
-
-//   const removeItem = async (productId) => {
-//     showToast('info', 'Remove item endpoint needs to be mapped in backend');
-//   };
-
-//   const getItemPrice = (item) => {
-//     const product = item.productDetails;
-//     if (product?.discountPrice && product.discountPrice > 0) {
-//       return product.price - product.discountPrice;
-//     }
-//     return product?.price || 0;
-//   };
-
-//   const subtotal = cartItems.reduce(
-//     (acc, curr) => acc + getItemPrice(curr) * curr.quantity,
-//     0
-//   );
-
-//   const totalSavings = cartItems.reduce((acc, curr) => {
-//     const product = curr.productDetails;
-//     if (product?.discountPrice && product.discountPrice > 0) {
-//       return acc + product.discountPrice * curr.quantity;
-//     }
-//     return acc;
-//   }, 0);
-
-//   // --- INSTANT CHECKOUT LOGIC ---
-//   const handleCheckout = async () => {
-//     setIsCheckingOut(true);
-//     try {
-//       // Backend ko order create karne ke liye exact waisa data bhejenge jaisa Order Model ko chahiye
-//       const checkoutItems = cartItems.map(item => ({
-//         product: item.product, 
-//         productId: item.product, 
-//         name: item.productDetails?.name || 'Luxury Item',
-//         image: item.productDetails?.variants?.[0]?.images?.[0]?.url || item.productDetails?.images?.[0]?.url || '',
-//         price: getItemPrice(item),
-//         quantity: item.quantity
-//       }));
-
-//       const payload = {
-//         cartItems: checkoutItems,
-//         totalAmount: subtotal
-//       };
-
-//       // API Call to create dummy order
-//       const response = await axiosInstance.post('/orders/instant-checkout', payload);
-      
-//       if (response.data.success) {
-//         // Agar success hua toh sidha Order Success page par bhejo ID ke sath
-//         navigate('/order-success', { state: { orderId: response.data.orderId } });
-//       }
-//     } catch (error) {
-//       showToast('error', error.response?.data?.error || 'Checkout Failed. Please try again.');
-//     } finally {
-//       setIsCheckingOut(false);
-//     }
-//   };
-
-//   if (loading) return <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center text-xl animate-pulse text-[#C8A253] font-serif">Curating your cart...</div>;
-
-//   return (
-//   <div className="bg-white min-h-screen text-black pt-24 pb-12 px-6">
-//     <Toast toast={toastMessage} onClose={() => setToastMessage(null)} />
-//     <div className="max-w-6xl mx-auto">
-//       <h1 className="text-4xl font-serif text-black mb-8 flex items-center gap-3">
-//         <ShoppingBag className="w-8 h-8" /> Your Cart
-//       </h1>
-
-//       {cartItems.length === 0 ? (
-//         <div className="text-center py-20 bg-gray-100 rounded-2xl border border-gray-300 shadow">
-//           <ShoppingBag className="w-16 h-16 mx-auto text-gray-500 mb-4" />
-//           <h2 className="text-2xl font-serif mb-2 text-black">Your cart is empty</h2>
-//           <p className="text-gray-600 mb-8">Looks like you haven't added any items yet.</p>
-//           <Link to="/shop" className="inline-block bg-black text-white px-8 py-3 rounded-full font-bold uppercase hover:bg-gray-800 transition">
-//             Continue Shopping
-//           </Link>
-//         </div>
-//       ) : (
-//         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          
-//           {/* LEFT SIDE */}
-//           <div className="lg:col-span-2 space-y-6">
-//             {cartItems.map((item) => {
-//               const product = item.productDetails;
-//               const itemImage =
-//                 product?.images?.[0]?.url || "https://placehold.co/200";
-
-//               const itemTotal = getItemPrice(item) * item.quantity;
-
-//               return (
-//                 <div key={item._id} className="flex gap-6 p-6 bg-white rounded-2xl border border-gray-300 shadow">
-                  
-//                   <div className="w-28 h-28 bg-gray-100 rounded-xl p-2">
-//                     <img src={itemImage} alt="" className="w-full h-full object-contain" />
-//                   </div>
-
-//                   <div className="flex-1 flex flex-col justify-between">
-                    
-//                     <div className="flex justify-between">
-//                       <div>
-//                         <h3 className="text-lg text-black">{product?.name}</h3>
-//                         <p className="text-xs text-gray-500">{product?.category}</p>
-//                       </div>
-
-//                       <button onClick={() => removeItem(item.product)}>
-//                         <Trash2 className="w-4 h-4 text-gray-500 hover:text-red-500" />
-//                       </button>
-//                     </div>
-
-//                     <div className="flex justify-between items-end">
-//                       <span className="text-lg font-semibold text-black">₹{itemTotal}</span>
-
-//                       <div className="flex items-center gap-4 border rounded-full px-3 py-1">
-//                         <button onClick={() => updateQuantity(item.product, item.quantity, -1)}>
-//                           <Minus className="w-4 h-4" />
-//                         </button>
-
-//                         <span>{item.quantity}</span>
-
-//                         <button onClick={() => updateQuantity(item.product, item.quantity, 1)}>
-//                           <Plus className="w-4 h-4" />
-//                         </button>
-//                       </div>
-//                     </div>
-//                   </div>
-//                 </div>
-//               );
-//             })}
-//           </div>
-
-//           {/* RIGHT SIDE */}
-//           <div>
-//             <div className="bg-gray-100 p-8 rounded-2xl border border-gray-300 sticky top-24 shadow">
-//               <h3 className="text-xl mb-6">Order Summary</h3>
-
-//               <div className="space-y-4 mb-6">
-//                 <div className="flex justify-between">
-//                   <span>Subtotal</span>
-//                   <span>₹{subtotal}</span>
-//                 </div>
-//               </div>
-
-//               <div className="border-t pt-4 mb-6 flex justify-between">
-//                 <span>Total</span>
-//                 <span className="text-xl font-bold">₹{subtotal}</span>
-//               </div>
-
-//               <button
-//                 onClick={handleCheckout}
-//                 className="w-full py-3 bg-black text-white rounded-xl font-bold hover:bg-gray-800"
-//               >
-//                 Checkout
-//               </button>
-//             </div>
-//           </div>
-
-//         </div>
-//       )}
-//     </div>
-//   </div>
-// );
-// }
-import React, { useEffect, useState } from 'react';
-import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
-import axiosInstance from '../utils/axiosInstance';
-import { Link, useNavigate } from 'react-router-dom';
-import Toast from '../components/Toast';
-
-export default function Cart() {
+export default function Cart({ isOpen, onClose }) {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
   const navigate = useNavigate();
 
-  const showToast = (type, message) => {
-    setToastMessage({ type, message });
-  };
+  const showToast = (type, message) => setToastMessage({ type, message });
 
   const fetchCart = async () => {
     try {
-      const { data } = await axiosInstance.get('/cart');
+      const { data } = await axiosInstance.get("/cart");
       if (data && data.items) {
         const detailedItems = await Promise.all(
           data.items.map(async (item) => {
@@ -248,7 +22,7 @@ export default function Cart() {
               const res = await axiosInstance.get(`/products/${item.product}`);
               return { ...item, productDetails: res.data.product };
             } catch (err) {
-              return { ...item, productDetails: { name: 'Unknown', price: 0, images: [] } };
+              return { ...item, productDetails: { name: "Unknown", price: 0, images: [] } };
             }
           })
         );
@@ -257,190 +31,141 @@ export default function Cart() {
         setCartItems([]);
       }
     } catch (error) {
-      if (error.response?.status !== 404) {
-        showToast('error', 'Failed to load cart');
-      }
+      if (error.response?.status !== 404) showToast("error", "Failed to load cart");
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchCart();
-  }, []);
+    if (isOpen) {
+      setLoading(true);
+      fetchCart();
+    }
+  }, [isOpen]);
 
   const updateQuantity = async (productId, currentQuantity, change) => {
-    if (change === 1) { 
+    if (change === 1) {
       try {
-        await axiosInstance.post('/cart/add', { productId, quantity: 1 });
-        fetchCart(); 
+        await axiosInstance.post("/cart/add", { productId, quantity: 1 });
+        fetchCart();
       } catch (error) {
-        showToast('error', 'Failed to update quantity');
+        showToast("error", "Failed to update quantity");
       }
-    } else if (change === -1 && currentQuantity > 1) { 
-      showToast('info', 'Quantity decrease endpoint needed in backend.');
+    } else if (change === -1 && currentQuantity > 1) {
+      showToast("info", "Quantity decrease endpoint needed in backend.");
     }
   };
 
   const removeItem = async (productId) => {
-    showToast('info', 'Remove item endpoint needs to be mapped in backend');
+    showToast("info", "Remove item endpoint needs to be mapped in backend");
   };
 
   const getItemPrice = (item) => {
     const product = item.productDetails;
-    if (product?.discountPrice && product.discountPrice > 0) {
-      return product.price - product.discountPrice;
-    }
+    if (product?.discountPrice && product.discountPrice > 0) return product.price - product.discountPrice;
     return product?.price || 0;
   };
 
-  const subtotal = cartItems.reduce(
-    (acc, curr) => acc + getItemPrice(curr) * curr.quantity,
-    0
-  );
+  const subtotal = cartItems.reduce((acc, curr) => acc + getItemPrice(curr) * curr.quantity, 0);
 
-  const totalSavings = cartItems.reduce((acc, curr) => {
-    const product = curr.productDetails;
-    if (product?.discountPrice && product.discountPrice > 0) {
-      return acc + product.discountPrice * curr.quantity;
-    }
-    return acc;
-  }, 0);
-
-  // --- INSTANT CHECKOUT LOGIC ---
-  const handleCheckout = async () => {
-    setIsCheckingOut(true);
-    try {
-      // Backend ko order create karne ke liye exact waisa data bhejenge jaisa Order Model ko chahiye
-      const checkoutItems = cartItems.map(item => ({
-        product: item.product, 
-        productId: item.product, 
-        name: item.productDetails?.name || 'Luxury Item',
-        image: item.productDetails?.variants?.[0]?.images?.[0]?.url || item.productDetails?.images?.[0]?.url || '',
-        price: getItemPrice(item),
-        quantity: item.quantity
-      }));
-
-      const payload = {
-        cartItems: checkoutItems,
-        totalAmount: subtotal
-      };
-
-      // API Call to create dummy order
-      const response = await axiosInstance.post('/orders/instant-checkout', payload);
-      
-      if (response.data.success) {
-        // Agar success hua toh sidha Order Success page par bhejo ID ke sath
-        navigate('/order-success', { state: { orderId: response.data.orderId } });
-      }
-    } catch (error) {
-      showToast('error', error.response?.data?.error || 'Checkout Failed. Please try again.');
-    } finally {
-      setIsCheckingOut(false);
-    }
+  const handleCheckout = () => {
+    onClose();
+    navigate("/checkout");
   };
 
-  if (loading) return <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center text-xl animate-pulse text-[#C8A253] font-serif">Curating your cart...</div>;
+  if (!isOpen) return null;
 
   return (
-  <div className="bg-white min-h-screen text-black pt-24 pb-12 px-6">
-    <Toast toast={toastMessage} onClose={() => setToastMessage(null)} />
-    <div className="max-w-6xl mx-auto">
-      <h1 className="text-4xl font-serif text-black mb-8 flex items-center gap-3">
-        <ShoppingBag className="w-8 h-8" /> Your Cart
-      </h1>
-
-      {cartItems.length === 0 ? (
-        <div className="text-center py-20 bg-gray-100 rounded-2xl border border-gray-300 shadow">
-          <ShoppingBag className="w-16 h-16 mx-auto text-gray-500 mb-4" />
-          <h2 className="text-2xl font-serif mb-2 text-black">Your cart is empty</h2>
-          <p className="text-gray-600 mb-8">Looks like you haven't added any items yet.</p>
-          <Link to="/shop" className="inline-block bg-black text-white px-8 py-3 rounded-full font-bold uppercase hover:bg-gray-800 transition">
-            Continue Shopping
-          </Link>
+    <>
+      <div 
+        className="fixed inset-0 bg-black/40 z-50 transition-opacity"
+        onClick={onClose}
+      />
+      <div className="fixed top-0 right-0 h-full w-[90%] sm:w-[450px] bg-white z-[60] shadow-2xl flex flex-col transform transition-transform duration-300 font-sans">
+        <Toast toast={toastMessage} onClose={() => setToastMessage(null)} />
+        
+        <div className="flex justify-between items-center p-6 border-b border-gray-100">
+          <h2 className="text-3xl font-serif font-[600] text-black tracking-tight">Shopping Cart</h2>
+          <button onClick={onClose} className="text-black hover:text-gray-600 transition-colors">
+            <X className="w-5 h-5" strokeWidth={2} />
+          </button>
         </div>
-      ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          
-          {/* LEFT SIDE */}
-          <div className="lg:col-span-2 space-y-6">
-            {cartItems.map((item, index) => {
-              const product = item.productDetails;
-              const itemImage =
-                product?.images?.[0]?.url || "https://placehold.co/200";
 
-              const itemTotal = getItemPrice(item) * item.quantity;
-
-              return (
-                <div key={`${item._id || item.product}-${index}`} className="flex gap-6 p-6 bg-white rounded-2xl border border-gray-300 shadow">
-                  
-                  <div className="w-28 h-28 bg-gray-100 rounded-xl p-2">
-                    <img src={itemImage} alt="" className="w-full h-full object-contain" />
-                  </div>
-
-                  <div className="flex-1 flex flex-col justify-between">
-                    
-                    <div className="flex justify-between">
-                      <div>
-                        <h3 className="text-lg text-black">{product?.name}</h3>
-                        <p className="text-xs text-gray-500">{product?.category}</p>
-                      </div>
-
-                      <button onClick={() => removeItem(item.product)}>
-                        <Trash2 className="w-4 h-4 text-gray-500 hover:text-red-500" />
-                      </button>
-                    </div>
-
-                    <div className="flex justify-between items-end">
-                      <span className="text-lg font-semibold text-black">₹{itemTotal}</span>
-
-                      <div className="flex items-center gap-4 border rounded-full px-3 py-1">
-                        <button onClick={() => updateQuantity(item.product, item.quantity, -1)}>
-                          <Minus className="w-4 h-4" />
-                        </button>
-
-                        <span>{item.quantity}</span>
-
-                        <button onClick={() => updateQuantity(item.product, item.quantity, 1)}>
-                          <Plus className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* RIGHT SIDE */}
-          <div>
-            <div className="bg-gray-100 p-8 rounded-2xl border border-gray-300 sticky top-24 shadow">
-              <h3 className="text-xl mb-6">Order Summary</h3>
-
-              <div className="space-y-4 mb-6">
-                <div className="flex justify-between">
-                  <span>Subtotal</span>
-                  <span>₹{subtotal}</span>
-                </div>
-              </div>
-
-              <div className="border-t pt-4 mb-6 flex justify-between">
-                <span>Total</span>
-                <span className="text-xl font-bold">₹{subtotal}</span>
-              </div>
-
-              <button
-                onClick={handleCheckout}
-                className="w-full py-3 bg-black text-white rounded-xl font-bold hover:bg-gray-800"
-              >
-                Checkout
+        <div className="flex-1 overflow-y-auto px-6 py-4">
+          {loading ? (
+             <div className="h-full flex items-center justify-center animate-pulse text-[#C8A253] font-serif">Curating your cart...</div>
+          ) : cartItems.length === 0 ? (
+            <div className="flex flex-col items-center justify-center h-full text-center space-y-4">
+              <ShoppingBag className="w-16 h-16 text-gray-300" strokeWidth={1} />
+              <p className="font-serif text-lg text-gray-500">Your cart is empty.</p>
+              <button onClick={onClose} className="mt-4 uppercase text-xs font-bold tracking-widest border-b border-black pb-1 hover:text-gray-600">
+                Continue Shopping
               </button>
             </div>
-          </div>
+          ) : (
+            <div className="space-y-6">
+              {cartItems.map((item, index) => {
+                const product = item.productDetails;
+                const itemImage = product?.images?.[0]?.url || "https://placehold.co/200";
+                const itemColor = product?.variants?.[0]?.attributes?.find(attr => attr.name.toLowerCase() === "color")?.value || "Standard";
+                const itemTotal = getItemPrice(item);
 
+                return (
+                  <div key={`${item.product}-${index}`} className="flex gap-6 items-center relative py-4 border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors px-2">
+                    <button onClick={() => removeItem(item.product)} className="absolute top-2 right-2 text-gray-300 hover:text-red-500 transition-colors z-10 w-6 h-6 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-200">
+                       <X className="w-3 h-3" />
+                    </button>
+
+                    <div className="w-[100px] h-[100px] bg-[#fdfdfd] flex-shrink-0 flex items-center justify-center p-2 rounded-sm border border-gray-100 shadow-sm">
+                      <img src={itemImage} alt={product?.name} className="w-full h-full object-contain mix-blend-multiply" />
+                    </div>
+
+                    <div className="flex-1 flex flex-col justify-center">
+                      <h4 className="text-[15px] font-serif font-bold text-[#1a1a1a] leading-snug mb-1 pr-6">{product?.name || "Product Name"}</h4>
+                      <p className="text-[12px] text-gray-500 mb-3 font-medium tracking-wide">Color : {itemColor}</p>
+                      <span className="text-[15px] font-[600] text-[#111] mb-3">${getItemPrice(item).toFixed(2)}</span>
+                      
+                      <div className="flex items-center w-max bg-[#f5f5f5] text-[#222] font-semibold text-[13px] px-1 py-1 rounded-[2px] shadow-inner mt-auto">
+                        <button onClick={() => updateQuantity(item.product, item.quantity, -1)} className="px-2 hover:text-black">
+                          <Minus className="w-3 h-3 hover:scale-110 transition-transform" />
+                        </button>
+                        <span className="w-6 text-center">{String(item.quantity).padStart(2, "0")}</span>
+                        <button onClick={() => updateQuantity(item.product, item.quantity, 1)} className="px-2 hover:text-black">
+                          <Plus className="w-3 h-3 hover:scale-110 transition-transform" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
-      )}
-    </div>
-  </div>
-);
+
+        {!loading && cartItems.length > 0 && (
+          <div className="border-t border-gray-100 px-6 py-6 bg-white relative z-10 shadow-[0_-10px_20px_rgba(0,0,0,0.03)]">
+            <div className="flex items-center gap-3 mb-6">
+               <input type="checkbox" className="w-[18px] h-[18px] border-2 border-gray-300 rounded-[2px] text-black bg-white focus:ring-0 focus:ring-offset-0 cursor-pointer accent-black transition-all" />
+               <span className="text-[13px] text-gray-500 tracking-wide font-medium">For <span className="font-bold text-[#111]">$10.00</span> Please Wrap The Product</span>
+            </div>
+
+            <div className="flex justify-between items-center mb-6 border-t border-gray-200 pt-5">
+              <span className="text-[17px] font-serif font-bold text-[#333] tracking-wide">Subtotal</span>
+              <span className="text-[18px] font-bold text-black tracking-tight">${subtotal.toFixed(2)}</span>
+            </div>
+            
+            <button onClick={handleCheckout} className="w-full bg-[#050505] text-white text-[12px] font-bold tracking-[0.2em] uppercase py-4 rounded-[4px] hover:bg-[#222] hover:shadow-lg transition-all active:scale-[0.99] mb-4">
+              Checkout
+            </button>
+            <div className="text-center">
+               <button onClick={onClose} className="text-[12px] font-bold text-gray-800 uppercase tracking-[0.1em] border-b-[1.5px] border-black pb-[2px] hover:text-gray-500 hover:border-gray-500 transition-colors">
+                 View Cart
+               </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </>
+  );
 }
