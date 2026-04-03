@@ -10,7 +10,7 @@ const MarshallDesign = () => {
   useEffect(() => {
     const fetchBestProduct = async () => {
       try {
-        const response = await axiosInstance.get('/api/products');
+        const response = await axiosInstance.get('/products');
         if (response.data && response.data.length > 0) {
           // Taking a visually appealing product like Speaker or the last one added
           const products = response.data;
@@ -30,10 +30,10 @@ const MarshallDesign = () => {
   if (loading) return null;
 
   // Fallbacks if data exists
-  const imageUrl = product?.images?.[0]?.url || product?.variants?.[0]?.images?.[0]?.url || "https://images.unsplash.com/photo-1545454675-3531b543be5d?q=80&w=2000";
+  const imageUrl = product?.images?.[0]?.url || product?.variants?.[0]?.images?.[0]?.url || "https://images.ctfassets.net/javen7msabdh/4GrViKwO0dssRyr4Rhmrg1/96b8fdd4fa7c300be8f4750d9368f315/amps_carousel.jpeg?w=1440&fm=jpg&q=85";
   const name = product?.name || "MARSHALL ACTIVE 3";
   const description = product?.description || "Experience the iconic sound in a compact build. Premium materials for a timeless look and superior audio performance.";
-  const price = product?.basePrice ? `$${product.basePrice.toFixed(2)}` : "$100.00";
+  const price = product?.basePrice ? `₹${product.basePrice.toFixed(2)}` : "₹100.00";
 
   return (
     <div className="w-full flex flex-col items-center justify-center bg-[#bdbebe]">

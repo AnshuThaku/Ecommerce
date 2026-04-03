@@ -7,6 +7,7 @@ import Footer from '../Home/Footer';
 import Header1 from '../Home/Header1'; 
 import Toast from '../../components/Toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Filter, X } from 'lucide-react';
 
 export default function ShopHome() {
   const [products, setProducts] = useState([]);
@@ -16,7 +17,8 @@ export default function ShopHome() {
   const showToast = (type, message) => setToastMessage({ type, message });
   const location = useLocation();
   const navigate = useNavigate();
-  
+  const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
+
   // ── UI STATES ──
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [activeMegaMenu, setActiveMegaMenu] = useState(null); 
@@ -24,7 +26,7 @@ export default function ShopHome() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
-  const [priceRange, setPriceRange] = useState(100000);
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 1000000 });
   const [maxPriceLimit, setMaxPriceLimit] = useState(100000);
   const [sortOrder, setSortOrder] = useState('newest');
   const [selectedColors, setSelectedColors] = useState([]);
@@ -32,23 +34,27 @@ export default function ShopHome() {
   const [selectedDiscount, setSelectedDiscount] = useState(null);
 
   useEffect(() => {
-    const fetchAll = async () => {
+    const fetchAllProducts = async () => {
       try {
         setLoading(true);
-        const { data } = await axiosInstance.get('/products');
+        const { data } = await axiosInstance.get(`/products`);
         if (data.success) {
           setProducts(data.products);
+
           const validPrices = data.products.map(p => p.price).filter(p => typeof p === 'number');
           const maxP = validPrices.length > 0 ? Math.max(...validPrices) : 100000;
           setMaxPriceLimit(maxP);
-          setPriceRange(maxP);
+          setPriceRange({ min: 0, max: maxP });
         }
-      } catch (e) { console.error(e); }
-      finally { setLoading(false); }
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setLoading(false);
+      }
     };
-    fetchAll();
-  }, []);
 
+    fetchAllProducts();
+  }, []);
   const allCategories = useMemo(() => {
     return [...new Set(products.map(p => p.category))].filter(Boolean);
   }, [products]);
@@ -58,13 +64,13 @@ export default function ShopHome() {
   }, [products]);
 
   useEffect(() => {
-    if (location.state) {
+    if (location.state && !location.state.processed) {
       if (location.state.category && location.state.search) {
         setSelectedCategories([location.state.category]);
         setSearchTerm(location.state.search);
         setSelectedBrands([]); 
         setSelectedColors([]);
-        setPriceRange(maxPriceLimit);
+        setPriceRange({ min: 0, max: maxPriceLimit });
         setSelectedRating(null);
         setSelectedDiscount(null);
       } else if (location.state.category) {
@@ -72,7 +78,7 @@ export default function ShopHome() {
         setSearchTerm(''); 
         setSelectedBrands([]);
         setSelectedColors([]);
-        setPriceRange(maxPriceLimit);
+        setPriceRange({ min: 0, max: maxPriceLimit });
         setSelectedRating(null);
         setSelectedDiscount(null);
       } else if (location.state.search) {
@@ -80,12 +86,12 @@ export default function ShopHome() {
         setSelectedCategories([]); 
         setSelectedBrands([]);
         setSelectedColors([]);
-        setPriceRange(maxPriceLimit);
+        setPriceRange({ min: 0, max: maxPriceLimit });
         setSelectedRating(null);
         setSelectedDiscount(null);
       }
       
-      navigate(location.pathname, { replace: true, state: null });
+      navigate(location.pathname, { replace: true, state: { ...location.state, processed: true } });
     }
   }, [location.state, navigate, maxPriceLimit]);
 
@@ -105,7 +111,7 @@ export default function ShopHome() {
     setSelectedCategories([]);
     setSelectedBrands([]);
     setSearchTerm('');
-    setPriceRange(maxPriceLimit);
+    setPriceRange({ min: 0, max: maxPriceLimit });
     setSelectedColors([]);
     setSelectedRating(null);
     setSelectedDiscount(null);
@@ -114,7 +120,12 @@ export default function ShopHome() {
   // ── FILTERING ──
   const filteredProducts = useMemo(() => {
     return products.filter(p => {
-      const matchesCategory = selectedCategories.length === 0 || selectedCategories.some(c => p.category && p.category.toLowerCase() === c.toLowerCase());
+        const matchesCategory = selectedCategories.length === 0 || selectedCategories.some(c => {
+          if (!p.category) return false;
+          const pc = p.category.toLowerCase().replace(/s$/, '');
+          const sc = c.toLowerCase().replace(/s$/, '');
+          return pc === sc || pc.includes(sc) || sc.includes(pc);
+        });
       const matchesBrand = selectedBrands.length === 0 || selectedBrands.some(b => p.brand && p.brand.toLowerCase() === b.toLowerCase());
       const query = searchTerm ? searchTerm.toLowerCase().trim() : '';
       const matchesSearch = !query || 
@@ -134,7 +145,7 @@ export default function ShopHome() {
       const discountPercentage = actualPrice > 0 ? Math.round(((actualPrice - currentPrice) / actualPrice) * 100) : 0;
       const matchesDiscount = !selectedDiscount || (discountPercentage >= selectedDiscount);
 
-      return matchesCategory && matchesBrand && matchesSearch && currentPrice <= priceRange && matchesColor && matchesRating && matchesDiscount;
+      return matchesCategory && matchesBrand && matchesSearch && currentPrice >= priceRange.min && currentPrice <= priceRange.max && matchesColor && matchesRating && matchesDiscount;
     }).sort((a, b) => {
       const priceA = a.flashDeal?.isActive && a.flashDeal?.dealPrice ? a.flashDeal.dealPrice : ((a.price || 0) - (a.discountPrice || 0));
       const priceB = b.flashDeal?.isActive && b.flashDeal?.dealPrice ? b.flashDeal.dealPrice : ((b.price || 0) - (b.discountPrice || 0));
@@ -143,12 +154,12 @@ export default function ShopHome() {
       return 0;
     });
   }, [products, selectedCategories, selectedBrands, searchTerm, priceRange, sortOrder, selectedColors, selectedRating, selectedDiscount]);
-  const displayProducts = products; // TEMPORARILY ALWAYS SHOW ALL PRODUCTS AS REQUESTED
+  const displayProducts = filteredProducts; // Use the correctly filtered products
   // ⚡ FIX: Ye line missing thi aapke code mein! Iske bina page crash ho raha tha.
   const isSidebarVisible = selectedCategories.length > 0 || selectedBrands.length > 0 || searchTerm.trim() !== '';
 
-  const activeBreadcrumbText = searchTerm ? 'SEARCH' : (selectedCategories.length > 0 ? selectedCategories.join(', ').toUpperCase() : (selectedBrands.length > 0 ? selectedBrands.join(', ').toUpperCase() : 'SPEAKERS'));
-  const activeSelectionText = searchTerm ? `RESULTS FOR "${searchTerm.toUpperCase()}"` : (selectedCategories.length > 0 ? selectedCategories.join(', ').toUpperCase() : (selectedBrands.length > 0 ? selectedBrands.join(', ').toUpperCase() : 'SPEAKERS'));
+  const activeBreadcrumbText = searchTerm ? 'SEARCH' : (selectedCategories.length > 0 ? selectedCategories.join(', ').toUpperCase() : (selectedBrands.length > 0 ? selectedBrands.join(', ').toUpperCase() : 'ALL PRODUCTS'));
+  const activeSelectionText = searchTerm ? `RESULTS FOR "${searchTerm.toUpperCase()}"` : (selectedCategories.length > 0 ? selectedCategories.join(', ').toUpperCase() : (selectedBrands.length > 0 ? selectedBrands.join(', ').toUpperCase() : 'ALL PRODUCTS'));
 
   return (
     <div className="min-h-screen bg-white font-sans text-center">
@@ -158,8 +169,8 @@ export default function ShopHome() {
       <main className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-10 flex flex-col items-center">
 
         {/* Title Section matching the screenshot */}
-        <div className="w-full text-center mb-6 mt-0">
-          <h1 className="text-[32px] md:text-[42px] font-serif font-bold uppercase tracking-widest text-[#111] mb-2">
+        <div className="w-full text-center mb-6 mt-0 ">
+          <h1 className="text-[32px] md:text-[42px] font-serif font-bold uppercase tracking-widest text-[#111] mb-2 ml-10">
                {activeSelectionText}
           </h1>
           <div className="text-[10px] font-semibold tracking-widest uppercase text-[#555] flex items-center justify-center gap-2">
@@ -172,7 +183,63 @@ export default function ShopHome() {
         {/* Layout Box: Sidebar + Grid */}
         <div className="w-full flex flex-col md:flex-row items-start gap-12 lg:gap-20">
           
-          <div className="w-full md:w-[220px] shrink-0 text-left">
+          {/* Mobile Filter Toggle Button */}
+          <div className="md:hidden w-full flex justify-between items-center mb-2 border-b border-gray-200 pb-4">
+            <button 
+              onClick={() => setIsMobileFiltersOpen(true)}
+              className="flex items-center gap-2 text-[12px] font-[800] tracking-[0.1em] uppercase text-[#111] bg-gray-50 px-5 py-2.5 rounded-sm shadow-sm active:scale-95 transition-transform"
+            >
+              <Filter className="w-4 h-4 text-black" /> Filters
+            </button>
+            <span className="text-[12px] tracking-widest text-[#555] font-bold uppercase">{displayProducts.length} Products</span>
+          </div>
+
+          {/* Sidebar Drawer on Mobile / Standard Sidebar on Desktop */}
+          <div 
+            className={`
+              md:hidden fixed inset-0 z-[999999] bg-black/50 transition-opacity duration-300
+              ${isMobileFiltersOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
+            `} 
+            onClick={() => setIsMobileFiltersOpen(false)}
+          >
+            <div 
+              className={`
+                absolute top-0 left-0 h-full w-[280px] bg-white shadow-2xl p-6 overflow-y-auto shrink-0 text-left
+                transition-transform duration-300 
+                ${isMobileFiltersOpen ? "translate-x-0" : "-translate-x-full"}
+              `}
+              onClick={e => e.stopPropagation()}
+            >
+              {/* Drawer Header (Mobile only) */}
+              <div className="flex justify-between items-center mb-6 border-b border-gray-100 pb-4 mt-2">
+                <h3 className="text-[20px] font-serif font-bold text-[#111]">Filters</h3>
+                <button onClick={() => setIsMobileFiltersOpen(false)} className="text-gray-400 hover:text-red-500 transition-colors p-2 bg-gray-50 rounded-full border border-gray-200">
+                  <X className="w-4 h-4" strokeWidth={2.5} />
+                </button>
+              </div>
+
+              <ShopSidebar
+                categories={allCategories}
+                selectedCategories={selectedCategories}
+                onCategoryToggle={handleCategoryToggle}
+                brands={allBrands}
+                selectedBrands={selectedBrands}
+                onBrandToggle={handleBrandToggle}
+                priceRange={priceRange}
+                setPriceRange={setPriceRange}
+                maxPriceLimit={maxPriceLimit}
+                selectedColors={selectedColors}
+                onColorToggle={(color) => setSelectedColors(prev => prev.includes(color) ? prev.filter(c => c !== color) : [...prev, color])}
+                selectedRating={selectedRating}
+                onRatingChange={setSelectedRating}
+                selectedDiscount={selectedDiscount}
+                onDiscountChange={setSelectedDiscount}
+                onClearFilters={clearFilters}
+              />
+            </div>
+          </div>
+
+          <div className="hidden md:block w-full md:w-[220px] shrink-0 text-left">
             <ShopSidebar
               categories={allCategories}
               selectedCategories={selectedCategories}

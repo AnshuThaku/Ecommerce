@@ -48,44 +48,43 @@ export default function CategoryShowcase() {
   };
 
   // ── FILTER LOGIC ──
-  // Fetch distinct categories dynamically from the frontend products list (no limit)
-  const availableCategories = ['ALL', ...new Set(products.map(p => p.category).filter(Boolean))];
-  // Match dummy visual if empty
-  const displayCategories = products.length > 0 ? availableCategories : ['ALL', 'MEMBRANE KEYBOARD', 'WIRELESS BLUETOOTH HEADPHONES', 'SMARTWATCHES', 'SPEAKERS', 'GAMING MICE'];
+  // Fetch distinct BRANDS dynamically from the frontend products list
+  const availableBrands = ['ALL', ...new Set(products.map(p => p.brand).filter(Boolean))];
+  
+  // Default selected visually
+  const displayBrands = products.length > 0 ? availableBrands : ['ALL', 'APPLE', 'SONY', 'MARSHALL', 'SAMSUNG', 'LOGITECH'];
+  const currentCategory = activeCategory === 'ALL' && products.length > 0 ? availableBrands[0] : activeCategory;
 
-  // Default selection visually
-  const currentCategory = activeCategory === 'ALL' && products.length > 0 ? availableCategories[0] : activeCategory;
-
-  // Filter products based on selected category, and take only the first 6 for a clean grid
+  // Filter products based on selected BRAND, and take only the first 6 for a clean grid
   const displayProducts = products
-    .filter(p => activeCategory === 'ALL' || p.category === activeCategory)
+    .filter(p => activeCategory === 'ALL' || p.brand === activeCategory)
     .slice(0, 6);
 
   return (
-    <section className="w-full bg-[#fbfbfb] py-10 px-6 md:px-12 font-sans" style={{ fontFamily: "'Inter', sans-serif" }}>
-      <div className="w-full max-w-[89%] mx-auto flex flex-col items-center">
+    <section className="w-full bg-[#fbfbfb] py-6 md:py-10 px-4 md:px-12 font-sans" style={{ fontFamily: "'Inter', sans-serif" }}>
+      <div className="w-full xl:max-w-[89%] mx-auto flex flex-col items-center">
         
         {/* ── SECTION HEADER ── */}
-        <h2 className="text-3xl md:text-4xl font-serif font-medium text-[#111] mb-4">Categories</h2>
-        <p className="text-gray-500 text-xs md:text-sm text-center max-w-xl mb-10 leading-relaxed">
+        <h2 className="text-2xl md:text-4xl font-serif font-medium text-[#111] mb-2 md:mb-4">Categories</h2>
+        <p className="text-gray-500 text-[10px] md:text-sm text-center max-w-xl mb-6 md:mb-10 leading-relaxed px-2">
           Discover a wide range of premium products tailored precisely for your 
           personal setup, professional workspace, or entertainment.
         </p>
 
         {/* ── CATEGORY FILTER TABS ── */}
-        <div className="flex overflow-x-auto hide-scrollbar w-full max-w-6xl justify-start gap-4 mb-14 relative pb-4 px-2 md:px-0">
+        <div className="flex overflow-x-auto hide-scrollbar w-full max-w-6xl justify-start gap-3 md:gap-4 mb-8 md:mb-14 relative pb-2 md:pb-4 px-2 md:px-0">
           <div className="flex gap-4 min-w-max">
-            {displayCategories.map((categoryLabel) => (
+            {displayBrands.map((brandLabel) => (
               <button
-                key={categoryLabel}
-                onClick={() => setActiveCategory(categoryLabel)}
+                key={brandLabel}
+                onClick={() => setActiveCategory(brandLabel)}
                 className={`px-6 py-2 rounded-md text-[10px] md:text-[11px] font-bold tracking-[0.15em] transition-all duration-300 uppercase shadow-sm cursor-pointer ${
-                  activeCategory === categoryLabel || currentCategory === categoryLabel
+                  activeCategory === brandLabel || currentCategory === brandLabel
                     ? 'bg-black text-white shadow-md'
                     : 'bg-white text-gray-500 hover:text-black hover:bg-gray-50 border border-gray-100'
                 }`}
               >
-                {categoryLabel}
+                {brandLabel}
               </button>
             ))}
           </div>

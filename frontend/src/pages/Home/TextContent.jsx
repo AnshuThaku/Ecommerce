@@ -2,7 +2,7 @@ import React from 'react';
 
 const TextContent = () => {
   return (
-    <div className="flex flex-col items-center lg:items-start text-center lg:text-left z-20 w-full max-w-[400px]">
+    <div className="flex flex-col items-center xl:items-start text-center xl:text-left mx-auto xl:mx-0 z-20 w-full max-w-[500px] xl:max-w-[400px]">
       <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#222] tracking-tight mb-5 md:mb-6">
         Deals Of The Month
       </h2>

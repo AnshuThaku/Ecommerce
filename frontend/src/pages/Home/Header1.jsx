@@ -196,6 +196,7 @@ export default function Header() {
     fetchCartData();
 
     const handleCartUpdate = (e) => {
+      setIsCartOpen(true); // Open modal on every cart update automatically
       if (e.detail?.increase) {
         setCartCount(prev => prev + e.detail.increase);
       } else {

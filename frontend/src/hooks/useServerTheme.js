@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 import { festivalThemes } from '../ThemeConfig';
+import axiosInstance from '../utils/axiosInstance';
 
 export const useServerTheme = () => {
   useEffect(() => {
     const fetchCurrentTheme = async () => {
       try {
-        const response = await fetch();
-        if (!response.ok) throw new Error('Network error');
+        const response = await axiosInstance.get('/theme/active');
+        const data = response.data;
         
-        const data = await response.json();
         let activeThemeKey = 'default';
-        
+
         if (data && data.theme && festivalThemes[data.theme]) {
           activeThemeKey = data.theme;
         }

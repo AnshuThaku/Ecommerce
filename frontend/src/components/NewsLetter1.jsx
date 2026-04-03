@@ -86,7 +86,7 @@ export default function Newsletter() {
 
                 <button
                   type="submit"
-                  className="w-full bg-[#C8A253] hover:bg-white text-black font-black py-4 text-[11px] uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-3 group rounded-sm shadow-[0_0_20px_rgba(200,162,83,0.15)] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+                  className="w-full bg-[#C8A253] hover:bg-[#b08b43] text-black hover:text-white font-black py-4 text-[11px] uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-3 group rounded-sm shadow-[0_0_20px_rgba(200,162,83,0.15)] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]"
                 >
                   Subscribe Now
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

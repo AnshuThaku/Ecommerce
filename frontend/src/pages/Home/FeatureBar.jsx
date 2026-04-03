@@ -30,7 +30,7 @@ const FeatureBar = () => {
           <Truck size={45} strokeWidth={1.2} className="text-black" />
           <div className="flex flex-col">
             <h3 className="text-[19px] font-bold text-[#242424] leading-tight">Free Shipping</h3>
-            <p className="text-[15px] text-[#898989] font-medium">Order over 150 $</p>
+            <p className="text-[15px] text-[#898989] font-medium">All over India</p>
           </div>
         </div>
 

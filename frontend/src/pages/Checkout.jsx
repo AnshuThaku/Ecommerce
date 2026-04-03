@@ -1,117 +1,281 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ChevronLeft, Lock } from "lucide-react";
+import React, { useState, useEffect } from 'react';
+import { Lock, ChevronDown, X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../utils/axiosInstance';
+import Toast from '../components/Toast';
 
-export default function Checkout() {
+const CheckoutPage = () => {
+  const [cartItems, setCartItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [toastMessage, setToastMessage] = useState(null);
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    firstName: "", lastName: "", email: "", address: "", city: "", zip: "", country: "", cardNumber: "", expiry: "", cvv: ""
-  });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const showToast = (type, message) => setToastMessage({ type, message });
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
+        const { data } = await axiosInstance.get("/cart");
+        if (data && data.items) {
+          const detailedItems = await Promise.all(
+            data.items.map(async (item) => {
+              try {
+                const res = await axiosInstance.get(`/products/${item.product}`);
+                return { ...item, productDetails: res.data.product };
+              } catch (err) {
+                return { ...item, productDetails: null };
+              }
+            })
+          );
+          setCartItems(detailedItems.filter(item => item.productDetails));
+        }
+      } catch (error) {
+        showToast("error", "Failed to load cart items");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCart();
+  }, []);
+
+  const getItemPrice = (item) => {
+    const product = item.productDetails;
+    if (product?.discountPrice && product.discountPrice > 0) return product.price - product.discountPrice;
+    return product?.price || 0;
   };
 
-  const handlePlaceOrder = (e) => {
-    e.preventDefault();
-    // Simulate placing order
-    setTimeout(() => {
-      navigate("/order-success");
-    }, 1000);
+  const updateQuantity = async (productId, currentQuantity, change) => {
+    try {
+      const newQuantity = currentQuantity + change;
+      if (newQuantity < 1) return; // Cart component handles trash/delete, here just prevent 0
+      
+      await axiosInstance.put("/cart/update", { productId, quantity: newQuantity });
+      setCartItems(cartItems.map(item => 
+        item.product === productId ? { ...item, quantity: newQuantity } : item
+      ));
+      // Notify other components (like Cart modal)
+      window.dispatchEvent(new Event('cartUpdated')); 
+    } catch (error) {
+      showToast("error", "Failed to update quantity");
+    }
   };
+
+  const handleCheckoutSubmit = async () => {
+    if (cartItems.length === 0) {
+      return showToast("error", "Your cart is empty!");
+    }
+
+    try {
+      const formattedItems = cartItems.map(item => ({
+        product: item.product,
+        name: item.productDetails.name,
+        image: item.productDetails.images?.[0]?.url || "",
+        price: getItemPrice(item),
+        quantity: item.quantity
+      }));
+
+      const response = await axiosInstance.post("/orders/instant-checkout", {
+        cartItems: formattedItems,
+        totalAmount: subtotal
+      });
+
+      if (response.data.success) {
+         showToast("success", "Order Placed Successfully!");
+         // Optionally clear cart frontend-side or backend-side here. Assuming backend does it or we reset.
+         setTimeout(() => navigate('/order-success'), 1500); 
+      }
+    } catch (error) {
+      console.error(error);
+      showToast("error", "Checkout failed. Please try again.");
+    }
+  };
+
+  const subtotal = cartItems.reduce((acc, curr) => acc + getItemPrice(curr) * curr.quantity, 0);
 
   return (
-    <div className="bg-[#fcfcfc] min-h-screen text-black pt-24 pb-12 px-6 lg:px-20 font-sans">
-      <div className="max-w-[1000px] mx-auto">
-        <button onClick={() => navigate(-1)} className="flex items-center text-sm font-medium text-gray-500 hover:text-black mb-8 transition-colors">
-          <ChevronLeft className="w-4 h-4 mr-1" /> Back to Cart
-        </button>
+    <div className="min-h-screen bg-white p-4 md:p-8 font-sans text-gray-800">
+      {toastMessage && <Toast type={toastMessage.type} message={toastMessage.message} onClose={() => setToastMessage(null)} />}
+      
+      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        {/* LEFT COLUMN: Forms */}
+        <div className="lg:col-span-7 space-y-10">
+          
+          {/* Contact Section */}
+          <section>
+            <div className="flex justify-between items-end mb-4">
+              <h2 className="text-3xl font-serif">Contact</h2>
+              <p className="text-sm">Have an account? <span onClick={() => navigate('/signup')} className="text-blue-600 underline cursor-pointer">Create Account</span></p>
+            </div>
+            <input 
+              type="email" 
+              placeholder="Email Address" 
+              className="w-full p-4 border border-gray-300 rounded bg-transparent focus:outline-none focus:ring-1 focus:ring-black"
+            />
+          </section>
 
-        <h1 className="text-4xl font-serif text-[#111] mb-10 font-[600] tracking-tight">Checkout</h1>
+          {/* Delivery Section */}
+          <section>
+            <h2 className="text-3xl font-serif mb-4">Delivery</h2>
+            <div className="space-y-0">
+              <div className="relative border border-gray-300 rounded-t p-0 flex justify-between items-center bg-transparent">
+                <select className="w-full p-4 bg-transparent outline-none appearance-none text-gray-700 cursor-pointer">
+                  <option value="" disabled selected className="text-gray-400">Country / Region</option>
+                  <option value="in">India</option>
+                  <option value="us">United States</option>
+                  <option value="uk">United Kingdom</option>
+                  <option value="ca">Canada</option>
+                  <option value="au">Australia</option>
+                </select>
+                <div className="absolute right-4 pointer-events-none">
+                  <ChevronDown size={20} className="text-gray-500" />
+                </div>
+              </div>
+              <div className="grid grid-cols-2">
+                <input type="text" placeholder="First Name" className="p-4 border border-t-0 border-gray-300 focus:outline-none" />
+                <input type="text" placeholder="Last Name" className="p-4 border border-t-0 border-l-0 border-gray-300 focus:outline-none" />
+              </div>
+              <input type="text" placeholder="Address" className="w-full p-4 border border-t-0 border-gray-300 focus:outline-none" />
+              <div className="grid grid-cols-2">
+                <input type="text" placeholder="City" className="p-4 border border-t-0 border-gray-300 rounded-bl focus:outline-none" />
+                <input type="text" placeholder="Postal Code" className="p-4 border border-t-0 border-l-0 border-gray-300 rounded-br focus:outline-none" />
+              </div>
+            </div>
+            <div className="flex items-center mt-4 gap-2">
+              <input type="checkbox" id="save-info" className="w-4 h-4 accent-black border-gray-400" />
+              <label htmlFor="save-info" className="text-sm text-gray-600 font-medium">Save This Info For Future</label>
+            </div>
+          </section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
-          <div className="lg:col-span-2 space-y-10">
-            <form onSubmit={handlePlaceOrder} id="checkout-form" className="space-y-10">
+          {/* Payment Section - Styled as per your Screenshot */}
+          <section>
+            <h2 className="text-3xl font-serif mb-4">Payment</h2>
+            <div className="border border-gray-300 rounded overflow-hidden">
+              {/* Header */}
+              <div className="relative border-b border-gray-300 flex justify-between items-center bg-white p-0">
+                <select className="w-full p-4 bg-transparent outline-none appearance-none text-gray-600 font-medium cursor-pointer relative z-10">
+                  <option value="card">Credit/Debit Card</option>
+                  <option value="upi">UPI / Netbanking</option>
+                  <option value="cod">Cash on Delivery (COD)</option>
+                  <option value="wallet">Wallet (Paytm, etc.)</option>
+                </select>
+                <div className="absolute right-4 flex gap-1 items-center z-0 pointer-events-none">
+                   <div className="flex -space-x-1">
+                      <div className="w-4 h-4 bg-red-500 rounded-full opacity-90"></div>
+                      <div className="w-4 h-4 bg-yellow-500 rounded-full opacity-90"></div>
+                   </div>
+                   <ChevronDown size={18} className="text-gray-500 ml-1" />
+                </div>
+              </div>
               
-              <section>
-                <h2 className="text-xl font-serif font-bold mb-6 border-b border-gray-100 pb-3">Shipping Information</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-[13px] font-semibold text-gray-700 mb-2">First Name</label>
-                    <input type="text" name="firstName" required className="w-full border border-gray-300 p-3 text-[14px] outline-none focus:border-black transition-colors" onChange={handleChange} />
-                  </div>
-                  <div>
-                    <label className="block text-[13px] font-semibold text-gray-700 mb-2">Last Name</label>
-                    <input type="text" name="lastName" required className="w-full border border-gray-300 p-3 text-[14px] outline-none focus:border-black transition-colors" onChange={handleChange} />
-                  </div>
-                  <div className="sm:col-span-2">
-                    <label className="block text-[13px] font-semibold text-gray-700 mb-2">Email Address</label>
-                    <input type="email" name="email" required className="w-full border border-gray-300 p-3 text-[14px] outline-none focus:border-black transition-colors" onChange={handleChange} />
-                  </div>
-                  <div className="sm:col-span-2">
-                    <label className="block text-[13px] font-semibold text-gray-700 mb-2">Address</label>
-                    <input type="text" name="address" required className="w-full border border-gray-300 p-3 text-[14px] outline-none focus:border-black transition-colors" onChange={handleChange} />
-                  </div>
-                  <div>
-                    <label className="block text-[13px] font-semibold text-gray-700 mb-2">City</label>
-                    <input type="text" name="city" required className="w-full border border-gray-300 p-3 text-[14px] outline-none focus:border-black transition-colors" onChange={handleChange} />
-                  </div>
-                  <div>
-                    <label className="block text-[13px] font-semibold text-gray-700 mb-2">ZIP Code</label>
-                    <input type="text" name="zip" required className="w-full border border-gray-300 p-3 text-[14px] outline-none focus:border-black transition-colors" onChange={handleChange} />
-                  </div>
+              {/* Card Fields Box */}
+              <div className="p-4 space-y-0 bg-white">
+                <div className="relative">
+                  <input type="text" placeholder="Card Number" className="w-full p-4 border border-gray-300 rounded-t focus:outline-none bg-transparent" />
+                  <Lock size={18} className="absolute right-4 top-5 text-gray-400" />
                 </div>
-              </section>
-
-              <section>
-                <h2 className="text-xl font-serif font-bold mb-6 border-b border-gray-100 pb-3 flex items-center"><Lock className="w-5 h-5 mr-2 text-gray-400" /> Payment Details</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div className="sm:col-span-2">
-                    <label className="block text-[13px] font-semibold text-gray-700 mb-2">Card Number</label>
-                    <input type="text" name="cardNumber" placeholder="0000 0000 0000 0000" className="w-full border border-gray-300 p-3 text-[14px] outline-none focus:border-black transition-colors" onChange={handleChange} />
-                  </div>
-                  <div>
-                    <label className="block text-[13px] font-semibold text-gray-700 mb-2">Expiry Date</label>
-                    <input type="text" name="expiry" placeholder="MM/YY" className="w-full border border-gray-300 p-3 text-[14px] outline-none focus:border-black transition-colors" onChange={handleChange} />
-                  </div>
-                  <div>
-                    <label className="block text-[13px] font-semibold text-gray-700 mb-2">CVV</label>
-                    <input type="text" name="cvv" placeholder="123" className="w-full border border-gray-300 p-3 text-[14px] outline-none focus:border-black transition-colors" onChange={handleChange} />
-                  </div>
+                <div className="grid grid-cols-2">
+                  <input type="text" placeholder="Expiration Date" className="p-4 border border-t-0 border-gray-300 focus:outline-none bg-transparent" />
+                  <input type="text" placeholder="Security Code" className="p-4 border border-t-0 border-l-0 border-gray-300 focus:outline-none bg-transparent" />
                 </div>
-              </section>
+                <input type="text" placeholder="Card Holder Name" className="w-full p-4 border border-t-0 border-gray-300 rounded-b focus:outline-none bg-transparent" />
+              </div>
+            </div>
+            <div className="flex items-center mt-4 gap-2">
+              <input type="checkbox" id="save-payment" className="w-4 h-4 accent-black border-gray-400" />
+              <label htmlFor="save-payment" className="text-sm text-gray-600 font-medium">Save This Info For Future</label>
+            </div>
+          </section>
 
-            </form>
+          <button onClick={handleCheckoutSubmit} className="w-full bg-black text-white py-4 rounded font-medium tracking-widest hover:bg-gray-900 transition-colors uppercase text-sm">
+            Pay Now
+          </button>
+        </div>
+
+        {/* RIGHT COLUMN: Shopping Cart */}
+        <div className="lg:col-span-5 border-l border-gray-200 pl-0 lg:pl-12">
+          <div className="flex justify-between items-center mb-10">
+            <h2 className="text-3xl font-serif">Shopping Cart</h2>
+            <X onClick={() => navigate('/shop')} size={24} className="cursor-pointer text-gray-400 hover:text-black transition-colors" />
           </div>
 
-          <div className="flex flex-col">
-             <div className="bg-white p-8 border border-gray-200 sticky top-24 shadow-sm">
-                <h3 className="text-xl font-serif font-bold mb-6 border-b border-gray-100 pb-4">Order Summary</h3>
+          {loading ? (
+             <div className="h-full flex items-center justify-center animate-pulse text-[#C8A253] font-serif">Loading your cart...</div>
+          ) : cartItems.length === 0 ? (
+            <div className="flex flex-col items-center justify-center text-center space-y-4 py-8">
+              <p className="font-serif text-lg text-gray-500">Your cart is empty.</p>
+              <button onClick={() => navigate('/shop')} className="uppercase text-xs font-bold tracking-widest border-b border-black pb-1 hover:text-gray-600">
+                Continue Shopping
+              </button>
+            </div>
+          ) : (
+            <div className="space-y-6 max-h-[50vh] overflow-y-auto pr-2">
+              {cartItems.map((item, index) => {
+                const product = item.productDetails;
+                const itemImage = product?.images?.[0]?.url || "https://placehold.co/200";
+                const itemColor = product?.variants?.[0]?.attributes?.find(attr => attr.name.toLowerCase() === "color")?.value || "Default";
+                
+                return (
+                  <div key={`${item.product}-${index}`} className="flex gap-6 items-center">
+                    <div className="w-24 h-24 sm:w-32 sm:h-32 bg-[#fdfdfd] border border-gray-100 shadow-sm rounded flex items-center justify-center overflow-hidden flex-shrink-0 p-2">
+                      <img 
+                        src={itemImage} 
+                        alt={product.name} 
+                        className="w-full h-full object-contain mix-blend-multiply" 
+                      />
+                    </div>
+                    <div className="flex-1 space-y-1">
+                      <h3 className="font-medium text-[15px] sm:text-lg leading-tight">{product.name}</h3>
+                      <p className="text-gray-400 text-xs sm:text-sm">Color: {itemColor}</p>
+                      <p className="font-bold mt-2 text-[15px] sm:text-lg">₹{getItemPrice(item).toLocaleString('en-IN')}</p>
+                      
+                      <div className="flex items-center mt-3 bg-gray-100 w-max justify-between rounded-full px-1 py-1 gap-2 shadow-inner">
+                        <button onClick={() => updateQuantity(item.product, item.quantity, -1)} className="w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center hover:bg-white rounded-full transition-all text-sm">-</button>
+                        <span className="font-medium text-xs sm:text-sm w-4 sm:w-6 text-center">{String(item.quantity).padStart(2, '0')}</span>
+                        <button onClick={() => updateQuantity(item.product, item.quantity, 1)} className="w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center hover:bg-white rounded-full transition-all text-sm">+</button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
 
-                <div className="space-y-4 mb-6 text-[14px] text-gray-600 font-medium">
-                  <div className="flex justify-between">
-                    <span>Subtotal</span>
-                    <span className="text-black">$100.00</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Shipping</span>
-                    <span className="text-green-600">Free</span>
-                  </div>
+          {cartItems.length > 0 && (
+            <>
+              <hr className="border-gray-200 my-8" />
+
+              {/* Extras & Totals */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <input type="checkbox" id="wrap" className="w-[18px] h-[18px] border-2 border-gray-300 rounded-[2px] text-black bg-white focus:ring-0 focus:ring-offset-0 cursor-pointer accent-black transition-all" />
+                  <label htmlFor="wrap" className="text-gray-500 text-[13px] font-medium cursor-pointer">
+                    For <span className="font-bold text-black">₹100</span> Please Wrap The Product
+                  </label>
                 </div>
 
-                <div className="border-t border-gray-100 pt-5 mb-8 flex justify-between items-center">
-                  <span className="text-[15px] font-bold text-gray-800">Total</span>
-                  <span className="text-2xl font-bold text-black tracking-tight">$100.00</span>
+                <hr className="border-gray-200 my-6" />
+
+                <div className="flex justify-between items-center">
+                  <span className="text-xl font-serif font-bold text-[#333]">Subtotal</span>
+                  <span className="text-xl font-bold text-black tracking-tight">₹{subtotal.toLocaleString('en-IN')}</span>
                 </div>
 
-                <button type="submit" form="checkout-form" className="w-full bg-[#0a0a0a] text-white text-[12px] font-bold tracking-[0.2em] uppercase py-4 rounded-[3px] hover:bg-[#222] transition-colors shadow-xl shadow-black/10">
-                  Place Order
-                </button>
-             </div>
-          </div>
+                <div className="space-y-4 pt-4">
+                  <button onClick={handleCheckoutSubmit} className="w-full bg-black text-white py-5 rounded-md text-sm sm:text-lg font-bold shadow-lg active:scale-95 transition-transform tracking-widest uppercase">
+                    Checkout Now
+                  </button>
+                  <button onClick={() => window.history.back()} className="w-full text-center underline text-sm font-medium text-black hover:text-gray-500 transition-colors uppercase tracking-widest">
+                    Back to Cart
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
   );
-}
+};
 
+export default CheckoutPage;

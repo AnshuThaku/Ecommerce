@@ -139,7 +139,8 @@
 // }
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Heart, Eye, Zap, Clock } from 'lucide-react';
+import { Heart, Eye, Zap, Clock, ShoppingBag } from 'lucide-react';
+import axiosInstance from '../../utils/axiosInstance';
 
 const DEFAULT_IMG = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=600";
 
@@ -206,6 +207,16 @@ export default function ProductCard({ product, onQuickView }) {
   const displayPrice = isDealActive ? product.flashDeal.dealPrice : product.price - (product.discountPrice || 0);
   const discountPercentage = Math.round(((product.price - displayPrice) / product.price) * 100);
 
+  const handleAddToCart = async (e) => {
+    e.stopPropagation();
+    try {
+      await axiosInstance.post('/cart/add', { productId: product._id, quantity: 1 });
+      window.dispatchEvent(new CustomEvent('cartUpdated', { detail: { increase: 1 } }));
+    } catch (error) {
+      console.error('Add to cart failed', error);
+    }
+  };
+
   return (
     <div
       data-aos="fade-up"
@@ -250,6 +261,9 @@ export default function ProductCard({ product, onQuickView }) {
         <div className="absolute right-4 top-1/2 -translate-y-1/2 flex flex-col space-y-3 z-30 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0">
           <button className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform" style={{ color: 'var(--theme-primary)' }}>
             <Heart className="w-4 h-4" />
+          </button>
+          <button onClick={handleAddToCart} className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform" style={{ color: 'var(--theme-primary)' }}>
+            <ShoppingBag className="w-4 h-4" />
           </button>
           <button onClick={(e) => { e.stopPropagation(); onQuickView(product); }} className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform" style={{ color: 'var(--theme-primary)' }}>
             <Eye className="w-4 h-4" />

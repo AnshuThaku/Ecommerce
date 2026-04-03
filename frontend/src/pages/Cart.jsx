@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { Minus, Plus, Trash2, X, ShoppingBag } from "lucide-react";
 import axiosInstance from "../utils/axiosInstance";
 import { useNavigate } from "react-router-dom";
@@ -44,21 +45,41 @@ export default function Cart({ isOpen, onClose }) {
     }
   }, [isOpen]);
 
-  const updateQuantity = async (productId, currentQuantity, change) => {
-    if (change === 1) {
-      try {
-        await axiosInstance.post("/cart/add", { productId, quantity: 1 });
+  // âš¡ NAYA LOGIC: React to 'cartUpdated' event to refresh the cart seamlessly when already open
+  useEffect(() => {
+    const handleCartUpdate = () => {
+      // If modal is open when an item is added, fetch silently without full loading spinner
+      if (isOpen) {
         fetchCart();
-      } catch (error) {
-        showToast("error", "Failed to update quantity");
       }
-    } else if (change === -1 && currentQuantity > 1) {
-      showToast("info", "Quantity decrease endpoint needed in backend.");
+    };
+    window.addEventListener('cartUpdated', handleCartUpdate);
+    return () => window.removeEventListener('cartUpdated', handleCartUpdate);
+  }, [isOpen]);
+
+const updateQuantity = async (productId, currentQuantity, change) => {
+    try {
+      if (change === 1) {
+        // Increase quantity
+        await axiosInstance.put("/cart/update", { productId, quantity: currentQuantity + 1 });
+      } else if (change === -1 && currentQuantity > 1) {
+        // Decrease quantity but not below 1
+        await axiosInstance.put("/cart/update", { productId, quantity: currentQuantity - 1 });
+      }
+      fetchCart();
+    } catch (error) {
+      showToast("error", "Failed to update quantity");
     }
   };
 
   const removeItem = async (productId) => {
-    showToast("info", "Remove item endpoint needs to be mapped in backend");
+    try {
+      // Assuming passing quantity 0 deletes it, as seen in updateProductController
+      await axiosInstance.put("/cart/update", { productId, quantity: 0 });
+      fetchCart();
+    } catch (error) {
+      showToast("error", "Failed to remove item");
+    }
   };
 
   const getItemPrice = (item) => {
@@ -76,14 +97,13 @@ export default function Cart({ isOpen, onClose }) {
 
   if (!isOpen) return null;
 
-  return (
-    <>
-      <div 
-        className="fixed inset-0 bg-black/40 z-50 transition-opacity"
+  return createPortal(
+    <div className="fixed inset-0 z-[9999999]" style={{ pointerEvents: 'none' }}>
+      <div
+        className="fixed inset-0 bg-black/40 transition-opacity" style={{ pointerEvents: 'auto' }}
         onClick={onClose}
       />
-      <div className="fixed top-0 right-0 h-full w-[90%] sm:w-[450px] bg-white z-[60] shadow-2xl flex flex-col transform transition-transform duration-300 font-sans">
-        <Toast toast={toastMessage} onClose={() => setToastMessage(null)} />
+      <div className="fixed top-0 right-0 h-full w-[90%] sm:w-[450px] bg-white shadow-2xl flex flex-col transform transition-transform duration-300 font-sans" style={{ pointerEvents: 'auto' }}>
         
         <div className="flex justify-between items-center p-6 border-b border-gray-100">
           <h2 className="text-3xl font-serif font-[600] text-black tracking-tight">Shopping Cart</h2>
@@ -113,8 +133,8 @@ export default function Cart({ isOpen, onClose }) {
 
                 return (
                   <div key={`${item.product}-${index}`} className="flex gap-6 items-center relative py-4 border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors px-2">
-                    <button onClick={() => removeItem(item.product)} className="absolute top-2 right-2 text-gray-300 hover:text-red-500 transition-colors z-10 w-6 h-6 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-200">
-                       <X className="w-3 h-3" />
+                      <button onClick={() => removeItem(item.product)} className="absolute top-4 right-4 text-red-600 bg-red-50 hover:bg-red-600 hover:text-white transition-colors z-10 w-8 h-8 flex items-center justify-center rounded-full shadow border border-red-200">
+                         <Trash2 className="w-4 h-4" strokeWidth={2.5} />
                     </button>
 
                     <div className="w-[100px] h-[100px] bg-[#fdfdfd] flex-shrink-0 flex items-center justify-center p-2 rounded-sm border border-gray-100 shadow-sm">
@@ -124,7 +144,7 @@ export default function Cart({ isOpen, onClose }) {
                     <div className="flex-1 flex flex-col justify-center">
                       <h4 className="text-[15px] font-serif font-bold text-[#1a1a1a] leading-snug mb-1 pr-6">{product?.name || "Product Name"}</h4>
                       <p className="text-[12px] text-gray-500 mb-3 font-medium tracking-wide">Color : {itemColor}</p>
-                      <span className="text-[15px] font-[600] text-[#111] mb-3">${getItemPrice(item).toFixed(2)}</span>
+                      <span className="text-[15px] font-[600] text-[#111] mb-3">₹{getItemPrice(item).toLocaleString('en-IN')}</span>
                       
                       <div className="flex items-center w-max bg-[#f5f5f5] text-[#222] font-semibold text-[13px] px-1 py-1 rounded-[2px] shadow-inner mt-auto">
                         <button onClick={() => updateQuantity(item.product, item.quantity, -1)} className="px-2 hover:text-black">
@@ -147,12 +167,12 @@ export default function Cart({ isOpen, onClose }) {
           <div className="border-t border-gray-100 px-6 py-6 bg-white relative z-10 shadow-[0_-10px_20px_rgba(0,0,0,0.03)]">
             <div className="flex items-center gap-3 mb-6">
                <input type="checkbox" className="w-[18px] h-[18px] border-2 border-gray-300 rounded-[2px] text-black bg-white focus:ring-0 focus:ring-offset-0 cursor-pointer accent-black transition-all" />
-               <span className="text-[13px] text-gray-500 tracking-wide font-medium">For <span className="font-bold text-[#111]">$10.00</span> Please Wrap The Product</span>
+               <span className="text-[13px] text-gray-500 tracking-wide font-medium">For <span className="font-bold text-[#111]">₹100</span> Please Wrap The Product</span>
             </div>
 
             <div className="flex justify-between items-center mb-6 border-t border-gray-200 pt-5">
               <span className="text-[17px] font-serif font-bold text-[#333] tracking-wide">Subtotal</span>
-              <span className="text-[18px] font-bold text-black tracking-tight">${subtotal.toFixed(2)}</span>
+              <span className="text-[18px] font-bold text-black tracking-tight">₹{subtotal.toLocaleString('en-IN')}</span>
             </div>
             
             <button onClick={handleCheckout} className="w-full bg-[#050505] text-white text-[12px] font-bold tracking-[0.2em] uppercase py-4 rounded-[4px] hover:bg-[#222] hover:shadow-lg transition-all active:scale-[0.99] mb-4">
@@ -166,6 +186,7 @@ export default function Cart({ isOpen, onClose }) {
           </div>
         )}
       </div>
-    </>
+    </div>,
+    document.body
   );
 }

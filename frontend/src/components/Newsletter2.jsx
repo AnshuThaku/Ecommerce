@@ -90,7 +90,7 @@ export default function Newsletter() {
 
                 <button
                   type="submit"
-                  className="w-full bg-[var(--theme-primary)] hover:bg-white text-black font-black py-3.5 sm:py-4 text-[11px] uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-3 group rounded-sm"
+                  className="w-full bg-[var(--theme-primary)] text-black hover:text-white hover:bg-[#222] font-black py-3.5 sm:py-4 text-[11px] uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-3 group rounded-sm"
                 >
                   Subscribe Now
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

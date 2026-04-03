@@ -69,7 +69,7 @@ export default function SaleCategories() {
   if (saleProducts.length === 0) return null;
 
   return (
-    <section className="py-10 bg-gray-50 transition-colors duration-500" style={{ fontFamily: "'Inter', sans-serif" }}>
+    <section className="py-4 md:py-10 bg-gray-50 transition-colors duration-500" style={{ fontFamily: "'Inter', sans-serif" }}>
       
       <style>
         {`
@@ -82,12 +82,12 @@ export default function SaleCategories() {
       {/* Wrapper */}
       <div className="w-full max-w-[89%] mx-auto px-4 sm:px-6 lg:px-8 relative">
 
-        <h2 className="text-3xl md:text-4xl font-[900] text-center text-black mb-8 tracking-wider uppercase">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-[900] text-center text-black mb-6 md:mb-8 tracking-wider uppercase">
           CATEGORIES
         </h2>
 
         {/* ⚡ THE FIX: Removed max-w-4xl and mx-auto, made it w-full to stretch edge-to-edge ⚡ */}
-        <div className="relative group w-full mb-16">
+        <div className="relative group w-full mb-8 md:mb-16">
           
           {/* Left Arrow */}
           <button 

@@ -272,19 +272,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Heart, Eye, ShoppingCart, ShoppingBag, X, ShieldCheck, Star, ChevronDown, ChevronUp, Package, CheckCircle, Truck, Zap, Clock, Cpu } from 'lucide-react';
 // Corrected Path (Double check if it's ../hooks or ../../hooks)
-import { useServerTheme } from '../../hooks/useServerTheme'; 
+import { useServerTheme } from '../../hooks/useServerTheme';
+import axiosInstance from '../../utils/axiosInstance';
 
 // --- FIXED: Added missing useAuth mock ---
 const useAuth = () => ({ user: null });
-
-// Basic mocks 
-const axiosInstance = {
-  post: async (url, data) => new Promise((resolve) => setTimeout(() => resolve({ data: { success: true } }), 800)),
-  get: async (url) => new Promise((resolve) => setTimeout(() => resolve({ data: { success: true, product: null, products: [] } }), 500))
-};
-
-const DEFAULT_IMG = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=600";
-
 const formatPrice = (amount) => {
   if (!amount) return '';
   return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(amount);

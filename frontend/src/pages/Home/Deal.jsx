@@ -4,19 +4,21 @@ import ImageSlider from './ImageSlider';
 
 const Deals = () => {
   return (
-    <section className="w-full bg-[#fcfcfc] py-10 relative z-0 overflow-hidden font-sans">
-      <div className="w-full flex flex-col xl:flex-row items-stretch gap-[20px] justify-between pl-[5.5%] pr-[5.5%] xl:pr-0">
+    <section className="w-full bg-[#fcfcfc] py-2 xl:py-10 relative z-0 overflow-hidden font-sans">
+      <div className="w-full flex flex-col xl:flex-row items-stretch gap-2 xl:gap-[20px] justify-between px-[20px] xl:px-[5%] 2xl:px-[10%] mx-auto">
 
         {/* Component 1: Text Part */}
-        <div className="w-full xl:w-[35%] flex flex-col justify-center items-start pb-8 pt-8">
-          <div className="flex-1 w-full max-w-[400px]">
+        <div className="w-full xl:w-[32%] flex flex-col justify-center items-center xl:items-start pb-2 pt-0 xl:pb-8 xl:pt-8">
+          <div className="flex-1 w-full max-w-[400px] xl:ml-auto">
             <TextContent />
           </div>
         </div>
 
         {/* Component 2: Slider Part */}
-        <div className="w-full xl:w-[58%] min-w-0 flex items-stretch m-0 p-0 xl:pr-0">
-          <ImageSlider />
+        <div className="w-full xl:w-[65%] min-w-0 flex items-stretch justify-start m-0 p-0">
+          <div className="w-full">
+            <ImageSlider />
+          </div>
         </div>
         
       </div>

@@ -92,12 +92,41 @@ exports.createProduct = wrapAsync(async (req, res, next) => {
 // @route   GET /api/products
 // @access  Public
 exports.getAllProducts = wrapAsync(async (req, res, next) => {
-  const products = await Product.find({ isActive: true }); 
+  const { category, brand, minPrice, maxPrice, color, rating, discount } = req.query;
+  
+  let filter = { isActive: true };
+
+  if (category) filter.category = { $in: category.split(',') };
+  if (brand) filter.brand = { $in: brand.split(',') };
+  
+  if (minPrice || maxPrice) {
+    filter.price = {};
+    if (minPrice) filter.price.$gte = Number(minPrice);
+    if (maxPrice) filter.price.$lte = Number(maxPrice);
+  }
+
+  // Handle color - assumes color is stored in variants
+  if (color) {
+    filter['variants.attributes.value'] = { $in: color.split(',') };
+  }
+
+  // Handle rating
+  if (rating) {
+    filter['ratings'] = { $gte: Number(rating) };
+  }
+
+  const products = await Product.find(filter);
+
+  // Partial implementation of discount filter (client side expects flashDeal/discountPrice)
+  let filteredProducts = products;
+  if (discount === 'true') {
+    filteredProducts = products.filter(p => p.discountPrice > 0 || (p.flashDeal && p.flashDeal.isActive));
+  }
 
   res.status(200).json({
     success: true,
-    count: products.length,
-    products,
+    count: filteredProducts.length,
+    products: filteredProducts,
   });
 });
 

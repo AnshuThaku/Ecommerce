@@ -76,6 +76,7 @@ function App() {
             
             {/* Cart abhi bhi PublicLayout me rahega kyunki isme apna header nahi hai */}
             <Route path="/cart"             element={<PublicLayout><Cart /></PublicLayout>} />
+            <Route path="/checkout"         element={<PublicLayout><Checkout /></PublicLayout>} />
             
             {/* ── Customer Private Routes ───────────────────────────── */}
             <Route path="/profile" element={

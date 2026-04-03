@@ -126,7 +126,7 @@ const BrandStrip = () => {
         </div>
       </div>
       
-      <style jsx global>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @keyframes marquee {
           0% { transform: translateX(0%); }
           100% { transform: translateX(-50%); }
@@ -137,7 +137,7 @@ const BrandStrip = () => {
         .group-hover\\:animation-pause:hover {
           animation-play-state: paused;
         }
-      `}</style>
+      `}} />
     </section>
   );
 };
