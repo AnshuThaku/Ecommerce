@@ -28,7 +28,7 @@ export default function OrderSuccess() {
         </div>
 
         <h1 className="text-3xl font-serif text-white mb-2">Thank You!</h1>
-        <p className="text-[#C8A253] text-sm tracking-widest uppercase mb-6">Order Confirmed</p>
+        <p className="text-gray-400 text-sm tracking-widest uppercase mb-6">Order Confirmed</p>
 
         <div className="bg-[#111] rounded-lg p-4 mb-8 border border-zinc-800 text-left">
           <div className="flex justify-between mb-2">
@@ -49,7 +49,7 @@ export default function OrderSuccess() {
 
         <Link 
           to="/shop"
-          className="block w-full py-3 rounded-xl bg-[#C8A253] text-[#0A0A0A] text-sm font-bold tracking-widest uppercase hover:bg-[#d4af6b] transition-all duration-300"
+          className="block w-full py-3 rounded-xl bg-white text-black text-sm font-bold tracking-widest uppercase hover:bg-gray-200 transition-all duration-300"
         >
           Continue Shopping
         </Link>

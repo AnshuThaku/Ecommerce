@@ -10,52 +10,54 @@ const ImageSlider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiperInstance, setSwiperInstance] = useState(null);
 
-  const slidesMain = [
-    {
-      id: 1,
-      img: "https://images.unsplash.com/photo-1545454675-3531b543be5d?q=80&w=800",
-      tagline: "SPRING SALE"
-    },
-    {
-      id: 2,
-      img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=800",
-      tagline: "SUMMER SALE"
-    },
-    {
-      id: 3,
-      img: "https://images.unsplash.com/photo-1461301214746-1e109215d6d3?q=80&w=800",
-      tagline: "AUTUMN SALE"
-    },
-  ];
+ const slidesMain = [
+ 
+  {
+    id: 1,
+    // Marshall Splash / Action Shot
+    img:"https://images.unsplash.com/photo-1692651763027-72aeb12130d7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bWFyc2hhbGwlMjBzcGVha2VyfGVufDB8fDB8fHww",
+    tagline: "MARSHALL SIGNATURE"
+  },
+   {
+    id: 2,
+    // Sonos Banner
+    img:"https://images.pexels.com/photos/31306016/pexels-photo-31306016.jpeg",
+    tagline:"Marshall Stanmore II"
+  },
+  {
+    id: 3,
+    // Premium Black Headphones (Sonos Vibe)
+    img:"https://images.unsplash.com/photo-1692351014024-97edd83a7b5a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bWFyc2hhbGwlMjBzcGVha2VyfGVufDB8fDB8fHww",
+    tagline: "PREMIUM SOUND"
+  },
+];
 
-  const slidesSide = [
-    { id: 1, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=800" },
-    { id: 2, img: "https://images.unsplash.com/photo-1461301214746-1e109215d6d3?q=80&w=800" },
-    { id: 3, img: "https://images.unsplash.com/photo-1545454675-3531b543be5d?q=80&w=800" },
-  ];
+const slidesSide = [
+  { 
+    id: 1, 
+    // Marshall Speaker Splash (Naye grid design se match karta hua)
+    img:"https://images.unsplash.com/photo-1639385054611-53f34c9297d4?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8bWFyc2hhbGwlMjBzcGVha2VyfGVufDB8fDB8fHww"
+  },
+  { 
+    id: 2, 
+    // Sonos/Sony Style Black Headphones
+    // (Agar aap apna local headphone use karna chahte hain, toh isko "/Left.png" kar dena)
+    img:"https://images.unsplash.com/photo-1502798985865-1ab60332f46c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bWFyc2hhbGwlMjBzcGVha2VyfGVufDB8fDB8fHww"
+  },
+  { 
+    id: 3, 
+    // TWS Earbuds (Aapke screenshot wale JBL/Bose style earbuds)
+    img:"https://images.unsplash.com/photo-1707364917582-6ad0f98379df?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fG1hcnNoYWxsJTIwc3BlYWtlcnxlbnwwfHwwfHx8MA%3D%3D"
+  },
+];
 
   return (
-    <div className="w-full relative flex flex-col md:flex-row gap-[10px] md:gap-[20px] m-0 p-0 pr-0">
+    <div className="w-full relative flex flex-col md:flex-row gap-4 md:gap-[30px] m-0 p-0 md:px-6 xl:px-12">
 
       {/* 1. Main Image Box */}
-      <div className="relative w-full shrink-0 md:w-[calc(60%+20px)] xl:w-[calc(60%+40px)] flex-none md:flex-[0_0_calc(60%+20px)] xl:flex-[0_0_calc(60%+40px)] flex flex-col md:flex-row items-center md:items-end">
-        {/* LEFT / RIGHT BUTTONS NOW OUTSIDE MAIN IMAGE - BOTTOM LEFT */}
-        <div className="flex flex-row gap-2 md:gap-3 z-50 md:mr-[5px] md:mb-[5px] mt-4 md:mt-0 order-2 md:order-1 self-start md:self-end">
-          <button 
-            onClick={() => swiperInstance?.slidePrev()}
-            className="w-10 h-10 rounded-full flex items-center justify-center border border-gray-300 hover:bg-black hover:text-white transition-all text-black text-[20px] font-light cursor-pointer shadow-sm bg-transparent"
-          >
-            ‹
-          </button>
-          <button 
-            onClick={() => swiperInstance?.slideNext()}
-            className="w-10 h-10 rounded-full flex items-center justify-center border border-gray-300 hover:bg-black hover:text-white transition-all text-black text-[20px] font-light cursor-pointer shadow-sm bg-transparent"
-          >
-            ›
-          </button>
-        </div>
-
-        <div className="relative overflow-hidden bg-[#f0f0f0] w-full h-[300px] sm:h-[350px] md:h-[400px] xl:h-[500px] rounded-[2px] transition-all duration-500 z-10 group order-1 md:order-2">
+      <div className="relative w-full md:w-[58%] shrink-0 flex-none h-[400px] md:h-[550px] xl:h-[600px]">
+        
+        <div className="relative overflow-hidden w-full h-full bg-[#f9f9f9]">
           <Swiper
             modules={[Navigation, EffectFade]}
             effect="fade"
@@ -64,34 +66,53 @@ const ImageSlider = () => {
             onSwiper={(swiper) => setSwiperInstance(swiper)}
             loop={true}
             allowTouchMove={false}
-            className="w-full h-full !overflow-hidden"       
+            className="w-full h-full"       
           >
             {slidesMain.map((slide) => (
               <SwiperSlide key={`main-${slide.id}`}>
                 <div className="relative w-full h-full">
                   <img
                     src={slide.img}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-center"
                     alt={`Deal ${slide.id}`}
                   />
-                  <div className="absolute bottom-0 right-0 xl:bottom-4 xl:right-4 bg-white py-4 px-6 xl:py-6 xl:px-8 shadow-xl min-w-[180px] md:min-w-[220px] xl:min-w-[260px] z-[60]">
-                    <p className="text-[10px] md:text-[13px] text-gray-500 tracking-[0.1em] mb-1 xl:mb-2 flex items-center gap-2 xl:gap-3">
+                  
+                  {/* White Info Card completely inside the image box */}
+                  <div className="absolute bottom-4 left-4 md:bottom-2 md:left-1 bg-white py-5 px-6 md:py-6 md:px-8 shadow-lg min-w-[220px] md:min-w-[260px] z-[60]">
+                    <p className="text-[12px] text-gray-400 tracking-[0.05em] mb-1 flex items-center gap-2">
                       <span className="font-semibold text-black">0{slide.id}</span>
-                      <span className="w-6 md:w-8 h-[1px] bg-gray-400 block"></span>
-                      <span className="capitalize font-medium">{slide.tagline}</span>
+                      <span className="w-6 h-[1px] bg-gray-300 block"></span>
+                      <span className="font-medium capitalize">{slide.tagline}</span>
                     </p>
-                    <h3 className="text-lg md:text-2xl xl:text-[32px] font-[500] text-[#111] font-sans">30% OFF</h3>
+                    <h3 className="text-xl md:text-2xl font-[500] text-[#111] font-sans mt-2">30% OFF</h3>
                   </div>
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
+
+        {/* Navigation Arrows positioned completely outside the image box at the bottom left */}
+        <div className="absolute -bottom-10 left-0 z-[60] flex gap-3 items-center bg-transparent px-2 py-1">
+          <button 
+            onClick={() => swiperInstance?.slidePrev()}
+            className="text-gray-600 hover:text-black transition-colors bg-transparent border border-gray-300 rounded-full w-8 h-8 flex items-center justify-center text-[18px] font-light cursor-pointer"
+          >
+            ‹
+          </button>
+          <button 
+            onClick={() => swiperInstance?.slideNext()}
+            className="text-gray-600 hover:text-black transition-colors bg-transparent border border-gray-300 rounded-full w-8 h-8 flex items-center justify-center text-[18px] font-light cursor-pointer"
+          >
+            ›
+          </button>
+        </div>
       </div>
 
       {/* 2. Right Image Box */}
-      <div className="relative w-full shrink-0 flex flex-col justify-between md:w-[calc(40%-40px)] xl:w-[calc(40%-60px)] flex-none md:flex-[0_0_calc(40%-40px)] xl:flex-[0_0_calc(40%-60px)] h-[300px] sm:h-[350px] md:h-[400px] xl:h-[500px] z-0 mr-1 mt-4 md:mt-0 pb-10 md:pb-0">
-        <div className="relative overflow-hidden bg-[#222] w-full h-full scale-y-[1.0] rounded-[2px] shadow-lg">
+      {/* Right wali image ki height tag 'h-[300px] md:h-[400px] xl:h-[500px]' ki taaki ye First wale se choti lage */}
+      <div className="relative w-full md:w-[42%] shrink-0 flex-none h-[300px] md:h-[400px] xl:h-[500px] flex flex-col justify-start">
+        <div className="relative overflow-hidden bg-[#111] w-full h-[calc(100%-40px)] rounded-[2px] shadow-md">
           <Swiper
             modules={[Autoplay, EffectFade]}
             effect="fade"
@@ -101,13 +122,13 @@ const ImageSlider = () => {
             loop={true}
             allowTouchMove={false}
             onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}        
-            className="w-full h-full !overflow-hidden"
+            className="w-full h-full"
           >
             {slidesSide.map((slide) => (
               <SwiperSlide key={`side-${slide.id}`}>
                  <img
                   src={slide.img}
-                  className="w-full h-full object-cover opacity-95"
+                  className="w-full h-full object-cover opacity-90"
                   alt="Upcoming Deal"
                 />
               </SwiperSlide>
@@ -115,17 +136,17 @@ const ImageSlider = () => {
           </Swiper>
         </div>
 
-         {/* Pagination Dots */}
-        <div className="absolute -bottom-8 md:relative md:bottom-auto flex gap-2 md:gap-3 items-center mt-0 md:mt-4 xl:mt-6 ml-0">
+         {/* Pagination Dots Below the Right Image */}
+        <div className="flex gap-3 items-center mt-4 pl-2 h-[20px]">
           {slidesMain.map((_, index) => (
             <span
               key={index}
-              className={`transition-all duration-500 rounded-full relative flex items-center justify-center ${
-                activeIndex === index ? 'w-2.5 h-2.5 bg-black' : 'w-2 h-2 bg-[#ccc]'
+              className={`transition-all duration-300 rounded-full relative flex items-center justify-center ${
+                activeIndex === index ? 'w-2.5 h-2.5 bg-black' : 'w-2 h-2 bg-gray-300'
               }`}
             >
               {activeIndex === index && (
-                <span className="absolute -inset-[4px] border-[1.5px] border-black rounded-full" />
+                <span className="absolute -inset-[3px] border-[1px] border-black rounded-full" />
               )}
             </span>
           ))}

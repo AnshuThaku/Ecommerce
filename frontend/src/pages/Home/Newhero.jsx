@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance';
-import heroImage from './truee-001-banner.png';
+import heroImage from './truee-001-banner (1).png';
 
 export default function Hero() {
   const navigate = useNavigate();

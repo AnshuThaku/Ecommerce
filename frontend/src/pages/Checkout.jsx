@@ -105,7 +105,7 @@ const CheckoutPage = () => {
           <section>
             <div className="flex justify-between items-end mb-4">
               <h2 className="text-3xl font-serif">Contact</h2>
-              <p className="text-sm">Have an account? <span onClick={() => navigate('/signup')} className="text-blue-600 underline cursor-pointer">Create Account</span></p>
+              <p className="text-sm">Not Have an account? <span onClick={() => navigate('/register')} className="text-blue-600 underline cursor-pointer">Create Account</span></p>
             </div>
             <input 
               type="email" 
