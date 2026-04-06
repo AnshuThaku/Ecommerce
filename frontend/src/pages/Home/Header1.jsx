@@ -287,10 +287,10 @@ export default function Header() {
             className="relative py-2 mb-2 group"
           >
             {(() => {
-              const isBrandsActive = location.pathname === '/shop' && location.state?.category === 'BRANDS';
+              const isBrandsActive = location.pathname === '/brands';
               return (
                 <button 
-                  onClick={() => navigate('/shop', { state: { category: 'BRANDS' } })}
+                  onClick={() => navigate('/brands')}
                   className={`font-semibold text-[10px] xl:text-[11px] tracking-widest uppercase transition-colors flex items-center gap-1 cursor-pointer bg-transparent border-none outline-none relative py-2 after:content-[''] after:absolute after:-bottom-2 after:left-0 after:h-[2px] after:bg-black after:transition-all after:duration-300 ${isBrandsActive ? 'text-black after:w-full' : 'text-[#6b6b6b] group-hover:text-black after:w-0 group-hover:after:w-full'}`}
                 >
                   BRANDS
@@ -438,7 +438,11 @@ export default function Header() {
               key={item} 
               onClick={() => {
                 setIsMobileMenuOpen(false);
-                navigate('/shop', { state: { category: item } });
+                if (item === 'BRANDS') {
+                  navigate('/brands');
+                } else {
+                  navigate('/shop', { state: { category: item } });
+                }
               }}
               className="text-left px-6 py-3 text-[#6b6b6b] hover:text-black hover:bg-zinc-50 font-semibold text-[11px] tracking-widest uppercase transition-colors cursor-pointer"
             >

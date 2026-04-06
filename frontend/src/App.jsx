@@ -21,6 +21,7 @@ import Home from './pages/Home/Home';
 import ShopHome from './pages/Shop/ShopHome';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
+import BrandsSection from './components/Brands';
 
 // ── Customer Protected Pages
 import OrderSuccess from './pages/orderSuccess';
@@ -75,6 +76,7 @@ function App() {
             <Route path="/products"         element={<ShopHome />} />
             
             {/* Cart abhi bhi PublicLayout me rahega kyunki isme apna header nahi hai */}
+            <Route path="/brands"           element={<PublicLayout><BrandsSection /></PublicLayout>} />
             <Route path="/cart"             element={<PublicLayout><Cart /></PublicLayout>} />
             <Route path="/checkout"         element={<PublicLayout><Checkout /></PublicLayout>} />
             
