@@ -1,4 +1,4 @@
-const Product = require('../../models/Product/ProductModel'); 
+const Product = require('../../models/Temp/ProductModel'); 
 const wrapAsync = require('../../utils/errorHandler/wrapAsync');
 
 // 1. SMART SUGGESTIONS API (Universal)

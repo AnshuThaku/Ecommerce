@@ -1,6 +1,6 @@
 const cartModel = require("../../models/cart/cartModel");
 // ⚡ ADDED: Product model import kiya taaki original price check kar sakein
-const Product = require("../../models/Product/ProductModel"); 
+const Product = require("../../models/Temp/ProductModel"); 
 const wrapAsync = require("../../utils/errorHandler/wrapAsync");
 const ExpressError = require("../../utils/errorHandler/expressError");
 
