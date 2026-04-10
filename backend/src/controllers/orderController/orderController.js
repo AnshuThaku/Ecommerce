@@ -1,5 +1,5 @@
 const Order = require('../../models/order/orderModel'); // Apna path check kar lijiye
-const Product = require('../../models/Temp/ProductModel'); // Apna path check kar lijiye
+const Product = require('../../models/Product/ProductModel'); // Apna path check kar lijiye
 const wrapAsync = require('../../utils/errorHandler/wrapAsync');
 const mongoose = require('mongoose');
 
