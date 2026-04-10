@@ -5,6 +5,15 @@ import axiosInstance from '../../utils/axiosInstance';
 import { useAuth } from '../../context/AuthContext';
 import Cart from '../Cart';
 
+// 🚀 Full Static Brands List for Dropdown
+const staticBrands = [
+  "Noise", "Amazfit", "Marshall", "DEVIALET", "SONOS", "BANG & OLUFSEN", "JLab", "truee", 
+  "SONY", "SHOKZ", "Sennheiser", "WITHINGS", "Therabody", "HUROM", "Bowers & Wilkins", 
+  "JBL", "BOSE", "harman/kardon", "Arcam", "JVC", "Formovie", "ViewSonic", "Ledger", 
+  "Goldmedal", "Aecooly", "Jisulife", "Plaud", "Whoop", "Meta Quest", "Meta Rayban", 
+  "Meta Oklahoma", "IZI", "Dyson", "Nespresso", "Ninja", "Shark", "KiCA", "Polar"
+];
+
 const SearchInline = ({ onClose, navigate }) => {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
@@ -99,11 +108,8 @@ const SearchInline = ({ onClose, navigate }) => {
         </button>
       </form>
 
-      {/* DROPDOWN */}
       {showDropdown && (query.trim() ? suggestions.length > 0 : recentSearches.length > 0) && (
         <div className="absolute top-[120%] left-4 right-4 bg-white border border-gray-100 rounded-2xl shadow-xl z-50 overflow-hidden text-black animate-fade-in">
-          
-          {/* RECENT SEARCHES */}
           {!query.trim() && recentSearches.length > 0 && (
             <div className="p-4">
               <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-4 px-2 flex items-center gap-2">
@@ -122,8 +128,6 @@ const SearchInline = ({ onClose, navigate }) => {
               </ul>
             </div>
           )}
-
-          {/* LIVE SUGGESTIONS */}
           {query.trim() && suggestions.length > 0 && (
             <ul className="py-2">
               {suggestions.map((item) => (
@@ -162,25 +166,6 @@ export default function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
 
-  // New states for brands and dropdowns
-  const [brands, setBrands] = useState([]);
-
-  useEffect(() => {
-    // Fetch distinct brands
-    const fetchBrands = async () => {
-      try {
-        const { data } = await axiosInstance.get('/products'); // Or specific endpoint if available
-        if (data.products) {
-          const uniqueBrands = [...new Set(data.products.map(p => p.brand).filter(Boolean))];
-          setBrands(uniqueBrands);
-        }
-      } catch (error) {
-        console.error('Error fetching brands:', error);
-      }
-    };
-    fetchBrands();
-  }, []);
-
   useEffect(() => {
     const fetchCartData = async () => {
       try {
@@ -196,7 +181,7 @@ export default function Header() {
     fetchCartData();
 
     const handleCartUpdate = (e) => {
-      setIsCartOpen(true); // Open modal on every cart update automatically
+      setIsCartOpen(true); 
       if (e.detail?.increase) {
         setCartCount(prev => prev + e.detail.increase);
       } else {
@@ -212,7 +197,7 @@ export default function Header() {
     <header className="w-full bg-white flex items-center justify-between px-6 md:px-12 h-[100px] flex-shrink-0 z-50 relative">
       
       {/* Mobile Hamburger Menu Icon */}
-      <div className="flex-1 lg:hidden">
+      <div className="flex-1 xl:hidden">
         <button 
           className="text-black hover:opacity-60 transition-opacity cursor-pointer"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -223,7 +208,7 @@ export default function Header() {
       </div>
 
       {/* LOGO */}
-      <div className="flex-1 lg:flex-none flex justify-center lg:justify-start">
+      <div className="flex-1 xl:flex-none flex justify-center xl:justify-start">
         <Link to="/" className="flex flex-col items-center justify-center mt-2 group w-[120px] text-center cursor-pointer">
           <img src="/Truee_Luxury_Logo.png" alt="Truee" className="h-10 md:h-12 w-auto object-contain brightness-0" />    
           <span className="text-[9px] font-bold tracking-[0.4em] uppercase mt-1 text-black opacity-80 group-hover:opacity-100 transition-opacity">
@@ -236,7 +221,9 @@ export default function Header() {
       {isSearchOpen ? (
         <SearchInline onClose={() => setIsSearchOpen(false)} navigate={navigate} />
       ) : (
-        <nav className="hidden lg:flex items-center gap-8 xl:gap-12 relative z-50">
+        <nav className="hidden xl:flex items-center h-full gap-3 2xl:gap-6 relative z-50">
+          
+          {/* ⚡ ORIGINAL STATIC CATEGORIES ⚡ */}
           {[
             { item: 'SPEAKERS', sub: ['Karaoke', 'Home Theater', 'Portable', 'Bluetooth'] },
             { item: 'HEADPHONES', sub: ['Over-Ear', 'On-Ear', 'Noise Cancelling', 'Wireless'] },
@@ -246,17 +233,17 @@ export default function Header() {
           ].map(({ item, sub }) => {
             const isActive = location.pathname === '/shop' && location.state?.category === item;
             return (
-              <div key={item} className="relative py-2 mb-2 group">
+              <div key={item} className="h-full flex items-center relative group">
                 <button 
                   onClick={() => navigate('/shop', { state: { category: item } })}
-                  className={`font-semibold text-[10px] xl:text-[11px] tracking-widest uppercase transition-colors flex items-center gap-1 cursor-pointer bg-transparent border-none outline-none relative py-2 after:content-[''] after:absolute after:-bottom-2 after:left-0 after:h-[2px] after:bg-black after:transition-all after:duration-300 ${isActive ? 'text-black after:w-full' : 'text-[#6b6b6b] group-hover:text-black after:w-0 group-hover:after:w-full'}`}
+                  className={`font-semibold text-[10px] xl:text-[11px] tracking-widest uppercase transition-colors flex items-center gap-1 cursor-pointer bg-transparent border-none outline-none relative py-2 after:content-[''] after:absolute after:-bottom-0 after:left-0 after:h-[2px] after:bg-black after:transition-all after:duration-300 ${isActive ? 'text-black after:w-full' : 'text-[#6b6b6b] group-hover:text-black after:w-0 group-hover:after:w-full'}`}
                 >
                   {item}
                   <ChevronDown size={14} className="transition-transform duration-300 group-hover:rotate-180" />
                 </button>
 
-                {/* Dropdown for Subcategories */}
-                <div className="absolute top-[100%] left-1/2 -translate-x-1/2 mt-2 pt-4 w-48 z-[10] opacity-0 invisible -translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-500 ease-out">
+                {/* Subcategories Dropdown */}
+                <div className="absolute top-[65%] left-1/2 -translate-x-1/2 pt-6 w-48 z-[10] opacity-0 invisible -translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-500 ease-out">
                   <div className="bg-white border border-gray-100 rounded-2xl shadow-xl overflow-hidden py-2">
                     <div className="px-4 py-2 border-b border-gray-50 flex justify-between items-center">
                       <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">CATEGORIES</span>
@@ -269,7 +256,7 @@ export default function Header() {
                               e.stopPropagation();
                               navigate('/shop', { state: { category: item, subcategory: subItem } });
                             }}
-                            className="w-full text-left px-4 py-2.5 text-[11px] font-semibold text-gray-700 hover:text-black hover:bg-gray-50 transition-colors uppercase tracking-wider cursor-pointer"
+                            className="w-full text-left px-4 py-2.5 text-[11px] font-semibold text-gray-700 hover:text-black hover:bg-gray-50 transition-colors uppercase tracking-wider cursor-pointer border-b border-gray-50 last:border-0"
                           >
                             {subItem}
                           </button>
@@ -282,16 +269,14 @@ export default function Header() {
             );
           })}
           
-          {/* BRANDS Dropdown */}
-          <div 
-            className="relative py-2 mb-2 group"
-          >
+          {/* ⚡ BRANDS Dropdown (STATIC) ⚡ */}
+          <div className="h-full flex items-center relative group">
             {(() => {
               const isBrandsActive = location.pathname === '/brands';
               return (
                 <button 
                   onClick={() => navigate('/brands')}
-                  className={`font-semibold text-[10px] xl:text-[11px] tracking-widest uppercase transition-colors flex items-center gap-1 cursor-pointer bg-transparent border-none outline-none relative py-2 after:content-[''] after:absolute after:-bottom-2 after:left-0 after:h-[2px] after:bg-black after:transition-all after:duration-300 ${isBrandsActive ? 'text-black after:w-full' : 'text-[#6b6b6b] group-hover:text-black after:w-0 group-hover:after:w-full'}`}
+                  className={`font-semibold text-[10px] xl:text-[11px] tracking-widest uppercase transition-colors flex items-center gap-1 cursor-pointer bg-transparent border-none outline-none relative py-2 after:content-[''] after:absolute after:-bottom-0 after:left-0 after:h-[2px] after:bg-black after:transition-all after:duration-300 ${isBrandsActive ? 'text-black after:w-full' : 'text-[#6b6b6b] group-hover:text-black after:w-0 group-hover:after:w-full'}`}
                 >
                   BRANDS
                   <ChevronDown size={14} className="transition-transform duration-300 group-hover:rotate-180" />
@@ -299,41 +284,24 @@ export default function Header() {
               );
             })()}
             
-            <div className="absolute top-[100%] left-1/2 -translate-x-1/2 mt-2 pt-4 w-64 z-[10] opacity-0 invisible -translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-500 ease-out">
+            <div className="absolute top-[65%] left-1/2 -translate-x-1/2 pt-6 w-64 z-[10] opacity-0 invisible -translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-500 ease-out">
               <div className="bg-white border border-gray-100 rounded-2xl shadow-xl overflow-hidden py-2">
                 <div className="px-4 py-2 border-b border-gray-50 flex justify-between items-center">
                   <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Select Brand</span>
                 </div>
-                <ul className="w-full max-h-[60vh] overflow-y-auto">
-                  {/* Fixed requested brands */}
-                  {['Noise', 'AmazFit', 'Marshall', 'Meta Quest'].map((brand, idx) => (
-                    <li key={`fixed-${idx}`}>
+                <ul className="w-full max-h-[60vh] overflow-y-auto custom-scrollbar">
+                  {staticBrands.map((brandName, idx) => (
+                    <li key={idx}>
                       <button
                         onClick={() => {
-                          navigate('/shop', { state: { search: brand } });
+                          navigate('/shop', { state: { search: brandName } });
                         }}
                         className="w-full text-left px-4 py-2.5 text-[11px] font-semibold text-gray-700 hover:text-black hover:bg-gray-50 transition-colors uppercase tracking-wider cursor-pointer"
                       >
-                        {brand}
+                        {brandName}
                       </button>
                     </li>
                   ))}
-                  {/* Dynamic Brands from Context / DB */}
-                  {brands && brands.filter(b => !['Noise', 'AmazFit', 'Marshall', 'Meta Quest'].includes(b.brandName || b)).map((brand, idx) => {
-                    const brandName = brand.brandName || brand;
-                    return (
-                      <li key={idx}>
-                        <button
-                          onClick={() => {
-                            navigate('/shop', { state: { search: brandName } });
-                          }}
-                          className="w-full text-left px-4 py-2.5 text-[11px] font-semibold text-gray-700 hover:text-black hover:bg-gray-50 transition-colors uppercase tracking-wider cursor-pointer"
-                        >
-                          {brandName}
-                        </button>
-                      </li>
-                    );
-                  })}
                 </ul>
               </div>
             </div>
@@ -342,7 +310,7 @@ export default function Header() {
       )}
 
       {/* Right Action Icons */}
-      <div className="flex-1 lg:flex-none flex items-center justify-end gap-4 md:gap-5 relative z-50">
+      <div className="flex-1 xl:flex-none flex items-center justify-end gap-4 md:gap-5 h-full relative z-50">
         <button 
           className="text-black hover:opacity-60 transition-opacity cursor-pointer hidden sm:block" 
           aria-label="Search"
@@ -352,47 +320,31 @@ export default function Header() {
         </button>
 
         {/* User Profile Dropdown */}
-        <div 
-          className="relative group py-2"
-        >
+        <div className="h-full flex items-center relative group">
           <Link to={user ? "/profile" : "/login"} className="text-black hover:opacity-60 transition-opacity cursor-pointer flex items-center gap-1" aria-label="Profile">
             <User size={18} strokeWidth={1.5} />
             {user && <ChevronDown size={14} className="transition-transform duration-300 group-hover:rotate-180" />}
           </Link>
           
           {user && (
-            <div className="absolute top-[100%] right-0 mt-2 pt-2 w-56 z-[100] opacity-0 invisible -translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-500 ease-out">
+            <div className="absolute top-[65%] right-0 pt-6 w-56 z-[100] opacity-0 invisible -translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-500 ease-out">
               <div className="bg-white border border-gray-100 rounded-2xl shadow-xl overflow-hidden">
                 <div className="p-4 border-b border-gray-50 bg-gray-50/50">
                   <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Signed in as</p>
                   <p className="text-sm font-semibold text-black truncate">{user.name || user.email || 'User'}</p>
                 </div>
-                
                 <div className="py-2">
-                  <Link 
-                    to="/profile" 
-                    className="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-gray-700 hover:text-black hover:bg-gray-50 transition-colors"
-                  >
+                  <Link to="/profile" className="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-gray-700 hover:text-black hover:bg-gray-50 transition-colors">
                     <User size={16} className="text-gray-400" />
                     My Profile
                   </Link>
-                  <Link 
-                    to="/profile?tab=orders" 
-                    className="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-gray-700 hover:text-black hover:bg-gray-50 transition-colors"
-                  >
+                  <Link to="/profile?tab=orders" className="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-gray-700 hover:text-black hover:bg-gray-50 transition-colors">
                     <Package size={16} className="text-gray-400" />
                     Orders
                   </Link>
                 </div>
-                
                 <div className="py-2 border-t border-gray-50">
-                  <button 
-                    onClick={() => {
-                      logout();
-                      navigate('/login');
-                    }}
-                    className="w-full flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-red-600 hover:bg-red-50 transition-colors cursor-pointer bg-transparent border-none outline-none"
-                  >
+                  <button onClick={() => { logout(); navigate('/login'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-red-600 hover:bg-red-50 transition-colors cursor-pointer bg-transparent border-none outline-none">
                     <LogOut size={16} />
                     Logout
                   </button>
@@ -418,7 +370,7 @@ export default function Header() {
 
       {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
-        <div className="absolute top-[100px] left-0 w-full bg-white shadow-lg lg:hidden flex flex-col py-4 z-40 border-t border-zinc-100">
+        <div className="absolute top-[100px] left-0 w-full bg-white shadow-lg xl:hidden flex flex-col py-4 z-40 border-t border-zinc-100 max-h-[80vh] overflow-y-auto custom-scrollbar">
           <div className="px-6 pb-4 mb-4 border-b border-zinc-100 flex items-center gap-2">
              <Search size={16} className="text-zinc-400" />
              <input 
@@ -433,7 +385,9 @@ export default function Header() {
                 }}
              />
           </div>
-          {['SPEAKERS', 'HEADPHONES', 'EARPHONES', 'SMARTWATCH', 'HOME THEATER', 'BRANDS'].map((item) => (
+          
+          {/* ORIGINAL CATEGORIES FOR MOBILE */}
+          {['SPEAKERS', 'HEADPHONES', 'EARPHONES', 'SMARTWATCHES', 'HOME THEATER', 'BRANDS'].map((item) => (
             <button 
               key={item} 
               onClick={() => {

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { login, updateFirstPassword, registerCustomer, logout } = require('../../controllers/authController/authController');
 const { protect } = require('../../middleware/authMiddleware');
+const { getUserProfile, updateUserProfile } = require('../../controllers/profileController/ProfileController');
 
 // Route: POST /api/auth/register
 // Public route (customers signing up themselves)
@@ -18,5 +19,9 @@ router.get('/logout', logout);
 // Route: PUT /api/auth/update-password
 // Protected route (you must have a valid JWT token to hit this endpoint)
 router.put('/update-password', protect, updateFirstPassword);
+
+router.get('/profile', protect, getUserProfile);
+router.put('/profile', protect, updateUserProfile);
+
 
 module.exports = router;

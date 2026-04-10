@@ -148,13 +148,13 @@ export default function ShopHome() {
 
         {/* ⚡ Title Section - Centered */}
         <div className="w-full flex flex-col items-center text-center mb-8">
-          <h1 className="text-[28px] md:text-[40px] font-serif font-bold tracking-tight text-[#111] mb-2 uppercase">
+          <h1 className="text-[28px] md:text-[40px] font-serif font-semibold tracking-tight text-[#333333] mb-2 uppercase">
                {activeSelectionText}
           </h1>
           <div className="text-[11px] font-medium tracking-widest uppercase text-[#888] flex items-center justify-center gap-2">
-              <Link to="/" className="hover:text-[#111] transition-colors cursor-pointer">HOME</Link>
+              <Link to="/" className="hover:text-[#333333] transition-colors cursor-pointer">HOME</Link>
               <span>/</span>
-              <span className="text-[#111]">{activeBreadcrumbText}</span>
+              <span className="text-[#333333]">{activeBreadcrumbText}</span>
           </div>
         </div>
 
@@ -179,7 +179,7 @@ export default function ShopHome() {
         {/* Layout Box: Product Grid */}
         <div className="w-full mt-4">
           {loading ? (
-              <div className="w-full py-32 flex justify-center"><div className="w-8 h-8 border-4 border-gray-200 border-t-black rounded-full animate-spin"></div></div>
+              <div className="w-full py-32 flex justify-center"><div className="w-8 h-8 border-4 border-gray-200 border-t-[#333333] rounded-full animate-spin"></div></div>
           ) : (
               <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-10 md:gap-x-8 md:gap-y-12">
                 {displayProducts.length > 0 ? (
@@ -189,7 +189,7 @@ export default function ShopHome() {
                 ) : (
                   <div className="col-span-full text-center py-24 bg-white border border-gray-100 rounded-sm">
                     <p className="text-gray-500 text-[15px] mb-5">No products found matching your current filters.</p>
-                    <button onClick={clearFilters} className="text-black font-bold uppercase tracking-widest text-[11px] border-2 border-black px-8 py-3 hover:bg-black hover:text-white transition-colors cursor-pointer">
+                    <button onClick={clearFilters} className="text-[#333333] font-semibold uppercase tracking-widest text-[11px] border-2 border-[#333333] px-8 py-3 hover:bg-[#333333] hover:text-white transition-colors cursor-pointer">
                       Clear All Filters
                     </button>
                   </div>

@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { ArrowRight, Mail } from 'lucide-react';
-// ⚡ DONO FILES KA INTEGRATION YAHAN HAI
 import { useServerTheme } from '../hooks/useServerTheme'; 
 
 export default function Newsletter() {
-  // 1. Hook call: Ye server se data layega aur CSS variables set karega
   useServerTheme();
 
   const [email, setEmail] = useState('');
@@ -22,54 +20,56 @@ export default function Newsletter() {
   };
 
   return (
-    /* 2. CSS Variables Integration: bg-[var(--theme-bg-dark)] etc. */
-    <section className="w-full overflow-x-hidden bg-white px-4 sm:px-6 lg:px-8 selection:bg-[var(--theme-primary)] selection:text-[var(--theme-text-light)] flex flex-col justify-center items-center py-16 md:py-24 transition-colors duration-500">
+    /* Fix 1: min-h-screen ko hata kar auto kiya aur padding adjust ki */
+    <section className="w-full h-auto overflow-x-hidden bg-white px-4 sm:px-8 md:px-12 lg:px-16 flex flex-col justify-center items-center py-12 md:py-16 lg:py-24 transition-colors duration-500">
 
-      <div className="w-full max-w-[92%] md:max-w-[85%] bg-white border border-zinc-200 rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-[0_8px_30px_rgb(0,0,0,0.05)] md:max-h-[80vh] transition-colors duration-500">
+      {/* Main Container: md:min-h ko thoda kam kiya taaki iPad par box stretch na ho */}
+      <div className="w-full max-w-[1200px] bg-white border border-zinc-200 rounded-3xl overflow-hidden flex flex-col md:flex-row shadow-[0_20px_50px_rgba(0,0,0,0.05)] md:min-h-[480px] lg:min-h-[550px] transition-colors duration-500">
 
         {/* Left Side - Image */}
-        <div className="w-full md:w-1/2 h-[200px] sm:h-[300px] md:h-auto md:min-h-[400px] relative overflow-hidden group">
-          <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-700 z-10"></div>
+        <div className="w-full md:w-1/2 h-[350px] sm:h-[450px] md:h-auto relative overflow-hidden group">
+          <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-all duration-700 z-10"></div>
           <img 
-            src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=800&q=80" 
+            src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=1200&q=80" 
             alt="Premium Audio" 
-            className="w-full h-full object-cover transform transition-transform duration-[10s] group-hover:scale-110"
+            className="absolute inset-0 w-full h-full object-cover transform transition-transform duration-[10s] group-hover:scale-105"
           />
         </div>
 
         {/* Right Side - Content */}
-        <div className="w-full md:w-1/2 p-6 sm:p-10 md:p-12 lg:p-16 flex flex-col justify-center relative overflow-y-auto">
+        <div className="w-full md:w-1/2 p-8 sm:p-14 md:p-10 lg:p-20 flex flex-col justify-center relative bg-white">
           
-          {/* Glow Effect */}
+          {/* Decorative Glow */}
           <div 
-            className="absolute top-0 right-0 w-64 h-64 opacity-10 blur-[100px] pointer-events-none transition-colors duration-500"
+            className="absolute top-0 right-0 w-72 h-72 opacity-[0.08] blur-[120px] pointer-events-none"
             style={{ backgroundColor: 'var(--theme-primary)' }}
           ></div>
 
-          <div className="relative z-10 w-full">
-            <div className="flex items-center gap-3 mb-3 sm:mb-6">
+          <div className="relative z-10 w-full max-w-md mx-auto md:mx-0">
+            <div className="flex items-center gap-3 mb-6">
               <Mail className="w-4 h-4 text-[var(--theme-primary)]" />
-              <span className="text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.4em] font-bold text-[var(--theme-primary)]">
+              <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[var(--theme-primary)]">
                 The Inner Circle
               </span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[#111] mb-2 sm:mb-4 leading-tight">
+            {/* Fix 2: Font size ko md screens (iPad) par thoda control kiya */}
+            <h2 className="text-3xl sm:text-4xl md:text-3xl lg:text-5xl font-serif text-[#111] mb-4 leading-[1.1]">
               Elevate Your <br />
               <span className="italic text-[var(--theme-primary)]">Everyday.</span>
             </h2>
 
-            <p className="text-zinc-600 text-[11px] sm:text-sm leading-relaxed mb-6 max-w-sm">
+            <p className="text-zinc-500 text-sm sm:text-base md:text-sm lg:text-base leading-relaxed mb-10">
               Become a Truee insider. Gain early access to limited releases and curated tech stories.
             </p>
 
             {isSubmitted ? (
-              <div className="bg-zinc-50 border border-[var(--theme-primary)]/30 rounded-lg p-6 text-center animate-in fade-in transition-all">
-                <p className="text-[var(--theme-primary)] font-serif italic text-xl mb-2">Welcome to the Club.</p>
-                <p className="text-zinc-500 text-xs uppercase tracking-widest">Your premium journey begins now.</p>
+              <div className="bg-zinc-50 border border-[var(--theme-primary)]/20 rounded-xl p-8 text-center animate-in fade-in zoom-in duration-500">
+                <p className="text-[var(--theme-primary)] font-serif italic text-2xl mb-2">Welcome to the Club.</p>
+                <p className="text-zinc-400 text-xs uppercase tracking-[0.2em]">Your premium journey begins now.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-4 sm:gap-6">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-8">
                 <div className="relative">
                   <input
                     type="email"
@@ -78,11 +78,11 @@ export default function Newsletter() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder=" "
-                    className="peer w-full bg-transparent border-b border-zinc-300 py-2 sm:py-3 text-[#111] text-sm focus:outline-none focus:border-[var(--theme-primary)] transition-colors duration-300 placeholder-transparent"
+                    className="peer w-full bg-transparent border-b-2 border-zinc-100 py-3 text-[#111] text-base focus:outline-none focus:border-[var(--theme-primary)] transition-colors duration-500 placeholder-transparent"
                   />
                   <label
                     htmlFor="newsletter-email"
-                    className="absolute left-0 top-3 text-[10px] sm:text-xs font-medium tracking-wider text-zinc-500 uppercase transition-all duration-300 peer-focus:-top-3 peer-focus:text-[10px] peer-focus:text-[var(--theme-primary)] peer-[&:not(:placeholder-shown)]:-top-3 peer-[&:not(:placeholder-shown)]:text-[var(--theme-primary)]"
+                    className="absolute left-0 top-3 text-xs font-bold tracking-widest text-zinc-400 uppercase transition-all duration-300 peer-focus:-top-5 peer-focus:text-[10px] peer-focus:text-[var(--theme-primary)] peer-[&:not(:placeholder-shown)]:-top-5 peer-[&:not(:placeholder-shown)]:text-[var(--theme-primary)]"
                   >
                     Email Address
                   </label>
@@ -90,10 +90,10 @@ export default function Newsletter() {
 
                 <button
                   type="submit"
-                  className="w-full bg-[var(--theme-primary)] text-black hover:text-white hover:bg-[#222] font-black py-3.5 sm:py-4 text-[11px] uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-3 group rounded-sm"
+                  className="w-full bg-[var(--theme-primary)] text-black hover:bg-black hover:text-white font-bold py-5 text-[11px] uppercase tracking-[0.3em] transition-all duration-500 flex items-center justify-center gap-3 group rounded-full shadow-lg shadow-[var(--theme-primary)]/10"
                 >
                   Subscribe Now
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
                 </button>
               </form>
             )}

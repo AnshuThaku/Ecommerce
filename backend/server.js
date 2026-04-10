@@ -7,9 +7,10 @@ const dns = require('dns');
 dns.setServers(['8.8.8.8', '8.8.4.4']);
 
 connectDb();
+const PORT = process.env.VITE_BACKEND_URL;
 
-const server = app.listen(8080, () => {
-  console.log('Server is running on port 8080...');
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}...`);
 });
 
 
@@ -17,6 +18,6 @@ app.use((err, req, res, next) => {
     console.error('GLOBAL ERROR HANDLER: ', err);
     res.status(500).json({
         success: false,
-        message: 'Kuch toh gadbad hai! Server error ho gaya.'
+        message: 'something is wrong'
     });
 });

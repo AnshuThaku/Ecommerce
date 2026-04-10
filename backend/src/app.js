@@ -6,7 +6,7 @@ const app = express();
 
 
 app.use(cors({
-  origin: "http://localhost:5173", // Replace with your frontend domain
+  origin: "*", // Replace with your frontend domain
   credentials: true // Allow cookies to be sent
 }));
 app.use(express.json());
