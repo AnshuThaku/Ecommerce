@@ -1,4 +1,4 @@
-const Product = require('../../models/product/productModel');
+const Product = require('../../models/Product/ProductModel');
 const Review = require('../../models/review/reviewModel');
 const wrapAsync = require('../../utils/errorHandler/wrapAsync');
 const ExpressError = require('../../utils/errorHandler/expressError');
