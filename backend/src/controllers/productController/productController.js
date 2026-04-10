@@ -1,4 +1,4 @@
-const Product = require('../../models/product/productModel');
+const product = require('../../models/product/productModel');
 const wrapAsync = require('../../utils/errorHandler/wrapAsync');
 const ExpressError = require('../../utils/errorHandler/expressError');
 const { PutObjectCommand, DeleteObjectCommand } = require("@aws-sdk/client-s3");
