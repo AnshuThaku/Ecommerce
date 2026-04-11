@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { registerCompany } = require('../../controllers/companyController/companyController');
+const { registerCompany } = require('../controllers/companyController');
 
 // Route: POST /api/company/register
 // Public route (used to initialize the MNC platform)

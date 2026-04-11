@@ -1,10 +1,10 @@
-const User           = require('../../models/User/userModel');
-const CompanyProfile = require('../../models/company/companyModel');
+const User           = require('../models/userModel');
+const CompanyProfile = require('../models/companyModel');
 const bcrypt         = require('bcryptjs');
-const generatePassword = require('../../utils/generatePassword');
-const emailService   = require('../../services/emailService/emailService');
-const wrapAsync      = require('../../utils/errorHandler/wrapAsync');
-const ExpressError   = require('../../utils/errorHandler/expressError');
+const generatePassword = require('../utils/generatePassword');
+const emailService   = require('../services/emailService/emailService');
+const wrapAsync      = require('../utils/wrapAsync');
+const ExpressError   = require('../utils/expressError');
 
 // ─────────────────────────────────────────────────────────
 //  ADMIN MANAGEMENT

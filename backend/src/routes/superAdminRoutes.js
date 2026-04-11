@@ -9,7 +9,7 @@ const {
   getCompanyProfile,
   updateCompanyProfile,
   getAnalytics,
-} = require('../../controllers/superAdminController/superAdminController');
+} = require('../../controllers/superAdminController');
 
 // All routes require a valid JWT + Super-Admin role
 router.use(protect, superAdminOnly);

@@ -1,7 +1,7 @@
-const Product = require('../../models/Product/ProductModel');
-const Review = require('../../models/review/reviewModel');
-const wrapAsync = require('../../utils/errorHandler/wrapAsync');
-const ExpressError = require('../../utils/errorHandler/expressError');
+const Product = require('../models/ProductModel');
+const Review = require('../models/reviewModel');
+const wrapAsync = require('../utils/wrapAsync');
+const ExpressError = require('../utils/expressError');
 
 // @desc    Create Review
 // @route   POST /api/reviews/:productId

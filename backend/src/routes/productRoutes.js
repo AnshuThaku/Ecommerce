@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 
-const upload = require('../../middleware/upload/upload');
+const upload = require('../middleware/upload');
 const {
   createProduct,
   getAdminProducts,
@@ -9,14 +9,14 @@ const {
   deleteProduct,
   getAllProducts,
   getProductDetails,
-} = require('../../controllers/productController/productController');
+} = require('../../config/productController');
 
-const {getSearchSuggestions,fullSearch} = require('../../controllers/productController/searchProductController');
-const { toggleFeaturedStatus } = require('../../controllers/productController/productController');
+const {getSearchSuggestions,fullSearch} = require('../controllers/searchProductController');
+const { toggleFeaturedStatus } = require('../../config/productController');
 
 // Ye do middleware check karte hain ki user logged in hai aur admin/company role se hai
-const { protect } = require('../../middleware/authMiddleware');
-const { adminOnly, superAdminOnly } = require('../../middleware/roleMiddleware');
+const { protect } = require('../middleware/authMiddleware');
+const { adminOnly, superAdminOnly } = require('../middleware/roleMiddleware');
 
 const router = express.Router();
 

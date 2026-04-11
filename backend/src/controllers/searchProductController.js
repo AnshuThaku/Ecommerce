@@ -1,5 +1,5 @@
-const Product = require('../../models/Product/ProductModel'); 
-const wrapAsync = require('../../utils/errorHandler/wrapAsync');
+const Product = require('../models/ProductModel'); 
+const wrapAsync = require('../utils/wrapAsync');
 
 // 1. SMART SUGGESTIONS API (Universal)
 exports.getSearchSuggestions = wrapAsync(async (req, res) => {

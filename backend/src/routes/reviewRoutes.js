@@ -4,7 +4,7 @@ const {
   updateReview,
   deleteReview,
   getReviewsByProduct
-} = require('../../controllers/reviewController/reviewController');
+} = require('../../controllers/reviewController');
 
 const { protect } = require('../../middleware/authMiddleware');
 

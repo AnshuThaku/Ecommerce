@@ -1,5 +1,5 @@
-const CompanyProfile = require('../../models/company/companyModel');
-const User = require('../../models/User/userModel');
+const CompanyProfile = require('../models/companyModel');
+const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 const generatePassword = require('../../utils/generatePassword');
 const emailService = require('../../services/emailService/emailService');

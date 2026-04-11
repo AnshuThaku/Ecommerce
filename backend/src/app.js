@@ -12,17 +12,17 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/api/company", require("./routes/companyRoutes/companyRoutes"));
-app.use("/api/auth",    require("./routes/authRoutes/authRoutes"));
+app.use("/api/company", require("./routes/companyRoutes"));
+app.use("/api/auth",    require("./routes/authRoutes"));
 app.use("/api/Superadmin",   require("./routes/superAdminRoutes/superAdminRoutes"));
-app.use("/api/products", require("./routes/productRoutes/productRoutes"));
+app.use("/api/products", require("./routes/productRoutes"));
 app.use("/api/reviews",  require("./routes/reviewRoutes/reviewRoutes"));
-app.use("/api/admin",    require("./routes/adminRoutes/adminRoutes"));
-app.use("/api/cart",     require("./routes/addTocart/addTocartRoutes"));
-app.use("/api/orders",   require("./routes/orderRoutes/orderRoutes"));
-app.use("/api/history",  require("./routes/historyroutes/historyRoutes"));
-app.use("/api/home",  require("./routes/homeRoutes/homeroutes"));
-app.use("/api/theme",  require("./routes/Theme/ThemeRoutes"));
+app.use("/api/admin",    require("./routes/adminRoutes"));
+app.use("/api/cart",     require("./routes/addTocartRoutes"));
+app.use("/api/orders",   require("./routes/orderRoutes"));
+app.use("/api/history",  require("./routes/historyRoutes"));
+app.use("/api/home",  require("./routes/homeroutes"));
+app.use("/api/theme",  require("./routes/ThemeRoutes"));
 
 app.use(errorMiddleware);
 
