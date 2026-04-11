@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getHistory, trackHistory } = require('../../controllers/historyController/historyController');
+const { getHistory, trackHistory } = require('../controllers/historyController');
 
 // 👇 1. 'protect' ki jagah 'optionalProtect' import kiya
 const { optionalProtect } = require('../middleware/authMiddleware');

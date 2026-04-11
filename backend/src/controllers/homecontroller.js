@@ -1,7 +1,7 @@
-const Product = require('../../models/Product/ProductModel');
-const History = require('../../models/History/HistoryModel');
-const recommendationService = require('../../services/recomendationservice'); 
-const wrapAsync = require('../../utils/errorHandler/wrapAsync');
+const Product = require('../models/ProductModel');
+const History = require('../models/HistoryModel');
+const recommendationService = require('../services/recomendationservice'); 
+const wrapAsync = require('../utils/wrapAsync');
 
 /**
  * @desc    Get All Home Page Data (Hybrid Model)

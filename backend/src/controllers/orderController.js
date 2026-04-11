@@ -1,6 +1,6 @@
-const Order = require('../../models/order/orderModel'); // Apna path check kar lijiye
-const Product = require('../../models/Product/ProductModel'); // Apna path check kar lijiye
-const wrapAsync = require('../../utils/errorHandler/wrapAsync');
+const Order = require('../models/orderModel'); // Apna path check kar lijiye
+const Product = require('../models/ProductModel'); // Apna path check kar lijiye
+const wrapAsync = require('../utils/wrapAsync');
 const mongoose = require('mongoose');
 
 exports.instantCheckout = wrapAsync(async (req, res) => {

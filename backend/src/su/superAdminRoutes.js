@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const { protect }         = require('../../middleware/authMiddleware');
-const { superAdminOnly }  = require('../../middleware/roleMiddleware');
+const { protect }         = require('../middleware/authMiddleware');
+const { superAdminOnly }  = require('../middleware/roleMiddleware');
 const {
   createAdmin,
   getAllAdmins,
@@ -9,7 +9,7 @@ const {
   getCompanyProfile,
   updateCompanyProfile,
   getAnalytics,
-} = require('../../controllers/superAdminController');
+} = require('../controllers/superAdminController');
 
 // All routes require a valid JWT + Super-Admin role
 router.use(protect, superAdminOnly);

@@ -9,10 +9,10 @@ const {
   deleteProduct,
   getAllProducts,
   getProductDetails,
-} = require('../../config/productController');
+} = require('../controllers/productController');
 
 const {getSearchSuggestions,fullSearch} = require('../controllers/searchProductController');
-const { toggleFeaturedStatus } = require('../../config/productController');
+const { toggleFeaturedStatus } = require('../controllers/productController');
 
 // Ye do middleware check karte hain ki user logged in hai aur admin/company role se hai
 const { protect } = require('../middleware/authMiddleware');

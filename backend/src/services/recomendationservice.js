@@ -1,5 +1,5 @@
-const History = require('../models/History/HistoryModel');
-const Product = require('../models/Product/ProductModel');
+const History = require('../models/HistoryModel');
+const Product = require('../models/ProductModel');
 
 // ============================================================================
 // 🧠 1. RECENTLY VIEWED (Aapka pehle wala same rahega)

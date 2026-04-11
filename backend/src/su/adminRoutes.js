@@ -1,5 +1,5 @@
 const router=require('express').Router()
-const {getAllUsers}=require('../../controllers/adminController/adminController')
+const {getAllUsers}=require('../controllers/adminController')
 const {protect}=require('../middleware/authMiddleware')
 const {adminOnly}=require('../middleware/roleMiddleware')
 

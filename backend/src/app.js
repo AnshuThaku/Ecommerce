@@ -14,9 +14,9 @@ app.use(cookieParser());
 
 app.use("/api/company", require("./routes/companyRoutes"));
 app.use("/api/auth",    require("./routes/authRoutes"));
-app.use("/api/Superadmin",   require("./routes/superAdminRoutes/superAdminRoutes"));
+app.use("/api/Superadmin",   require("./routes/superAdminRoutes"));
 app.use("/api/products", require("./routes/productRoutes"));
-app.use("/api/reviews",  require("./routes/reviewRoutes/reviewRoutes"));
+app.use("/api/reviews",  require("./routes/reviewRoutes"));
 app.use("/api/admin",    require("./routes/adminRoutes"));
 app.use("/api/cart",     require("./routes/addTocartRoutes"));
 app.use("/api/orders",   require("./routes/orderRoutes"));

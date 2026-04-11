@@ -3,7 +3,7 @@ const wrapAsync = require('../utils/wrapAsync');
 const ExpressError = require('../utils/expressError');
 const { PutObjectCommand, DeleteObjectCommand } = require("@aws-sdk/client-s3");
 const mongoose = require('mongoose');
-const r2 = require("./cloudConfig");
+const r2 = require("../config/cloudConfig");
 
 // @desc    Create new product
 // @route   POST /api/products/admin/product/new

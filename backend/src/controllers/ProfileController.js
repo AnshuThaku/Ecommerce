@@ -1,4 +1,4 @@
-const User=require('../../models/User/userModel')
+const User=require('../models/userModel')
 // @desc    Get logged in user profile
 // @route   GET /api/users/profile
 // @access  Private

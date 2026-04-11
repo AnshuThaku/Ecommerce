@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { login, updateFirstPassword, registerCustomer, logout } = require('../../controllers/authController/authController');
+const { login, updateFirstPassword, registerCustomer, logout } = require('../controllers/authController');
 const { protect } = require('../middleware/authMiddleware');
-const { getUserProfile, updateUserProfile } = require('../../controllers/profileController/ProfileController');
+const { getUserProfile, updateUserProfile } = require('../controllers/ProfileController');
 
 // Route: POST /api/auth/register
 // Public route (customers signing up themselves)

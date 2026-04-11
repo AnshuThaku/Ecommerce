@@ -1,6 +1,6 @@
-const cartModel = require("../../models/cart/cartModel");
-const wrapAsync = require("../../utils/errorHandler/wrapAsync");
-const ExpressError = require("../../utils/errorHandler/expressError");
+const cartModel = require("../models/cartModel");
+const wrapAsync = require("../utils/wrapAsync");
+const ExpressError = require("../utils/expressError");
 
 
 exports.deleteCartController = wrapAsync(async (req, res) => {

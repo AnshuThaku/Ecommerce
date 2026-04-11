@@ -1,5 +1,5 @@
-const History = require('../../models/History/HistoryModel');
-const wrapAsync = require('../../utils/errorHandler/wrapAsync');
+const History = require('../models/HistoryModel');
+const wrapAsync = require('../utils/wrapAsync');
 
 // =========================================================
 // 1. TRACK HISTORY (Saves both Views and Searches)

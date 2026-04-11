@@ -1,5 +1,5 @@
-const cartModel = require("../../models/cart/cartModel");
-const wrapAsync = require("../../utils/errorHandler/wrapAsync");
+const cartModel = require("../models/cartModel");
+const wrapAsync = require("../utils/wrapAsync");
 
 exports.cartDetailsController = wrapAsync(async (req, res) => {
     const userId = req.user ? req.user.id : null;

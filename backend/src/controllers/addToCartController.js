@@ -1,8 +1,8 @@
-const cartModel = require("../../models/cart/cartModel");
+const cartModel = require("../models/cartModel");
 // ⚡ ADDED: Product model import kiya taaki original price check kar sakein
-const Product = require("../../models/Product/ProductModel"); 
-const wrapAsync = require("../../utils/errorHandler/wrapAsync");
-const ExpressError = require("../../utils/errorHandler/expressError");
+const Product = require("../models/ProductModel"); 
+const wrapAsync = require("../utils/wrapAsync");
+const ExpressError = require("../utils/expressError");
 
 exports.addToCartController = wrapAsync(async (req, res) => {
     const { productId, quantity } = req.body;

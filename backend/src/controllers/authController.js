@@ -1,9 +1,9 @@
-const User = require('../../models/User/userModel');
-const Cart = require('../../models/cart/cartModel');
+const User = require('../models/userModel');
+const Cart = require('../models/cartModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const wrapAsync = require('../../utils/errorHandler/wrapAsync');
-const ExpressError = require('../../utils/errorHandler/expressError');
+const wrapAsync = require('../utils/wrapAsync');
+const ExpressError = require('../utils/expressError');
 
 // --- HELPER: VERIFY GOOGLE RECAPTCHA ---
 const verifyGoogleRecaptcha = async (token) => {

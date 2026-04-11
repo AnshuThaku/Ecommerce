@@ -1,5 +1,5 @@
 // backend/controllers/ThemeController.js
-const Theme = require('../../models/Theme/Theme');
+const Theme = require('../models/Theme');
 
 // controllers/ThemeController.js
 
