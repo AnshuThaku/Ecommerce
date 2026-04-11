@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { ShoppingBag, Settings, Box, CreditCard, Power } from "lucide-react"
-import SidebarItem from "./SidebarItem"
+import Sidebaritem from "./Sidebaritem"
 
 const Sidebar = ({ activeTab, setActiveTab }) => {
 
@@ -18,7 +18,7 @@ return (
 
 {/* Orders Route */}
 <Link to="/cart">
-<SidebarItem icon={ShoppingBag} label="My Orders" />
+<Sidebaritem icon={ShoppingBag} label="My Orders" />
 </Link>
 
 {/* Account Settings */}
@@ -29,7 +29,7 @@ return (
 <span>Account Settings</span>
 </div>
 
-<SidebarItem
+<Sidebaritem    
 label="Profile Information"
 id="profile"
 activeTab={activeTab}
@@ -37,7 +37,7 @@ setActiveTab={setActiveTab}
 isSubItem
 />
 
-<SidebarItem
+<Sidebaritem
 label="Manage Addresses"
 id="addresses"
 activeTab={activeTab}
@@ -55,7 +55,7 @@ isSubItem
 <span>Payments</span>
 </div>
 
-<SidebarItem
+<Sidebaritem
 label="Gift Cards"
 id="gifts"
 activeTab={activeTab}
@@ -63,7 +63,7 @@ setActiveTab={setActiveTab}
 isSubItem
 />
 
-<SidebarItem
+<Sidebaritem
 label="Saved UPI"
 id="upi"
 activeTab={activeTab}
@@ -81,7 +81,7 @@ isSubItem
 <span>Personal Collection</span>
 </div>
 
-<SidebarItem
+<Sidebaritem
 label="My Coupons"
 id="coupons"
 activeTab={activeTab}
@@ -89,7 +89,7 @@ setActiveTab={setActiveTab}
 isSubItem
 />
 
-<SidebarItem
+<Sidebaritem
 label="Reviews & Ratings"
 id="reviews"
 activeTab={activeTab}
@@ -97,7 +97,7 @@ setActiveTab={setActiveTab}
 isSubItem
 />
 
-<SidebarItem
+<Sidebaritem
 label="All Notifications"
 id="notifications"
 activeTab={activeTab}
@@ -105,7 +105,7 @@ setActiveTab={setActiveTab}
 isSubItem
 />
 
-<SidebarItem
+<Sidebaritem
 label="Wishlist"
 id="wishlist"
 activeTab={activeTab}
