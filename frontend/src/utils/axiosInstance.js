@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 const api = axios.create({ 
-  baseURL: '/api',
+  // ⚡ VITE_BACKEND_URI agar .env mein hai toh wo use hoga (Production/Vercel par), 
+  // warna fallback ke liye '/api' use hoga jo local proxy ke through 8080 par jayega.
+  baseURL: import.meta.env.VITE_BACKEND_URI || '/api',
   withCredentials: true 
 });
 
