@@ -10,53 +10,45 @@ const ImageSlider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiperInstance, setSwiperInstance] = useState(null);
 
- const slidesMain = [
- 
-  {
-    id: 1,
-    // Marshall Splash / Action Shot
-    img:"https://images.unsplash.com/photo-1692651763027-72aeb12130d7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bWFyc2hhbGwlMjBzcGVha2VyfGVufDB8fDB8fHww",
-    tagline: "MARSHALL SIGNATURE"
-  },
-   {
-    id: 2,
-    // Sonos Banner
-    img:"https://images.pexels.com/photos/31306016/pexels-photo-31306016.jpeg",
-    tagline:"Marshall Stanmore II"
-  },
-  {
-    id: 3,
-    // Premium Black Headphones (Sonos Vibe)
-    img:"https://images.unsplash.com/photo-1692351014024-97edd83a7b5a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bWFyc2hhbGwlMjBzcGVha2VyfGVufDB8fDB8fHww",
-    tagline: "PREMIUM SOUND"
-  },
-];
+  const slidesMain = [
+    {
+      id: 1,
+      img: "https://images.unsplash.com/photo-1692651763027-72aeb12130d7?w=600&auto=format&fit=crop&q=60",
+      tagline: "MARSHALL SIGNATURE"
+    },
+    {
+      id: 2,
+      img: "https://images.pexels.com/photos/31306016/pexels-photo-31306016.jpeg",
+      tagline: "Marshall Stanmore II"
+    },
+    {
+      id: 3,
+      img: "https://images.unsplash.com/photo-1692351014024-97edd83a7b5a?w=600&auto=format&fit=crop&q=60",
+      tagline: "PREMIUM SOUND"
+    },
+  ];
 
-const slidesSide = [
-  { 
-    id: 1, 
-    // Marshall Speaker Splash (Naye grid design se match karta hua)
-    img:"https://images.unsplash.com/photo-1639385054611-53f34c9297d4?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8bWFyc2hhbGwlMjBzcGVha2VyfGVufDB8fDB8fHww"
-  },
-  { 
-    id: 2, 
-    // Sonos/Sony Style Black Headphones
-    // (Agar aap apna local headphone use karna chahte hain, toh isko "/Left.png" kar dena)
-    img:"https://images.unsplash.com/photo-1502798985865-1ab60332f46c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bWFyc2hhbGwlMjBzcGVha2VyfGVufDB8fDB8fHww"
-  },
-  { 
-    id: 3, 
-    // TWS Earbuds (Aapke screenshot wale JBL/Bose style earbuds)
-    img:"https://images.unsplash.com/photo-1707364917582-6ad0f98379df?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fG1hcnNoYWxsJTIwc3BlYWtlcnxlbnwwfHwwfHx8MA%3D%3D"
-  },
-];
+  const slidesSide = [
+    { 
+      id: 1, 
+      img: "https://images.unsplash.com/photo-1639385054611-53f34c9297d4?w=600&auto=format&fit=crop&q=60" 
+    },
+    { 
+      id: 2, 
+      img: "https://images.unsplash.com/photo-1502798985865-1ab60332f46c?w=600&auto=format&fit=crop&q=60" 
+    },
+    { 
+      id: 3, 
+      img: "https://images.unsplash.com/photo-1707364917582-6ad0f98379df?w=600&auto=format&fit=crop&q=60" 
+    },
+  ];
 
   return (
-    <div className="w-full relative flex flex-col md:flex-row gap-4 md:gap-[30px] m-0 p-0 md:px-6 xl:px-12">
+    // md:gap-[30px] desktop ke liye, gap-12 mobile par space dene ke liye
+    <div className="w-full relative flex flex-col md:flex-row gap-12 md:gap-[30px] m-0 p-0 md:px-6 xl:px-12 py-10">
 
       {/* 1. Main Image Box */}
       <div className="relative w-full md:w-[58%] shrink-0 flex-none h-[400px] md:h-[550px] xl:h-[600px]">
-        
         <div className="relative overflow-hidden w-full h-full bg-[#f9f9f9]">
           <Swiper
             modules={[Navigation, EffectFade]}
@@ -66,7 +58,7 @@ const slidesSide = [
             onSwiper={(swiper) => setSwiperInstance(swiper)}
             loop={true}
             allowTouchMove={false}
-            className="w-full h-full"       
+            className="w-full h-full"
           >
             {slidesMain.map((slide) => (
               <SwiperSlide key={`main-${slide.id}`}>
@@ -77,7 +69,7 @@ const slidesSide = [
                     alt={`Deal ${slide.id}`}
                   />
                   
-                  {/* White Info Card completely inside the image box */}
+                  {/* Info Card */}
                   <div className="absolute bottom-4 left-4 md:bottom-2 md:left-1 bg-white py-5 px-6 md:py-6 md:px-8 shadow-lg min-w-[220px] md:min-w-[260px] z-[60]">
                     <p className="text-[12px] text-gray-400 tracking-[0.05em] mb-1 flex items-center gap-2">
                       <span className="font-semibold text-black">0{slide.id}</span>
@@ -92,27 +84,28 @@ const slidesSide = [
           </Swiper>
         </div>
 
-        {/* Navigation Arrows positioned completely outside the image box at the bottom left */}
-        <div className="absolute -bottom-10 left-0 z-[60] flex gap-3 items-center bg-transparent px-2 py-1">
-          <button 
-            onClick={() => swiperInstance?.slidePrev()}
-            className="text-gray-600 hover:text-black transition-colors bg-transparent border border-gray-300 rounded-full w-8 h-8 flex items-center justify-center text-[18px] font-light cursor-pointer"
-          >
-            ‹
-          </button>
-          <button 
-            onClick={() => swiperInstance?.slideNext()}
-            className="text-gray-600 hover:text-black transition-colors bg-transparent border border-gray-300 rounded-full w-8 h-8 flex items-center justify-center text-[18px] font-light cursor-pointer"
-          >
-            ›
-          </button>
+        {/* NAVIGATION ARROWS: Mobile par dono images ke center space mein */}
+
+        <div className="relative md:absolute flex justify-center md:justify-start items-center gap-4 w-full md:w-auto mt-6 md:mt-0 md:-bottom-10 md:left-0 z-[70]">
+         <button 
+  onClick={() => swiperInstance?.slidePrev()}
+  className="text-black hover:bg-black hover:text-white transition-all bg-white border border-gray-200 rounded-full w-9 h-9 flex items-center justify-center text-[18px] shadow-sm cursor-pointer"
+>
+  ‹
+</button>
+
+<button 
+  onClick={() => swiperInstance?.slideNext()}
+  className="text-black hover:bg-black hover:text-white transition-all bg-white border border-gray-200 rounded-full w-9 h-9 flex items-center justify-center text-[18px] shadow-sm cursor-pointer"
+>
+  ›
+</button>
         </div>
       </div>
 
       {/* 2. Right Image Box */}
-      {/* Right wali image ki height tag 'h-[300px] md:h-[400px] xl:h-[500px]' ki taaki ye First wale se choti lage */}
       <div className="relative w-full md:w-[42%] shrink-0 flex-none h-[300px] md:h-[400px] xl:h-[500px] flex flex-col justify-start">
-        <div className="relative overflow-hidden bg-[#111] w-full h-[calc(100%-40px)] rounded-[2px] shadow-md">
+        <div className="relative overflow-hidden bg-[#111] w-full h-full rounded-[2px] shadow-md">
           <Swiper
             modules={[Autoplay, EffectFade]}
             effect="fade"
@@ -136,8 +129,8 @@ const slidesSide = [
           </Swiper>
         </div>
 
-         {/* Pagination Dots Below the Right Image */}
-        <div className="flex gap-3 items-center mt-4 pl-2 h-[20px]">
+        {/* Pagination Dots (Right Image ke niche) */}
+        <div className="flex gap-3 items-center mt-6 justify-center md:justify-start">
           {slidesMain.map((_, index) => (
             <span
               key={index}

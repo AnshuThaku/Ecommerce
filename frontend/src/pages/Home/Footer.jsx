@@ -7,154 +7,140 @@ export default function Footer() {
       style={{
         background: "#ffffff",
         color: "#111111",
-        paddingTop: "80px",
+        paddingTop: "80px", // Luxury feel ke liye padding thodi badhayi
         paddingBottom: "40px",
         fontFamily: "'Montserrat', sans-serif",
-        transition: "background 0.5s ease, color 0.5s ease",
-        borderTop: "1px solid #eaeaea"
+        borderTop: "1px solid #f0f0f0"
       }}
     >
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap');
 
         .footer-link {
-          color: #999;
+          color: #888;
           text-decoration: none;
           font-size: 13px;
           font-weight: 400;
           letter-spacing: 0.05em;
-          transition: color 0.3s ease, transform 0.3s ease;
+          transition: all 0.3s ease;
           display: inline-block;
         }
+
         .footer-link:hover {
-          color: var(--theme-primary);
-          transform: translateX(4px);
+          color: #111;
+          transform: translateX(5px); /* Chota sa movement effect */
         }
 
         .footer-heading {
           text-transform: uppercase;
-          letter-spacing: 0.25em;
-          font-size: 11px;
-          font-weight: 600;
-          margin-bottom: 28px;
+          letter-spacing: 0.2em;
+          font-size: 12px;
+          font-weight: 700;
+          margin-bottom: 25px;
           color: #111;
+        }
+
+        .footer-container {
+          max-width: 1400px; /* Thoda tight container for premium look */
+          margin: 0 auto;
+          padding: 0 40px;
+        }
+
+        .footer-grid {
+          display: grid;
+          grid-template-columns: 2fr 1fr 1fr 1fr; /* Logo section wider */
+          gap: 50px;
+          margin-bottom: 80px;
+        }
+
+        @media (max-width: 1024px) {
+          .footer-grid { grid-template-columns: repeat(2, 1fr); }
+          .footer-logo-section { grid-column: span 2; }
+        }
+
+        @media (max-width: 768px) {
+          .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+          .footer-logo-section { grid-column: span 1; text-align: center; align-items: center; }
+          .footer-heading { text-align: center; }
+          ul { align-items: center !important; text-align: center; }
+          .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
         }
       `}</style>
 
-      <div style={{ maxWidth: "1600px", margin: "0 auto", padding: "0 40px" }}> 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",        
-            gap: "80px",
-            marginBottom: "60px",
-          }}
-        >
-          {/* Logo & Description */}
-          <div style={{ gridColumn: "span 2", paddingRight: "40px" }}>
-            <Link to="/" style={{ textDecoration: 'none' }}>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  marginBottom: "24px",
-                  cursor: "pointer",
-                }}
-              >
-                <div style={{ display: "flex", gap: "3px", marginBottom: "12px" }}>
-                  <div style={{ width: "2px", height: "16px", backgroundColor: "#444" }}></div>
-                  <div style={{ width: "2px", height: "24px", backgroundColor: "#666" }}></div>
-                  <div style={{ width: "2px", height: "32px", backgroundColor: "var(--theme-primary)" }}></div>
-                  <div style={{ width: "2px", height: "24px", backgroundColor: "#666" }}></div>
-                  <div style={{ width: "2px", height: "16px", backgroundColor: "#444" }}></div>
-                </div>
-                <h2
-                  style={{
-                    fontSize: "28px",
-                    fontFamily: "'Playfair Display', serif",
-                    fontWeight: "700",
-                    letterSpacing: "0.15em",
-                    margin: "0",
-                    color: "#111"
-                  }}
-                >
-                  TRUEE<span style={{ color: "var(--theme-primary)", fontStyle: "italic", fontWeight: "400" }}>.in</span>
-                </h2>
-              </div>
+      <div className="footer-container"> 
+        <div className="footer-grid">
+          
+          {/* --- LOGO SECTION --- */}
+          <div className="footer-logo-section" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+            <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '15px' }}>
+              {/* ✅ Original Logo Image Implementation */}
+              <img 
+                src="/Truee_Luxury_Logo.png" 
+                alt="Truee Luxury Logo" 
+                style={{ height: "45px", width: "auto", objectFit: "contain" }} 
+              />
+              <h2 style={{ 
+                fontSize: "22px", 
+                fontFamily: "'Playfair Display', serif", 
+                fontWeight: "700", 
+                letterSpacing: "0.1em", 
+                margin: "0", 
+                color: "#111",
+                textTransform: "uppercase" 
+              }}>
+                Truee<span style={{ color: "var(--theme-primary)", fontWeight: "300" }}></span>
+              </h2>
             </Link>
-            <p
-              style={{
-                color: "#888",
-                fontSize: "13px",
-                fontWeight: 300,
-                lineHeight: "2",
-                maxWidth: "380px",
-              }}
-            >
-              Curating the world's most premium luxury audio, smart home, and wellness products. Elevate your everyday living with our handpicked selection of global brands.
+            <p style={{ color: "#888", fontSize: "14px", fontWeight: 300, lineHeight: "1.8", maxWidth: "320px" }}>
+              Experience the pinnacle of craftsmanship with our curated collection of luxury audio and smart living essentials.
             </p>
           </div>
 
-          {/* Links */}
+          {/* --- LINKS COLUMNS --- */}
           <div>
-            <h4 className="footer-heading">The Collection</h4>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "16px" }}>
-              <li><Link to="/shop" state={{ search: 'Audio' }} className="footer-link">High-Fidelity Audio</Link></li>
-              <li><Link to="/shop" state={{ search: 'Smart' }} className="footer-link">Smart Wearables</Link></li>
-              <li><Link to="/shop" state={{ search: 'Home' }} className="footer-link">Luxury Home Care</Link></li> 
-              <li><Link to="/shop" state={{ search: 'Accessories' }} className="footer-link">Exclusive Accessories</Link></li>
+            <h4 className="footer-heading">Shop</h4>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
+              <li><Link to="/shop" className="footer-link">All Collections</Link></li>
+              <li><Link to="/shop?category=audio" className="footer-link">Audio Experience</Link></li>
+              <li><Link to="/shop?category=home" className="footer-link">Home Wellness</Link></li> 
             </ul>
           </div>
 
           <div>
-            <h4 className="footer-heading">Client Services</h4>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "16px" }}>
+            <h4 className="footer-heading">Assistance</h4>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
               <li><Link to="/profile" className="footer-link">My Account</Link></li>
-              <li><Link to="/orders" className="footer-link">Track Order</Link></li>
-              <li><Link to="#" className="footer-link">Shipping & Returns</Link></li>      
-              <li><Link to="#z" className="footer-link">Warranty Info</Link></li>    
+              <li><Link to="/orders" className="footer-link">Shipping Policy</Link></li>
+              <li><Link to="#" className="footer-link">Contact Us</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="footer-heading">Connect</h4>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "16px" }}>
-              <li><a href="#" className="footer-link">Instagram</a></li>        
-              <li><a href="#" className="footer-link">Facebook</a></li>
-              <li><a href="#" className="footer-link">LinkedIn</a></li>
-              <li><a href="#" className="footer-link">Twitter</a></li>
+            <h4 className="footer-heading">Legal</h4>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
+              <li><Link to="#" className="footer-link">Privacy Policy</Link></li> 
+              <li><Link to="#" className="footer-link">Terms of Service</Link></li>
+              <li><Link to="#" className="footer-link">Cookie Policy</Link></li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div
-          style={{
-            borderTop: "1px solid #eaeaea",
-            paddingTop: "32px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            flexWrap: "wrap",
-            gap: "20px",
-          }}
-        >
-          <p
-            style={{
-              color: "#666",
-              fontSize: "10px",
-              textTransform: "uppercase",
-              letterSpacing: "0.2em",
-              fontWeight: 600,
-              margin: 0,
-            }}
-          >
-            &copy; {new Date().getFullYear()} Truee Luxury. All rights reserved.
+        {/* --- BOTTOM BAR --- */}
+        <div className="footer-bottom" style={{ 
+          borderTop: "1px solid #f0f0f0", 
+          paddingTop: "30px", 
+          display: "flex", 
+          justifyContent: "space-between",
+          alignItems: "center"
+        }}>
+          <p style={{ color: "#999", fontSize: "11px", fontWeight: 500, letterSpacing: "0.1em" }}>
+            &copy; {new Date().getFullYear()} TRUEE LUXURY. ALL RIGHTS RESERVED.
           </p>
-          <div style={{ display: "flex", gap: "32px", flexWrap: "wrap" }}>      
-            <Link to="#" style={{ color: "#666", fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.2em", fontWeight: 600, textDecoration: "none", transition: "color 0.3s" }} onMouseOver={(e) => e.target.style.color="var(--theme-primary)"} onMouseOut={(e) => e.target.style.color="#666"}>Privacy Policy</Link>
-            <Link to="#" style={{ color: "#666", fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.2em", fontWeight: 600, textDecoration: "none", transition: "color 0.3s" }} onMouseOver={(e) => e.target.style.color="var(--theme-primary)"} onMouseOut={(e) => e.target.style.color="#666"}>Terms of Service</Link>
+          
+          <div style={{ display: "flex", gap: "20px" }}>
+             {/* Social Placeholder icons can go here */}
+             <a href="#" className="footer-link" style={{fontSize: '11px'}}>INSTAGRAM</a>
+             <a href="#" className="footer-link" style={{fontSize: '11px'}}>FACEBOOK</a>
           </div>
         </div>
       </div>
