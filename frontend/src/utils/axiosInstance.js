@@ -4,7 +4,7 @@ const api = axios.create({
   // ⚡ VITE_BACKEND_URI agar .env mein hai toh wo use hoga (Production/Vercel par), 
   // warna fallback ke liye '/api' use hoga jo local proxy ke through 8080 par jayega.
   // Direct render ka link hardcode kar diya
-  baseURL: 'https://ecommerce-0iuy.onrender.com/api', 
+  baseURL:  import.meta.env.VITE_BACKEND_URL || '/api', 
   withCredentials: true 
 }); 
 
