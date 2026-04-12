@@ -29,7 +29,6 @@ export default function ShopHome() {
     const fetchAllProducts = async () => {
       try {
         setLoading(true);
-        // Using lean and select for faster performance as discussed
         const { data } = await axiosInstance.get(`/products`);
         if (data.success) {
           setProducts(data.products);
@@ -52,8 +51,21 @@ export default function ShopHome() {
 
   useEffect(() => {
     if (location.state && !location.state.processed) {
-      if (location.state.category) setSelectedCategories([location.state.category]);
-      if (location.state.search) setSearchTerm(location.state.search);
+      if (location.state.categories) {
+        setSelectedCategories(location.state.categories);
+        setSearchTerm('');
+      } else if (location.state.category) {
+        setSelectedCategories([location.state.category]);
+        setSearchTerm('');
+      }
+
+      if (location.state.search) {
+        setSearchTerm(location.state.search);
+        if (!location.state.categories) {
+          setSelectedCategories([]); 
+        }
+      }
+
       navigate(location.pathname, { replace: true, state: { ...location.state, processed: true } });
     }
   }, [location.state, navigate]);
@@ -71,8 +83,14 @@ export default function ShopHome() {
     return products.filter(p => {
       const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(p.category);
       const matchesBrand = selectedBrands.length === 0 || selectedBrands.includes(p.brand);
+      
       const query = searchTerm.toLowerCase();
-      const matchesSearch = !query || p.name.toLowerCase().includes(query) || p.brand?.toLowerCase().includes(query);
+      
+      // ⚡ FIX 1: Added p.category check here so Smart Keywords (like "Speaker") work perfectly!
+      const matchesSearch = !query || 
+        p.name?.toLowerCase().includes(query) || 
+        p.brand?.toLowerCase().includes(query) || 
+        p.category?.toLowerCase().includes(query);
       
       const currentPrice = p.flashDeal?.isActive ? p.flashDeal.dealPrice : (p.price - (p.discountPrice || 0));
       const matchesStock = inStockOnly ? p.stock > 0 : true;
@@ -87,8 +105,16 @@ export default function ShopHome() {
     });
   }, [products, selectedCategories, selectedBrands, searchTerm, priceRange, sortOrder, inStockOnly]);
 
-  const activeBreadcrumbText = searchTerm ? 'SEARCH' : (selectedCategories[0] || 'ALL PRODUCTS');
-  const activeSelectionText = searchTerm ? `Results for "${searchTerm}"` : (selectedCategories[0] || 'The Collection');
+  let activeBreadcrumbText = 'ALL PRODUCTS';
+  let activeSelectionText = 'The Collection';
+
+  if (searchTerm) {
+    activeBreadcrumbText = 'SEARCH';
+    activeSelectionText = `Results for "${searchTerm}"`;
+  } else if (selectedCategories.length > 0) {
+    activeBreadcrumbText = 'CATEGORY';
+    activeSelectionText = selectedCategories.length > 1 ? 'Selected Categories' : selectedCategories[0];
+  }
 
   return (
     <div className="min-h-screen bg-[#fafafa]">
@@ -97,33 +123,45 @@ export default function ShopHome() {
 
       <main className="w-full max-w-[1600px] mx-auto px-4 sm:px-8 pt-12 pb-16 flex flex-col items-center">
 
-        {/* ── ⚡ LUXURY TITLE SECTION ── */}
-        <div className="w-full flex flex-col items-center text-center mb-12 md:mb-16">
-          <h1 
-            className="text-[36px] md:text-[46px] font-serif tracking-tight text-[#111] mb-4"
-            style={{ fontFamily: "'Playfair Display', serif", fontWeight: '700' }}
-          >
-            {activeSelectionText}
-          </h1>
-
+      {/* ── ⚡ REFINED LUXURY TITLE SECTION (COMPACT & QUOTE-FREE) ── */}
+        <div className="w-full flex flex-col items-center text-center mt-4 mb-8 md:mb-12">
+          
+          {/* Breadcrumbs - Ultra Slim */}
           <div 
-            className="flex items-center justify-center gap-4 text-[10px] md:text-[11px] font-medium tracking-[0.3em] uppercase"
-            style={{ fontFamily: "'Montserrat', sans-serif", color: "#999" }}
+            className="flex items-center justify-center gap-2 md:gap-3 text-[9px] md:text-[10px] font-bold tracking-[0.25em] uppercase mb-3"
+            style={{ color: "#999" }}
           >
-            <Link to="/" className="hover:text-black transition-all duration-300">HOME</Link>
+            <Link to="/" className="hover:text-black transition-colors duration-300">HOME</Link>
             <span className="opacity-30">/</span>
-            <span className="text-[#333] font-bold">{activeBreadcrumbText}</span>
+            <span className="text-[#111]">{activeBreadcrumbText}</span>
           </div>
 
-          <div className="mt-8 w-16 h-[1.5px] bg-[#d4af37] opacity-50"></div>
+          {/* Main Title - No Quotes, Minimalist & Elegant */}
+          <h1 
+            className="text-[28px] sm:text-[34px] md:text-[40px] tracking-tight text-[#111] leading-none px-4"
+            style={{ fontFamily: "'Playfair Display', serif", fontWeight: '600' }}
+          >
+            {searchTerm ? (
+              <span className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2">
+                <span className="text-gray-400 font-normal italic text-[20px] sm:text-[28px]">Results for</span>
+                <span className="capitalize">{searchTerm}</span>
+              </span>
+            ) : (
+              activeSelectionText
+            )}
+          </h1>
+
+          {/* Minimalist Decorative Dash */}
+          <div className="mt-5 w-10 h-[1.5px] bg-black opacity-80"></div>
         </div>
+        {/* ─────────────────────────────────────────────────────────── */}
 
         {/* ── FILTER BAR ── */}
         <div className="w-full mb-8">
           <ShopTopbar
             categories={allCategories}
             selectedCategories={selectedCategories}
-            onCategoryToggle={(cat) => setSelectedCategories(prev => prev.includes(cat) ? [] : [cat])}
+            onCategoryToggle={(cat) => setSelectedCategories(prev => prev.includes(cat) ? prev.filter(c => c !== cat) : [...prev, cat])}
             brands={allBrands}
             selectedBrands={selectedBrands}
             onBrandToggle={(br) => setSelectedBrands(prev => prev.includes(br) ? prev.filter(b => b !== br) : [...prev, br])}
@@ -146,7 +184,8 @@ export default function ShopHome() {
                <p className="text-[10px] tracking-[0.2em] text-gray-400 uppercase">Fetching Perfection</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-12">
+            // ⚡ FIX 2: Mobile par grid-cols-2 kar diya gaya hai aur gap theek kar diya hai!
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-3 gap-y-8 sm:gap-x-6 sm:gap-y-12">
               {filteredProducts.length > 0 ? (
                 filteredProducts.map(p => (
                   <ShopProductCard key={p._id} product={p} onQuickView={setSelectedProduct} />
@@ -154,7 +193,7 @@ export default function ShopHome() {
               ) : (
                 <div className="col-span-full text-center py-32 bg-white rounded-3xl border border-gray-100 shadow-sm">
                   <p className="text-gray-400 font-serif italic text-lg mb-6">No masterpieces found matching your criteria.</p>
-                  <button onClick={clearFilters} className="bg-black text-white px-10 py-4 rounded-full text-[11px] font-bold tracking-[0.2em] uppercase hover:bg-gray-800 transition-all">
+                  <button onClick={clearFilters} className="bg-black text-white px-10 py-4 rounded-full text-[11px] font-bold tracking-[0.2em] uppercase hover:bg-gray-800 transition-all cursor-pointer">
                     Reset Filters
                   </button>
                 </div>

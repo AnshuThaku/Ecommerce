@@ -33,9 +33,9 @@ const getAllImages = (product) => {
 const Toast = ({ toast, onClose }) => {
   if (!toast) return null;
   return (
-    <div className="fixed top-5 right-5 z-[999999] bg-[#111] text-white border border-gray-800 px-6 py-4 rounded-xl shadow-2xl flex items-center gap-4 transition-all animate-in fade-in slide-in-from-top-4">
-      <span className="font-medium text-sm tracking-wide">{toast.message}</span>
-      <button onClick={onClose} className="hover:text-gray-400 transition-colors"><X className="w-4 h-4" /></button>
+    <div className="fixed top-5 right-5 z-[999999] bg-[#111] text-white border border-gray-800 px-5 py-3 rounded-lg shadow-2xl flex items-center gap-3 transition-all animate-in fade-in slide-in-from-top-4">
+      <span className="font-medium text-xs tracking-wide">{toast.message}</span>
+      <button onClick={onClose} className="hover:text-gray-400 transition-colors"><X className="w-3 h-3" /></button>
     </div>
   );
 };
@@ -49,7 +49,7 @@ export default function QuickViewModal({ product, onClose }) {
   const [relatedProducts, setRelatedProducts] = useState([]); 
   
   const [activeImgIdx, setActiveImgIdx] = useState(0);
-  const [expand, setExpand] = useState(false); // State for Slide-Up Expansion
+  const [expand, setExpand] = useState(false);
   const [showFullTitle, setShowFullTitle] = useState(false);
   const [activeDetailTab, setActiveDetailTab] = useState('overview');
   const [quantity, setQuantity] = useState(1);
@@ -60,7 +60,6 @@ export default function QuickViewModal({ product, onClose }) {
   const modalRef = useRef(null);
   const thumbScrollRef = useRef(null);
 
-  // Prevent background scrolling when modal is open
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => { document.body.style.overflow = 'unset'; };
@@ -74,7 +73,6 @@ export default function QuickViewModal({ product, onClose }) {
   const isDealActive = fullProduct?.flashDeal?.isActive && new Date(fullProduct.flashDeal.endTime).getTime() > Date.now();
   const displayPrice = isDealActive ? fullProduct.flashDeal.dealPrice : (fullProduct?.price - (fullProduct?.discountPrice || 0));
 
-  // Fetch full details and related products
   useEffect(() => {
     if (product && product._id) {
       const fetchDetails = async () => {
@@ -92,15 +90,11 @@ export default function QuickViewModal({ product, onClose }) {
     }
   }, [product]);
 
-  // ─── MAGIC SCROLL LOGIC FOR EXPANSION ───
   const handleScrollAndSwipe = (deltaY) => {
     const scrollTop = modalRef.current?.scrollTop || 0;
-    // If scrolled down slightly and not expanded, trigger expand
     if (!expand && deltaY > 15) setExpand(true);
-    // If scrolled back up to top, un-expand
     else if (expand && scrollTop <= 5 && deltaY < -15) setExpand(false);
   };
-  // ────────────────────────────────────────
 
   const handleModalAddToCart = async () => {
     setIsAddingToCart(true);
@@ -127,7 +121,7 @@ export default function QuickViewModal({ product, onClose }) {
   galleryImages = [...new Set(galleryImages.filter(Boolean))];
   if (galleryImages.length === 0) galleryImages = [DEFAULT_IMG];
 
-  // ─── DYNAMIC DATA PARSER WITH EXTRA CONTENT ───
+  // ─── DYNAMIC DATA PARSER ───
   let featuresText = "Experience premium quality with our latest collection.";
   let descriptionList = ["Premium build quality", "Durable materials", "Ergonomic design"];
   let specs = [
@@ -160,46 +154,42 @@ export default function QuickViewModal({ product, onClose }) {
     }
   }
 
-  // Adding dynamic bullet points to make it look fuller like Amazon
   const dynamicBullets = [
     `100% Authentic ${fullProduct?.brand || 'Premium'} Product`,
-    "7-Days Easy Return & Exchange Policy",
-    "Standard Manufacturer Warranty Applicable",
-    "Secure & Verified Checkout"
+    "7-Days Easy Return & Exchange",
+    "Standard Manufacturer Warranty",
+    "Secure Checkout"
   ];
   const finalDescriptionList = [...descriptionList, ...dynamicBullets];
-  // ──────────────────────────────────────────────
+  // ──────────────────────────
 
   return (
-    // ⚡ The wrapper handles the background and overall centering. Notice the `ease-out` transition.
-    <div className={`fixed inset-0 z-[99999] flex transition-all duration-500 ease-out ${expand ? 'bg-white items-start p-0' : 'bg-black/70 backdrop-blur-sm items-center justify-center p-4'}`} onClick={onClose}>
+    <div className={`fixed inset-0 z-[99999] flex transition-all duration-500 ease-out ${expand ? 'bg-white items-start p-0' : 'bg-black/60 backdrop-blur-sm items-center justify-center p-4'}`} onClick={onClose}>
       <Toast toast={toastMessage} onClose={() => setToastMessage(null)} />
       
-      {/* ⚡ The main modal container that expands full width/height when `expand` is true */}
       <div 
         ref={modalRef} 
         onWheel={(e) => handleScrollAndSwipe(e.deltaY)} 
         onScroll={(e) => { if(e.target.scrollTop > 10 && !expand) setExpand(true); }}
         onClick={(e) => e.stopPropagation()} 
-        className={`relative bg-white overflow-y-auto transition-all duration-500 ease-out hide-scroll transform-gpu ${expand ? 'w-full h-full rounded-none px-6 md:px-12' : 'w-full max-w-[1100px] max-h-[90vh] rounded-[24px] shadow-2xl px-6 pb-6 pt-2 md:pt-4'}`}
+        className={`relative bg-white overflow-y-auto transition-all duration-500 ease-out hide-scroll transform-gpu ${expand ? 'w-full h-full rounded-none px-6 md:px-12' : 'w-full max-w-[1000px] max-h-[90vh] rounded-[20px] shadow-2xl px-5 pb-5 pt-3 md:pt-4'}`}
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', scrollBehavior: 'smooth' }}
       >
-        {/* Close Button - Stays fixed on top right */}
-        <button onClick={onClose} className="fixed top-4 right-4 md:top-6 md:right-8 p-2 rounded-full bg-gray-50 hover:bg-gray-200 shadow-sm z-[100] cursor-pointer transition-all">
-          <X className="w-5 h-5 text-gray-800" />
+        {/* Close Button */}
+        <button onClick={onClose} className="fixed top-4 right-4 md:top-6 md:right-6 p-1.5 rounded-full bg-gray-50 hover:bg-gray-200 shadow-sm z-[100] cursor-pointer transition-all">
+          <X className="w-4 h-4 text-gray-700" />
         </button>
         
-        {/* Inner wrapper adds top padding when expanded so content doesn't hit the ceiling */}
-        <div className={`w-full max-w-[1300px] mx-auto transition-all duration-500 ${expand ? 'pt-20 md:pt-28 pb-10' : 'pt-8 pb-4'}`}>
-          <div className="flex flex-col md:flex-row w-full gap-6 md:gap-8 items-start">
+        {/* Main Content Wrapper */}
+        <div className={`w-full max-w-[1100px] mx-auto transition-all duration-500 ${expand ? 'pt-16 md:pt-20 pb-8' : 'pt-6 pb-2'}`}>
+          <div className="flex flex-col md:flex-row w-full gap-5 md:gap-7 items-start">
             
             {/* ── IMAGE GALLERY (LEFT) ── */}
-            <div className="w-full md:w-[48%] flex flex-row justify-start items-start relative min-h-[300px]">
-              {/* Thumbnails */}
-              <div className="flex flex-col items-center mr-3 w-[60px] md:w-[70px] h-[300px] md:h-[400px]">
+            <div className="w-full md:w-[46%] flex flex-row justify-start items-start relative min-h-[280px]">
+              <div className="flex flex-col items-center mr-2 w-[55px] md:w-[60px] h-[280px] md:h-[360px]">
                 <div className="hide-scroll flex flex-col gap-2 overflow-y-auto scroll-smooth w-full flex-1 py-1">
                   {galleryImages.map((imgSrc, idx) => (
-                    <div key={idx} onMouseEnter={() => setActiveImgIdx(idx)} className={`w-full aspect-square rounded-md flex items-center justify-center cursor-pointer transition-all border-2 ${activeImgIdx === idx ? 'border-black shadow-sm' : 'border-gray-200 bg-gray-50 hover:border-gray-400'}`} style={{ padding: '2px' }}>
+                    <div key={idx} onMouseEnter={() => setActiveImgIdx(idx)} className={`w-full aspect-square rounded-md flex items-center justify-center cursor-pointer transition-all border ${activeImgIdx === idx ? 'border-gray-800 shadow-sm' : 'border-gray-200 bg-gray-50 hover:border-gray-400'}`} style={{ padding: '2px' }}>
                       <img src={imgSrc} alt="thumb" className="w-full h-full object-contain mix-blend-multiply" />
                     </div>
                   ))}
@@ -207,38 +197,38 @@ export default function QuickViewModal({ product, onClose }) {
               </div>
 
               {/* Main Image */}
-              <div className="flex-1 bg-white border border-gray-100 rounded-lg flex items-center justify-center p-4 relative h-[300px] md:h-[400px]">
-                {isDealActive && <div className="absolute top-0 left-0 z-10 bg-red-600 text-white text-[10px] font-bold px-2 py-1 uppercase rounded-br-lg shadow-sm"><Zap className="w-3 h-3 inline fill-current mr-1" /> Deal</div>}
+              <div className="flex-1 bg-white border border-gray-100 rounded-lg flex items-center justify-center p-4 relative h-[280px] md:h-[360px]">
+                {isDealActive && <div className="absolute top-0 left-0 z-10 bg-red-600 text-white text-[9px] font-medium px-2 py-0.5 uppercase rounded-br-md shadow-sm">Deal</div>}
                 <img src={galleryImages[activeImgIdx]} alt="main" className="max-h-full object-contain mix-blend-multiply transition-transform duration-300 hover:scale-105" />
               </div>
             </div>
 
             {/* ── PRODUCT INFO (RIGHT) ── */}
-            <div className="w-full md:w-[52%] flex flex-col items-start text-left md:pl-2">
+            <div className="w-full md:w-[54%] flex flex-col items-start text-left md:pl-2">
               <div className="flex items-center justify-between w-full mb-1">
-                <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest">{fullProduct?.brand}</p>
-                <div className="flex items-center gap-1 bg-[#111] text-white px-2 py-0.5 rounded text-[11px] font-bold">
+                <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">{fullProduct?.brand}</p>
+                <div className="flex items-center gap-1 bg-[#111] text-white px-1.5 py-0.5 rounded text-[10px] font-medium">
                   <span>{fullProduct?.ratings || "4.8"}</span>
-                  <Star size={10} className="fill-current" />
+                  <Star size={9} className="fill-current" />
                 </div>
               </div>
 
-              <h1 className="text-gray-900 font-semibold text-[20px] md:text-[26px] leading-tight mb-2">
-                {showFullTitle ? fullProduct?.name : (fullProduct?.name?.length > 70 ? fullProduct?.name?.substring(0, 70) + "..." : fullProduct?.name)}
-                {fullProduct?.name?.length > 70 && (
-                  <button onClick={() => setShowFullTitle(!showFullTitle)} className="text-gray-500 text-[12px] ml-2 font-semibold hover:text-black hover:underline">
-                    {showFullTitle ? 'Show Less' : 'Show More'}
+              <h1 className="text-gray-900 font-medium text-[18px] md:text-[22px] leading-snug mb-2">
+                {showFullTitle ? fullProduct?.name : (fullProduct?.name?.length > 65 ? fullProduct?.name?.substring(0, 65) + "..." : fullProduct?.name)}
+                {fullProduct?.name?.length > 65 && (
+                  <button onClick={() => setShowFullTitle(!showFullTitle)} className="text-blue-500 text-[11px] ml-2 font-medium hover:underline">
+                    {showFullTitle ? 'Show Less' : 'More'}
                   </button>
                 )}
               </h1>
               
               {/* Pricing */}
-              <div className="flex items-baseline gap-3 mb-4">
-                <span className="font-black text-[28px] text-gray-900">{formatPrice(displayPrice)}</span>
+              <div className="flex items-baseline gap-2 mb-4">
+                <span className="font-semibold text-[24px] text-gray-900">{formatPrice(displayPrice)}</span>
                 {fullProduct?.discountPrice > 0 && (
                   <>
-                    <span className="text-gray-400 line-through text-[16px]">{formatPrice(fullProduct?.price)}</span>
-                    <span className="text-green-600 text-[13px] font-bold">
+                    <span className="text-gray-400 line-through text-[14px]">{formatPrice(fullProduct?.price)}</span>
+                    <span className="text-green-600 text-[12px] font-medium">
                       {Math.round(((fullProduct.price - displayPrice) / fullProduct.price) * 100)}% off
                     </span>
                   </>
@@ -246,31 +236,27 @@ export default function QuickViewModal({ product, onClose }) {
               </div>
 
               {/* ── OFFERS CARDS ── */}
-              <div className="flex gap-3 overflow-x-auto hide-scroll w-full mb-6 pb-2">
-                <div className="min-w-[150px] border border-gray-200 rounded-md p-2.5 bg-gray-50">
-                  <p className="flex items-center gap-1 text-[11px] font-bold text-[#111] mb-1"><Tag size={12}/> Bank Offer</p>
-                  <p className="text-[11px] text-gray-600 leading-tight">5% Cashback on Axis Bank Credit Card.</p>
+              <div className="flex gap-2 overflow-x-auto hide-scroll w-full mb-5 pb-1">
+                <div className="min-w-[140px] border border-gray-200 rounded p-2 bg-gray-50">
+                  <p className="flex items-center gap-1 text-[10px] font-medium text-[#111] mb-1"><Tag size={10}/> Bank Offer</p>
+                  <p className="text-[10px] text-gray-600 leading-tight">5% Cashback on Axis Card.</p>
                 </div>
-                <div className="min-w-[150px] border border-gray-200 rounded-md p-2.5 bg-gray-50">
-                  <p className="flex items-center gap-1 text-[11px] font-bold text-[#111] mb-1"><Tag size={12}/> Special Price</p>
-                  <p className="text-[11px] text-gray-600 leading-tight">Get extra ₹{fullProduct?.discountPrice || 500} off (inclusive of cashback).</p>
-                </div>
-                <div className="min-w-[150px] border border-gray-200 rounded-md p-2.5 bg-gray-50">
-                  <p className="flex items-center gap-1 text-[11px] font-bold text-[#111] mb-1"><Tag size={12}/> Partner Offer</p>
-                  <p className="text-[11px] text-gray-600 leading-tight">Sign up for Pay Later and get free Gift Card.</p>
+                <div className="min-w-[140px] border border-gray-200 rounded p-2 bg-gray-50">
+                  <p className="flex items-center gap-1 text-[10px] font-medium text-[#111] mb-1"><Tag size={10}/> Special Price</p>
+                  <p className="text-[10px] text-gray-600 leading-tight">Extra ₹{fullProduct?.discountPrice || 500} off.</p>
                 </div>
               </div>
               
               {/* Variants */}
               {hasVariants && (
-                <div className="mb-6 space-y-2 w-full">
-                  <span className="text-sm text-gray-600 font-semibold">
-                    Color: <span className="text-gray-900 font-bold">{fullProduct.variants[selectedVariantIdx].color}</span>
+                <div className="mb-5 space-y-1.5 w-full">
+                  <span className="text-xs text-gray-600 font-medium">
+                    Color: <span className="text-gray-900">{fullProduct.variants[selectedVariantIdx].color}</span>
                   </span>
                   <div className="flex gap-2 flex-wrap">
                     {fullProduct.variants.map((v, idx) => (
                       <button key={idx} onClick={() => { setSelectedVariantIdx(idx); setActiveImgIdx(0); }} 
-                              className={`w-14 h-14 rounded-md border-2 transition-all p-1 bg-white ${selectedVariantIdx === idx ? 'border-black shadow-sm' : 'border-gray-200 hover:border-gray-400'}`}>
+                              className={`w-12 h-12 rounded-md border-2 transition-all p-1 bg-white ${selectedVariantIdx === idx ? 'border-gray-800 shadow-sm' : 'border-gray-200 hover:border-gray-400'}`}>
                         <img src={v.images?.[0]?.url || DEFAULT_IMG} className="w-full h-full object-contain mix-blend-multiply" alt="v" />
                       </button>
                     ))}
@@ -278,72 +264,70 @@ export default function QuickViewModal({ product, onClose }) {
                 </div>
               )}
 
-              {/* ── THEME MATCHING ACTION BUTTONS ── */}
-              <div className="flex flex-col gap-3 w-full mb-6 relative z-20">
-                
-                <div className="flex flex-row gap-3 w-full">
+              {/* ── ACTION BUTTONS ── */}
+              <div className="flex flex-col gap-2.5 w-full mb-5 relative z-20">
+                <div className="flex flex-row gap-2.5 w-full">
                   {/* Quantity */}
-                  <div className="flex items-center justify-between bg-white border border-gray-300 rounded-md px-2 w-28 shrink-0 h-[46px]">
-                    <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="text-gray-600 hover:bg-gray-100 w-8 h-8 rounded-full flex items-center justify-center font-bold">−</button>
-                    <span className="font-semibold text-gray-900 text-sm">{quantity}</span>
-                    <button onClick={() => setQuantity(quantity + 1)} className="text-gray-600 hover:bg-gray-100 w-8 h-8 rounded-full flex items-center justify-center font-bold">+</button>
+                  <div className="flex items-center justify-between bg-white border border-gray-300 rounded-md px-2 w-24 shrink-0 h-[42px]">
+                    <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="text-gray-500 hover:text-black w-6 h-6 flex items-center justify-center text-sm font-medium">−</button>
+                    <span className="font-medium text-gray-900 text-[13px]">{quantity}</span>
+                    <button onClick={() => setQuantity(quantity + 1)} className="text-gray-500 hover:text-black w-6 h-6 flex items-center justify-center text-sm font-medium">+</button>
                   </div>
                   
-                  {/* Add to Cart (Outline Theme) */}
+                  {/* Add to Cart */}
                   <button 
                     onClick={handleModalAddToCart} 
                     disabled={isAddingToCart} 
-                    className="flex-1 flex items-center justify-center gap-2 rounded-md font-semibold text-[14px] transition-all bg-white border-2 border-[#111] text-[#111] hover:bg-gray-50 shadow-sm"
-                    style={{ height: '46px' }}
+                    className="flex-1 flex items-center justify-center gap-2 rounded-md font-medium text-[12px] transition-all bg-white border border-gray-800 text-gray-900 hover:bg-gray-50 shadow-sm"
+                    style={{ height: '42px' }}
                   >
-                    <ShoppingCart size={18} />
-                    <span>{isAddingToCart ? 'Adding...' : 'ADD TO CART'}</span>
+                    <ShoppingCart size={14} />
+                    <span>{isAddingToCart ? 'Adding...' : 'Add to Cart'}</span>
                   </button>
                 </div>
 
-                {/* BUY NOW (Solid Theme) */}
+                {/* BUY NOW */}
                 <button 
                   onClick={() => navigate('/checkout')} 
-                  className="w-full flex items-center justify-center gap-2 rounded-md font-semibold text-[14px] transition-all bg-[#111] hover:bg-black text-white shadow-sm"
-                  style={{ height: '46px' }}
+                  className="w-full flex items-center justify-center gap-2 rounded-md font-medium text-[12px] transition-all bg-[#111] hover:bg-black text-white shadow-sm"
+                  style={{ height: '42px' }}
                 >
-                  <Zap size={18} className="fill-current" />
-                  <span>BUY NOW</span>
+                  <Zap size={14} className="fill-current" />
+                  <span>Buy Now</span>
                 </button>
 
                 {/* Safe Payment Options Card */}
-                <div className="flex flex-wrap items-center justify-between mt-2 border border-gray-200 rounded-md p-3 bg-white">
+                <div className="flex flex-wrap items-center justify-between mt-1 border border-gray-200 rounded p-2 bg-white">
                    <div className="flex items-center gap-1.5 text-gray-500">
-                      <Lock size={14} className="text-gray-800" />
-                      <span className="text-[11px] font-semibold text-gray-800">Safe & Secure Payments</span>
+                      <Lock size={12} className="text-gray-700" />
+                      <span className="text-[10px] font-medium text-gray-700">Safe Payments</span>
                    </div>
-                   <div className="flex items-center gap-2 grayscale opacity-70">
-                      <span className="text-[10px] font-bold border border-gray-300 px-1 rounded">UPI</span>
-                      <span className="text-[10px] font-bold border border-gray-300 px-1 rounded text-blue-800 italic">VISA</span>
-                      <span className="text-[10px] font-bold border border-gray-300 px-1 rounded text-red-600">MC</span>
-                      <span className="text-[10px] font-bold border border-gray-300 px-1 rounded">NetBanking</span>
+                   <div className="flex items-center gap-1.5 grayscale opacity-60">
+                      <span className="text-[9px] font-medium border border-gray-300 px-1 rounded">UPI</span>
+                      <span className="text-[9px] font-medium border border-gray-300 px-1 rounded text-blue-800">VISA</span>
+                      <span className="text-[9px] font-medium border border-gray-300 px-1 rounded text-red-600">MC</span>
                    </div>
                 </div>
               </div>
 
               {/* Delivery Badges */}
-              <div className="grid grid-cols-2 gap-3 w-full mb-2">
-                <div className="flex items-center gap-3 p-3 bg-white rounded-md border border-gray-200">
-                  <Truck className="w-5 h-5 text-gray-800" />
-                  <div className="flex flex-col text-left"><h4 className="text-[12px] font-semibold text-gray-800">Free Delivery</h4><p className="text-[11px] text-gray-500">By Tomorrow</p></div>
+              <div className="grid grid-cols-2 gap-2 w-full mb-1">
+                <div className="flex items-center gap-2 p-2 bg-white rounded border border-gray-200">
+                  <Truck className="w-4 h-4 text-gray-600" />
+                  <div className="flex flex-col text-left"><h4 className="text-[11px] font-medium text-gray-800">Free Delivery</h4><p className="text-[9px] text-gray-500">By Tomorrow</p></div>
                 </div>
-                <div className="flex items-center gap-3 p-3 bg-white rounded-md border border-gray-200">
-                  <ShieldCheck className="w-5 h-5 text-gray-800" />
-                  <div className="flex flex-col text-left"><h4 className="text-[12px] font-semibold text-gray-800">1 Year Warranty</h4><p className="text-[11px] text-gray-500">Brand Authorized</p></div>
+                <div className="flex items-center gap-2 p-2 bg-white rounded border border-gray-200">
+                  <ShieldCheck className="w-4 h-4 text-gray-600" />
+                  <div className="flex flex-col text-left"><h4 className="text-[11px] font-medium text-gray-800">1 Year Warranty</h4><p className="text-[9px] text-gray-500">Authorized</p></div>
                 </div>
               </div>
               
-              {/* ⚡ The "Explore Full Details" button that triggers expansion ⚡ */}
+              {/* Explore Trigger */}
               {!expand && (
-                <div className="w-full flex items-center justify-center mt-6 cursor-pointer group" onClick={() => setExpand(true)}>
-                  <div className="flex flex-col items-center gap-2 text-blue-500 hover:text-blue-700 transition-all">
-                    <span className="text-[12px] font-bold uppercase tracking-widest">Explore Full Details</span>
-                    <ChevronDown size={20} className="animate-bounce" />
+                <div className="w-full flex items-center justify-center mt-4 cursor-pointer group" onClick={() => setExpand(true)}>
+                  <div className="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-800 transition-all">
+                    <span className="text-[10px] font-medium uppercase tracking-widest">View Details</span>
+                    <ChevronDown size={16} className="animate-bounce opacity-70" />
                   </div>
                 </div>
               )}
@@ -351,42 +335,39 @@ export default function QuickViewModal({ product, onClose }) {
             </div>
           </div>
 
-          {/* ── EXPANDED DETAILS SECTION (Only visible when `expand` is true) ── */}
-          <div style={{ maxHeight: expand ? '6000px' : '0px', opacity: expand ? 1 : 0, overflow: 'hidden', transition: 'all 0.8s ease-in-out' }}>
-            <div className="mt-12 w-full max-w-5xl mx-auto border-t border-gray-200 pt-8">
+          {/* ── EXPANDED DETAILS SECTION ── */}
+          <div style={{ maxHeight: expand ? '6000px' : '0px', opacity: expand ? 1 : 0, overflow: 'hidden', transition: 'all 0.6s ease-in-out' }}>
+            <div className="mt-8 w-full max-w-4xl mx-auto border-t border-gray-200 pt-6">
               
-              {/* Tabs for Description & Specs */}
-              <div className="flex gap-6 border-b border-gray-200 mb-8 px-2 md:px-0 overflow-x-auto hide-scroll">
+              {/* Tabs */}
+              <div className="flex gap-6 border-b border-gray-200 mb-6 px-2 md:px-0 overflow-x-auto hide-scroll">
                 {['overview', 'specs'].map(tab => (
-                  <button key={tab} onClick={() => setActiveDetailTab(tab)} className={`pb-3 text-[15px] font-semibold whitespace-nowrap relative transition-all ${activeDetailTab === tab ? 'text-gray-900' : 'text-gray-400 hover:text-gray-800'}`}>
-                    {tab === 'overview' ? 'Product Description' : 'Specifications'}
-                    {activeDetailTab === tab && <div className="absolute bottom-[-1px] left-0 w-full h-[3px] bg-gray-900 rounded-t-md" />}
+                  <button key={tab} onClick={() => setActiveDetailTab(tab)} className={`pb-2 text-[13px] font-medium whitespace-nowrap relative transition-all ${activeDetailTab === tab ? 'text-gray-900' : 'text-gray-400 hover:text-gray-700'}`}>
+                    {tab === 'overview' ? 'Description' : 'Specifications'}
+                    {activeDetailTab === tab && <div className="absolute bottom-[-1px] left-0 w-full h-[2px] bg-gray-900 rounded-t-md" />}
                   </button>
                 ))}
               </div>
               
-              <div className="min-h-[150px] px-2 md:px-0 mb-12">
+              <div className="min-h-[150px] px-2 md:px-0 mb-8">
                 {activeDetailTab === 'overview' ? (
                   <div className="w-full">
-                    <p className="text-gray-700 text-sm leading-relaxed mb-6">{featuresText}</p>
-                    
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4 border-b border-gray-100 pb-2">Key Features</h3>
-                    <ul className="text-left space-y-3 list-disc pl-5">
+                    <p className="text-gray-600 text-[13px] leading-relaxed mb-5">{featuresText}</p>
+                    <h3 className="text-base font-medium text-gray-900 mb-3 border-b border-gray-100 pb-1">Key Features</h3>
+                    <ul className="text-left space-y-2 list-disc pl-4">
                       {finalDescriptionList.map((d, i) => (
-                        <li key={i} className="text-gray-700 text-sm">
-                          {d}
-                        </li>
+                        <li key={i} className="text-gray-600 text-[13px]">{d}</li>
                       ))}
                     </ul>
                   </div>
                 ) : (
                   <div className="w-full">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4 border-b border-gray-100 pb-2">General Specifications</h3>
-                    <div className="bg-white border border-gray-200 rounded-md overflow-hidden">
+                    <h3 className="text-base font-medium text-gray-900 mb-3 border-b border-gray-100 pb-1">General Specifications</h3>
+                    <div className="bg-white border border-gray-200 rounded overflow-hidden">
                       {specs.map((s, i) => (
-                        <div key={i} className={`flex flex-col sm:flex-row py-3 px-4 text-sm ${i % 2 === 0 ? 'bg-gray-50' : 'bg-white'} border-b border-gray-100 last:border-0`}>
+                        <div key={i} className={`flex flex-col sm:flex-row py-2.5 px-4 text-[13px] ${i % 2 === 0 ? 'bg-gray-50' : 'bg-white'} border-b border-gray-100 last:border-0`}>
                           <span className="text-gray-500 w-full sm:w-1/3">{s.label}</span>
-                          <span className="text-gray-900 font-medium w-full sm:w-2/3">{s.value}</span>
+                          <span className="text-gray-800 font-medium w-full sm:w-2/3">{s.value}</span>
                         </div>
                       ))}
                     </div>
@@ -394,14 +375,14 @@ export default function QuickViewModal({ product, onClose }) {
                 )}
               </div>
 
-              {/* ⚡ RECOMMENDED PRODUCTS (ABOVE IMAGES) ⚡ */}
+              {/* ⚡ RECOMMENDED PRODUCTS ⚡ */}
               {relatedProducts.length > 0 && (
-                <div className="w-full pt-6 pb-12 px-2 md:px-0">
-                  <div className="mb-6">
-                    <h3 className="text-[18px] font-semibold text-gray-900 border-l-4 border-[#111] pl-3">Similar Products</h3>
+                <div className="w-full pt-4 pb-8 px-2 md:px-0">
+                  <div className="mb-4">
+                    <h3 className="text-[16px] font-medium text-gray-900 border-l-4 border-gray-800 pl-2">Similar Products</h3>
                   </div>
                   
-                  <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
+                  <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
                     {relatedProducts.map((related) => {
                       const isRelatedDeal = related.flashDeal?.isActive && new Date(related.flashDeal.endTime).getTime() > Date.now();
                       const relatedPrice = isRelatedDeal ? related.flashDeal.dealPrice : (related.price - (related.discountPrice || 0));
@@ -409,24 +390,20 @@ export default function QuickViewModal({ product, onClose }) {
                       return (
                         <div 
                           key={related._id} 
-                          className="group cursor-pointer flex flex-col bg-white border border-gray-200 p-3 rounded-md hover:shadow-md transition-shadow"
+                          className="group cursor-pointer flex flex-col bg-white border border-gray-100 p-2.5 rounded hover:shadow-sm transition-shadow"
                           onClick={() => handleRecommendedClick(related._id)}
                         >
-                          <div className="bg-white overflow-hidden aspect-square mb-3 flex items-center justify-center relative">
+                          <div className="bg-white overflow-hidden aspect-square mb-2.5 flex items-center justify-center relative">
                             <img 
                               src={related.images?.[0]?.url || related.variants?.[0]?.images?.[0]?.url || DEFAULT_IMG} 
                               alt={related.name} 
                               className="w-full h-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
                             />
                           </div>
-                          <h4 className="text-[13px] text-gray-800 line-clamp-2 hover:text-black transition-colors mb-1">
+                          <h4 className="text-[12px] text-gray-700 line-clamp-2 hover:text-black transition-colors mb-1 font-medium">
                             {related.name}
                           </h4>
-                          <div className="flex items-center gap-1 text-white bg-green-700 px-1.5 py-0.5 rounded-sm w-fit mb-2">
-                             <span className="text-[10px] font-bold">{related.ratings || "4.5"}</span>
-                             <Star size={8} className="fill-current" />
-                          </div>
-                          <p className="text-[16px] font-bold text-gray-900">
+                          <p className="text-[14px] font-semibold text-gray-900 mt-1">
                             {formatPrice(relatedPrice)}
                           </p>
                         </div>
@@ -436,16 +413,16 @@ export default function QuickViewModal({ product, onClose }) {
                 </div>
               )}
 
-              {/* ── FULL WIDTH IMAGE GALLERY (AT BOTTOM) ── */}
+              {/* ── FULL WIDTH IMAGE GALLERY ── */}
               {galleryImages.length > 0 && (
-                <div className="w-full pb-16 px-2 md:px-0">
-                   <div className="mb-6">
-                     <h3 className="text-[18px] font-semibold text-gray-900 border-l-4 border-[#111] pl-3">Product Gallery</h3>
+                <div className="w-full pb-10 px-2 md:px-0">
+                   <div className="mb-4">
+                     <h3 className="text-[16px] font-medium text-gray-900 border-l-4 border-gray-800 pl-2">Product Gallery</h3>
                    </div>
-                   <div className="flex flex-col gap-6 w-full items-center">
+                   <div className="flex flex-col gap-4 w-full items-center">
                       {galleryImages.map((img, i) => (
-                        <div key={i} className="w-full bg-[#fcfcfc] border border-gray-200 rounded-lg p-6 md:p-10 flex items-center justify-center">
-                           <img src={img} alt={`gallery-full-${i}`} className="w-full max-h-[600px] object-contain mix-blend-multiply" />
+                        <div key={i} className="w-full bg-[#fcfcfc] border border-gray-100 rounded p-4 md:p-8 flex items-center justify-center">
+                           <img src={img} alt={`gallery-full-${i}`} className="w-full max-h-[500px] object-contain mix-blend-multiply" />
                         </div>
                       ))}
                    </div>

@@ -5,13 +5,63 @@ import axiosInstance from '../../utils/axiosInstance';
 import { useAuth } from '../../context/AuthContext';
 import Cart from '../Cart';
 
-// 🚀 Full Static Brands List for Dropdown
+// 🚀 Full Static Brands List
 const staticBrands = [
-  "Noise", "Amazfit", "Marshall", "DEVIALET", "SONOS", "BANG & OLUFSEN", "JLab", "truee", 
-  "SONY", "SHOKZ", "Sennheiser", "WITHINGS", "Therabody", "HUROM", "Bowers & Wilkins", 
-  "JBL", "BOSE", "harman/kardon", "Arcam", "JVC", "Formovie", "ViewSonic", "Ledger", 
-  "Goldmedal", "Aecooly", "Jisulife", "Plaud", "Whoop", "Meta Quest", "Meta Rayban", 
-  "Meta Oklahoma", "IZI", "Dyson", "Nespresso", "Ninja", "Shark", "KiCA", "Polar"
+  "Noise", "Amazfit", "Marshall", "Devialet", "Sonos", "Bang & Olufsen", "Jlab", "Truee", 
+  "Sony", "Shokz", "Withings", "Therabody", "Hurom", "Bowers & Wilkins", 
+  "JBL", "Bose", "Harman Kardon", "Arcam", "JVC", "Formovie", "ViewSonic"
+];
+
+// ⚡ SMART CATEGORIES MAP: Maps UI Labels to Universal Search Keywords
+const NAV_CATEGORIES = [
+  { 
+    label: 'SPEAKERS', 
+    keyword: 'Speaker',
+    sub: [
+      { label: 'Karaoke Speakers', keyword: 'Karaoke' },
+      { label: 'Home Theater Speakers', keyword: 'Home Theater' },
+      { label: 'Party Speakers', keyword: 'Party' },
+      { label: 'Portable Speakers', keyword: 'Portable' },
+      { label: 'Smart Speaker', keyword: 'Smart Speaker' },
+      { label: 'Power Speakers', keyword: 'Power' }
+    ]
+  },
+  { 
+    label: 'HEADPHONES', 
+    keyword: 'Headphone',
+    sub: [
+      { label: 'Wired Headphones', keyword: 'Wired Headphone' },
+      { label: 'Wireless Headphones', keyword: 'Wireless Headphone' }
+    ] 
+  },
+  { 
+    label: 'EARPHONES', 
+    keyword: 'Earphone',
+    sub: [
+      { label: 'Wired Earphones', keyword: 'Wired Earphone' },
+      { label: 'Wireless Earphones', keyword: 'Wireless Earphone' },
+      { label: 'Truly Wireless Earphones', keyword: 'TWS' }
+    ]
+  },
+  { 
+    label: 'SMARTWATCHES', 
+    keyword: 'Smartwatch',
+    sub: [
+      { label: 'Budget', keyword: 'Budget' },
+      { label: 'Premium', keyword: 'Premium' }
+    ] 
+  },
+  { 
+    label: 'HOME THEATER', 
+    keyword: 'Home Theater',
+    sub: [
+      { label: 'Home Theater Setup', keyword: 'Home Theater' },
+      { label: 'Soundbars', keyword: 'Soundbar' },
+      { label: 'Subwoofers', keyword: 'Subwoofer' },
+      { label: 'Amplifier', keyword: 'Amplifier' },
+      { label: 'Projector', keyword: 'Projector' }
+    ] 
+  }
 ];
 
 const SearchInline = ({ onClose, navigate }) => {
@@ -103,7 +153,7 @@ const SearchInline = ({ onClose, navigate }) => {
           className="w-full bg-transparent border-none text-black text-xs lg:text-sm focus:outline-none focus:ring-0 placeholder-zinc-400 tracking-wider" 
         />
         {isSearching && <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>}
-        <button type="button" onClick={onClose} className="text-zinc-500 hover:text-black transition-colors cursor-pointer">
+        <button type="button" onClick={onClose} className="text-zinc-500 hover:text-black transition-colors cursor-pointer bg-transparent border-none">
           <X size={20} />
         </button>
       </form>
@@ -157,7 +207,7 @@ const SearchInline = ({ onClose, navigate }) => {
   );
 };
 
-export default function Header() {
+export default function Header1() {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, logout } = useAuth();
@@ -194,12 +244,12 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="w-full bg-white flex items-center justify-between px-6 md:px-12 h-[100px] flex-shrink-0 z-50 relative">
+    <header className="w-full bg-white flex items-center justify-between px-6 md:px-12 h-[100px] flex-shrink-0 z-50 relative border-b border-gray-100">
       
       {/* Mobile Hamburger Menu Icon */}
       <div className="flex-1 xl:hidden">
         <button 
-          className="text-black hover:opacity-60 transition-opacity cursor-pointer"
+          className="text-black hover:opacity-60 transition-opacity cursor-pointer bg-transparent border-none"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Menu"
         >
@@ -223,66 +273,59 @@ export default function Header() {
       ) : (
         <nav className="hidden xl:flex items-center h-full gap-3 2xl:gap-6 relative z-50">
           
-          {/* ⚡ ORIGINAL STATIC CATEGORIES ⚡ */}
-          {[
-            { item: 'SPEAKERS', sub: ['Karaoke', 'Home Theater', 'Portable', 'Bluetooth'] },
-            { item: 'HEADPHONES', sub: ['Over-Ear', 'On-Ear', 'Noise Cancelling', 'Wireless'] },
-            { item: 'EARPHONES', sub: ['In-Ear', 'True Wireless', 'Wired', 'Neckbands'] },
-            { item: 'SMARTWATCHES', sub: ['Fitness Trackers', 'GPS Watches', 'Hybrid', 'Luxury'] },
-            { item: 'HOME THEATER', sub: ['Soundbars', '5.1 Systems', '7.1 Systems', 'Receivers'] }
-          ].map(({ item, sub }) => {
-            const isActive = location.pathname === '/shop' && location.state?.category === item;
+          {/* ⚡ DYNAMIC MENU RENDERING ⚡ */}
+          {NAV_CATEGORIES.map((cat) => {
+            const isActive = location.pathname === '/shop' && location.state?.search === cat.keyword;
+            
             return (
-              <div key={item} className="h-full flex items-center relative group">
+              <div key={cat.label} className="h-full flex items-center relative group">
                 <button 
-                  onClick={() => navigate('/shop', { state: { category: item } })}
+                  onClick={() => navigate('/shop', { state: { search: cat.keyword } })}
                   className={`font-semibold text-[10px] xl:text-[11px] tracking-widest uppercase transition-colors flex items-center gap-1 cursor-pointer bg-transparent border-none outline-none relative py-2 after:content-[''] after:absolute after:-bottom-0 after:left-0 after:h-[2px] after:bg-black after:transition-all after:duration-300 ${isActive ? 'text-black after:w-full' : 'text-[#6b6b6b] group-hover:text-black after:w-0 group-hover:after:w-full'}`}
                 >
-                  {item}
-                  <ChevronDown size={14} className="transition-transform duration-300 group-hover:rotate-180" />
+                  {cat.label}
+                  {cat.sub.length > 0 && <ChevronDown size={14} className="transition-transform duration-300 group-hover:rotate-180" />}
                 </button>
 
                 {/* Subcategories Dropdown */}
-                <div className="absolute top-[65%] left-1/2 -translate-x-1/2 pt-6 w-48 z-[10] opacity-0 invisible -translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-500 ease-out">
-                  <div className="bg-white border border-gray-100 rounded-2xl shadow-xl overflow-hidden py-2">
-                    <div className="px-4 py-2 border-b border-gray-50 flex justify-between items-center">
-                      <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">CATEGORIES</span>
+                {cat.sub.length > 0 && (
+                  <div className="absolute top-[65%] left-1/2 -translate-x-1/2 pt-6 w-56 z-[10] opacity-0 invisible -translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-500 ease-out">
+                    <div className="bg-white border border-gray-100 rounded-2xl shadow-xl overflow-hidden py-2">
+                      <div className="px-4 py-2 border-b border-gray-50 flex justify-between items-center">
+                        <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">CATEGORIES</span>
+                      </div>
+                      <ul className="w-full">
+                        {cat.sub.map((subItem, idx) => (
+                          <li key={idx}>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                // Send specific keyword to search globally across all brands
+                                navigate('/shop', { state: { search: subItem.keyword } });
+                              }}
+                              className="w-full text-left px-4 py-2.5 text-[11px] font-semibold text-gray-700 hover:text-black hover:bg-gray-50 transition-colors uppercase tracking-wider cursor-pointer border-b border-gray-50 last:border-0 bg-transparent"
+                            >
+                              {subItem.label}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <ul className="w-full">
-                      {sub.map((subItem, idx) => (
-                        <li key={idx}>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              navigate('/shop', { state: { category: item, subcategory: subItem } });
-                            }}
-                            className="w-full text-left px-4 py-2.5 text-[11px] font-semibold text-gray-700 hover:text-black hover:bg-gray-50 transition-colors uppercase tracking-wider cursor-pointer border-b border-gray-50 last:border-0"
-                          >
-                            {subItem}
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
                   </div>
-                </div>
+                )}
               </div>
             );
           })}
           
-          {/* ⚡ BRANDS Dropdown (STATIC) ⚡ */}
+          {/* ⚡ BRANDS Dropdown ⚡ */}
           <div className="h-full flex items-center relative group">
-            {(() => {
-              const isBrandsActive = location.pathname === '/brands';
-              return (
-                <button 
-                  onClick={() => navigate('/brands')}
-                  className={`font-semibold text-[10px] xl:text-[11px] tracking-widest uppercase transition-colors flex items-center gap-1 cursor-pointer bg-transparent border-none outline-none relative py-2 after:content-[''] after:absolute after:-bottom-0 after:left-0 after:h-[2px] after:bg-black after:transition-all after:duration-300 ${isBrandsActive ? 'text-black after:w-full' : 'text-[#6b6b6b] group-hover:text-black after:w-0 group-hover:after:w-full'}`}
-                >
-                  BRANDS
-                  <ChevronDown size={14} className="transition-transform duration-300 group-hover:rotate-180" />
-                </button>
-              );
-            })()}
+            <button 
+              onClick={() => navigate('/brands')}
+              className={`font-semibold text-[10px] xl:text-[11px] tracking-widest uppercase transition-colors flex items-center gap-1 cursor-pointer bg-transparent border-none outline-none relative py-2 after:content-[''] after:absolute after:-bottom-0 after:left-0 after:h-[2px] after:bg-black after:transition-all after:duration-300 ${location.pathname === '/brands' ? 'text-black after:w-full' : 'text-[#6b6b6b] group-hover:text-black after:w-0 group-hover:after:w-full'}`}
+            >
+              BRANDS
+              <ChevronDown size={14} className="transition-transform duration-300 group-hover:rotate-180" />
+            </button>
             
             <div className="absolute top-[65%] left-1/2 -translate-x-1/2 pt-6 w-64 z-[10] opacity-0 invisible -translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-500 ease-out">
               <div className="bg-white border border-gray-100 rounded-2xl shadow-xl overflow-hidden py-2">
@@ -296,7 +339,7 @@ export default function Header() {
                         onClick={() => {
                           navigate('/shop', { state: { search: brandName } });
                         }}
-                        className="w-full text-left px-4 py-2.5 text-[11px] font-semibold text-gray-700 hover:text-black hover:bg-gray-50 transition-colors uppercase tracking-wider cursor-pointer"
+                        className="w-full text-left px-4 py-2.5 text-[11px] font-semibold text-gray-700 hover:text-black hover:bg-gray-50 transition-colors uppercase tracking-wider cursor-pointer bg-transparent border-none"
                       >
                         {brandName}
                       </button>
@@ -312,7 +355,7 @@ export default function Header() {
       {/* Right Action Icons */}
       <div className="flex-1 xl:flex-none flex items-center justify-end gap-4 md:gap-5 h-full relative z-50">
         <button 
-          className="text-black hover:opacity-60 transition-opacity cursor-pointer hidden sm:block" 
+          className="text-black hover:opacity-60 transition-opacity cursor-pointer hidden sm:block bg-transparent border-none" 
           aria-label="Search"
           onClick={() => setIsSearchOpen(!isSearchOpen)}
         >
@@ -386,23 +429,30 @@ export default function Header() {
              />
           </div>
           
-          {/* ORIGINAL CATEGORIES FOR MOBILE */}
-          {['SPEAKERS', 'HEADPHONES', 'EARPHONES', 'SMARTWATCHES', 'HOME THEATER', 'BRANDS'].map((item) => (
-            <button 
-              key={item} 
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                if (item === 'BRANDS') {
-                  navigate('/brands');
-                } else {
-                  navigate('/shop', { state: { category: item } });
-                }
-              }}
-              className="text-left px-6 py-3 text-[#6b6b6b] hover:text-black hover:bg-zinc-50 font-semibold text-[11px] tracking-widest uppercase transition-colors cursor-pointer"
-            >
-              {item}
-            </button>
+          {/* MOBILE NAV CATEGORIES */}
+          {NAV_CATEGORIES.map((cat) => (
+            <div key={cat.label} className="w-full">
+              <button 
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  navigate('/shop', { state: { search: cat.keyword } });
+                }}
+                className="w-full text-left px-6 py-3 text-[#6b6b6b] hover:text-black hover:bg-zinc-50 font-semibold text-[11px] tracking-widest uppercase transition-colors cursor-pointer bg-transparent border-none"
+              >
+                {cat.label}
+              </button>
+            </div>
           ))}
+          
+          <button 
+            onClick={() => {
+              setIsMobileMenuOpen(false);
+              navigate('/brands');
+            }}
+            className="text-left px-6 py-3 text-[#6b6b6b] hover:text-black hover:bg-zinc-50 font-semibold text-[11px] tracking-widest uppercase transition-colors cursor-pointer bg-transparent border-none"
+          >
+            BRANDS
+          </button>
         </div>
       )}
       
