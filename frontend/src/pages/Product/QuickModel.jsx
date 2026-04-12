@@ -45,11 +45,12 @@ export default function QuickViewModal({ product, onClose }) {
   const navigate = useNavigate();
   const { user } = useAuth();
   
+  const [activeProductId, setActiveProductId] = useState(product?._id);
   const [fullProduct, setFullProduct] = useState(product);
   const [relatedProducts, setRelatedProducts] = useState([]); 
   
   const [activeImgIdx, setActiveImgIdx] = useState(0);
-  const [expand, setExpand] = useState(false);
+  const [expand, setExpand] = useState(false); 
   const [showFullTitle, setShowFullTitle] = useState(false);
   const [activeDetailTab, setActiveDetailTab] = useState('overview');
   const [quantity, setQuantity] = useState(1);
@@ -58,7 +59,6 @@ export default function QuickViewModal({ product, onClose }) {
   const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
 
   const modalRef = useRef(null);
-  const thumbScrollRef = useRef(null);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -70,25 +70,42 @@ export default function QuickViewModal({ product, onClose }) {
     setTimeout(() => setToastMessage(null), 3000);
   };
 
-  const isDealActive = fullProduct?.flashDeal?.isActive && new Date(fullProduct.flashDeal.endTime).getTime() > Date.now();
-  const displayPrice = isDealActive ? fullProduct.flashDeal.dealPrice : (fullProduct?.price - (fullProduct?.discountPrice || 0));
+  useEffect(() => {
+    if (product?._id) {
+      setActiveProductId(product._id);
+    }
+  }, [product]);
 
   useEffect(() => {
-    if (product && product._id) {
+    if (activeProductId) {
       const fetchDetails = async () => {
         try {
-          const { data } = await axiosInstance.get(`/products/${product._id}`);
+          const { data } = await axiosInstance.get(`/products/${activeProductId}`);
           if (data?.success && data?.product) {
             setFullProduct(data.product);
             if (data.relatedProducts) {
               setRelatedProducts(data.relatedProducts);
+            }
+            
+            setActiveImgIdx(0);
+            setSelectedVariantIdx(0);
+            setQuantity(1);
+            setExpand(false); 
+            setActiveDetailTab('overview');
+            setShowFullTitle(false);
+            
+            if (modalRef.current) {
+              modalRef.current.scrollTo({ top: 0, behavior: 'smooth' });
             }
           }
         } catch (e) { console.error(e); }
       };
       fetchDetails();
     }
-  }, [product]);
+  }, [activeProductId]);
+
+  const isDealActive = fullProduct?.flashDeal?.isActive && new Date(fullProduct.flashDeal.endTime).getTime() > Date.now();
+  const displayPrice = isDealActive ? fullProduct.flashDeal.dealPrice : (fullProduct?.price - (fullProduct?.discountPrice || 0));
 
   const handleScrollAndSwipe = (deltaY) => {
     const scrollTop = modalRef.current?.scrollTop || 0;
@@ -110,8 +127,7 @@ export default function QuickViewModal({ product, onClose }) {
   };
 
   const handleRecommendedClick = (recommendedId) => {
-    onClose(); 
-    navigate(`/product/${recommendedId}`); 
+    setActiveProductId(recommendedId);
   };
 
   const hasVariants = fullProduct?.variants?.length > 0;
@@ -121,7 +137,6 @@ export default function QuickViewModal({ product, onClose }) {
   galleryImages = [...new Set(galleryImages.filter(Boolean))];
   if (galleryImages.length === 0) galleryImages = [DEFAULT_IMG];
 
-  // ─── DYNAMIC DATA PARSER ───
   let featuresText = "Experience premium quality with our latest collection.";
   let descriptionList = ["Premium build quality", "Durable materials", "Ergonomic design"];
   let specs = [
@@ -161,7 +176,6 @@ export default function QuickViewModal({ product, onClose }) {
     "Secure Checkout"
   ];
   const finalDescriptionList = [...descriptionList, ...dynamicBullets];
-  // ──────────────────────────
 
   return (
     <div className={`fixed inset-0 z-[99999] flex transition-all duration-500 ease-out ${expand ? 'bg-white items-start p-0' : 'bg-black/60 backdrop-blur-sm items-center justify-center p-4'}`} onClick={onClose}>
@@ -175,16 +189,13 @@ export default function QuickViewModal({ product, onClose }) {
         className={`relative bg-white overflow-y-auto transition-all duration-500 ease-out hide-scroll transform-gpu ${expand ? 'w-full h-full rounded-none px-6 md:px-12' : 'w-full max-w-[1000px] max-h-[90vh] rounded-[20px] shadow-2xl px-5 pb-5 pt-3 md:pt-4'}`}
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', scrollBehavior: 'smooth' }}
       >
-        {/* Close Button */}
         <button onClick={onClose} className="fixed top-4 right-4 md:top-6 md:right-6 p-1.5 rounded-full bg-gray-50 hover:bg-gray-200 shadow-sm z-[100] cursor-pointer transition-all">
           <X className="w-4 h-4 text-gray-700" />
         </button>
         
-        {/* Main Content Wrapper */}
         <div className={`w-full max-w-[1100px] mx-auto transition-all duration-500 ${expand ? 'pt-16 md:pt-20 pb-8' : 'pt-6 pb-2'}`}>
           <div className="flex flex-col md:flex-row w-full gap-5 md:gap-7 items-start">
             
-            {/* ── IMAGE GALLERY (LEFT) ── */}
             <div className="w-full md:w-[46%] flex flex-row justify-start items-start relative min-h-[280px]">
               <div className="flex flex-col items-center mr-2 w-[55px] md:w-[60px] h-[280px] md:h-[360px]">
                 <div className="hide-scroll flex flex-col gap-2 overflow-y-auto scroll-smooth w-full flex-1 py-1">
@@ -196,14 +207,12 @@ export default function QuickViewModal({ product, onClose }) {
                 </div>
               </div>
 
-              {/* Main Image */}
               <div className="flex-1 bg-white border border-gray-100 rounded-lg flex items-center justify-center p-4 relative h-[280px] md:h-[360px]">
                 {isDealActive && <div className="absolute top-0 left-0 z-10 bg-red-600 text-white text-[9px] font-medium px-2 py-0.5 uppercase rounded-br-md shadow-sm">Deal</div>}
                 <img src={galleryImages[activeImgIdx]} alt="main" className="max-h-full object-contain mix-blend-multiply transition-transform duration-300 hover:scale-105" />
               </div>
             </div>
 
-            {/* ── PRODUCT INFO (RIGHT) ── */}
             <div className="w-full md:w-[54%] flex flex-col items-start text-left md:pl-2">
               <div className="flex items-center justify-between w-full mb-1">
                 <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">{fullProduct?.brand}</p>
@@ -222,7 +231,6 @@ export default function QuickViewModal({ product, onClose }) {
                 )}
               </h1>
               
-              {/* Pricing */}
               <div className="flex items-baseline gap-2 mb-4">
                 <span className="font-semibold text-[24px] text-gray-900">{formatPrice(displayPrice)}</span>
                 {fullProduct?.discountPrice > 0 && (
@@ -235,7 +243,6 @@ export default function QuickViewModal({ product, onClose }) {
                 )}
               </div>
 
-              {/* ── OFFERS CARDS ── */}
               <div className="flex gap-2 overflow-x-auto hide-scroll w-full mb-5 pb-1">
                 <div className="min-w-[140px] border border-gray-200 rounded p-2 bg-gray-50">
                   <p className="flex items-center gap-1 text-[10px] font-medium text-[#111] mb-1"><Tag size={10}/> Bank Offer</p>
@@ -247,7 +254,6 @@ export default function QuickViewModal({ product, onClose }) {
                 </div>
               </div>
               
-              {/* Variants */}
               {hasVariants && (
                 <div className="mb-5 space-y-1.5 w-full">
                   <span className="text-xs text-gray-600 font-medium">
@@ -264,17 +270,14 @@ export default function QuickViewModal({ product, onClose }) {
                 </div>
               )}
 
-              {/* ── ACTION BUTTONS ── */}
               <div className="flex flex-col gap-2.5 w-full mb-5 relative z-20">
                 <div className="flex flex-row gap-2.5 w-full">
-                  {/* Quantity */}
                   <div className="flex items-center justify-between bg-white border border-gray-300 rounded-md px-2 w-24 shrink-0 h-[42px]">
                     <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="text-gray-500 hover:text-black w-6 h-6 flex items-center justify-center text-sm font-medium">−</button>
                     <span className="font-medium text-gray-900 text-[13px]">{quantity}</span>
                     <button onClick={() => setQuantity(quantity + 1)} className="text-gray-500 hover:text-black w-6 h-6 flex items-center justify-center text-sm font-medium">+</button>
                   </div>
                   
-                  {/* Add to Cart */}
                   <button 
                     onClick={handleModalAddToCart} 
                     disabled={isAddingToCart} 
@@ -286,7 +289,6 @@ export default function QuickViewModal({ product, onClose }) {
                   </button>
                 </div>
 
-                {/* BUY NOW */}
                 <button 
                   onClick={() => navigate('/checkout')} 
                   className="w-full flex items-center justify-center gap-2 rounded-md font-medium text-[12px] transition-all bg-[#111] hover:bg-black text-white shadow-sm"
@@ -296,7 +298,6 @@ export default function QuickViewModal({ product, onClose }) {
                   <span>Buy Now</span>
                 </button>
 
-                {/* Safe Payment Options Card */}
                 <div className="flex flex-wrap items-center justify-between mt-1 border border-gray-200 rounded p-2 bg-white">
                    <div className="flex items-center gap-1.5 text-gray-500">
                       <Lock size={12} className="text-gray-700" />
@@ -310,7 +311,6 @@ export default function QuickViewModal({ product, onClose }) {
                 </div>
               </div>
 
-              {/* Delivery Badges */}
               <div className="grid grid-cols-2 gap-2 w-full mb-1">
                 <div className="flex items-center gap-2 p-2 bg-white rounded border border-gray-200">
                   <Truck className="w-4 h-4 text-gray-600" />
@@ -322,7 +322,6 @@ export default function QuickViewModal({ product, onClose }) {
                 </div>
               </div>
               
-              {/* Explore Trigger */}
               {!expand && (
                 <div className="w-full flex items-center justify-center mt-4 cursor-pointer group" onClick={() => setExpand(true)}>
                   <div className="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-800 transition-all">
@@ -335,11 +334,9 @@ export default function QuickViewModal({ product, onClose }) {
             </div>
           </div>
 
-          {/* ── EXPANDED DETAILS SECTION ── */}
           <div style={{ maxHeight: expand ? '6000px' : '0px', opacity: expand ? 1 : 0, overflow: 'hidden', transition: 'all 0.6s ease-in-out' }}>
             <div className="mt-8 w-full max-w-4xl mx-auto border-t border-gray-200 pt-6">
               
-              {/* Tabs */}
               <div className="flex gap-6 border-b border-gray-200 mb-6 px-2 md:px-0 overflow-x-auto hide-scroll">
                 {['overview', 'specs'].map(tab => (
                   <button key={tab} onClick={() => setActiveDetailTab(tab)} className={`pb-2 text-[13px] font-medium whitespace-nowrap relative transition-all ${activeDetailTab === tab ? 'text-gray-900' : 'text-gray-400 hover:text-gray-700'}`}>
@@ -375,7 +372,6 @@ export default function QuickViewModal({ product, onClose }) {
                 )}
               </div>
 
-              {/* ⚡ RECOMMENDED PRODUCTS ⚡ */}
               {relatedProducts.length > 0 && (
                 <div className="w-full pt-4 pb-8 px-2 md:px-0">
                   <div className="mb-4">
@@ -413,7 +409,6 @@ export default function QuickViewModal({ product, onClose }) {
                 </div>
               )}
 
-              {/* ── FULL WIDTH IMAGE GALLERY ── */}
               {galleryImages.length > 0 && (
                 <div className="w-full pb-10 px-2 md:px-0">
                    <div className="mb-4">
