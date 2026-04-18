@@ -1006,6 +1006,254 @@ const products = [
     "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
     "reviews": [],
     "isActive": true, "soldCount": 0, "isFeatured": false, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }, "__v": 0, "createdAt": { "$date": "2026-04-09T06:50:25.787Z" }, "updatedAt": { "$date": "2026-04-09T09:39:01.489Z" }
+  },
+  
+  // ==========================================
+  // MISSED MARSHALL PRODUCTS
+  // ==========================================
+  {
+    "_id": { "$oid": "69d74c31d99e0f85f58f0701" },
+    "name": "Marshall Monitor II ANC",
+    "description": "Features (Paragraph):\nAdvanced active noise cancelling technology blocks out the noise, letting you focus on what matters most – the music. Engineered for an all-day listening experience, they boast up to 30 hours of wireless playtime with active noise cancelling.\n\nDescription List (Bullets):\n\nHigh-performance Active Noise Cancelling.\nUp to 30 hours of playtime with ANC (45 hours without).\nCustom-tuned 40 mm dynamic drivers for superior sound.\nErgonomic over-ear construction for all-day comfort.\nVoice Assistant compatible with a dedicated M-button.\n\nSpecifications:\n\nDriver Type: 40 mm Dynamic\nBattery Life: 30 Hours (with ANC)\nWeight: 320 g\nConnectivity: Bluetooth 5.0, 3.5 mm\nIn the Box: Monitor II ANC, USB-C Cable, 3.5mm cord, Canvas bag\nWarranty: 1 Year Official Manufacturer Warranty",
+    "price": 29999,
+    "discountPrice": 0,
+    "category": "Marshall Headphones",
+    "brand": "Marshall",
+    "stock": 10,
+    "images": [
+      {
+        "public_id": "seed_monitor_ii_main",
+        "url": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&q=80&w=800",
+        "_id": { "$oid": "69d76fe369cbc958a102e111" }
+      }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 29999, "_id": { "$oid": "69da2769e404c7e1550a111" }, "images": [ { "url": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&q=80&w=800" } ] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": false, "soldCount": 0, "isFeatured": false, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }, "__v": 0, "createdAt": { "$date": "2026-04-19T02:00:00.000Z" }, "updatedAt": { "$date": "2026-04-19T02:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "69d74c31d99e0f85f58f0702" },
+    "name": "Marshall Monitor III ANC",
+    "description": "Features (Paragraph):\nThe next generation of immersive listening. Monitor III ANC features upgraded noise cancellation algorithms and spatial audio tuning for a concert-like experience. Designed with premium vegan leather and solid metal hinges.\n\nDescription List (Bullets):\n\nNext-generation adaptive Active Noise Cancelling.\nExceptional 40+ hours of playtime with ANC enabled.\nSpatial audio support for immersive listening.\nFoldable and durable premium design.\nCustomizable EQ through the Marshall Bluetooth App.\n\nSpecifications:\n\nDriver Type: 40 mm Dynamic\nBattery Life: 40+ Hours (with ANC)\nWeight: 310 g\nConnectivity: Bluetooth 5.3 LE Audio\nIn the Box: Monitor III ANC, USB-C Cable, Premium Carry Case\nWarranty: 1 Year Official Manufacturer Warranty",
+    "price": 29999,
+    "discountPrice": 0,
+    "category": "Marshall Headphones",
+    "brand": "Marshall",
+    "stock": 20,
+    "images": [
+      {
+        "public_id": "seed_monitor_iii_main",
+        "url": "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&q=80&w=800",
+        "_id": { "$oid": "69d76fe369cbc958a102e112" }
+      }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 29999, "_id": { "$oid": "69da2769e404c7e1550a112" }, "images": [ { "url": "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&q=80&w=800" } ] },
+      { "color": "Cream", "size": "Standard", "stock": 10, "price": 29999, "_id": { "$oid": "69da2769e404c7e1550a113" }, "images": [ { "url": "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&q=80&w=800" } ] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": false, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }, "__v": 0, "createdAt": { "$date": "2026-04-19T02:00:00.000Z" }, "updatedAt": { "$date": "2026-04-19T02:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "69d74c31d99e0f85f58f0703" },
+    "name": "Heston 60",
+    "description": "Features (Paragraph):\nElevate your home theater with the Marshall Heston 60 Soundbar. Bringing the signature stadium sound into your living room, it features deep, rumbling bass and crisp dialogue enhancement.\n\nDescription List (Bullets):\n\nSignature Marshall sound optimized for home cinema.\nBuilt-in subwoofers for deep, room-filling bass.\nHDMI ARC for seamless TV integration.\nBluetooth 5.0 for wireless music streaming.\nClassic Marshall aesthetic with textured vinyl and brass.\n\nSpecifications:\n\nType: All-in-one Soundbar\nOutput Power: 60W Total\nConnectivity: HDMI ARC, Optical, Bluetooth\nIn the Box: Heston 60 Soundbar, Remote, Power Cable\nWarranty: 1 Year Official Manufacturer Warranty",
+    "price": 69999,
+    "discountPrice": 0,
+    "category": "Marshall Soundbar & Subwoofer",
+    "brand": "Marshall",
+    "stock": 20,
+    "images": [
+      {
+        "public_id": "seed_heston60_main",
+        "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&q=80&w=800",
+        "_id": { "$oid": "69d76fe369cbc958a102e114" }
+      }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 69999, "_id": { "$oid": "69da2769e404c7e1550a114" }, "images": [ { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&q=80&w=800" } ] },
+      { "color": "Cream", "size": "Standard", "stock": 10, "price": 69999, "_id": { "$oid": "69da2769e404c7e1550a115" }, "images": [ { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&q=80&w=800" } ] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": true, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }, "__v": 0, "createdAt": { "$date": "2026-04-19T02:00:00.000Z" }, "updatedAt": { "$date": "2026-04-19T02:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "69d74c31d99e0f85f58f0704" },
+    "name": "Marshall Heddon",
+    "description": "Features (Paragraph):\nPremium wireless music streamer featuring clear sound, deep bass, and effortless WiFi & Bluetooth connectivity. The Heddon seamlessly bridges vintage aesthetics with modern multi-room streaming capabilities.\n\nDescription List (Bullets):\n\nHigh-fidelity wireless music streaming.\nSupports Wi-Fi, AirPlay 2, and Spotify Connect.\nIconic Marshall design that fits any premium space.\nDeep bass and crisp highs.\nMulti-room ready.\n\nSpecifications:\n\nType: Wireless Music Streamer\nConnectivity: Wi-Fi, Bluetooth 5.2, AirPlay 2\nWeight: 2.1 kg\nIn the Box: Marshall Heddon, Power Cable, Quick Start Guide\nWarranty: 1 Year Official Manufacturer Warranty",
+    "price": 32999,
+    "discountPrice": 3000,
+    "category": "Marshall Music Streamer",
+    "brand": "Marshall",
+    "stock": 25,
+    "images": [
+      {
+        "public_id": "seed_heddon_main",
+        "url": "https://imboldn.com/wp-content/uploads/2022/05/Marshall-Willen-05.jpg",
+        "_id": { "$oid": "69d76fe369cbc958a102e116" }
+      }
+    ],
+    "variants": [
+      { "color": "Black & Brass", "size": "Standard", "stock": 25, "price": 29999, "_id": { "$oid": "69da2769e404c7e1550a116" }, "images": [ { "url": "https://imboldn.com/wp-content/uploads/2022/05/Marshall-Willen-05.jpg" } ] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": false, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }, "__v": 0, "createdAt": { "$date": "2026-04-19T02:00:00.000Z" }, "updatedAt": { "$date": "2026-04-19T02:00:00.000Z" }
+  },
+
+  // ==========================================
+  // SONOS PREMIUM AUDIO
+  // ==========================================
+  {
+    "_id": { "$oid": "69d74c31d99e0f85f58f0705" },
+    "name": "Sonos Roam II",
+    "description": "Features (Paragraph):\nExperience size-defying sound at home and on the go with the lightweight, outdoor-ready Sonos Roam II. Enjoy hours of music, radio, audiobooks, and more from all your favorite services thanks to a long-lasting rechargeable battery.\n\nDescription List (Bullets):\n\nPrecision-engineered acoustics deliver incredible clarity and depth.\nIP67 waterproof and dustproof rating for outdoor adventures.\nUp to 10 hours of continuous playback on a single charge.\nAutomatic Trueplay™ tuning adapts the sound to your surroundings.\nStream via WiFi at home or Bluetooth everywhere else.\n\nSpecifications:\n\nAmplifiers: Two Class-H digital amplifiers\nWater Resistance: IP67\nBattery Life: 10 Hours\nWeight: 0.43 kg\nConnectivity: WiFi, Bluetooth 5.2, Apple AirPlay 2\nWarranty: 1 Year Official Manufacturer Warranty",
+    "price": 18999,
+    "discountPrice": 4000,
+    "category": "Sonos Portable",
+    "brand": "Sonos",
+    "stock": 50,
+    "images": [
+      {
+        "public_id": "seed_sonos_roam2_main",
+        "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&q=80&w=800",
+        "_id": { "$oid": "69d76fe369cbc958a102e117" }
+      }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 14999, "_id": { "$oid": "69da2769e404c7e1550a117" }, "images": [ { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&q=80&w=800" } ] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 14999, "_id": { "$oid": "69da2769e404c7e1550a118" }, "images": [ { "url": "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&q=80&w=800" } ] },
+      { "color": "Green", "size": "Standard", "stock": 10, "price": 14999, "_id": { "$oid": "69da2769e404c7e1550a119" }, "images": [ { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&q=80&w=800" } ] },
+      { "color": "Red", "size": "Standard", "stock": 10, "price": 14999, "_id": { "$oid": "69da2769e404c7e1550a120" }, "images": [ { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&q=80&w=800" } ] },
+      { "color": "Blue", "size": "Standard", "stock": 10, "price": 14999, "_id": { "$oid": "69da2769e404c7e1550a121" }, "images": [ { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&q=80&w=800" } ] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": false, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }, "__v": 0, "createdAt": { "$date": "2026-04-19T02:00:00.000Z" }, "updatedAt": { "$date": "2026-04-19T02:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "69d74c31d99e0f85f58f0706" },
+    "name": "Sonos Era 300",
+    "description": "Features (Paragraph):\nFeel sound from every direction. Featuring six optimally positioned drivers all around the front, sides, and top to support Dolby Atmos Music, the breakthrough acoustic design projects sound from wall to wall and floor to ceiling, immersing you in every dimension of the song.\n\nDescription List (Bullets):\n\nBreakthrough spatial audio with Dolby Atmos support.\nSix custom-designed drivers for an immersive 3D soundstage.\nStream effortlessly over WiFi, Bluetooth, or Apple AirPlay 2.\nTrueplay™ tuning perfectly balances sound for the room.\nTouch controls and Voice control enabled.\n\nSpecifications:\n\nAmplifiers: Six Class-D digital amplifiers\nMicrophones: Far-field microphone array\nWeight: 4.47 kg\nConnectivity: WiFi 6, Bluetooth 5.0, USB-C Line in\nWarranty: 1 Year Official Manufacturer Warranty",
+    "price": 44999,
+    "discountPrice": 0,
+    "category": "Sonos Home Speakers",
+    "brand": "Sonos",
+    "stock": 20,
+    "images": [
+      {
+        "public_id": "seed_sonos_era300_main",
+        "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&q=80&w=800",
+        "_id": { "$oid": "69d76fe369cbc958a102e122" }
+      }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 44999, "_id": { "$oid": "69da2769e404c7e1550a123" }, "images": [ { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&q=80&w=800" } ] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 44999, "_id": { "$oid": "69da2769e404c7e1550a124" }, "images": [ { "url": "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&q=80&w=800" } ] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": true, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }, "__v": 0, "createdAt": { "$date": "2026-04-19T02:00:00.000Z" }, "updatedAt": { "$date": "2026-04-19T02:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "69d74c31d99e0f85f58f0707" },
+    "name": "Sonos Arc Ultra",
+    "description": "Features (Paragraph):\nThe premium smart soundbar for TV, movies, music, gaming, and more. Bring all your entertainment to life with the brilliantly realistic sound of Arc Ultra, featuring Dolby Atmos. Enjoy control with your TV remote, voice, the Sonos app, and Apple AirPlay 2.\n\nDescription List (Bullets):\n\nCinematic 3D sound with Dolby Atmos.\nEleven high-performance drivers for crisp highs and dynamic midranges.\nSpeech Enhancement feature for crystal-clear dialogue.\nSeamless integration with your existing Sonos ecosystem.\nElegant, slim profile design that blends into your home.\n\nSpecifications:\n\nAmplifiers: Eleven Class-D digital amplifiers\nAudio Formats: Dolby Atmos, TrueHD, Digital Plus\nWeight: 6.25 kg\nConnectivity: HDMI eARC, WiFi, Ethernet, AirPlay 2\nWarranty: 1 Year Official Manufacturer Warranty",
+    "price": 99999,
+    "discountPrice": 0,
+    "category": "Sonos Home Theater",
+    "brand": "Sonos",
+    "stock": 10,
+    "images": [
+      {
+        "public_id": "seed_sonos_arc_main",
+        "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&q=80&w=800",
+        "_id": { "$oid": "69d76fe369cbc958a102e125" }
+      }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 5, "price": 99999, "_id": { "$oid": "69da2769e404c7e1550a126" }, "images": [ { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&q=80&w=800" } ] },
+      { "color": "White", "size": "Standard", "stock": 5, "price": 99999, "_id": { "$oid": "69da2769e404c7e1550a127" }, "images": [ { "url": "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&q=80&w=800" } ] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": true, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }, "__v": 0, "createdAt": { "$date": "2026-04-19T02:00:00.000Z" }, "updatedAt": { "$date": "2026-04-19T02:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "69d74c31d99e0f85f58f0708" },
+    "name": "Sonos Ace Headphone",
+    "description": "Features (Paragraph):\nExperience every frequency with superior precision and clarity. Sonos Ace maximizes your listening experience with lossless audio streaming, world-class active noise cancellation, and Aware mode to let the world in when you need to.\n\nDescription List (Bullets):\n\nCustom-designed drivers for lossless, high-fidelity audio.\nWorld-class Active Noise Cancellation.\nUp to 30 hours of battery life with ANC on.\nPlush memory foam ear cushions for extended comfort.\nSeamless device switching and Sonos ecosystem integration.\n\nSpecifications:\n\nDesign: Over-Ear\nBattery Life: 30 Hours (with ANC)\nWeight: 312 g\nConnectivity: Bluetooth 5.4, USB-C\nWarranty: 1 Year Official Manufacturer Warranty",
+    "price": 34999,
+    "discountPrice": 0,
+    "category": "Sonos Headphones",
+    "brand": "Sonos",
+    "stock": 20,
+    "images": [
+      {
+        "public_id": "seed_sonos_ace_main",
+        "url": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&q=80&w=800",
+        "_id": { "$oid": "69d76fe369cbc958a102e128" }
+      }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 34999, "_id": { "$oid": "69da2769e404c7e1550a129" }, "images": [ { "url": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&q=80&w=800" } ] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 34999, "_id": { "$oid": "69da2769e404c7e1550a130" }, "images": [ { "url": "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&q=80&w=800" } ] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": false, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }, "__v": 0, "createdAt": { "$date": "2026-04-19T02:00:00.000Z" }, "updatedAt": { "$date": "2026-04-19T02:00:00.000Z" }
+  },
+
+  // ==========================================
+  // DEVIALET ULTRA-PREMIUM AUDIO
+  // ==========================================
+  {
+    "_id": { "$oid": "69d74c31d99e0f85f58f0709" },
+    "name": "Devialet Mania",
+    "description": "Features (Paragraph):\nDevialet Mania is a high-fidelity portable smart speaker with 360° stereo sound. Featuring proprietary acoustic mapping technology, it adapts its audio rendering to the space it's in, delivering expansive, breathtaking sound.\n\nDescription List (Bullets):\n\nASC (Active Stereo Calibration) automatically adapts sound to your room.\n360° immersive stereo sound.\nUp to 10 hours of untethered playtime.\nBuilt-in Wi-Fi, Bluetooth, and AirPlay 2.\nExquisite luxury design with premium materials.\n\nSpecifications:\n\nLoudspeakers: 4 Aluminium full-range drivers, 2 woofers\nMaximum Sound Level: 95 dB SPL at 1 meter\nBattery Life: 10 Hours\nWeight: 2.3 kg\nConnectivity: Wi-Fi, Bluetooth 5.0, AirPlay 2\nWarranty: 2 Year Official Devialet Warranty",
+    "price": 84990,
+    "discountPrice": 0,
+    "category": "Devialet Portable",
+    "brand": "Devialet",
+    "stock": 10,
+    "images": [
+      {
+        "public_id": "seed_devialet_mania_main",
+        "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&q=80&w=800",
+        "_id": { "$oid": "69d76fe369cbc958a102e131" }
+      }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 2, "price": 84990, "_id": { "$oid": "69da2769e404c7e1550a132" }, "images": [ { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&q=80&w=800" } ] },
+      { "color": "White", "size": "Standard", "stock": 2, "price": 84990, "_id": { "$oid": "69da2769e404c7e1550a133" }, "images": [ { "url": "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&q=80&w=800" } ] },
+      { "color": "Opera De Paris", "size": "Standard", "stock": 2, "price": 109990, "_id": { "$oid": "69da2769e404c7e1550a134" }, "images": [ { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&q=80&w=800" } ] },
+      { "color": "Opera Rouge", "size": "Standard", "stock": 2, "price": 109990, "_id": { "$oid": "69da2769e404c7e1550a135" }, "images": [ { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&q=80&w=800" } ] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": true, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }, "__v": 0, "createdAt": { "$date": "2026-04-19T02:00:00.000Z" }, "updatedAt": { "$date": "2026-04-19T02:00:00.000Z" }
+  },
+  {
+    "_id": { "$oid": "69d74c31d99e0f85f58f0710" },
+    "name": "Devialet Phantom I 108 db",
+    "description": "Features (Paragraph):\nThe ultimate connected speaker. Hear every detail brought to life with unthinkable clarity and precision by a Grade I Titanium tweeter. Experience immense power and ultra-deep bass for a physical impact you can feel in your bones.\n\nDescription List (Bullets):\n\nUnreasonable sound power: 108 dB SPL.\nImplosive bass down to 14Hz.\nZero distortion, zero saturation, zero background noise.\nArchitectural masterpiece design.\nSeamless Wi-Fi, Bluetooth, Spotify Connect, and AirPlay 2.\n\nSpecifications:\n\nLoudspeakers: Grade I Titanium Tweeter, Aluminum Medium & Bass drivers\nMaximum Sound Level: 108 dB SPL at 1 meter\nAmplification Power: 1100 Watts RMS\nWeight: 11.4 kg\nConnectivity: Wi-Fi, Ethernet, Bluetooth, Optical\nWarranty: 2 Year Official Devialet Warranty",
+    "price": 329990,
+    "discountPrice": 0,
+    "category": "Devialet Home Audio",
+    "brand": "Devialet",
+    "stock": 5,
+    "images": [
+      {
+        "public_id": "seed_devialet_phantom_main",
+        "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&q=80&w=800",
+        "_id": { "$oid": "69d76fe369cbc958a102e136" }
+      }
+    ],
+    "variants": [
+      { "color": "Default", "size": "Standard", "stock": 5, "price": 329990, "_id": { "$oid": "69da2769e404c7e1550a137" }, "images": [ { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&q=80&w=800" } ] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": true, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }, "__v": 0, "createdAt": { "$date": "2026-04-19T02:00:00.000Z" }, "updatedAt": { "$date": "2026-04-19T02:00:00.000Z" }
   }
+
+
+// Apni data.js file mein is array ko purane 'products' array ke aage spread (...) kar lijiye.
+// Example: const allProducts = [...products, ...remainingProducts];
 ]
 module.exports = products;

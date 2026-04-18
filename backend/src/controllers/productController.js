@@ -4,10 +4,11 @@ const ExpressError = require('../utils/expressError');
 const { PutObjectCommand } = require("@aws-sdk/client-s3");
 const mongoose = require('mongoose');
 const r2 = require("../config/cloudConfig");
-const sharp = require('sharp'); // ⚡ Step 1: Sharp install karke import karein
+const sharp = require('sharp'); 
+const { removeBackground } = require('../utils/removeBg'); // ⚡ NAYA: Remove.bg utility import kiya
 
 // -------------------------------------------------------------------
-// 1. CREATE PRODUCT (With Image Compression)
+// 1. CREATE PRODUCT (With Remove.bg + Sharp Compression + R2)
 // -------------------------------------------------------------------
 exports.createProduct = wrapAsync(async (req, res, next) => {
     const { name, description, price, category, brand, stock, isActive, discountPrice } = req.body;
@@ -50,18 +51,32 @@ exports.createProduct = wrapAsync(async (req, res, next) => {
             });
 
             for (const variantFile of thisVariantImages) {
-                // ⚡ SHARP LOGIC: Compress image before R2 upload
-                const optimizedBuffer = await sharp(variantFile.buffer)
+                let finalBuffer = variantFile.buffer;
+
+                // ⚡ STEP 1: BACKGROUND REMOVAL API
+                try {
+                    console.log(`Removing background for variant ${i}...`);
+                    // Buffer bhejenge remove.bg ko, aur transparent PNG buffer wapas aayega
+                    finalBuffer = await removeBackground(variantFile.buffer);
+                } catch (bgError) {
+                    console.error("⚠️ Background removal failed (Maybe out of credits). Falling back to original image.");
+                    // Agar API fail ho jaye toh product upload rukega nahi, original image aage jayegi.
+                }
+
+                // ⚡ STEP 2: SHARP COMPRESSION
+                // Fit 'inside' and WebP conversion. Added alphaQuality: 100 to preserve transparent background.
+                const optimizedBuffer = await sharp(finalBuffer)
                     .resize(800, 800, { fit: 'inside', withoutEnlargement: true })
-                    .webp({ quality: 80 }) // 🔥 Convert to WebP (Very Small Size)
+                    .webp({ quality: 80, alphaQuality: 100 }) // 🔥 WebP with Transparency
                     .toBuffer();
 
+                // ⚡ STEP 3: CLOUDFLARE R2 UPLOAD
                 const key = `Products/${Date.now()}-${Math.random().toString(36).substr(2, 5)}.webp`;
                 
                 await r2.send(new PutObjectCommand({
                     Bucket: process.env.R2_BUCKET_NAME,
                     Key: key,
-                    Body: optimizedBuffer, // Send compressed buffer
+                    Body: optimizedBuffer, 
                     ContentType: 'image/webp',
                 }));
 
@@ -70,7 +85,11 @@ exports.createProduct = wrapAsync(async (req, res, next) => {
             processedVariants.push(variant);
         }
         productData.variants = processedVariants;
-        if (processedVariants[0]?.images?.length > 0) productData.images = [processedVariants[0].images[0]];
+        
+        // Product ki main 'images' array mein first variant ki first image daal do (Display ke liye)
+        if (processedVariants[0]?.images?.length > 0) {
+            productData.images = [processedVariants[0].images[0]];
+        }
     }
 
     const savedProduct = await Product.create(productData);
@@ -118,76 +137,45 @@ exports.getProductDetails = wrapAsync(async (req, res, next) => {
     res.status(200).json({ success: true, product, isDealActive, relatedProducts });
 });
 
-// 5. UPDATE PRODUCT
-
 // -------------------------------------------------------------------
-
+// 4. UPDATE PRODUCT
+// -------------------------------------------------------------------
 exports.updateProduct = wrapAsync(async (req, res, next) => {
-
     let product = await Product.findById(req.params.id);
-
     if (!product) throw new ExpressError(404, 'Product not found');
-
-
-
-    // Use req.body and handle number conversions
 
     if (req.body.price) req.body.price = Number(req.body.price);
-
     if (req.body.flashDeal) req.body.flashDeal = JSON.parse(req.body.flashDeal);
-
     if (req.body.variants) req.body.variants = JSON.parse(req.body.variants);
 
-
-
     const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, {
-
         new: true,
-
         runValidators: true,
-
     });
 
-
-
     res.status(200).json({ success: true, product: updatedProduct });
-
 });
 
-
-
 // -------------------------------------------------------------------
-
-// 6. DELETE PRODUCT
-
+// 5. DELETE PRODUCT
 // -------------------------------------------------------------------
-
 exports.deleteProduct = wrapAsync(async (req, res, next) => {
-
     const product = await Product.findByIdAndDelete(req.params.id);
-
     if (!product) throw new ExpressError(404, 'Product not found');
-
     res.status(200).json({ success: true, message: 'Product deleted' });
-
 });
 
-
-
 // -------------------------------------------------------------------
-
-// 7. GET ADMIN PRODUCTS
-
+// 6. GET ADMIN PRODUCTS
 // -------------------------------------------------------------------
-
 exports.getAdminProducts = wrapAsync(async (req, res, next) => {
-
     const products = await Product.find();
-
     res.status(200).json({ success: true, count: products.length, products });
-
 });
-// productController.js ke ekdum niche check karein
+
+// -------------------------------------------------------------------
+// 7. TOGGLE FEATURED STATUS
+// -------------------------------------------------------------------
 exports.toggleFeaturedStatus = wrapAsync(async (req, res, next) => {
     const product = await Product.findById(req.params.id);
     if (!product) {
