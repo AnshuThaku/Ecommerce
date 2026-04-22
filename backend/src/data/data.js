@@ -1250,6 +1250,837 @@ const products = [
     ],
     "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
     "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": true, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }, "__v": 0, "createdAt": { "$date": "2026-04-19T02:00:00.000Z" }, "updatedAt": { "$date": "2026-04-19T02:00:00.000Z" }
+  },
+  {
+    "name": "Marshall Mode C Type Earphone",
+    "description": "Features (Paragraph):\nMode wired earphones deliver huge sound in a small package. Customized drivers deliver high-output sound at minimal distortion. With its unique in-ear design, it anchors to your ear.\n\nDescription List (Bullets):\nCustomized drivers for high-output audio.\nUSB-C connectivity for modern devices.\nBuilt-in microphone and remote.\nErgonomic fit with multiple ear tips.\n\nSpecifications:\nDriver Type: 9 mm Dynamic\nConnectivity: USB-C\nWeight: 17 g",
+    "price": 3999,
+    "discountPrice": 500,
+    "category": "Marshall Wired Earphones",
+    "brand": "Marshall",
+    "stock": 50,
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1572536147245-87f11b697334?auto=format&fit=crop&w=800&q=80"
+      }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 50, "price": 3499, "images": [{ "url": "https://images.unsplash.com/photo-1572536147245-87f11b697334?auto=format&fit=crop&w=800&q=80" }] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": false, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }
+  },
+  {
+    "name": "Heston 120",
+    "description": "Features (Paragraph):\nThe Marshall Heston 120 Soundbar delivers room-filling stadium sound for your home theater. Enjoy deep, rumbling bass and crisp dialogue enhancement.\n\nDescription List (Bullets):\nSignature Marshall sound optimized for home cinema.\nBuilt-in subwoofers for deep bass.\nHDMI ARC for seamless TV integration.\n\nSpecifications:\nOutput Power: 120W Total\nConnectivity: HDMI ARC, Optical, Bluetooth",
+    "price": 119999,
+    "discountPrice": 10000,
+    "category": "Marshall Soundbar",
+    "brand": "Marshall",
+    "stock": 10,
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80"
+      }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 109999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80" }] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": false, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }
+  },
+  {
+    "name": "Heston 200",
+    "description": "Features (Paragraph):\nThe flagship Marshall Heston 200 Soundbar brings the ultimate stadium sound to your living room. Features explosive bass, surround sound capabilities, and premium Marshall design.\n\nDescription List (Bullets):\nUltimate Marshall home cinema experience.\nMassive 200W output for explosive audio.\nHDMI eARC and Dolby Audio support.\n\nSpecifications:\nOutput Power: 200W Total\nConnectivity: HDMI eARC, Optical, Bluetooth",
+    "price": 189999,
+    "discountPrice": 15000,
+    "category": "Marshall Soundbar",
+    "brand": "Marshall",
+    "stock": 5,
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80"
+      }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 5, "price": 174999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80" }] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": true, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }
+  },
+  {
+    "name": "Marshall Bromley 450",
+    "description": "Features (Paragraph):\nThe Bromley 450 is a premium multi-room wireless speaker designed to fill your space with iconic Marshall sound.\n\nDescription List (Bullets):\nHigh-fidelity wireless streaming.\nWi-Fi and Bluetooth 5.2 connectivity.\nMulti-room setup compatible.\n\nSpecifications:\nType: Wireless Multi-room Speaker\nConnectivity: Wi-Fi, Bluetooth 5.2",
+    "price": 44999,
+    "discountPrice": 0,
+    "category": "Marshall Music Streamer",
+    "brand": "Marshall",
+    "stock": 15,
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80"
+      }
+    ],
+    "variants": [
+      { "color": "Black & Brass", "size": "Standard", "stock": 15, "price": 44999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80" }] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": false, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }
+  },
+  {
+    "name": "Sonos Roam",
+    "description": "Features (Paragraph):\nEnjoy size-defying sound at home and on the go with this lightweight, outdoor-ready portable smart speaker.\n\nDescription List (Bullets):\n10 hours of battery life.\nIP67 waterproof and dustproof.\nWiFi and Bluetooth streaming.\n\nSpecifications:\nWater Resistance: IP67\nBattery Life: 10 Hours\nConnectivity: WiFi, Bluetooth",
+    "price": 16999,
+    "discountPrice": 0,
+    "category": "Sonos Portable",
+    "brand": "Sonos",
+    "stock": 25,
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80"
+      }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 15, "price": 16999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 16999, "images": [{ "url": "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=800&q=80" }] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": false, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }
+  },
+  {
+    "name": "Sonos Move",
+    "description": "Features (Paragraph):\nGet brilliant sound anywhere with the weatherproof and drop-resistant Move. Control with your voice, the Sonos app, and Apple AirPlay 2.\n\nDescription List (Bullets):\nDurable, battery-powered smart speaker.\nGreat for outdoor and indoor listening.\nAutomatic Trueplay tuning.\n\nSpecifications:\nWater Resistance: IP56\nBattery Life: 11 Hours\nConnectivity: WiFi, Bluetooth",
+    "price": 39999,
+    "discountPrice": 2000,
+    "category": "Sonos Portable",
+    "brand": "Sonos",
+    "stock": 20,
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80"
+      }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 37999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 37999, "images": [{ "url": "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=800&q=80" }] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": false, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }
+  },
+  {
+    "name": "Sonos Era 100",
+    "description": "Features (Paragraph):\nFeaturing next-gen acoustics and new levels of connectivity, Era 100 transforms any room with the finely tuned stereo sound and rich bass your music deserves.\n\nDescription List (Bullets):\nNext-gen dual-tweeter acoustic architecture.\nCompact design fits beautifully on any bookshelf.\nWiFi, Bluetooth, and line-in connectivity.\n\nSpecifications:\nAmplifiers: 3 Class-D digital amplifiers\nConnectivity: WiFi 6, Bluetooth 5.0, USB-C Line In",
+    "price": 24999,
+    "discountPrice": 0,
+    "category": "Sonos Home Speakers",
+    "brand": "Sonos",
+    "stock": 30,
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80"
+      }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 15, "price": 24999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80" }] },
+      { "color": "White", "size": "Standard", "stock": 15, "price": 24999, "images": [{ "url": "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=800&q=80" }] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": false, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }
+  },
+  {
+    "name": "Sonos Five",
+    "description": "Features (Paragraph):\nThe high-fidelity speaker for superior sound. Experience vividly clear, room-filling sound for music streaming, vinyl, and more. Enjoy control with the app and Apple AirPlay 2.\n\nDescription List (Bullets):\nStudio-quality sound with deep bass.\nThree high-excursion woofers.\nLine-in port for connecting a turntable.\n\nSpecifications:\nAmplifiers: Six Class-D digital amplifiers\nConnectivity: WiFi, 3.5mm line in",
+    "price": 54999,
+    "discountPrice": 2000,
+    "category": "Sonos Home Speakers",
+    "brand": "Sonos",
+    "stock": 10,
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80"
+      }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 5, "price": 52999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80" }] },
+      { "color": "White", "size": "Standard", "stock": 5, "price": 52999, "images": [{ "url": "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=800&q=80" }] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": false, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }
+  },
+  {
+    "name": "Sonos Beam Gen 2",
+    "description": "Features (Paragraph):\nEnrich all your entertainment with the latest generation of our compact smart soundbar, now with Dolby Atmos. Enjoy panoramic sound for shows, movies, and games.\n\nDescription List (Bullets):\n3D Surround Sound with Dolby Atmos.\nCrystal clear dialogue with Speech Enhancement.\nEasy setup with a single cable to your TV.\n\nSpecifications:\nAudio Formats: Dolby Atmos\nConnectivity: HDMI eARC, WiFi",
+    "price": 44999,
+    "discountPrice": 0,
+    "category": "Sonos Home Theater",
+    "brand": "Sonos",
+    "stock": 20,
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80"
+      }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 44999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 44999, "images": [{ "url": "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=800&q=80" }] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": false, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }
+  },
+  {
+    "name": "Sonos Arc",
+    "description": "Features (Paragraph):\nBring all your entertainment to life with the brilliantly realistic sound of Arc, featuring Dolby Atmos. Enjoy control with your TV remote, voice, the Sonos app, and Apple AirPlay 2.\n\nDescription List (Bullets):\nPremium smart soundbar for TV, movies, music, and gaming.\n3D sound with Dolby Atmos.\nEleven high-performance drivers.\n\nSpecifications:\nAudio Formats: Dolby Atmos\nConnectivity: HDMI eARC, WiFi",
+    "price": 89999,
+    "discountPrice": 5000,
+    "category": "Sonos Home Theater",
+    "brand": "Sonos",
+    "stock": 10,
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80"
+      }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 5, "price": 84999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80" }] },
+      { "color": "White", "size": "Standard", "stock": 5, "price": 84999, "images": [{ "url": "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=800&q=80" }] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": true, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }
+  },
+  {
+    "name": "Sonos Sub Mini",
+    "description": "Features (Paragraph):\nDeepen your enjoyment of TV, music, and more with bold bass when you pair Sub Mini with Beam, Ray, Era 100, or One.\n\nDescription List (Bullets):\nDual custom woofers generate deep, dynamic low end.\nUnique cylindrical design looks right at home.\nZero buzz or rattle.\n\nSpecifications:\nAmplifiers: Two Class-D digital amplifiers\nConnectivity: WiFi",
+    "price": 42999,
+    "discountPrice": 0,
+    "category": "Sonos Home Theater",
+    "brand": "Sonos",
+    "stock": 15,
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=800&q=80"
+      }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 8, "price": 42999, "images": [{ "url": "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=800&q=80" }] },
+      { "color": "White", "size": "Standard", "stock": 7, "price": 42999, "images": [{ "url": "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=800&q=80" }] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": false, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }
+  },
+  {
+    "name": "Sonos Sub Gen 3",
+    "description": "Features (Paragraph):\nHear and feel the difference with Sub, the wireless subwoofer for deep bass. Experience lower lows and higher highs when you connect Sub to your Sonos system.\n\nDescription List (Bullets):\nNo buzz, just bass. Force-canceling drivers eliminate vibration.\nIconic, award-winning design.\nConnects wirelessly to any Sonos speaker or soundbar.\n\nSpecifications:\nAmplifiers: Two Class-D digital amplifiers\nConnectivity: WiFi",
+    "price": 74999,
+    "discountPrice": 5000,
+    "category": "Sonos Home Theater",
+    "brand": "Sonos",
+    "stock": 10,
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80"
+      }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 5, "price": 69999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80" }] },
+      { "color": "White", "size": "Standard", "stock": 5, "price": 69999, "images": [{ "url": "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=800&q=80" }] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": false, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }
+  },
+  {
+    "name": "Devialet Gemini II",
+    "description": "Features (Paragraph):\nSecond-generation Devialet Gemini true wireless earbuds pack a suite of enhanced tech into a smaller, more ergonomic design. Enjoy pure Devialet sound on the go.\n\nDescription List (Bullets):\nDevialet Adaptive Noise Cancellation™.\nTransparency mode.\nBluetooth 5.2 with Multipoint.\nIP4X water resistance.\n\nSpecifications:\nBattery Life: 22 Hours total\nConnectivity: Bluetooth 5.2 multipoint\nWeight: 6g per earbud",
+    "price": 34990,
+    "discountPrice": 0,
+    "category": "Devialet TWS",
+    "brand": "Devialet",
+    "stock": 15,
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=800&q=80"
+      }
+    ],
+    "variants": [
+      { "color": "Matte Black", "size": "Standard", "stock": 8, "price": 34990, "images": [{ "url": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=800&q=80" }] },
+      { "color": "Iconic White", "size": "Standard", "stock": 7, "price": 34990, "images": [{ "url": "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=800&q=80" }] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": false, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }
+  },
+  {
+    "name": "Devialet Dione",
+    "description": "Features (Paragraph):\nDevialet Dione is an intensely immersive, all-in-one Dolby Atmos® 5.1.2 soundbar that elevates viewing into a cinematic experience.\n\nDescription List (Bullets):\nDolby Atmos 5.1.2 support.\nSeventeen autonomous high-end drivers.\nSPACE™ technology upscale any signal into 5.1.2.\nORB® central sphere adapts to the soundbar position.\n\nSpecifications:\nLoudspeakers: 17 custom Devialet neodymium drivers\nMaximum Sound Level: 101 dB SPL at 1 meter\nConnectivity: HDMI eARC, Optical, AirPlay 2, Bluetooth 5.0",
+    "price": 239990,
+    "discountPrice": 0,
+    "category": "Devialet Home Audio",
+    "brand": "Devialet",
+    "stock": 5,
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80"
+      }
+    ],
+    "variants": [
+      { "color": "Dark Grey", "size": "Standard", "stock": 5, "price": 239990, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80" }] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": true, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }
+  },
+  {
+    "name": "Devialet Phantom I 103 db",
+    "description": "Features (Paragraph):\nPhantom I 103 dB features every class-leading Devialet invention bringing you high-fidelity and ultra-dense sound in a compact design. \n\nDescription List (Bullets):\nZero distortion, zero saturation.\nHeart-bass implosion technology.\nWi-Fi, Bluetooth, Spotify Connect and AirPlay 2.\nIncludes Devialet Remote.\n\nSpecifications:\nMaximum Sound Level: 103 dB SPL at 1 meter\nAmplification Power: 500 Watts RMS\nWeight: 11.4 kg\nConnectivity: Wi-Fi, Ethernet, Bluetooth, Optical",
+    "price": 249990,
+    "discountPrice": 0,
+    "category": "Devialet Home Audio",
+    "brand": "Devialet",
+    "stock": 5,
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80"
+      }
+    ],
+    "variants": [
+      { "color": "Light Chrome", "size": "Standard", "stock": 3, "price": 249990, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=800&q=80" }] },
+      { "color": "Matte Black", "size": "Standard", "stock": 2, "price": 249990, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80" }] }
+    ],
+    "seller": { "$oid": "65f0b5a31c5b4b1a2c9d8e7f" },
+    "reviews": [], "isActive": true, "soldCount": 0, "isFeatured": true, "flashDeal": { "isActive": false, "dealPrice": null, "startTime": null, "endTime": null }
+  },
+  {
+    "name": "Devialet Phantom I 108 dB (Ultimate Edition)",
+    "description": "Experience premium audio quality and iconic design with the Devialet Phantom I 108 dB (Ultimate Edition). Brand: Devialet\nCategory: Premium Audio",
+    "price": 329990,
+    "discountPrice": 0,
+    "category": "Premium Audio",
+    "brand": "Devialet",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/DevialetPhantomI108dBUltimateEditionLightPearl1/800/800" }
+    ],
+    "variants": [
+      {
+        "color": "Light Pearl",
+        "size": "Standard",
+        "stock": 10,
+        "price": 329990,
+        "images": [ { "url": "https://picsum.photos/seed/DevialetPhantomI108dBUltimateEditionLightPearl1/800/800" } ]
+      }
+    ]
+  },
+  {
+    "name": "Devialet Tree for Phanton I",
+    "description": "Experience premium audio quality and iconic design with the Devialet Tree for Phanton I. Brand: Devialet\nCategory: Premium Audio",
+    "price": 34990,
+    "discountPrice": 0,
+    "category": "Premium Audio",
+    "brand": "Devialet",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/DevialetTreeforPhantonIWhite1/800/800" }
+    ],
+    "variants": [
+      { "color": "White", "size": "Standard", "stock": 10, "price": 34990, "images": [ { "url": "https://picsum.photos/seed/DevialetTreeforPhantonIWhite1/800/800" } ] },
+      { "color": "Matte Black", "size": "Standard", "stock": 10, "price": 34990, "images": [ { "url": "https://picsum.photos/seed/DevialetTreeforPhantonIMatteBlack1/800/800" } ] }
+    ]
+  },
+  {
+    "name": "Devialet Tree  Phantom Ultimate 108 dB",
+    "description": "Experience premium audio quality and iconic design with the Devialet Tree  Phantom Ultimate 108 dB. Brand: Devialet\nCategory: Premium Audio",
+    "price": 39990,
+    "discountPrice": 0,
+    "category": "Premium Audio",
+    "brand": "Devialet",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/DevialetTreePhantomUltimate108dBGold1/800/800" }
+    ],
+    "variants": [
+      {
+        "color": "Gold",
+        "size": "Standard",
+        "stock": 10,
+        "price": 39990,
+        "images": [ { "url": "https://picsum.photos/seed/DevialetTreePhantomUltimate108dBGold1/800/800" } ]
+      }
+    ]
+  },
+  {
+    "name": "Devialet Treepod for Phanton I",
+    "description": "Experience premium audio quality and iconic design with the Devialet Treepod for Phanton I. Brand: Devialet\nCategory: Premium Audio",
+    "price": 29990,
+    "discountPrice": 0,
+    "category": "Premium Audio",
+    "brand": "Devialet",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/DevialetTreepodforPhantonIWhite1/800/800" }
+    ],
+    "variants": [
+      { "color": "White", "size": "Standard", "stock": 10, "price": 29990, "images": [ { "url": "https://picsum.photos/seed/DevialetTreepodforPhantonIWhite1/800/800" } ] },
+      { "color": "Matte Black", "size": "Standard", "stock": 10, "price": 29990, "images": [ { "url": "https://picsum.photos/seed/DevialetTreepodforPhantonIMatteBlack1/800/800" } ] }
+    ]
+  },
+  {
+    "name": "Devialet Treepod  Phantom Ultimate 108 dB",
+    "description": "Experience premium audio quality and iconic design with the Devialet Treepod  Phantom Ultimate 108 dB. Brand: Devialet\nCategory: Premium Audio",
+    "price": 34990,
+    "discountPrice": 0,
+    "category": "Premium Audio",
+    "brand": "Devialet",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/DevialetTreepodPhantomUltimate108dBGold1/800/800" }
+    ],
+    "variants": [
+      {
+        "color": "Gold",
+        "size": "Standard",
+        "stock": 10,
+        "price": 34990,
+        "images": [ { "url": "https://picsum.photos/seed/DevialetTreepodPhantomUltimate108dBGold1/800/800" } ]
+      }
+    ]
+  },
+  {
+    "name": "Devialet Gecko for Phanton I",
+    "description": "Experience premium audio quality and iconic design with the Devialet Gecko for Phanton I. Brand: Devialet\nCategory: Premium Audio",
+    "price": 19990,
+    "discountPrice": 0,
+    "category": "Premium Audio",
+    "brand": "Devialet",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/DevialetGeckoforPhantonIWhite1/800/800" }
+    ],
+    "variants": [
+      { "color": "White", "size": "Standard", "stock": 10, "price": 19990, "images": [ { "url": "https://picsum.photos/seed/DevialetGeckoforPhantonIWhite1/800/800" } ] },
+      { "color": "Matte Black", "size": "Standard", "stock": 10, "price": 19990, "images": [ { "url": "https://picsum.photos/seed/DevialetGeckoforPhantonIMatteBlack1/800/800" } ] }
+    ]
+  },
+  {
+    "name": "Devialet Gecko Phantom Ultimate 108 dB",
+    "description": "Experience premium audio quality and iconic design with the Devialet Gecko Phantom Ultimate 108 dB. Brand: Devialet\nCategory: Premium Audio",
+    "price": 24990,
+    "discountPrice": 0,
+    "category": "Premium Audio",
+    "brand": "Devialet",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/DevialetGeckoPhantomUltimate108dBGold1/800/800" }
+    ],
+    "variants": [
+      {
+        "color": "Gold",
+        "size": "Standard",
+        "stock": 10,
+        "price": 24990,
+        "images": [ { "url": "https://picsum.photos/seed/DevialetGeckoPhantomUltimate108dBGold1/800/800" } ]
+      }
+    ]
+  },
+  {
+    "name": "Devialet Gecko for Phantom Ultimate 98 dB",
+    "description": "Experience premium audio quality and iconic design with the Devialet Gecko for Phantom Ultimate 98 dB. Brand: Devialet\nCategory: Premium Audio",
+    "price": 24990,
+    "discountPrice": 0,
+    "category": "Premium Audio",
+    "brand": "Devialet",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/DevialetGeckoforPhantomUltimate98dBGold1/800/800" }
+    ],
+    "variants": [
+      {
+        "color": "Gold",
+        "size": "Standard",
+        "stock": 10,
+        "price": 24990,
+        "images": [ { "url": "https://picsum.photos/seed/DevialetGeckoforPhantomUltimate98dBGold1/800/800" } ]
+      }
+    ]
+  },
+  {
+    "name": "Devialet Cocoon for Phantom I",
+    "description": "Experience premium audio quality and iconic design with the Devialet Cocoon for Phantom I. Brand: Devialet\nCategory: Premium Audio",
+    "price": 29990,
+    "discountPrice": 0,
+    "category": "Premium Audio",
+    "brand": "Devialet",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/DevialetCocoonforPhantomIOrange1/800/800" }
+    ],
+    "variants": [
+      {
+        "color": "Orange",
+        "size": "Standard",
+        "stock": 10,
+        "price": 29990,
+        "images": [ { "url": "https://picsum.photos/seed/DevialetCocoonforPhantomIOrange1/800/800" } ]
+      }
+    ]
+  },
+  {
+    "name": "Devialet Cocoon for Phantom II",
+    "description": "Experience premium audio quality and iconic design with the Devialet Cocoon for Phantom II. Brand: Devialet\nCategory: Premium Audio",
+    "price": 24990,
+    "discountPrice": 0,
+    "category": "Premium Audio",
+    "brand": "Devialet",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/DevialetCocoonforPhantomIIGrey1/800/800" }
+    ],
+    "variants": [
+      {
+        "color": "Grey",
+        "size": "Standard",
+        "stock": 10,
+        "price": 24990,
+        "images": [ { "url": "https://picsum.photos/seed/DevialetCocoonforPhantomIIGrey1/800/800" } ]
+      }
+    ]
+  },
+  {
+    "name": "Devialet Cocoon for Mania",
+    "description": "Experience premium audio quality and iconic design with the Devialet Cocoon for Mania. Brand: Devialet\nCategory: Premium Audio",
+    "price": 14990,
+    "discountPrice": 0,
+    "category": "Premium Audio",
+    "brand": "Devialet",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/DevialetCocoonforManiaGrey1/800/800" }
+    ],
+    "variants": [
+      {
+        "color": "Grey",
+        "size": "Standard",
+        "stock": 10,
+        "price": 14990,
+        "images": [ { "url": "https://picsum.photos/seed/DevialetCocoonforManiaGrey1/800/800" } ]
+      }
+    ]
+  },
+  {
+    "name": "Devialet Arch for Phantom I",
+    "description": "Experience premium audio quality and iconic design with the Devialet Arch for Phantom I. Brand: Devialet\nCategory: Premium Audio",
+    "price": 34990,
+    "discountPrice": 0,
+    "category": "Premium Audio",
+    "brand": "Devialet",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/DevialetArchforPhantomIWhite1/800/800" }
+    ],
+    "variants": [
+      {
+        "color": "White",
+        "size": "Standard",
+        "stock": 10,
+        "price": 34990,
+        "images": [ { "url": "https://picsum.photos/seed/DevialetArchforPhantomIWhite1/800/800" } ]
+      }
+    ]
+  },
+  {
+    "name": "Devialet Remote for Phantom I",
+    "description": "Experience premium audio quality and iconic design with the Devialet Remote for Phantom I. Brand: Devialet\nCategory: Premium Audio",
+    "price": 14990,
+    "discountPrice": 0,
+    "category": "Premium Audio",
+    "brand": "Devialet",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/DevialetRemoteforPhantomIWhite1/800/800" }
+    ],
+    "variants": [
+      { "color": "White", "size": "Standard", "stock": 10, "price": 14990, "images": [ { "url": "https://picsum.photos/seed/DevialetRemoteforPhantomIWhite1/800/800" } ] },
+      { "color": "Matte Black", "size": "Standard", "stock": 10, "price": 14990, "images": [ { "url": "https://picsum.photos/seed/DevialetRemoteforPhantomIMatteBlack1/800/800" } ] }
+    ]
+  },
+  {
+    "name": "Devialet Remote for Phantom II",
+    "description": "Experience premium audio quality and iconic design with the Devialet Remote for Phantom II. Brand: Devialet\nCategory: Premium Audio",
+    "price": 14990,
+    "discountPrice": 0,
+    "category": "Premium Audio",
+    "brand": "Devialet",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/DevialetRemoteforPhantomIIWhite1/800/800" }
+    ],
+    "variants": [
+      { "color": "White", "size": "Standard", "stock": 10, "price": 14990, "images": [ { "url": "https://picsum.photos/seed/DevialetRemoteforPhantomIIWhite1/800/800" } ] },
+      { "color": "Matte Black", "size": "Standard", "stock": 10, "price": 14990, "images": [ { "url": "https://picsum.photos/seed/DevialetRemoteforPhantomIIMatteBlack1/800/800" } ] }
+    ]
+  },
+  {
+    "name": "Devialet Remote for Phantom Ultimate",
+    "description": "Experience premium audio quality and iconic design with the Devialet Remote for Phantom Ultimate. Brand: Devialet\nCategory: Premium Audio",
+    "price": 19990,
+    "discountPrice": 0,
+    "category": "Premium Audio",
+    "brand": "Devialet",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/DevialetRemoteforPhantomUltimateGold1/800/800" }
+    ],
+    "variants": [
+      {
+        "color": "Gold",
+        "size": "Standard",
+        "stock": 10,
+        "price": 19990,
+        "images": [ { "url": "https://picsum.photos/seed/DevialetRemoteforPhantomUltimateGold1/800/800" } ]
+      }
+    ]
+  },
+  {
+    "name": "Era 100 SL",
+    "description": "Experience premium audio quality and iconic design with the Era 100 SL. Brand: Sonos\nCategory: Sonos Home Speakers",
+    "price": 24999,
+    "discountPrice": 0,
+    "category": "Sonos Home Speakers",
+    "brand": "Sonos",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/Era100SLBlack1/800/800" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 24999, "images": [ { "url": "https://picsum.photos/seed/Era100SLBlack1/800/800" } ] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 24999, "images": [ { "url": "https://picsum.photos/seed/Era100SLWhite1/800/800" } ] }
+    ]
+  },
+  {
+    "name": "Sonos Premium Set with Arc Ultra and Sub 4",
+    "description": "Experience premium audio quality and iconic design with the Sonos Premium Set with Arc Ultra and Sub 4. Brand: Sonos\nCategory: Sonos Home Theater",
+    "price": 185998,
+    "discountPrice": 0,
+    "category": "Sonos Home Theater",
+    "brand": "Sonos",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/SonosPremiumSetwithArcUltraandSub4Black1/800/800" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 185998, "images": [ { "url": "https://picsum.photos/seed/SonosPremiumSetwithArcUltraandSub4Black1/800/800" } ] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 185998, "images": [ { "url": "https://picsum.photos/seed/SonosPremiumSetwithArcUltraandSub4White1/800/800" } ] }
+    ]
+  },
+  {
+    "name": "Sonos Surround Set with Arc Ultra + Sub 4 + 2x Era 300",
+    "description": "Experience premium audio quality and iconic design with the Sonos Surround Set. Brand: Sonos\nCategory: Sonos Home Theater",
+    "price": 275996,
+    "discountPrice": 0,
+    "category": "Sonos Home Theater",
+    "brand": "Sonos",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/SonosSurroundSetwithArcUltraSub42xEra300Black1/800/800" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 275996, "images": [ { "url": "https://picsum.photos/seed/SonosSurroundSetwithArcUltraSub42xEra300Black1/800/800" } ] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 275996, "images": [ { "url": "https://picsum.photos/seed/SonosSurroundSetwithArcUltraSub42xEra300White1/800/800" } ] }
+    ]
+  },
+  {
+    "name": "Sonos Premium Set with Arc Ultra + Sub 4 + 2x Era 100",
+    "description": "Experience premium audio quality and iconic design with the Sonos Premium Set. Brand: Sonos\nCategory: Sonos Home Theater",
+    "price": 235996,
+    "discountPrice": 0,
+    "category": "Sonos Home Theater",
+    "brand": "Sonos",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/SonosPremiumSetwithArcUltraSub42xEra100Black1/800/800" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 235996, "images": [ { "url": "https://picsum.photos/seed/SonosPremiumSetwithArcUltraSub42xEra100Black1/800/800" } ] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 235996, "images": [ { "url": "https://picsum.photos/seed/SonosPremiumSetwithArcUltraSub42xEra100White1/800/800" } ] }
+    ]
+  },
+  {
+    "name": "Sonos Entertainment Set with Sonos Beam and Sub Mini",
+    "description": "Experience premium audio quality and iconic design with the Sonos Entertainment Set. Brand: Sonos\nCategory: Sonos Home Theater",
+    "price": 102998,
+    "discountPrice": 0,
+    "category": "Sonos Home Theater",
+    "brand": "Sonos",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/SonosEntertainmentSetwithSonosBeamandSubMiniBlack1/800/800" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 102998, "images": [ { "url": "https://picsum.photos/seed/SonosEntertainmentSetwithSonosBeamandSubMiniBlack1/800/800" } ] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 102998, "images": [ { "url": "https://picsum.photos/seed/SonosEntertainmentSetwithSonosBeamandSubMiniWhite1/800/800" } ] }
+    ]
+  },
+  {
+    "name": "Home Theatre Completion Set",
+    "description": "Experience premium audio quality and iconic design with the Home Theatre Completion Set. Brand: Sonos\nCategory: Sonos Home Theater",
+    "price": 139997,
+    "discountPrice": 0,
+    "category": "Sonos Home Theater",
+    "brand": "Sonos",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/HomeTheatreCompletionSetBlack1/800/800" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 139997, "images": [ { "url": "https://picsum.photos/seed/HomeTheatreCompletionSetBlack1/800/800" } ] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 139997, "images": [ { "url": "https://picsum.photos/seed/HomeTheatreCompletionSetWhite1/800/800" } ] }
+    ]
+  },
+  {
+    "name": "Ultimate Home Theatre Completion Set",
+    "description": "Experience premium audio quality and iconic design with the Ultimate Home Theatre Completion Set. Brand: Sonos\nCategory: Sonos Home Theater",
+    "price": 179997,
+    "discountPrice": 0,
+    "category": "Sonos Home Theater",
+    "brand": "Sonos",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/UltimateHomeTheatreCompletionSetBlack1/800/800" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 179997, "images": [ { "url": "https://picsum.photos/seed/UltimateHomeTheatreCompletionSetBlack1/800/800" } ] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 179997, "images": [ { "url": "https://picsum.photos/seed/UltimateHomeTheatreCompletionSetWhite1/800/800" } ] }
+    ]
+  },
+  {
+    "name": "Premium Personal Entertainment Set with Arc Ultra",
+    "description": "Experience premium audio quality and iconic design with the Premium Personal Entertainment Set. Brand: Sonos\nCategory: Sonos Home Theater",
+    "price": 134998,
+    "discountPrice": 0,
+    "category": "Sonos Home Theater",
+    "brand": "Sonos",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/PremiumPersonalEntertainmentSetwithArcUltraBlack1/800/800" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 134998, "images": [ { "url": "https://picsum.photos/seed/PremiumPersonalEntertainmentSetwithArcUltraBlack1/800/800" } ] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 134998, "images": [ { "url": "https://picsum.photos/seed/PremiumPersonalEntertainmentSetwithArcUltraWhite1/800/800" } ] }
+    ]
+  },
+  {
+    "name": "Indoor/Outdoor Set with Sonos Play",
+    "description": "Experience premium audio quality and iconic design with the Indoor/Outdoor Set. Brand: Sonos\nCategory: Sonos Home Speakers",
+    "price": 64998,
+    "discountPrice": 0,
+    "category": "Sonos Home Speakers",
+    "brand": "Sonos",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/IndoorOutdoorSetwithSonosPlayBlack1/800/800" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 64998, "images": [ { "url": "https://picsum.photos/seed/IndoorOutdoorSetwithSonosPlayBlack1/800/800" } ] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 64998, "images": [ { "url": "https://picsum.photos/seed/IndoorOutdoorSetwithSonosPlayWhite1/800/800" } ] }
+    ]
+  },
+  {
+    "name": "Adventure Set with Sonos Play",
+    "description": "Experience premium audio quality and iconic design with the Adventure Set. Brand: Sonos\nCategory: Sonos Portable",
+    "price": 46998,
+    "discountPrice": 0,
+    "category": "Sonos Portable",
+    "brand": "Sonos",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/AdventureSetwithSonosPlayBlack1/800/800" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 46998, "images": [ { "url": "https://picsum.photos/seed/AdventureSetwithSonosPlayBlack1/800/800" } ] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 46998, "images": [ { "url": "https://picsum.photos/seed/AdventureSetwithSonosPlayWhite1/800/800" } ] }
+    ]
+  },
+  {
+    "name": "Turntable Set with Era 100",
+    "description": "Experience premium audio quality and iconic design with the Turntable Set. Brand: Sonos\nCategory: Sonos Home Speakers",
+    "price": 79999,
+    "discountPrice": 0,
+    "category": "Sonos Home Speakers",
+    "brand": "Sonos",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/TurntableSetwithEra100Black1/800/800" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 79999, "images": [ { "url": "https://picsum.photos/seed/TurntableSetwithEra100Black1/800/800" } ] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 79999, "images": [ { "url": "https://picsum.photos/seed/TurntableSetwithEra100White1/800/800" } ] }
+    ]
+  },
+  {
+    "name": "Turntable Set with Five",
+    "description": "Experience premium audio quality and iconic design with the Turntable Set with Five. Brand: Sonos\nCategory: Sonos Home Speakers",
+    "price": 109999,
+    "discountPrice": 0,
+    "category": "Sonos Home Speakers",
+    "brand": "Sonos",
+    "stock": 10,
+    "isActive": true,
+    "ratings": 4.8,
+    "images": [
+      { "url": "https://picsum.photos/seed/TurntableSetwithFiveBlack1/800/800" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 109999, "images": [ { "url": "https://picsum.photos/seed/TurntableSetwithFiveBlack1/800/800" } ] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 109999, "images": [ { "url": "https://picsum.photos/seed/TurntableSetwithFiveWhite1/800/800" } ] }
+    ]
   }
 
 

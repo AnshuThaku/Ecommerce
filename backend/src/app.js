@@ -24,6 +24,9 @@ app.use("/api/history",  require("./routes/historyRoutes"));
 app.use("/api/home",  require("./routes/homeroutes"));
 app.use("/api/theme",  require("./routes/ThemeRoutes"));
 
+// Baaki app.use() ke sath isko daal dein
+app.use('/api/payment', require('./routes/paymentRoutes'));
+
 app.use(errorMiddleware);
 
 module.exports = app;

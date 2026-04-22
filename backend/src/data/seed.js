@@ -44,37 +44,52 @@ const seedProducts = async () => {
             // Attach Seller ID
             product.seller = sellerId;
 
-            // ⚡ NAYA LOGIC: Saari purani ya invalid IDs ko delete kar do
-            // Mongoose automatically perfectly valid naye IDs bana dega!
+            // ⚡ FIX 1: Delete all hardcoded/invalid _ids to let MongoDB generate valid ones
             delete product._id;
+
+            // ⚡ FIX 2: Clean IDs and Ensure 'public_id' exists for Main Images
+            if (product.images && product.images.length > 0) {
+                product.images = product.images.map((img, i) => {
+                    delete img._id; // Clean old _id
+                    return {
+                        url: img.url || img,
+                        public_id: img.public_id || `seed_main_${index}_${i}_${Date.now()}` // Add dummy public_id if missing
+                    };
+                });
+            }
+
+            // ⚡ FIX 3: Clean IDs and Ensure 'public_id' exists for Variant Images
+            if (product.variants && product.variants.length > 0) {
+                product.variants = product.variants.map((variant, vIndex) => {
+                    delete variant._id; // Clean old _id
+                    
+                    if (variant.images && variant.images.length > 0) {
+                        variant.images = variant.images.map((img, i) => {
+                            delete img._id; // Clean old _id
+                            return {
+                                url: img.url || img,
+                                public_id: img.public_id || `seed_variant_${index}_${vIndex}_${i}_${Date.now()}` // Add dummy public_id
+                            };
+                        });
+                    }
+                    return variant;
+                });
+            }
+
+            // Remove Mongoose auto-generated fields to avoid conflicts
             delete product.createdAt;
             delete product.updatedAt;
             delete product.__v;
 
-            // Variants ke andar ki IDs bhi delete karo
-            if (product.variants && Array.isArray(product.variants)) {
-                product.variants.forEach(variant => {
-                    delete variant._id;
-                    if (variant.images && Array.isArray(variant.images)) {
-                        variant.images.forEach(img => delete img._id);
-                    }
-                });
-            }
-
-            // Main images ki IDs bhi delete karo
-            if (product.images && Array.isArray(product.images)) {
-                product.images.forEach(img => delete img._id);
-            }
-
             formattedProducts.push(product);
         }
 
-        console.log(`🧹 Deleting old products from database...`);
-        // Delete ALL old products
+        console.log(`🧹 Deleting ${await Product.countDocuments()} old products from database...`);
+        // ⚡ Delete ALL old products to avoid duplicates
         await Product.deleteMany({});
         
         console.log(`➕ Inserting ${formattedProducts.length} new products into database...`);
-        // Insert ALL fresh data
+        // ⚡ Insert ALL fresh data
         await Product.insertMany(formattedProducts);
         
         console.log("\n=========================================");

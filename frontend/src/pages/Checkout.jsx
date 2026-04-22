@@ -7,7 +7,21 @@ import Toast from '../components/Toast';
 const CheckoutPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [paymentProcessing, setPaymentProcessing] = useState(false); 
   const [toastMessage, setToastMessage] = useState(null);
+  
+  // ⚡ UPDATE: Saari required fields state mein add kar di gayi hain
+  const [userDetails, setUserDetails] = useState({
+      email: '',
+      firstName: '',
+      lastName: '',
+      phone: '', 
+      country: '',
+      address: '',
+      city: '',
+      postalCode: ''
+  });
+
   const navigate = useNavigate();
 
   const showToast = (type, message) => setToastMessage({ type, message });
@@ -47,50 +61,142 @@ const CheckoutPage = () => {
   const updateQuantity = async (productId, currentQuantity, change) => {
     try {
       const newQuantity = currentQuantity + change;
-      if (newQuantity < 1) return; // Cart component handles trash/delete, here just prevent 0
+      if (newQuantity < 1) return;
       
       await axiosInstance.put("/cart/update", { productId, quantity: newQuantity });
       setCartItems(cartItems.map(item => 
         item.product === productId ? { ...item, quantity: newQuantity } : item
       ));
-      // Notify other components (like Cart modal)
       window.dispatchEvent(new Event('cartUpdated')); 
     } catch (error) {
       showToast("error", "Failed to update quantity");
     }
   };
 
-  const handleCheckoutSubmit = async () => {
+  const subtotal = cartItems.reduce((acc, curr) => acc + getItemPrice(curr) * curr.quantity, 0);
+
+  const loadRazorpayScript = () => {
+      return new Promise((resolve) => {
+          const script = document.createElement('script');
+          script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+          script.onload = () => resolve(true);
+          script.onerror = () => resolve(false);
+          document.body.appendChild(script);
+      });
+  };
+
+  const handlePayment = async () => {
     if (cartItems.length === 0) {
       return showToast("error", "Your cart is empty!");
     }
 
+    // ⚡ UPDATE: Strict Validation Check
+    const { email, firstName, lastName, country, address, city, postalCode } = userDetails;
+    
+    if (!email || !firstName || !lastName || !country || !address || !city || !postalCode) {
+        return showToast("error", "Please fill in all delivery and contact details!");
+    }
+
+    // Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        return showToast("error", "Please enter a valid email address!");
+    }
+
+    setPaymentProcessing(true);
+
     try {
-      const formattedItems = cartItems.map(item => ({
-        product: item.product,
-        name: item.productDetails.name,
-        image: item.productDetails.images?.[0]?.url || "",
-        price: getItemPrice(item),
-        quantity: item.quantity
-      }));
+        const isScriptLoaded = await loadRazorpayScript();
+        if (!isScriptLoaded) {
+            showToast('error', 'Razorpay SDK failed to load. Please check your internet.');
+            setPaymentProcessing(false);
+            return;
+        }
 
-      const response = await axiosInstance.post("/orders/instant-checkout", {
-        cartItems: formattedItems,
-        totalAmount: subtotal
-      });
+        const formattedItems = cartItems.map(item => ({
+            product: item.product,
+            name: item.productDetails.name,
+            image: item.productDetails.images?.[0]?.url || "",
+            price: getItemPrice(item),
+            quantity: item.quantity
+        }));
 
-      if (response.data.success) {
-         showToast("success", "Order Placed Successfully!");
-         // Optionally clear cart frontend-side or backend-side here. Assuming backend does it or we reset.
-         setTimeout(() => navigate('/order-success'), 1500); 
-      }
+        const { data: orderData } = await axiosInstance.post("/payment/create-order", {
+            amount: subtotal
+        });
+
+        if (!orderData.success) {
+            showToast('error', 'Failed to initialize payment.');
+            setPaymentProcessing(false);
+            return;
+        }
+
+        const options = {
+            key: orderData.key_id, 
+            amount: orderData.order.amount,
+            currency: orderData.order.currency,
+            name: "Truee Luxury", 
+            description: "Premium Audio Equipment Purchase",
+            order_id: orderData.order.id,
+            handler: async function (response) {
+                try {
+                    const verifyRes = await axiosInstance.post('/payment/verify-payment', {
+                        razorpay_order_id: response.razorpay_order_id,
+                        razorpay_payment_id: response.razorpay_payment_id,
+                        razorpay_signature: response.razorpay_signature,
+                        orderDetails: { 
+                            items: formattedItems, 
+                            totalAmount: subtotal,
+                            // ⚡ Optionally pass shipping details to backend to save in Order DB
+                            shippingAddress: {
+                                firstName, lastName, email, phone: userDetails.phone, country, address, city, postalCode
+                            }
+                        }
+                    });
+
+                    if (verifyRes.data.success) {
+                        showToast("success", "Payment Successful! Order Placed.");
+                        setCartItems([]);
+                        window.dispatchEvent(new Event('cartUpdated')); 
+                        setTimeout(() => navigate('/order-success'), 1500); 
+                    }
+                } catch (error) {
+                    console.error("Verification failed:", error);
+                    showToast("error", "Payment verification failed. Please contact support.");
+                }
+            },
+            prefill: {
+                name: `${firstName} ${lastName}`.trim(),
+                email: email,
+                contact: userDetails.phone || "9999999999" 
+            },
+            theme: {
+                color: "#000000" 
+            },
+            modal: {
+                ondismiss: function() {
+                    console.log("Payment popup closed by user");
+                    setPaymentProcessing(false); 
+                    showToast("error", "Payment cancelled by user.");
+                }
+            }
+        };
+
+        const razorpayObject = new window.Razorpay(options);
+        
+        razorpayObject.on('payment.failed', function (response) {
+            showToast('error', `Payment Failed: ${response.error.description}`);
+            setPaymentProcessing(false);
+        });
+
+        razorpayObject.open();
+
     } catch (error) {
-      console.error(error);
-      showToast("error", "Checkout failed. Please try again.");
+        console.error("Payment initiation error:", error);
+        showToast("error", "Something went wrong while starting payment.");
+        setPaymentProcessing(false);
     }
   };
-
-  const subtotal = cartItems.reduce((acc, curr) => acc + getItemPrice(curr) * curr.quantity, 0);
 
   return (
     <div className="min-h-screen bg-white p-4 md:p-8 font-sans text-gray-800">
@@ -109,7 +215,9 @@ const CheckoutPage = () => {
             </div>
             <input 
               type="email" 
-              placeholder="Email Address" 
+              placeholder="Email Address"
+              value={userDetails.email}
+              onChange={(e) => setUserDetails({...userDetails, email: e.target.value})}
               className="w-full p-4 border border-gray-300 rounded bg-transparent focus:outline-none focus:ring-1 focus:ring-black"
             />
           </section>
@@ -119,26 +227,64 @@ const CheckoutPage = () => {
             <h2 className="text-3xl font-serif mb-4">Delivery</h2>
             <div className="space-y-0">
               <div className="relative border border-gray-300 rounded-t p-0 flex justify-between items-center bg-transparent">
-                <select className="w-full p-4 bg-transparent outline-none appearance-none text-gray-700 cursor-pointer">
-                  <option value="" disabled selected className="text-gray-400">Country / Region</option>
-                  <option value="in">India</option>
-                  <option value="us">United States</option>
-                  <option value="uk">United Kingdom</option>
-                  <option value="ca">Canada</option>
-                  <option value="au">Australia</option>
+                {/* ⚡ UPDATE: Bound to state */}
+                <select 
+                    value={userDetails.country}
+                    onChange={(e) => setUserDetails({...userDetails, country: e.target.value})}
+                    className="w-full p-4 bg-transparent outline-none appearance-none text-gray-700 cursor-pointer"
+                >
+                  <option value="" disabled className="text-gray-400">Country / Region</option>
+                  <option value="India">India</option>
+                  <option value="United States">United States</option>
+                  <option value="United Kingdom">United Kingdom</option>
+                  <option value="Canada">Canada</option>
+                  <option value="Australia">Australia</option>
                 </select>
                 <div className="absolute right-4 pointer-events-none">
                   <ChevronDown size={20} className="text-gray-500" />
                 </div>
               </div>
               <div className="grid grid-cols-2">
-                <input type="text" placeholder="First Name" className="p-4 border border-t-0 border-gray-300 focus:outline-none" />
-                <input type="text" placeholder="Last Name" className="p-4 border border-t-0 border-l-0 border-gray-300 focus:outline-none" />
+                <input 
+                    type="text" 
+                    placeholder="First Name" 
+                    value={userDetails.firstName}
+                    onChange={(e) => setUserDetails({...userDetails, firstName: e.target.value})}
+                    className="p-4 border border-t-0 border-gray-300 focus:outline-none" 
+                />
+                <input 
+                    type="text" 
+                    placeholder="Last Name" 
+                    value={userDetails.lastName}
+                    onChange={(e) => setUserDetails({...userDetails, lastName: e.target.value})}
+                    className="p-4 border border-t-0 border-l-0 border-gray-300 focus:outline-none" 
+                />
               </div>
-              <input type="text" placeholder="Address" className="w-full p-4 border border-t-0 border-gray-300 focus:outline-none" />
+              {/* ⚡ UPDATE: Bound to state */}
+              <input 
+                type="text" 
+                placeholder="Address" 
+                value={userDetails.address}
+                onChange={(e) => setUserDetails({...userDetails, address: e.target.value})}
+                className="w-full p-4 border border-t-0 border-gray-300 focus:outline-none" 
+              />
               <div className="grid grid-cols-2">
-                <input type="text" placeholder="City" className="p-4 border border-t-0 border-gray-300 rounded-bl focus:outline-none" />
-                <input type="text" placeholder="Postal Code" className="p-4 border border-t-0 border-l-0 border-gray-300 rounded-br focus:outline-none" />
+                {/* ⚡ UPDATE: Bound to state */}
+                <input 
+                    type="text" 
+                    placeholder="City" 
+                    value={userDetails.city}
+                    onChange={(e) => setUserDetails({...userDetails, city: e.target.value})}
+                    className="p-4 border border-t-0 border-gray-300 rounded-bl focus:outline-none" 
+                />
+                {/* ⚡ UPDATE: Bound to state */}
+                <input 
+                    type="text" 
+                    placeholder="Postal Code" 
+                    value={userDetails.postalCode}
+                    onChange={(e) => setUserDetails({...userDetails, postalCode: e.target.value})}
+                    className="p-4 border border-t-0 border-l-0 border-gray-300 rounded-br focus:outline-none" 
+                />
               </div>
             </div>
             <div className="flex items-center mt-4 gap-2">
@@ -147,48 +293,32 @@ const CheckoutPage = () => {
             </div>
           </section>
 
-          {/* Payment Section - Styled as per your Screenshot */}
+          {/* Payment Section Selection */}
           <section>
             <h2 className="text-3xl font-serif mb-4">Payment</h2>
             <div className="border border-gray-300 rounded overflow-hidden">
-              {/* Header */}
               <div className="relative border-b border-gray-300 flex justify-between items-center bg-white p-0">
-                <select className="w-full p-4 bg-transparent outline-none appearance-none text-gray-600 font-medium cursor-pointer relative z-10">
-                  <option value="card">Credit/Debit Card</option>
-                  <option value="upi">UPI / Netbanking</option>
+                <select className="w-full p-4 bg-transparent outline-none appearance-none text-gray-600 font-medium cursor-pointer relative z-10" defaultValue="razorpay">
+                  <option value="razorpay">Razorpay (Cards / UPI / Netbanking)</option>
                   <option value="cod">Cash on Delivery (COD)</option>
-                  <option value="wallet">Wallet (Paytm, etc.)</option>
                 </select>
                 <div className="absolute right-4 flex gap-1 items-center z-0 pointer-events-none">
-                   <div className="flex -space-x-1">
-                      <div className="w-4 h-4 bg-red-500 rounded-full opacity-90"></div>
-                      <div className="w-4 h-4 bg-yellow-500 rounded-full opacity-90"></div>
-                   </div>
                    <ChevronDown size={18} className="text-gray-500 ml-1" />
                 </div>
               </div>
               
-              {/* Card Fields Box */}
-              <div className="p-4 space-y-0 bg-white">
-                <div className="relative">
-                  <input type="text" placeholder="Card Number" className="w-full p-4 border border-gray-300 rounded-t focus:outline-none bg-transparent" />
-                  <Lock size={18} className="absolute right-4 top-5 text-gray-400" />
-                </div>
-                <div className="grid grid-cols-2">
-                  <input type="text" placeholder="Expiration Date" className="p-4 border border-t-0 border-gray-300 focus:outline-none bg-transparent" />
-                  <input type="text" placeholder="Security Code" className="p-4 border border-t-0 border-l-0 border-gray-300 focus:outline-none bg-transparent" />
-                </div>
-                <input type="text" placeholder="Card Holder Name" className="w-full p-4 border border-t-0 border-gray-300 rounded-b focus:outline-none bg-transparent" />
+              <div className="p-4 space-y-0 bg-gray-50 text-gray-500 text-sm text-center">
+                 Secure payment processing via Razorpay gateway.
               </div>
-            </div>
-            <div className="flex items-center mt-4 gap-2">
-              <input type="checkbox" id="save-payment" className="w-4 h-4 accent-black border-gray-400" />
-              <label htmlFor="save-payment" className="text-sm text-gray-600 font-medium">Save This Info For Future</label>
             </div>
           </section>
 
-          <button onClick={handleCheckoutSubmit} className="w-full bg-black text-white py-4 rounded font-medium tracking-widest hover:bg-gray-900 transition-colors uppercase text-sm">
-            Pay Now
+          <button 
+            onClick={handlePayment} 
+            disabled={paymentProcessing || loading || cartItems.length === 0}
+            className="w-full bg-black text-white py-4 rounded font-medium tracking-widest hover:bg-gray-900 transition-colors uppercase text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {paymentProcessing ? "Processing Payment..." : "Pay Now"}
           </button>
         </div>
 
@@ -230,9 +360,9 @@ const CheckoutPage = () => {
                       <p className="font-bold mt-2 text-[15px] sm:text-lg">₹{getItemPrice(item).toLocaleString('en-IN')}</p>
                       
                       <div className="flex items-center mt-3 bg-gray-100 w-max justify-between rounded-full px-1 py-1 gap-2 shadow-inner">
-                        <button onClick={() => updateQuantity(item.product, item.quantity, -1)} className="w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center hover:bg-white rounded-full transition-all text-sm">-</button>
+                        <button onClick={() => updateQuantity(item.product, item.quantity, -1)} disabled={paymentProcessing} className="w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center hover:bg-white rounded-full transition-all text-sm">-</button>
                         <span className="font-medium text-xs sm:text-sm w-4 sm:w-6 text-center">{String(item.quantity).padStart(2, '0')}</span>
-                        <button onClick={() => updateQuantity(item.product, item.quantity, 1)} className="w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center hover:bg-white rounded-full transition-all text-sm">+</button>
+                        <button onClick={() => updateQuantity(item.product, item.quantity, 1)} disabled={paymentProcessing} className="w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center hover:bg-white rounded-full transition-all text-sm">+</button>
                       </div>
                     </div>
                   </div>
@@ -245,10 +375,9 @@ const CheckoutPage = () => {
             <>
               <hr className="border-gray-200 my-8" />
 
-              {/* Extras & Totals */}
               <div className="space-y-6">
                 <div className="flex items-center gap-3">
-                  <input type="checkbox" id="wrap" className="w-[18px] h-[18px] border-2 border-gray-300 rounded-[2px] text-black bg-white focus:ring-0 focus:ring-offset-0 cursor-pointer accent-black transition-all" />
+                  <input type="checkbox" id="wrap" disabled={paymentProcessing} className="w-[18px] h-[18px] border-2 border-gray-300 rounded-[2px] text-black bg-white focus:ring-0 focus:ring-offset-0 cursor-pointer accent-black transition-all" />
                   <label htmlFor="wrap" className="text-gray-500 text-[13px] font-medium cursor-pointer">
                     For <span className="font-bold text-black">₹100</span> Please Wrap The Product
                   </label>
@@ -262,8 +391,12 @@ const CheckoutPage = () => {
                 </div>
 
                 <div className="space-y-4 pt-4">
-                  <button onClick={handleCheckoutSubmit} className="w-full bg-black text-white py-5 rounded-md text-sm sm:text-lg font-bold shadow-lg active:scale-95 transition-transform tracking-widest uppercase">
-                    Checkout Now
+                  <button 
+                    onClick={handlePayment} 
+                    disabled={paymentProcessing}
+                    className="w-full bg-black text-white py-5 rounded-md text-sm sm:text-lg font-bold shadow-lg active:scale-95 transition-transform tracking-widest uppercase disabled:opacity-50"
+                  >
+                    {paymentProcessing ? "Processing..." : "Checkout with Razorpay"}
                   </button>
                   <button onClick={() => window.history.back()} className="w-full text-center underline text-sm font-medium text-black hover:text-gray-500 transition-colors uppercase tracking-widest">
                     Back to Cart
