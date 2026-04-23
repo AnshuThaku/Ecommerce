@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const paymentController = require('../controllers/paymentController');
+const paymentController = require('../controllers/g');
 // Agar aapne token verification middleware banaya hai toh usko bhi attach kar lein
 // const { verifyToken } = require('../middlewares/auth');
 
