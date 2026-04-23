@@ -175,3 +175,5 @@ exports.toggleFeaturedStatus = wrapAsync(async (req, res, next) => {
         isFeatured: product.isFeatured
     });
 });
+
+//fix
