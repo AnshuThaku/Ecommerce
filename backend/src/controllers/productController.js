@@ -5,7 +5,6 @@ const { PutObjectCommand } = require("@aws-sdk/client-s3");
 const mongoose = require('mongoose');
 const r2 = require("../config/cloudConfig");
 const sharp = require('sharp'); 
-const { removeBackground } = require('../utils/removeBg'); // ⚡ NAYA: Remove.bg utility import kiya
 
 // -------------------------------------------------------------------
 // 1. CREATE PRODUCT (With Remove.bg + Sharp Compression + R2)
@@ -53,22 +52,8 @@ exports.createProduct = wrapAsync(async (req, res, next) => {
             for (const variantFile of thisVariantImages) {
                 let finalBuffer = variantFile.buffer;
 
-                // ⚡ STEP 1: BACKGROUND REMOVAL API
-                try {
-                    console.log(`Removing background for variant ${i}...`);
-                    // Buffer bhejenge remove.bg ko, aur transparent PNG buffer wapas aayega
-                    finalBuffer = await removeBackground(variantFile.buffer);
-                } catch (bgError) {
-                    console.error("⚠️ Background removal failed (Maybe out of credits). Falling back to original image.");
-                    // Agar API fail ho jaye toh product upload rukega nahi, original image aage jayegi.
-                }
-
-                // ⚡ STEP 2: SHARP COMPRESSION
-                // Fit 'inside' and WebP conversion. Added alphaQuality: 100 to preserve transparent background.
-                const optimizedBuffer = await sharp(finalBuffer)
-                    .resize(800, 800, { fit: 'inside', withoutEnlargement: true })
-                    .webp({ quality: 80, alphaQuality: 100 }) // 🔥 WebP with Transparency
-                    .toBuffer();
+             
+              
 
                 // ⚡ STEP 3: CLOUDFLARE R2 UPLOAD
                 const key = `Products/${Date.now()}-${Math.random().toString(36).substr(2, 5)}.webp`;
