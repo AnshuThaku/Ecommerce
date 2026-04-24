@@ -4,6 +4,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance';
 import { useAuth } from '../../context/AuthContext';
 import Cart from '../Cart';
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 
 // 🚀 Full Static Brands List
 const staticBrands = [
@@ -12,7 +13,7 @@ const staticBrands = [
   "JBL", "Bose", "Harman Kardon", "Arcam", "JVC", "Formovie", "ViewSonic"
 ];
 
-// ⚡ SMART CATEGORIES MAP: Maps UI Labels to Universal Search Keywords
+// ⚡ SMART CATEGORIES MAP
 const NAV_CATEGORIES = [
   { 
     label: 'SPEAKERS', 
@@ -216,6 +217,15 @@ export default function Header1() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
 
+  // SCROLL REVEAL LOGIC
+  const [hidden, setHidden] = useState(false);
+  const { scrollY } = useScroll();
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious();
+    if (latest > previous && latest > 150) setHidden(true);
+    else setHidden(false);
+  });
+
   useEffect(() => {
     const fetchCartData = async () => {
       try {
@@ -244,7 +254,19 @@ export default function Header1() {
   }, []);
 
   return (
-    <header className="w-full bg-white flex items-center justify-between px-6 md:px-12 h-[100px] flex-shrink-0 z-50 relative border-b border-gray-100">
+    <>
+    {/* Placeholder div to prevent content overlap */}
+    <div className="h-[100px] w-full" />
+    
+    <motion.header 
+      variants={{
+        visible: { y: 0, opacity: 1 },
+        hidden: { y: -20, opacity: 0 },
+      }}
+      animate={hidden ? "hidden" : "visible"}
+      transition={{ type: "spring", stiffness: 120, damping: 25, mass: 0.8 }}
+      className="fixed top-0 left-0 w-full bg-white flex items-center justify-between px-6 md:px-12 h-[100px] flex-shrink-0 z-[999] border-b border-gray-100"
+    >
       
       {/* Mobile Hamburger Menu Icon */}
       <div className="flex-1 xl:hidden">
@@ -272,11 +294,8 @@ export default function Header1() {
         <SearchInline onClose={() => setIsSearchOpen(false)} navigate={navigate} />
       ) : (
         <nav className="hidden xl:flex items-center h-full gap-3 2xl:gap-6 relative z-50">
-          
-          {/* ⚡ DYNAMIC MENU RENDERING ⚡ */}
           {NAV_CATEGORIES.map((cat) => {
             const isActive = location.pathname === '/shop' && location.state?.search === cat.keyword;
-            
             return (
               <div key={cat.label} className="h-full flex items-center relative group">
                 <button 
@@ -287,7 +306,6 @@ export default function Header1() {
                   {cat.sub.length > 0 && <ChevronDown size={14} className="transition-transform duration-300 group-hover:rotate-180" />}
                 </button>
 
-                {/* Subcategories Dropdown */}
                 {cat.sub.length > 0 && (
                   <div className="absolute top-[65%] left-1/2 -translate-x-1/2 pt-6 w-56 z-[10] opacity-0 invisible -translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-500 ease-out">
                     <div className="bg-white border border-gray-100 rounded-2xl shadow-xl overflow-hidden py-2">
@@ -300,7 +318,6 @@ export default function Header1() {
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
-                                // Send specific keyword to search globally across all brands
                                 navigate('/shop', { state: { search: subItem.keyword } });
                               }}
                               className="w-full text-left px-4 py-2.5 text-[11px] font-semibold text-gray-700 hover:text-black hover:bg-gray-50 transition-colors uppercase tracking-wider cursor-pointer border-b border-gray-50 last:border-0 bg-transparent"
@@ -317,7 +334,6 @@ export default function Header1() {
             );
           })}
           
-          {/* ⚡ BRANDS Dropdown ⚡ */}
           <div className="h-full flex items-center relative group">
             <button 
               onClick={() => navigate('/brands')}
@@ -362,7 +378,6 @@ export default function Header1() {
           <Search size={18} strokeWidth={1.5} />
         </button>
 
-        {/* User Profile Dropdown */}
         <div className="h-full flex items-center relative group">
           <Link to={user ? "/profile" : "/login"} className="text-black hover:opacity-60 transition-opacity cursor-pointer flex items-center gap-1" aria-label="Profile">
             <User size={18} strokeWidth={1.5} />
@@ -417,19 +432,18 @@ export default function Header1() {
           <div className="px-6 pb-4 mb-4 border-b border-zinc-100 flex items-center gap-2">
              <Search size={16} className="text-zinc-400" />
              <input 
-                type="text" 
-                placeholder="Search..." 
-                className="w-full bg-transparent border-none text-sm outline-none"
-                onKeyDown={(e) => {
-                  if(e.key === 'Enter' && e.target.value.trim()) {
-                    setIsMobileMenuOpen(false);
-                    navigate('/shop', { state: { search: e.target.value } });
-                  }
-                }}
+               type="text" 
+               placeholder="Search..." 
+               className="w-full bg-transparent border-none text-sm outline-none"
+               onKeyDown={(e) => {
+                 if(e.key === 'Enter' && e.target.value.trim()) {
+                   setIsMobileMenuOpen(false);
+                   navigate('/shop', { state: { search: e.target.value } });
+                 }
+               }}
              />
           </div>
           
-          {/* MOBILE NAV CATEGORIES */}
           {NAV_CATEGORIES.map((cat) => (
             <div key={cat.label} className="w-full">
               <button 
@@ -457,6 +471,7 @@ export default function Header1() {
       )}
       
       <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
-    </header>
+    </motion.header>
+    </>
   );
 }

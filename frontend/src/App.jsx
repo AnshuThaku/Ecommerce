@@ -40,6 +40,7 @@ import AdminProducts from './pages/Admin/AdminProducts';
 import AdminOrders from './pages/Admin/AdminOrders';
 import AdminUsers from './pages/Admin/AdminUsers';
 import AdminThemeManager from './pages/Admin/AdminThemeManager';
+import AdminProfile from './pages/Admin/AdminProfile';
 import ScrollToTop from './components/ScrollTop';
 
 // Layout wrapper for pages that DO NOT have their own header/footer (like Cart, Profile)
@@ -128,6 +129,7 @@ function App() {
               }
             >
               <Route path="dashboard" element={<AdminDashboard />} />
+              <Route path="profile"   element={<AdminProfile />} />
               <Route path="products"  element={<AdminProducts />} />
               <Route path="orders"    element={<AdminOrders />} />
               <Route path="users"     element={<AdminUsers />} />

@@ -10,16 +10,17 @@ const CheckoutPage = () => {
   const [paymentProcessing, setPaymentProcessing] = useState(false); 
   const [toastMessage, setToastMessage] = useState(null);
   
-  // ⚡ UPDATE: Saari required fields state mein add kar di gayi hain
+  // ⚡ FIX 1: Naye fields add kiye hain taaki DB Validation pass ho sake
   const [userDetails, setUserDetails] = useState({
       email: '',
       firstName: '',
       lastName: '',
-      phone: '', 
+      phone: '', // 👈 Phone is required by DB
       country: '',
+      state: '', // 👈 State is required by DB
       address: '',
       city: '',
-      postalCode: ''
+      postalCode: '' // 👈 Pincode mapping
   });
 
   const navigate = useNavigate();
@@ -90,14 +91,13 @@ const CheckoutPage = () => {
       return showToast("error", "Your cart is empty!");
     }
 
-    // ⚡ UPDATE: Strict Validation Check
-    const { email, firstName, lastName, country, address, city, postalCode } = userDetails;
+    const { email, firstName, lastName, phone, country, state, address, city, postalCode } = userDetails;
     
-    if (!email || !firstName || !lastName || !country || !address || !city || !postalCode) {
+    // ⚡ FIX 2: Added State and Phone to Validation
+    if (!email || !firstName || !lastName || !phone || !country || !state || !address || !city || !postalCode) {
         return showToast("error", "Please fill in all delivery and contact details!");
     }
 
-    // Email format validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
         return showToast("error", "Please enter a valid email address!");
@@ -140,6 +140,7 @@ const CheckoutPage = () => {
             order_id: orderData.order.id,
             handler: async function (response) {
                 try {
+                    // ⚡ FIX 3: MAP FRONTEND DATA TO EXACT SCHEMA NAMES
                     const verifyRes = await axiosInstance.post('/payment/verify-payment', {
                         razorpay_order_id: response.razorpay_order_id,
                         razorpay_payment_id: response.razorpay_payment_id,
@@ -147,9 +148,14 @@ const CheckoutPage = () => {
                         orderDetails: { 
                             items: formattedItems, 
                             totalAmount: subtotal,
-                            // ⚡ Optionally pass shipping details to backend to save in Order DB
+                            // Exact mapping per DB Error
                             shippingAddress: {
-                                firstName, lastName, email, phone: userDetails.phone, country, address, city, postalCode
+                                fullName: `${firstName} ${lastName}`.trim(),
+                                phone: phone,
+                                addressLine1: address,
+                                city: city,
+                                state: state,
+                                pincode: postalCode
                             }
                         }
                     });
@@ -168,7 +174,7 @@ const CheckoutPage = () => {
             prefill: {
                 name: `${firstName} ${lastName}`.trim(),
                 email: email,
-                contact: userDetails.phone || "9999999999" 
+                contact: phone 
             },
             theme: {
                 color: "#000000" 
@@ -218,7 +224,15 @@ const CheckoutPage = () => {
               placeholder="Email Address"
               value={userDetails.email}
               onChange={(e) => setUserDetails({...userDetails, email: e.target.value})}
-              className="w-full p-4 border border-gray-300 rounded bg-transparent focus:outline-none focus:ring-1 focus:ring-black"
+              className="w-full p-4 border border-gray-300 rounded-t bg-transparent focus:outline-none focus:ring-1 focus:ring-black"
+            />
+            {/* Added Phone Input */}
+            <input 
+              type="tel" 
+              placeholder="Phone Number"
+              value={userDetails.phone}
+              onChange={(e) => setUserDetails({...userDetails, phone: e.target.value})}
+              className="w-full p-4 border border-gray-300 border-t-0 rounded-b bg-transparent focus:outline-none focus:ring-1 focus:ring-black"
             />
           </section>
 
@@ -227,7 +241,6 @@ const CheckoutPage = () => {
             <h2 className="text-3xl font-serif mb-4">Delivery</h2>
             <div className="space-y-0">
               <div className="relative border border-gray-300 rounded-t p-0 flex justify-between items-center bg-transparent">
-                {/* ⚡ UPDATE: Bound to state */}
                 <select 
                     value={userDetails.country}
                     onChange={(e) => setUserDetails({...userDetails, country: e.target.value})}
@@ -260,16 +273,14 @@ const CheckoutPage = () => {
                     className="p-4 border border-t-0 border-l-0 border-gray-300 focus:outline-none" 
                 />
               </div>
-              {/* ⚡ UPDATE: Bound to state */}
               <input 
                 type="text" 
-                placeholder="Address" 
+                placeholder="Address Line 1" 
                 value={userDetails.address}
                 onChange={(e) => setUserDetails({...userDetails, address: e.target.value})}
                 className="w-full p-4 border border-t-0 border-gray-300 focus:outline-none" 
               />
-              <div className="grid grid-cols-2">
-                {/* ⚡ UPDATE: Bound to state */}
+              <div className="grid grid-cols-3">
                 <input 
                     type="text" 
                     placeholder="City" 
@@ -277,10 +288,17 @@ const CheckoutPage = () => {
                     onChange={(e) => setUserDetails({...userDetails, city: e.target.value})}
                     className="p-4 border border-t-0 border-gray-300 rounded-bl focus:outline-none" 
                 />
-                {/* ⚡ UPDATE: Bound to state */}
+                {/* Added State Input */}
                 <input 
                     type="text" 
-                    placeholder="Postal Code" 
+                    placeholder="State" 
+                    value={userDetails.state}
+                    onChange={(e) => setUserDetails({...userDetails, state: e.target.value})}
+                    className="p-4 border border-t-0 border-l-0 border-gray-300 focus:outline-none" 
+                />
+                <input 
+                    type="text" 
+                    placeholder="Postal Code (Pincode)" 
                     value={userDetails.postalCode}
                     onChange={(e) => setUserDetails({...userDetails, postalCode: e.target.value})}
                     className="p-4 border border-t-0 border-l-0 border-gray-300 rounded-br focus:outline-none" 

@@ -7,7 +7,7 @@ const r2 = require("../config/cloudConfig");
 const sharp = require('sharp'); 
 
 // -------------------------------------------------------------------
-// 1. CREATE PRODUCT (With Remove.bg + Sharp Compression + R2)
+// 1. CREATE PRODUCT (With Sharp Compression + R2)
 // -------------------------------------------------------------------
 exports.createProduct = wrapAsync(async (req, res, next) => {
     const { name, description, price, category, brand, stock, isActive, discountPrice } = req.body;
@@ -22,7 +22,7 @@ exports.createProduct = wrapAsync(async (req, res, next) => {
         discountPrice: discountPrice ? Number(discountPrice) : 0,
         stock: Number(stock) || 1,
         isActive: isActive === 'true' || isActive === true,
-        seller: req.user._id,
+        seller: req.user._id, // ⚡ Ensure route is protected, else req.user._id will crash
         images: [], 
         variants: [] 
     };
@@ -50,10 +50,10 @@ exports.createProduct = wrapAsync(async (req, res, next) => {
             });
 
             for (const variantFile of thisVariantImages) {
-                let finalBuffer = variantFile.buffer;
-
-             
-              
+                // ⚡ FIX: Use Sharp to optimize buffer
+                const optimizedBuffer = await sharp(variantFile.buffer)
+                    .webp({ quality: 80 }) // 80% quality ke sath webp banayega
+                    .toBuffer();
 
                 // ⚡ STEP 3: CLOUDFLARE R2 UPLOAD
                 const key = `Products/${Date.now()}-${Math.random().toString(36).substr(2, 5)}.webp`;
@@ -175,5 +175,3 @@ exports.toggleFeaturedStatus = wrapAsync(async (req, res, next) => {
         isFeatured: product.isFeatured
     });
 });
-
-//fix

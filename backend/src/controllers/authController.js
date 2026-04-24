@@ -76,8 +76,16 @@ exports.login = wrapAsync(async (req, res) => {
     { expiresIn: process.env.JWT_EXPIRE || '1d' }
   );
 
-  // Send token in HTTP-only cookie
-  res.cookie('token', token);
+  // Send token in HTTP-only cookie with proper options
+  const cookieOptions = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production', // Only HTTPS in production
+    sameSite: 'lax',
+    maxAge: 1000 * 60 * 60 * 24, // 1 day
+    path: '/'
+  };
+  res.cookie('token', token, cookieOptions);
+  console.log('✅ Token cookie set:', { userId: user._id, role: user.role });
 
   // --- GUEST CART MERGE LOGIC START (For existing users logging in) ---
   const guestId = req.headers['x-guest-id'];
@@ -106,6 +114,7 @@ exports.login = wrapAsync(async (req, res) => {
   // 6. Send successful response with the user data
   res.status(200).json({
     success: true,
+    token: token,  // Include token for frontend storage
     user: {
       id: user._id,
       name: user.name,
@@ -179,12 +188,20 @@ exports.registerCustomer = wrapAsync(async (req, res) => {
     { expiresIn: process.env.JWT_EXPIRE || '1d' }
   );
 
-  // Send token  cookie
-  res.cookie('token', token);
+  // Send token cookie with proper options
+  const cookieOptions = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: 1000 * 60 * 60 * 24,
+    path: '/'
+  };
+  res.cookie('token', token, cookieOptions);
 
   res.status(201).json({
     success: true,
     message: 'Registration successful',
+    token: token,  // Include token for frontend storage
     user: {
       id: newUser._id,
       name: newUser.name,

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import axiosInstance from '../../utils/axiosInstance';
 import ShopTopbar from './ShopSidebar'; 
 import ShopProductCard from './ShopProductCard';
-import QuickViewModal from '../Product/QuickModel';
+import QuickViewModal from '../Product/ProductDetailModel';
 import Footer from '../Home/Footer'; 
 import Header1 from '../Home/Header1'; 
 import Toast from '../../components/Toast';

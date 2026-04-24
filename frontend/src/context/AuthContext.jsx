@@ -31,8 +31,11 @@ export function AuthProvider({ children }) {
   }, [user]);
 
   const login = useCallback((token, userData) => {
-    // Note: The token is securely stored by the browser via HTTP-Only cookies.
-    // We only need localStorage to persist the basic UI data (name, role, etc).
+    // Store the token in localStorage for Authorization header
+    if (token) {
+      localStorage.setItem('token', token);
+    }
+    // Also store basic user info for UI
     localStorage.setItem('authUser', JSON.stringify(userData));
     setUser(userData);
   }, []);
@@ -47,6 +50,7 @@ export function AuthProvider({ children }) {
     
     // Clear the UI data from localStorage
     localStorage.removeItem('authUser');
+    localStorage.removeItem('token');
     setUser(null);
   }, []);
 

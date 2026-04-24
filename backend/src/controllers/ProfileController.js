@@ -16,7 +16,7 @@ const getUserProfile = async (req, res) => {
           email: user.email,
           phone: user.phone || '',
           address: user.address || {},
-          isAdmin: user.isAdmin,
+          role: user.role,
         }
       });
     } else {
@@ -62,7 +62,7 @@ const updateUserProfile = async (req, res) => {
           email: updatedUser.email,
           phone: updatedUser.phone,
           address: updatedUser.address,
-          isAdmin: updatedUser.isAdmin,
+          role: updatedUser.role,
         }
       });
     } else {

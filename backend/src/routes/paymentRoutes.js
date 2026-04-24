@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const paymentController = require('../controllers/paymentController');
-// Agar aapne token verification middleware banaya hai toh usko bhi attach kar lein
-// const { verifyToken } = require('../middlewares/auth');
 
-router.post('/create-order', paymentController.createOrder); // isme verifyToken laga sakte hain
-router.post('/verify-payment', paymentController.verifyPayment);
+// ⚡ Yahan apna auth middleware import karein (path apne project ke hisaab se check kar lein)
+// Maan lijiye aapka middleware 'protect' naam se hai authMiddleware file mein:
+const { protect } = require('../middleware/authMiddleware'); 
+
+// ⚡ Ab dono routes pe 'protect' laga dein, taaki req.user mil jaye
+router.post('/create-order', protect, paymentController.createOrder);
+router.post('/verify-payment', protect, paymentController.verifyPayment);
 
 module.exports = router;
