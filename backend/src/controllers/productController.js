@@ -7,7 +7,7 @@ const r2 = require("../config/cloudConfig");
 const sharp = require('sharp'); 
 
 // -------------------------------------------------------------------
-// 1. CREATE PRODUCT (With Sharp Compression + R2)
+// 1. CREATE PRODUCT (With Sharp Compression + R2 & Premium Fields)
 // -------------------------------------------------------------------
 exports.createProduct = wrapAsync(async (req, res, next) => {
     const { name, description, price, category, brand, stock, isActive, discountPrice } = req.body;
@@ -22,12 +22,18 @@ exports.createProduct = wrapAsync(async (req, res, next) => {
         discountPrice: discountPrice ? Number(discountPrice) : 0,
         stock: Number(stock) || 1,
         isActive: isActive === 'true' || isActive === true,
-        seller: req.user._id, // ⚡ Ensure route is protected, else req.user._id will crash
+        seller: req.user._id, 
         images: [], 
         variants: [] 
     };
 
+    // ⚡ PARSE PREMIUM FIELDS FROM FRONTEND ⚡
     if (req.body.flashDeal) productData.flashDeal = JSON.parse(req.body.flashDeal);
+    if (req.body.techSpecs) productData.techSpecs = JSON.parse(req.body.techSpecs);
+    if (req.body.lifestyleFeatures) productData.lifestyleFeatures = JSON.parse(req.body.lifestyleFeatures);
+    if (req.body.highlights) productData.highlights = JSON.parse(req.body.highlights);
+    if (req.body.inTheBox) productData.inTheBox = JSON.parse(req.body.inTheBox);
+    if (req.body.promotionalVideo) productData.promotionalVideo = JSON.parse(req.body.promotionalVideo);
 
     const variantImageFiles = req.files?.filter(f => f.fieldname.startsWith('variantImages_')) || [];
 
@@ -50,12 +56,12 @@ exports.createProduct = wrapAsync(async (req, res, next) => {
             });
 
             for (const variantFile of thisVariantImages) {
-                // ⚡ FIX: Use Sharp to optimize buffer
+                // Optimize image with Sharp
                 const optimizedBuffer = await sharp(variantFile.buffer)
-                    .webp({ quality: 80 }) // 80% quality ke sath webp banayega
+                    .webp({ quality: 80 }) 
                     .toBuffer();
 
-                // ⚡ STEP 3: CLOUDFLARE R2 UPLOAD
+                // CLOUDFLARE R2 UPLOAD
                 const key = `Products/${Date.now()}-${Math.random().toString(36).substr(2, 5)}.webp`;
                 
                 await r2.send(new PutObjectCommand({
@@ -82,7 +88,7 @@ exports.createProduct = wrapAsync(async (req, res, next) => {
 });
 
 // -------------------------------------------------------------------
-// 2. GET ALL PRODUCTS (Fast Query with .lean() & .select())
+// 2. GET ALL PRODUCTS
 // -------------------------------------------------------------------
 exports.getAllProducts = wrapAsync(async (req, res, next) => {
     const { category, brand, minPrice, maxPrice, color } = req.query;
@@ -91,23 +97,23 @@ exports.getAllProducts = wrapAsync(async (req, res, next) => {
     if (category) filter.category = { $in: category.split(',') };
     if (brand) filter.brand = { $in: brand.split(',') };
     
-    // ⚡ Optimization: .select() only needed fields and .lean() for speed
+    // Note: Premium fields (techSpecs, etc.) yahan get nahi kar rahe taaki API fast rahe. Wo details page par milenge.
     const products = await Product.find(filter)
-        .select('name price discountPrice images brand category flashDeal variants ratings')
-        .lean(); // 🔥 Lean queries are 5x faster
+        .select('name price discountPrice images brand category flashDeal variants ratings highlights')
+        .lean(); 
 
     res.status(200).json({ success: true, count: products.length, products });
 });
 
 // -------------------------------------------------------------------
-// 3. GET SINGLE PRODUCT
+// 3. GET SINGLE PRODUCT (This will automatically fetch all Premium Fields)
 // -------------------------------------------------------------------
 exports.getProductDetails = wrapAsync(async (req, res, next) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) throw new ExpressError(400, 'Invalid ID');
 
-    // ⚡ Optimization: Lean query
-    const product = await Product.findById(id).lean();
+    // ⚡ product details API saara naya data (techSpecs, video, etc) apne aap bhej degi kyunki lean() use hua hai
+    const product = await Product.findById(id).populate('boughtTogether', 'name price discountPrice images brand category').lean();
     if (!product) throw new ExpressError(404, 'Product not found');
 
     const currentTime = new Date();
@@ -130,8 +136,15 @@ exports.updateProduct = wrapAsync(async (req, res, next) => {
     if (!product) throw new ExpressError(404, 'Product not found');
 
     if (req.body.price) req.body.price = Number(req.body.price);
+    
+    // ⚡ PARSE PREMIUM FIELDS ON UPDATE ⚡
     if (req.body.flashDeal) req.body.flashDeal = JSON.parse(req.body.flashDeal);
     if (req.body.variants) req.body.variants = JSON.parse(req.body.variants);
+    if (req.body.techSpecs) req.body.techSpecs = JSON.parse(req.body.techSpecs);
+    if (req.body.lifestyleFeatures) req.body.lifestyleFeatures = JSON.parse(req.body.lifestyleFeatures);
+    if (req.body.highlights) req.body.highlights = JSON.parse(req.body.highlights);
+    if (req.body.inTheBox) req.body.inTheBox = JSON.parse(req.body.inTheBox);
+    if (req.body.promotionalVideo) req.body.promotionalVideo = JSON.parse(req.body.promotionalVideo);
 
     const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
@@ -153,11 +166,21 @@ exports.deleteProduct = wrapAsync(async (req, res, next) => {
 // -------------------------------------------------------------------
 // 6. GET ADMIN PRODUCTS
 // -------------------------------------------------------------------
-exports.getAdminProducts = wrapAsync(async (req, res, next) => {
-    const products = await Product.find();
-    res.status(200).json({ success: true, count: products.length, products });
-});
-
+exports.getAdminProducts = async (req, res, next) => {
+    try {
+        console.log("👉 Database se admin products fetch ho rahe hain...");
+        
+        const products = await Product.find();
+        
+        console.log(`✅ Success! ${products.length} products found.`);
+        res.status(200).json({ success: true, count: products.length, products });
+        
+    } catch (error) {
+        // Yeh line exact error bata degi ki DB kyu phat raha hai!
+        console.error("🔥 ERROR IN getAdminProducts:", error); 
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
 // -------------------------------------------------------------------
 // 7. TOGGLE FEATURED STATUS
 // -------------------------------------------------------------------

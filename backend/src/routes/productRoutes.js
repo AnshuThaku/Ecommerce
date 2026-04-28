@@ -21,13 +21,11 @@ const {
 const { protect } = require('../middleware/authMiddleware');
 const { adminOnly } = require('../middleware/roleMiddleware');
 
-// --- PUBLIC ROUTES ---
-router.route('/').get(getAllProducts); 
+// --- 1. SEARCH ROUTES ---
 router.route('/search-suggestions').get(getSearchSuggestions); 
 router.route('/search').get(fullSearch); 
-router.route('/:id').get(getProductDetails); // Dynamic ID hamesha niche rahegi
 
-// --- ADMIN ROUTES ---
+// --- 2. ADMIN ROUTES (Hamesha /:id se upar hone chahiye) ---
 router.route('/admin/product/new').post(protect, adminOnly, upload.any(), createProduct);
 router.route('/admin/products').get(protect, adminOnly, getAdminProducts);
 
@@ -39,5 +37,11 @@ router
 router
   .route('/admin/product/:id/feature')
   .patch(protect, adminOnly, toggleFeaturedStatus);
+
+// --- 3. PUBLIC ROUTES ---
+router.route('/').get(getAllProducts); 
+
+// 🚨 WARNING: Dynamic ID route SABSE LAST mein hona chahiye! 🚨
+router.route('/:id').get(getProductDetails); 
 
 module.exports = router;

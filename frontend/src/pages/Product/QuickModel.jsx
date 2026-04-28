@@ -1,432 +1,301 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Heart, Eye, ShoppingCart, ShoppingBag, X, ShieldCheck, Star, ChevronDown, ChevronUp, Package, CheckCircle, Truck, Zap, Lock, Tag, Check } from 'lucide-react';
-import { useServerTheme } from '../../hooks/useServerTheme';
-import axiosInstance from '../../utils/axiosInstance';
-
-const useAuth = () => ({ user: null });
+import React, { useState, useEffect } from 'react';
+import { X, Battery, Droplets, Shield, Wifi, Bluetooth, Zap, Tag, Star, Plus, CheckCircle2, ShoppingBag } from 'lucide-react';
+import axiosInstance from '../../utils/axiosInstance'; 
 
 const DEFAULT_IMG = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=600";
 
-const formatPrice = (amount) => {
-  if (!amount) return '';
-  return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(amount);
+// ⚡ Dynamic Icons Mapper for Highlights
+const iconMap = { Battery, Droplets, Shield, Wifi, Bluetooth, Zap, Tag, Star };
+const getIcon = (iconName) => {
+  const IconComponent = iconMap[iconName] || Tag;
+  return <IconComponent size={24} />;
 };
 
-const getAllImages = (product) => {
-  if (!product) return [DEFAULT_IMG];
-  let images = [];
-  if (product.images?.length > 0) images.push(...product.images.map(img => img.url));
-  else if (product.image) {
-    images.push(product.image);
-    if (product.hoverImage) images.push(product.hoverImage);
-  }
-  if (product.variants?.length > 0) {
-    product.variants.forEach(variant => {
-      if (variant.images?.length > 0) images.push(...variant.images.map(img => img.url));
-    });
-  }
-  images = [...new Set(images.filter(Boolean))];
-  return images.length > 0 ? images : [DEFAULT_IMG];
-};
-
-const Toast = ({ toast, onClose }) => {
-  if (!toast) return null;
-  return (
-    <div className="fixed top-5 right-5 z-[999999] bg-[#111] text-white border border-gray-800 px-5 py-3 rounded-lg shadow-2xl flex items-center gap-3 transition-all animate-in fade-in slide-in-from-top-4">
-      <span className="font-medium text-xs tracking-wide">{toast.message}</span>
-      <button onClick={onClose} className="hover:text-gray-400 transition-colors"><X className="w-3 h-3" /></button>
-    </div>
-  );
-};
-
-export default function QuickViewModal({ product, onClose }) {
-  const theme = useServerTheme(); 
-  const navigate = useNavigate();
-  const { user } = useAuth();
-  
-  const [activeProductId, setActiveProductId] = useState(product?._id);
-  const [fullProduct, setFullProduct] = useState(product);
-  const [relatedProducts, setRelatedProducts] = useState([]); 
-  
+export default function QuickViewModal({ product: initialProduct, onClose }) {
+  const [expand, setExpand] = useState(false);
+  const [activeTab, setActiveTab] = useState('features');
+  const [activeSpecTab, setActiveSpecTab] = useState('Audio'); // Tech Specs tabs
+  const [fullProduct, setFullProduct] = useState(initialProduct);
   const [activeImgIdx, setActiveImgIdx] = useState(0);
-  const [expand, setExpand] = useState(false); 
-  const [showFullTitle, setShowFullTitle] = useState(false);
-  const [activeDetailTab, setActiveDetailTab] = useState('overview');
-  const [quantity, setQuantity] = useState(1);
-  const [isAddingToCart, setIsAddingToCart] = useState(false);
-  const [toastMessage, setToastMessage] = useState(null);
   const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
-
-  const modalRef = useRef(null);
-
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = 'unset'; };
-  }, []);
-
-  const showToast = (type, message) => {
-    setToastMessage({ type, message });
-    setTimeout(() => setToastMessage(null), 3000);
-  };
+  
+  // ⚡ BOUGHT TOGETHER STATE
+  const [selectedBoughtTogether, setSelectedBoughtTogether] = useState([]);
 
   useEffect(() => {
-    if (product?._id) {
-      setActiveProductId(product._id);
-    }
-  }, [product]);
-
-  useEffect(() => {
-    if (activeProductId) {
+    if (initialProduct?._id) {
       const fetchDetails = async () => {
         try {
-          const { data } = await axiosInstance.get(`/products/${activeProductId}`);
+          const { data } = await axiosInstance.get(`/products/${initialProduct._id}`);
           if (data?.success && data?.product) {
             setFullProduct(data.product);
-            if (data.relatedProducts) {
-              setRelatedProducts(data.relatedProducts);
+            // Pre-select all bought together items
+            if (data.product.boughtTogether) {
+              setSelectedBoughtTogether(data.product.boughtTogether.map(p => p._id));
             }
-            
-            setActiveImgIdx(0);
-            setSelectedVariantIdx(0);
-            setQuantity(1);
-            setExpand(false); 
-            setActiveDetailTab('overview');
-            setShowFullTitle(false);
-            
-            if (modalRef.current) {
-              modalRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+            // Set initial spec tab from first available category
+            if (data.product.techSpecs?.length > 0) {
+              setActiveSpecTab(data.product.techSpecs[0].category);
             }
           }
         } catch (e) { console.error(e); }
       };
       fetchDetails();
     }
-  }, [activeProductId]);
-
-  const isDealActive = fullProduct?.flashDeal?.isActive && new Date(fullProduct.flashDeal.endTime).getTime() > Date.now();
-  const displayPrice = isDealActive ? fullProduct.flashDeal.dealPrice : (fullProduct?.price - (fullProduct?.discountPrice || 0));
-
-  const handleScrollAndSwipe = (deltaY) => {
-    const scrollTop = modalRef.current?.scrollTop || 0;
-    if (!expand && deltaY > 15) setExpand(true);
-    else if (expand && scrollTop <= 5 && deltaY < -15) setExpand(false);
-  };
-
-  const handleModalAddToCart = async () => {
-    setIsAddingToCart(true);
-    try {
-      await axiosInstance.post('/cart/add', { productId: fullProduct._id, quantity });
-      window.dispatchEvent(new CustomEvent('cartUpdated', { detail: { increase: quantity } }));
-      showToast('success', `${quantity} item(s) added to cart.`);
-    } catch (error) {
-      showToast('error', 'Failed to add items to cart.');
-    } finally {
-      setIsAddingToCart(false);
-    }
-  };
-
-  const handleRecommendedClick = (recommendedId) => {
-    setActiveProductId(recommendedId);
-  };
+  }, [initialProduct]);
 
   const hasVariants = fullProduct?.variants?.length > 0;
+  
   let galleryImages = (hasVariants && fullProduct.variants[selectedVariantIdx]?.images?.length > 0)
     ? fullProduct.variants[selectedVariantIdx].images.map(img => img.url)
-    : getAllImages(fullProduct);
-  galleryImages = [...new Set(galleryImages.filter(Boolean))];
-  if (galleryImages.length === 0) galleryImages = [DEFAULT_IMG];
+    : (fullProduct.images?.length > 0 ? fullProduct.images.map(img => img.url) : [fullProduct?.image || DEFAULT_IMG]);
 
-  let featuresText = "Experience premium quality with our latest collection.";
-  let descriptionList = ["Premium build quality", "Durable materials", "Ergonomic design"];
-  let specs = [
-    { label: "Brand", value: fullProduct?.brand || "Exclusive" },
-    { label: "Category", value: fullProduct?.category || "Luxury" }
-  ];
+  const handleScroll = (e) => {
+    if (e.target.scrollTop > 20) setExpand(true);
+    else setExpand(false);
+  };
 
-  if (fullProduct?.description) {
-    const descStr = fullProduct.description;
-    const featuresSplit = descStr.split("Description List (Bullets):");
-    
-    if (featuresSplit.length === 2) {
-      featuresText = featuresSplit[0].replace("Features (Paragraph):", "").trim();
-      
-      const specsSplit = featuresSplit[1].split("Specifications:");
-      if (specsSplit.length === 2) {
-        descriptionList = specsSplit[0].split('\n').map(s => s.trim()).filter(Boolean);
-        
-        const rawSpecs = specsSplit[1].split('\n').map(s => s.trim()).filter(Boolean);
-        specs = rawSpecs.map(line => {
-          const idx = line.indexOf(':');
-          if (idx > -1) {
-            return { label: line.slice(0, idx).trim(), value: line.slice(idx + 1).trim() };
-          }
-          return null;
-        }).filter(Boolean);
-      }
-    } else {
-      featuresText = fullProduct.description;
+  // ⚡ PRICING CALCULATIONS
+  const mainPrice = fullProduct?.discountPrice > 0 ? (fullProduct.price - fullProduct.discountPrice) : fullProduct?.price || 0;
+  const extraTotal = fullProduct?.boughtTogether?.reduce((total, p) => {
+    if (selectedBoughtTogether.includes(p._id)) {
+      const pPrice = p.discountPrice > 0 ? (p.price - p.discountPrice) : p.price;
+      return total + pPrice;
     }
-  }
+    return total;
+  }, 0) || 0;
+  const bundleTotal = mainPrice + extraTotal;
 
-  const dynamicBullets = [
-    `100% Authentic ${fullProduct?.brand || 'Premium'} Product`,
-    "7-Days Easy Return & Exchange",
-    "Standard Manufacturer Warranty",
-    "Secure Checkout"
-  ];
-  const finalDescriptionList = [...descriptionList, ...dynamicBullets];
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const itemsToAdd = [
+      { product: fullProduct._id, variant: hasVariants ? fullProduct.variants[selectedVariantIdx] : null }
+    ];
+
+    if (fullProduct.boughtTogether) {
+      const extras = fullProduct.boughtTogether
+        .filter(p => selectedBoughtTogether.includes(p._id))
+        .map(p => ({ product: p._id, variant: null }));
+      itemsToAdd.push(...extras);
+    }
+
+    console.log("Adding to Cart:", itemsToAdd);
+    alert(`${itemsToAdd.length} items added to cart!`);
+  };
 
   return (
-    <div className={`fixed inset-0 z-[99999] flex transition-all duration-500 ease-out ${expand ? 'bg-white items-start p-0' : 'bg-black/60 backdrop-blur-sm items-center justify-center p-4'}`} onClick={onClose}>
-      <Toast toast={toastMessage} onClose={() => setToastMessage(null)} />
-      
+    <div className="fixed inset-0 z-[99999] bg-black/50 backdrop-blur-sm flex items-start justify-center overflow-hidden p-2 md:p-0" onClick={onClose}>
       <div 
-        ref={modalRef} 
-        onWheel={(e) => handleScrollAndSwipe(e.deltaY)} 
-        onScroll={(e) => { if(e.target.scrollTop > 10 && !expand) setExpand(true); }}
-        onClick={(e) => e.stopPropagation()} 
-        className={`relative bg-white overflow-y-auto transition-all duration-500 ease-out hide-scroll transform-gpu ${expand ? 'w-full h-full rounded-none px-6 md:px-12' : 'w-full max-w-[1000px] max-h-[90vh] rounded-[20px] shadow-2xl px-5 pb-5 pt-3 md:pt-4'}`}
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', scrollBehavior: 'smooth' }}
+        onScroll={handleScroll}
+        onClick={(e) => e.stopPropagation()}
+        className={`bg-white transition-all duration-700 ease-in-out overflow-y-auto ${
+          expand ? 'w-full h-full rounded-none' : 'w-[95vw] md:w-[90vw] max-w-[1000px] h-[90vh] mt-[5vh] rounded-[24px] shadow-2xl'
+        }`}
+        style={{ scrollbarWidth: 'none' }}
       >
-        <button onClick={onClose} className="fixed top-4 right-4 md:top-6 md:right-6 p-1.5 rounded-full bg-gray-50 hover:bg-gray-200 shadow-sm z-[100] cursor-pointer transition-all">
-          <X className="w-4 h-4 text-gray-700" />
+        <button onClick={(e) => { e.stopPropagation(); onClose(); }} className="sticky top-6 left-[85%] md:left-[95%] z-[100] p-2 rounded-full hover:bg-gray-200 bg-gray-100/50 backdrop-blur">
+          <X size={20}/>
         </button>
-        
-        <div className={`w-full max-w-[1100px] mx-auto transition-all duration-500 ${expand ? 'pt-16 md:pt-20 pb-8' : 'pt-6 pb-2'}`}>
-          <div className="flex flex-col md:flex-row w-full gap-5 md:gap-7 items-start">
+
+        {/* --- MAIN TOP SECTION --- */}
+        <div className="flex flex-col md:flex-row gap-8 md:gap-12 p-6 md:p-10 pt-16 items-start">
+          {/* IMAGE GALLERY */}
+          <div className="w-full md:w-1/2 flex flex-col gap-4">
+            <div className="rounded-2xl aspect-square flex items-center justify-center p-2 relative bg-gray-50">
+              <img src={galleryImages[activeImgIdx]} alt="product" className="w-full h-full object-contain mix-blend-multiply transition-all duration-500" />
+              {fullProduct?.discountPrice > 0 && (
+                <div className="absolute top-4 left-4 bg-black text-white px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase">Sale</div>
+              )}
+            </div>
+            <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+              {galleryImages.map((img, idx) => (
+                <div key={idx} onMouseEnter={() => setActiveImgIdx(idx)} className={`flex-shrink-0 w-20 h-20 rounded-lg cursor-pointer border-2 transition-all ${activeImgIdx === idx ? 'border-black scale-105' : 'border-gray-200'}`}>
+                  <img src={img} alt="thumb" className="w-full h-full object-cover rounded-md" />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* PRODUCT ACTIONS */}
+          <div className="w-full md:w-1/2 sticky top-0 self-start mt-5">
+            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">{fullProduct?.brand}</span>
+            <h1 className="text-3xl md:text-4xl font-bold mb-2 tracking-tight">{fullProduct?.name}</h1>
+            <div className="flex items-baseline gap-3 mb-6">
+              <p className="text-2xl font-bold text-black">₹{mainPrice}</p>
+              {fullProduct?.discountPrice > 0 && <p className="text-lg text-gray-400 line-through">₹{fullProduct.price}</p>}
+            </div>
             
-            <div className="w-full md:w-[46%] flex flex-row justify-start items-start relative min-h-[280px]">
-              <div className="flex flex-col items-center mr-2 w-[55px] md:w-[60px] h-[280px] md:h-[360px]">
-                <div className="hide-scroll flex flex-col gap-2 overflow-y-auto scroll-smooth w-full flex-1 py-1">
-                  {galleryImages.map((imgSrc, idx) => (
-                    <div key={idx} onMouseEnter={() => setActiveImgIdx(idx)} className={`w-full aspect-square rounded-md flex items-center justify-center cursor-pointer transition-all border ${activeImgIdx === idx ? 'border-gray-800 shadow-sm' : 'border-gray-200 bg-gray-50 hover:border-gray-400'}`} style={{ padding: '2px' }}>
-                      <img src={imgSrc} alt="thumb" className="w-full h-full object-contain mix-blend-multiply" />
-                    </div>
+            {hasVariants && (
+              <div className="mb-8">
+                <p className="text-[10px] font-bold mb-3 uppercase tracking-widest text-gray-500">Available Colors</p>
+                <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+                  {fullProduct.variants.map((v, idx) => (
+                    <button key={idx} onClick={(e) => { e.stopPropagation(); setSelectedVariantIdx(idx); setActiveImgIdx(0); }} className={`px-6 py-2.5 border-2 rounded-full text-xs font-bold transition-all flex-shrink-0 ${selectedVariantIdx === idx ? 'border-black bg-black text-white shadow-lg' : 'border-gray-200 text-gray-600 hover:border-gray-400'}`}>
+                      {v.color}
+                    </button>
                   ))}
                 </div>
               </div>
+            )}
 
-              <div className="flex-1 bg-white border border-gray-100 rounded-lg flex items-center justify-center p-4 relative h-[280px] md:h-[360px]">
-                {isDealActive && <div className="absolute top-0 left-0 z-10 bg-red-600 text-white text-[9px] font-medium px-2 py-0.5 uppercase rounded-br-md shadow-sm">Deal</div>}
-                <img src={galleryImages[activeImgIdx]} alt="main" className="max-h-full object-contain mix-blend-multiply transition-transform duration-300 hover:scale-105" />
-              </div>
-            </div>
-
-            <div className="w-full md:w-[54%] flex flex-col items-start text-left md:pl-2">
-              <div className="flex items-center justify-between w-full mb-1">
-                <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">{fullProduct?.brand}</p>
-                <div className="flex items-center gap-1 bg-[#111] text-white px-1.5 py-0.5 rounded text-[10px] font-medium">
-                  <span>{fullProduct?.ratings || "4.8"}</span>
-                  <Star size={9} className="fill-current" />
-                </div>
+            <button onClick={handleAddToCart} className="bg-black text-white w-full py-4 rounded-full font-bold mb-10 hover:opacity-90 transition-all flex items-center justify-center gap-2 shadow-xl active:scale-[0.98]">
+              <ShoppingBag size={18}/> Add to Cart
+            </button>
+            
+            {/* TABS SECTION */}
+            <div className="bg-gray-100 rounded-[2rem] p-4 md:p-6 h-[400px] overflow-y-auto scrollbar-hide border border-gray-200">
+              <div className="bg-gray-200/50 p-1 rounded-full flex mb-8 sticky top-0 z-10 backdrop-blur">
+                <button onClick={() => setActiveTab('features')} className={`flex-1 py-2.5 rounded-full text-xs font-bold transition-all ${activeTab === 'features' ? 'bg-white shadow text-black' : 'text-gray-500'}`}>Highlights</button>
+                <button onClick={() => setActiveTab('details')} className={`flex-1 py-2.5 rounded-full text-xs font-bold transition-all ${activeTab === 'details' ? 'bg-white shadow text-black' : 'text-gray-500'}`}>Details</button>
               </div>
 
-              <h1 className="text-gray-900 font-medium text-[18px] md:text-[22px] leading-snug mb-2">
-                {showFullTitle ? fullProduct?.name : (fullProduct?.name?.length > 65 ? fullProduct?.name?.substring(0, 65) + "..." : fullProduct?.name)}
-                {fullProduct?.name?.length > 65 && (
-                  <button onClick={() => setShowFullTitle(!showFullTitle)} className="text-blue-500 text-[11px] ml-2 font-medium hover:underline">
-                    {showFullTitle ? 'Show Less' : 'More'}
-                  </button>
-                )}
-              </h1>
-              
-              <div className="flex items-baseline gap-2 mb-4">
-                <span className="font-semibold text-[24px] text-gray-900">{formatPrice(displayPrice)}</span>
-                {fullProduct?.discountPrice > 0 && (
-                  <>
-                    <span className="text-gray-400 line-through text-[14px]">{formatPrice(fullProduct?.price)}</span>
-                    <span className="text-green-600 text-[12px] font-medium">
-                      {Math.round(((fullProduct.price - displayPrice) / fullProduct.price) * 100)}% off
-                    </span>
-                  </>
-                )}
-              </div>
-
-              <div className="flex gap-2 overflow-x-auto hide-scroll w-full mb-5 pb-1">
-                <div className="min-w-[140px] border border-gray-200 rounded p-2 bg-gray-50">
-                  <p className="flex items-center gap-1 text-[10px] font-medium text-[#111] mb-1"><Tag size={10}/> Bank Offer</p>
-                  <p className="text-[10px] text-gray-600 leading-tight">5% Cashback on Axis Card.</p>
-                </div>
-                <div className="min-w-[140px] border border-gray-200 rounded p-2 bg-gray-50">
-                  <p className="flex items-center gap-1 text-[10px] font-medium text-[#111] mb-1"><Tag size={10}/> Special Price</p>
-                  <p className="text-[10px] text-gray-600 leading-tight">Extra ₹{fullProduct?.discountPrice || 500} off.</p>
-                </div>
-              </div>
-              
-              {hasVariants && (
-                <div className="mb-5 space-y-1.5 w-full">
-                  <span className="text-xs text-gray-600 font-medium">
-                    Color: <span className="text-gray-900">{fullProduct.variants[selectedVariantIdx].color}</span>
-                  </span>
-                  <div className="flex gap-2 flex-wrap">
-                    {fullProduct.variants.map((v, idx) => (
-                      <button key={idx} onClick={() => { setSelectedVariantIdx(idx); setActiveImgIdx(0); }} 
-                              className={`w-12 h-12 rounded-md border-2 transition-all p-1 bg-white ${selectedVariantIdx === idx ? 'border-gray-800 shadow-sm' : 'border-gray-200 hover:border-gray-400'}`}>
-                        <img src={v.images?.[0]?.url || DEFAULT_IMG} className="w-full h-full object-contain mix-blend-multiply" alt="v" />
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              <div className="flex flex-col gap-2.5 w-full mb-5 relative z-20">
-                <div className="flex flex-row gap-2.5 w-full">
-                  <div className="flex items-center justify-between bg-white border border-gray-300 rounded-md px-2 w-24 shrink-0 h-[42px]">
-                    <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="text-gray-500 hover:text-black w-6 h-6 flex items-center justify-center text-sm font-medium">−</button>
-                    <span className="font-medium text-gray-900 text-[13px]">{quantity}</span>
-                    <button onClick={() => setQuantity(quantity + 1)} className="text-gray-500 hover:text-black w-6 h-6 flex items-center justify-center text-sm font-medium">+</button>
-                  </div>
-                  
-                  <button 
-                    onClick={handleModalAddToCart} 
-                    disabled={isAddingToCart} 
-                    className="flex-1 flex items-center justify-center gap-2 rounded-md font-medium text-[12px] transition-all bg-white border border-gray-800 text-gray-900 hover:bg-gray-50 shadow-sm"
-                    style={{ height: '42px' }}
-                  >
-                    <ShoppingCart size={14} />
-                    <span>{isAddingToCart ? 'Adding...' : 'Add to Cart'}</span>
-                  </button>
-                </div>
-
-                <button 
-                  onClick={() => navigate('/checkout')} 
-                  className="w-full flex items-center justify-center gap-2 rounded-md font-medium text-[12px] transition-all bg-[#111] hover:bg-black text-white shadow-sm"
-                  style={{ height: '42px' }}
-                >
-                  <Zap size={14} className="fill-current" />
-                  <span>Buy Now</span>
-                </button>
-
-                <div className="flex flex-wrap items-center justify-between mt-1 border border-gray-200 rounded p-2 bg-white">
-                   <div className="flex items-center gap-1.5 text-gray-500">
-                      <Lock size={12} className="text-gray-700" />
-                      <span className="text-[10px] font-medium text-gray-700">Safe Payments</span>
-                   </div>
-                   <div className="flex items-center gap-1.5 grayscale opacity-60">
-                      <span className="text-[9px] font-medium border border-gray-300 px-1 rounded">UPI</span>
-                      <span className="text-[9px] font-medium border border-gray-300 px-1 rounded text-blue-800">VISA</span>
-                      <span className="text-[9px] font-medium border border-gray-300 px-1 rounded text-red-600">MC</span>
-                   </div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-2 w-full mb-1">
-                <div className="flex items-center gap-2 p-2 bg-white rounded border border-gray-200">
-                  <Truck className="w-4 h-4 text-gray-600" />
-                  <div className="flex flex-col text-left"><h4 className="text-[11px] font-medium text-gray-800">Free Delivery</h4><p className="text-[9px] text-gray-500">By Tomorrow</p></div>
-                </div>
-                <div className="flex items-center gap-2 p-2 bg-white rounded border border-gray-200">
-                  <ShieldCheck className="w-4 h-4 text-gray-600" />
-                  <div className="flex flex-col text-left"><h4 className="text-[11px] font-medium text-gray-800">1 Year Warranty</h4><p className="text-[9px] text-gray-500">Authorized</p></div>
-                </div>
-              </div>
-              
-              {!expand && (
-                <div className="w-full flex items-center justify-center mt-4 cursor-pointer group" onClick={() => setExpand(true)}>
-                  <div className="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-800 transition-all">
-                    <span className="text-[10px] font-medium uppercase tracking-widest">View Details</span>
-                    <ChevronDown size={16} className="animate-bounce opacity-70" />
-                  </div>
-                </div>
-              )}
-
-            </div>
-          </div>
-
-          <div style={{ maxHeight: expand ? '6000px' : '0px', opacity: expand ? 1 : 0, overflow: 'hidden', transition: 'all 0.6s ease-in-out' }}>
-            <div className="mt-8 w-full max-w-4xl mx-auto border-t border-gray-200 pt-6">
-              
-              <div className="flex gap-6 border-b border-gray-200 mb-6 px-2 md:px-0 overflow-x-auto hide-scroll">
-                {['overview', 'specs'].map(tab => (
-                  <button key={tab} onClick={() => setActiveDetailTab(tab)} className={`pb-2 text-[13px] font-medium whitespace-nowrap relative transition-all ${activeDetailTab === tab ? 'text-gray-900' : 'text-gray-400 hover:text-gray-700'}`}>
-                    {tab === 'overview' ? 'Description' : 'Specifications'}
-                    {activeDetailTab === tab && <div className="absolute bottom-[-1px] left-0 w-full h-[2px] bg-gray-900 rounded-t-md" />}
-                  </button>
-                ))}
-              </div>
-              
-              <div className="min-h-[150px] px-2 md:px-0 mb-8">
-                {activeDetailTab === 'overview' ? (
-                  <div className="w-full">
-                    <p className="text-gray-600 text-[13px] leading-relaxed mb-5">{featuresText}</p>
-                    <h3 className="text-base font-medium text-gray-900 mb-3 border-b border-gray-100 pb-1">Key Features</h3>
-                    <ul className="text-left space-y-2 list-disc pl-4">
-                      {finalDescriptionList.map((d, i) => (
-                        <li key={i} className="text-gray-600 text-[13px]">{d}</li>
-                      ))}
-                    </ul>
-                  </div>
-                ) : (
-                  <div className="w-full">
-                    <h3 className="text-base font-medium text-gray-900 mb-3 border-b border-gray-100 pb-1">General Specifications</h3>
-                    <div className="bg-white border border-gray-200 rounded overflow-hidden">
-                      {specs.map((s, i) => (
-                        <div key={i} className={`flex flex-col sm:flex-row py-2.5 px-4 text-[13px] ${i % 2 === 0 ? 'bg-gray-50' : 'bg-white'} border-b border-gray-100 last:border-0`}>
-                          <span className="text-gray-500 w-full sm:w-1/3">{s.label}</span>
-                          <span className="text-gray-800 font-medium w-full sm:w-2/3">{s.value}</span>
-                        </div>
-                      ))}
+              {activeTab === 'features' ? (
+                <div className="grid grid-cols-2 gap-x-4 gap-y-8">
+                  {fullProduct?.highlights?.map((f, i) => (
+                    <div key={i} className="flex flex-col items-center text-center gap-2 group">
+                      <div className="text-gray-900 group-hover:scale-110 transition-transform">{getIcon(f.iconName)}</div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-gray-800 leading-tight">{f.title}</p>
                     </div>
-                  </div>
-                )}
-              </div>
-
-              {relatedProducts.length > 0 && (
-                <div className="w-full pt-4 pb-8 px-2 md:px-0">
-                  <div className="mb-4">
-                    <h3 className="text-[16px] font-medium text-gray-900 border-l-4 border-gray-800 pl-2">Similar Products</h3>
-                  </div>
-                  
-                  <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
-                    {relatedProducts.map((related) => {
-                      const isRelatedDeal = related.flashDeal?.isActive && new Date(related.flashDeal.endTime).getTime() > Date.now();
-                      const relatedPrice = isRelatedDeal ? related.flashDeal.dealPrice : (related.price - (related.discountPrice || 0));
-                      
-                      return (
-                        <div 
-                          key={related._id} 
-                          className="group cursor-pointer flex flex-col bg-white border border-gray-100 p-2.5 rounded hover:shadow-sm transition-shadow"
-                          onClick={() => handleRecommendedClick(related._id)}
-                        >
-                          <div className="bg-white overflow-hidden aspect-square mb-2.5 flex items-center justify-center relative">
-                            <img 
-                              src={related.images?.[0]?.url || related.variants?.[0]?.images?.[0]?.url || DEFAULT_IMG} 
-                              alt={related.name} 
-                              className="w-full h-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-105"
-                            />
-                          </div>
-                          <h4 className="text-[12px] text-gray-700 line-clamp-2 hover:text-black transition-colors mb-1 font-medium">
-                            {related.name}
-                          </h4>
-                          <p className="text-[14px] font-semibold text-gray-900 mt-1">
-                            {formatPrice(relatedPrice)}
-                          </p>
-                        </div>
-                      );
-                    })}
-                  </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="p-2">
+                  <div className="text-sm text-gray-600 leading-relaxed mb-6" dangerouslySetInnerHTML={{ __html: fullProduct?.description }} />
+                  {fullProduct?.inTheBox?.length > 0 && (
+                    <div className="border-t pt-4">
+                       <h4 className="font-bold text-sm mb-4">What's in the box</h4>
+                       <ul className="space-y-3">
+                         {fullProduct.inTheBox.map((item, idx) => (
+                           <li key={idx} className="flex items-center gap-3 text-xs text-gray-600">
+                             <CheckCircle2 size={14} className="text-black"/> {item}
+                           </li>
+                         ))}
+                       </ul>
+                    </div>
+                  )}
                 </div>
               )}
-
-              {galleryImages.length > 0 && (
-                <div className="w-full pb-10 px-2 md:px-0">
-                   <div className="mb-4">
-                     <h3 className="text-[16px] font-medium text-gray-900 border-l-4 border-gray-800 pl-2">Product Gallery</h3>
-                   </div>
-                   <div className="flex flex-col gap-4 w-full items-center">
-                      {galleryImages.map((img, i) => (
-                        <div key={i} className="w-full bg-[#fcfcfc] border border-gray-100 rounded p-4 md:p-8 flex items-center justify-center">
-                           <img src={img} alt={`gallery-full-${i}`} className="w-full max-h-[500px] object-contain mix-blend-multiply" />
-                        </div>
-                      ))}
-                   </div>
-                </div>
-              )}
-
             </div>
           </div>
         </div>
+
+        {/* --- SCROLLABLE EXTENDED CONTENT --- */}
+        <div className={`p-6 md:p-10 transition-all duration-1000 ${expand ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          
+          {/* BOUGHT TOGETHER */}
+          {fullProduct?.boughtTogether?.length > 0 && (
+            <section id="bundle" className="border-t pt-16 mb-20">
+               <div className="max-w-4xl mx-auto bg-gray-50 rounded-[2.5rem] p-8 border border-gray-100">
+                  <h2 className="text-2xl font-bold mb-8 flex items-center gap-3 italic">Frequently Bought Together</h2>
+                  <div className="flex flex-col md:flex-row gap-8 items-center">
+                    <div className="flex items-center gap-4">
+                      <div className="w-24 h-24 bg-white rounded-2xl p-2 border shadow-sm flex items-center justify-center">
+                        <img src={galleryImages[0]} alt="main" className="max-h-full mix-blend-multiply" />
+                      </div>
+                      {fullProduct.boughtTogether.map((item) => selectedBoughtTogether.includes(item._id) && (
+                        <React.Fragment key={item._id}>
+                          <Plus size={16} className="text-gray-400" />
+                          <div className="w-24 h-24 bg-white rounded-2xl p-2 border shadow-sm flex items-center justify-center">
+                            <img src={item.images?.[0]?.url || DEFAULT_IMG} alt="extra" className="max-h-full mix-blend-multiply" />
+                          </div>
+                        </React.Fragment>
+                      ))}
+                    </div>
+                    <div className="md:ml-auto text-center md:text-right">
+                      <p className="text-xs font-bold text-gray-400 uppercase mb-1">Bundle Total</p>
+                      <p className="text-4xl font-black mb-5">₹{bundleTotal}</p>
+                      <button onClick={handleAddToCart} className="bg-black text-white px-10 py-3 rounded-full font-bold text-sm hover:scale-105 transition-transform">Add {selectedBoughtTogether.length + 1} Items</button>
+                    </div>
+                  </div>
+                  <div className="mt-10 space-y-4 border-t pt-6">
+                    {fullProduct.boughtTogether.map((item) => (
+                      <label key={item._id} className="flex items-center gap-4 cursor-pointer">
+                        <input 
+                          type="checkbox" 
+                          checked={selectedBoughtTogether.includes(item._id)}
+                          onChange={(e) => {
+                            if (e.target.checked) setSelectedBoughtTogether([...selectedBoughtTogether, item._id]);
+                            else setSelectedBoughtTogether(selectedBoughtTogether.filter(id => id !== item._id));
+                          }}
+                          className="w-5 h-5 rounded-full border-gray-300 text-black focus:ring-black" 
+                        />
+                        <span className="text-sm font-medium text-gray-600">{item.name} <span className="text-black font-bold ml-2">₹{item.price - (item.discountPrice || 0)}</span></span>
+                      </label>
+                    ))}
+                  </div>
+               </div>
+            </section>
+          )}
+
+          {/* VIDEO SECTION */}
+          {fullProduct?.promotionalVideo?.url && (
+            <section id="video" className="mb-20">
+              <div className="w-full h-64 md:h-[600px] bg-black rounded-[3rem] overflow-hidden shadow-2xl relative">
+                <video className="w-full h-full object-cover" autoPlay muted loop playsInline controls poster={fullProduct.promotionalVideo.thumbnailUrl}>
+                  <source src={fullProduct.promotionalVideo.url} type="video/mp4" />
+                </video>
+              </div>
+            </section>
+          )}
+
+          {/* TECH SPECS TABS */}
+          <section id="tech" className="border-t pt-20 mb-20">
+            <div className="max-w-6xl mx-auto px-4">
+              <h2 className="text-4xl font-bold mb-12 text-center tracking-tighter italic">Technical Specifications</h2>
+              <div className="flex justify-center gap-8 text-gray-400 mb-16 text-[10px] font-bold uppercase tracking-widest overflow-x-auto scrollbar-hide border-b border-gray-100 pb-4">
+                {fullProduct?.techSpecs?.map((spec) => (
+                  <button 
+                    key={spec.category}
+                    onClick={() => setActiveSpecTab(spec.category)}
+                    className={`pb-4 transition-all whitespace-nowrap ${activeSpecTab === spec.category ? 'text-black border-b-2 border-black' : 'hover:text-gray-600'}`}
+                  >
+                    {spec.category}
+                  </button>
+                ))}
+              </div>
+              <div className="max-w-3xl mx-auto min-h-[200px]">
+                {fullProduct?.techSpecs?.filter(s => s.category === activeSpecTab).map((spec, i) => (
+                  <div key={i} className="text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
+                    <p className="text-xl md:text-2xl text-gray-800 leading-relaxed font-medium">{spec.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* REVIEWS & COMPARE (Placeholder style - kept for UI) */}
+          <section id="reviews" className="border-t pt-20 mb-20 text-center">
+              <h2 className="text-3xl font-bold mb-10">Sound Rated 4.7/5</h2>
+              <div className="flex justify-center gap-4">
+                {galleryImages.slice(0,3).map((img, i) => (
+                  <img key={i} src={img} className="w-24 h-24 rounded-2xl object-cover border" alt="rev"/>
+                ))}
+              </div>
+          </section>
+        </div>
+
+        {/* --- STICKY BOTTOM BAR --- */}
+        {expand && (
+          <div className="sticky bottom-0 bg-white/80 backdrop-blur-xl border-t py-4 px-6 md:px-10 flex justify-between items-center z-[100] animate-in slide-in-from-bottom duration-500 shadow-[0_-20px_50px_rgba(0,0,0,0.1)]">
+            <div className="flex items-center gap-3">
+              <img src={galleryImages[0]} alt="p" className="w-10 h-10 object-contain mix-blend-multiply bg-gray-100 rounded-lg p-1" />
+              <div>
+                <span className="font-bold text-sm block">{fullProduct?.name}</span>
+                <span className="text-[10px] font-bold text-[#C8A253]">₹{bundleTotal} Bundle</span>
+              </div>
+            </div>
+            <div className="hidden lg:flex gap-8">
+              {[['bundle', 'Bundle'], ['video', 'Visuals'], ['tech', 'Specs']].map(([id, label]) => (
+                <button key={id} onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })} className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 hover:text-black transition-colors">
+                  {label}
+                </button>
+              ))}
+            </div>
+            <button onClick={handleAddToCart} className="bg-black text-white px-8 py-3 rounded-full font-bold text-xs shadow-lg hover:shadow-black/20 transition-all active:scale-95">Add to Cart</button>
+          </div>
+        )}
       </div>
     </div>
   );
