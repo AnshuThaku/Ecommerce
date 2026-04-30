@@ -243,110 +243,93 @@ export default function QuickViewModal({ product: initialProduct, onClose, onQui
           </div>
         </section>
 
-        {/* --- TECH SPECS SECTION --- */}
-        <section id="tech-specs-section" className="py-32 bg-white border-t border-gray-50">
-          <div className="max-w-[1440px] mx-auto px-6 md:px-12 text-center">
-            <h2 className="text-5xl md:text-7xl font-medium tracking-tighter mb-20 uppercase">Tech Specs.</h2>
-            
-            <div className="flex justify-center gap-8 md:gap-16 border-b border-gray-100 mb-20 overflow-x-auto scrollbar-hide px-4">
-              {fullProduct?.techSpecs?.map((spec, idx) => (
-                <button 
-                  key={spec.category || idx} 
-                  onClick={() => setActiveSpecTab(spec.category)} 
-                  className={`pb-6 text-lg md:text-xl font-medium transition-all relative whitespace-nowrap cursor-pointer ${
-                    activeSpecTab === spec.category ? 'text-black opacity-100' : 'text-gray-400 hover:text-black'
-                  }`}
-                >
-                  {spec.category}
-                  {activeSpecTab === spec.category && (
-                    <div className="absolute bottom-0 left-0 w-full h-[2px] bg-black rounded-full animate-in slide-in-from-left duration-300"/>
-                  )}
-                </button>
-              ))}
-            </div>
+      {/* --- TECH SPECS SECTION - FULLY RESPONSIVE --- */}
+<section id="tech-specs-section" className="py-20 md:py-32 bg-white border-t border-gray-50">
+  <div className="max-w-[1340px] mx-auto px-6 md:px-12 text-center">
+    
+    <h2 className="text-4xl md:text-7xl font-medium tracking-tighter mb-12 md:mb-20 uppercase">Tech Specs.</h2>
+    
+    {/* Category Tabs - Scrollable but scrollbar hidden */}
+    <div className="flex justify-start md:justify-center gap-6 md:gap-16 border-b border-gray-100 mb-12 md:mb-20 overflow-x-auto scrollbar-hide px-2">
+      {fullProduct?.techSpecs?.map((spec, idx) => (
+        <button 
+          key={spec.category || idx} 
+          onClick={() => setActiveSpecTab(spec.category)} 
+          className={`pb-4 text-base md:text-xl font-medium transition-all relative whitespace-nowrap cursor-pointer ${
+            activeSpecTab === spec.category ? 'text-black' : 'text-gray-400'
+          }`}
+        >
+          {spec.category}
+          {activeSpecTab === spec.category && (
+            <div className="absolute bottom-0 left-0 w-full h-[2px] bg-black rounded-full animate-in slide-in-from-left duration-300"/>
+          )}
+        </button>
+      ))}
+    </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 text-left max-w-6xl mx-auto min-h-[300px]">
-              {fullProduct?.techSpecs
-                ?.filter(s => s.category === activeSpecTab)
-                ?.map((spec) => (
-                  spec.details?.map((detail, idx) => (
-                    <div key={`${spec.category}-${idx}`} className="animate-in fade-in slide-in-from-bottom-2 duration-500">
-                      <h4 className="text-[15px] font-semibold text-black mb-2 tracking-tight">
-                        {detail.title || (typeof detail === 'string' ? detail.split(':')[0] : 'Spec')}
-                      </h4>
-                      <p className="text-[15px] text-gray-600 leading-[1.6] font-light">
-                        {detail.desc || (typeof detail === 'string' ? detail.split(':').slice(1).join(':') : detail)}
-                      </p>
-                    </div>
-                  ))
-                ))}
-              
-              {!fullProduct?.techSpecs?.some(s => s.category === activeSpecTab) && (
-                <div className="col-span-3 py-20 text-gray-400 italic font-light tracking-widest text-sm">
-                  No specifications available.
-                </div>
-              )}
+    {/* Content Grid - 1 column on mobile, 3 on desktop */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-10 md:gap-y-16 text-left max-w-6xl mx-auto">
+      {fullProduct?.techSpecs
+        ?.filter(s => s.category === activeSpecTab)
+        ?.map((spec) => (
+          spec.details?.map((detail, idx) => (
+            <div key={`${spec.category}-${idx}`} className="animate-in fade-in slide-in-from-bottom-2 duration-500 border-b border-gray-50 pb-6 md:border-none md:pb-0">
+              <h4 className="text-[15px] font-semibold text-black mb-2 tracking-tight">
+                {detail.title || (typeof detail === 'string' ? detail.split(':')[0] : 'Spec')}
+              </h4>
+              <p className="text-[14px] md:text-[15px] text-gray-600 leading-relaxed font-light">
+                {detail.desc || (typeof detail === 'string' ? detail.split(':').slice(1).join(':') : detail)}
+              </p>
             </div>
-          </div>
-        </section>
+          ))
+        ))}
+    </div>
+  </div>
+</section>
 
-   {/* --- CURATED FOR YOU (RECOMMENDED) --- */}
-<section id="curated-section" className="py-32 bg-white border-t border-gray-50">
-  <div className="max-w-[1440px] mx-auto px-6 md:px-12">
-    <h2 className="text-5xl font-medium tracking-tighter mb-16 text-center md:text-left cursor-default">Recommended for you.</h2>
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+{/* --- RECOMMENDED SECTION - CLICK FIX FOR MOBILE --- */}
+<section id="curated-section" className="py-20 md:py-32 bg-white border-t border-gray-50 relative z-10">
+  <div className="max-w-[1340px] mx-auto px-6 md:px-12">
+    <h2 className="text-3xl md:text-5xl font-medium tracking-tighter mb-12 text-center md:text-left">Recommended for you.</h2>
+    
+    {/* Grid fix: 2 columns on mobile is better for luxury feel */}
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-12">
       {relatedProducts.slice(0, 4).map((p) => (
         <div 
           key={p._id} 
-          className="group cursor-pointer" 
-          onClick={async () => {
-            // ⚡ 1. Pehle Modal ko upar bhejo
-            if (modalRef.current) {
-              modalRef.current.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-
-            // ⚡ 2. Loading aur states reset karo
+          className="group cursor-pointer relative" 
+          style={{ touchAction: 'manipulation' }} // Better touch handling for mobile
+          onClick={async (e) => {
+            e.preventDefault(); // Stop any ghost clicks
+            if (modalRef.current) modalRef.current.scrollTo({ top: 0, behavior: 'smooth' });
             setLoading(true);
             setActiveImgIdx(0);
             setSelectedVariantIdx(0);
             setExpandDescription(false);
-
-            // ⚡ 3. Naya data fetch karo
+            
             try {
               const { data } = await axiosInstance.get(`/products/${p._id}`);
               if (data?.success && data?.product) {
                 setFullProduct(data.product);
                 setRelatedProducts(data.relatedProducts || []);
-                
-                if (data.product.techSpecs?.length > 0) {
-                  setActiveSpecTab(data.product.techSpecs[0].category);
-                }
+                if (data.product.techSpecs?.length > 0) setActiveSpecTab(data.product.techSpecs[0].category);
               }
-            } catch (e) {
-              console.error("Manual fetch error:", e);
-            } finally {
-              setLoading(false);
-            }
+            } catch (e) { console.error(e); } 
+            finally { setLoading(false); }
           }}
         >
-          {/* Product Card UI */}
-          <div className="aspect-square bg-[#f8f8f8] rounded-[2.5rem] p-10 mb-6 overflow-hidden flex items-center justify-center relative cursor-pointer border border-transparent hover:border-gray-100 transition-all shadow-sm hover:shadow-md">
+          <div className="aspect-square bg-[#f8f8f8] rounded-[1.5rem] md:rounded-[2.5rem] p-4 md:p-10 mb-4 overflow-hidden flex items-center justify-center relative">
             <img 
               src={p.images?.[0]?.url || DEFAULT_IMG} 
-              className="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-700 pointer-events-none" 
+              className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500" 
               alt={p.name} 
             />
-            <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-pointer">
-              <span className="bg-white text-black px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-2xl transition-transform group-hover:scale-105">
-                View Product
-              </span>
-            </div>
           </div>
 
-          <h4 className="font-bold text-[13px] uppercase tracking-widest mb-2 group-hover:text-[#C8A253] transition-colors cursor-pointer leading-tight">
+          <h4 className="font-bold text-[11px] md:text-[13px] uppercase tracking-widest mb-1 group-hover:text-[#C8A253] transition-colors line-clamp-2">
             {p.name}
           </h4>
-          <p className="text-gray-400 text-sm font-light italic cursor-default">
+          <p className="text-gray-400 text-[12px] md:text-sm font-light">
             ₹{p.price?.toLocaleString()}
           </p>
         </div>
