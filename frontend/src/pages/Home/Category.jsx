@@ -5,7 +5,7 @@ import axiosInstance from '../../utils/axiosInstance';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
-import QuickModel from '../Product/QuickModel';
+import QuickModel from '../Product/ProductDetailModel';
 
 export default function CategoryShowcase() {
   const navigate = useNavigate();

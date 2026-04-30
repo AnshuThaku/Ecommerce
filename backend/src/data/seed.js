@@ -4,16 +4,18 @@ require('dotenv').config({ path: path.join(__dirname, '../../.env') });
 
 const Product = require('../models/ProductModel'); 
 const User = require('../models/UserModel');       
-const productsData = require('./data.js'); 
-
-const dns = require('dns');
+const productsDataRaw = require('./data.js'); 
+const dns = require("dns");
 dns.setServers(['8.8.8.8', '8.8.4.4']);
-const { connectDb } = require('../config/db');
-connectDb();
 
-// -------------------------------------------------------------------
-// HELPER: Clean BSON objects ($oid, $date etc.)
-// -------------------------------------------------------------------
+const { connectDb } = require('../config/db');
+
+// Export handling (Array check)
+const productsData = Array.isArray(productsDataRaw) 
+    ? productsDataRaw 
+    : (productsDataRaw.products || [productsDataRaw]);
+
+// BSON object cleaner ($oid, $date)
 const cleanBsonObj = (obj) => {
     if (!obj || typeof obj !== 'object') return obj;
     if (obj.$oid) return obj.$oid;
@@ -24,51 +26,52 @@ const cleanBsonObj = (obj) => {
     return cleaned;
 };
 
-// -------------------------------------------------------------------
-// MAIN SEED FUNCTION (Direct Database Insert)
-// -------------------------------------------------------------------
 const seedProducts = async () => {
     try {
-        console.log("🚀 Preparing Data for Database Insertion...\n");
+        await connectDb();
+        console.log("🚀 Starting Fast Data Seeding (No BG Removal)...\n");
 
+        // 1. Admin Seller Link
         let adminUser = await User.findOne({ role: 'admin' });
         const sellerId = adminUser ? adminUser._id : new mongoose.Types.ObjectId();
 
         const formattedProducts = [];
 
-        // Loop through ALL products in data.js
         for (let index = 0; index < productsData.length; index++) {
             let rawProduct = productsData[index];
+            if (!rawProduct || typeof rawProduct !== 'object') continue;
+
             let product = cleanBsonObj(rawProduct);
             
-            // Attach Seller ID
+            // Basic Info Cleanup
             product.seller = sellerId;
-
-            // ⚡ FIX 1: Delete all hardcoded/invalid _ids to let MongoDB generate valid ones
             delete product._id;
+            delete product.createdAt;
+            delete product.updatedAt;
+            delete product.__v;
 
-            // ⚡ FIX 2: Clean IDs and Ensure 'public_id' exists for Main Images
-            if (product.images && product.images.length > 0) {
+            // ⚡ Main Images Formatting (Keeping original URLs)
+            if (product.images && Array.isArray(product.images)) {
                 product.images = product.images.map((img, i) => {
-                    delete img._id; // Clean old _id
+                    const imageUrl = img.url || (typeof img === 'string' ? img : '');
                     return {
-                        url: img.url || img,
-                        public_id: img.public_id || `seed_main_${index}_${i}_${Date.now()}` // Add dummy public_id if missing
+                        url: imageUrl,
+                        public_id: img.public_id || `main_${index}_${i}_${Date.now()}`
                     };
                 });
             }
 
-            // ⚡ FIX 3: Clean IDs and Ensure 'public_id' exists for Variant Images
-            if (product.variants && product.variants.length > 0) {
+            // ⚡ Variant Images Formatting (Keeping original URLs)
+            if (product.variants && Array.isArray(product.variants)) {
                 product.variants = product.variants.map((variant, vIndex) => {
-                    delete variant._id; // Clean old _id
+                    delete variant._id; 
                     
-                    if (variant.images && variant.images.length > 0) {
+                    if (variant.images && Array.isArray(variant.images)) {
                         variant.images = variant.images.map((img, i) => {
-                            delete img._id; // Clean old _id
+                            const imageUrl = img.url || (typeof img === 'string' ? img : '');
                             return {
-                                url: img.url || img,
-                                public_id: img.public_id || `seed_variant_${index}_${vIndex}_${i}_${Date.now()}` // Add dummy public_id
+                                url: imageUrl,
+                                public_id: img.public_id || `variant_${index}_${vIndex}_${i}_${Date.now()}`
                             };
                         });
                     }
@@ -76,32 +79,21 @@ const seedProducts = async () => {
                 });
             }
 
-            // Remove Mongoose auto-generated fields to avoid conflicts
-            delete product.createdAt;
-            delete product.updatedAt;
-            delete product.__v;
-
             formattedProducts.push(product);
         }
 
-        console.log(`🧹 Deleting ${await Product.countDocuments()} old products from database...`);
-        // ⚡ Delete ALL old products to avoid duplicates
+        console.log(`🧹 Cleaning old heavy products from DB...`);
         await Product.deleteMany({});
         
-        console.log(`➕ Inserting ${formattedProducts.length} new products into database...`);
-        // ⚡ Insert ALL fresh data
-        await Product.insertMany(formattedProducts);
+        console.log(`➕ Inserting ${formattedProducts.length} lightweight products...`);
+        const result = await Product.insertMany(formattedProducts);
         
-        console.log("\n=========================================");
-        console.log("✅ SEEDING COMPLETE!");
-        console.log("=========================================");
-        console.log(`🛍️ Total Products Successfully Added : ${formattedProducts.length}`);
-        console.log("=========================================\n");
-
+        console.log("\n✅ SEEDING SUCCESSFUL!");
+        console.log(`🛍️ Total Products in DB: ${result.length}`);
         process.exit(0);
 
     } catch (error) {
-        console.error("\n❌ Seeding Error:", error);
+        console.error("\n❌ Seeding Error:", error.message);
         process.exit(1);
     }
 };

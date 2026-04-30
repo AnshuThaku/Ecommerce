@@ -123,7 +123,7 @@
 // }
 import React, { useState, useEffect, useRef } from 'react';
 import ProductCard from './ProductCard'; 
-import QuickViewModal from './QuickModel'; 
+import productViewModel from './ProductDetailModel'; 
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useServerTheme } from "../../hooks/useServerTheme"; // Hook Import kiya
 
@@ -226,7 +226,7 @@ export default function ProductGrid({ title, subtitle, products }) {
         </div>
       </div>
 
-      {selectedProduct && <QuickViewModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />}
+      {selectedProduct && <productViewModel product={selectedProduct} onClose={() => setSelectedProduct(null)} />}
     </section>
   );
 }
