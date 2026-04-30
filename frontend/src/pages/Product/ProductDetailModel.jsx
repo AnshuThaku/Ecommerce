@@ -273,7 +273,7 @@ export default function QuickViewModal({ product: initialProduct, onClose, onQui
         ?.filter(s => s.category === activeSpecTab)
         ?.map((spec) => (
           spec.details?.map((detail, idx) => (
-            <div key={`${spec.category}-${idx}`} className="animate-in fade-in slide-in-from-bottom-2 duration-500 border-b border-gray-50 pb-6 md:border-none md:pb-0">
+            <div key={`${spec.category}-${idx}`} className="animate-in fade-in slide-in-from-bottom-2 duration-500 border-b border-gray-50  md:border-none md:pb-0">
               <h4 className="text-[15px] font-semibold text-black mb-2 tracking-tight">
                 {detail.title || (typeof detail === 'string' ? detail.split(':')[0] : 'Spec')}
               </h4>
@@ -371,7 +371,7 @@ export default function QuickViewModal({ product: initialProduct, onClose, onQui
             </div>
           </div>
 
-          <div className="flex-1 flex justify-center gap-3 md:gap-8 text-[7px] md:text-[10px] font-black uppercase overflow-x-auto scrollbar-hide">
+          <div className="flex-1 flex justify-center gap-3 md:gap-8 text-[7px] md:text-[10px] font-grey uppercase overflow-x-auto scrollbar-hide">
             <button onClick={() => scrollToSection('curated-section')} className="hover:text-black whitespace-nowrap cursor-pointer">Recommended</button>
             <button onClick={() => scrollToSection('sidebar-features')} className="hover:text-black whitespace-nowrap cursor-pointer">Features</button>
             <button onClick={() => scrollToSection('tech-specs-section')} className="hover:text-black whitespace-nowrap cursor-pointer">Tech Specs</button>
