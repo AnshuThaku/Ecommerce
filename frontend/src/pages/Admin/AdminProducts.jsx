@@ -19,18 +19,9 @@ export default function AdminProducts() {
     setToastMessage({ type, message });
   };
 
-  // ⚡ UPDATED: Added Premium Content Fields
   const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    price: '',
-    discountPrice: 0,
-    category: '',
-    brand: '',
-    stock: 1,
-    isActive: true,
+    name: '', description: '', price: '', discountPrice: 0, category: '', brand: '', stock: 1, isActive: true,
     flashDeal: { isActive: false, dealPrice: '', startTime: '', endTime: '' },
-    // Premium Fields
     promotionalVideo: { url: '', thumbnailUrl: '' },
     inTheBox: [''],
     techSpecs: [],
@@ -41,8 +32,7 @@ export default function AdminProducts() {
   const [variants, setVariants] = useState([]);
 
   const filteredProducts = products.filter(p => {
-    const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          p.brand?.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase()) || p.brand?.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = filterCategory === 'all' || p.category === filterCategory;
     return matchesSearch && matchesCategory;
   });
@@ -73,14 +63,10 @@ export default function AdminProducts() {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
-      flashDeal: {
-        ...prev.flashDeal,
-        [name]: type === 'checkbox' ? checked : value
-      }
+      flashDeal: { ...prev.flashDeal, [name]: type === 'checkbox' ? checked : value }
     }));
   };
 
-  // ⚡ PREMIUM FIELDS HANDLERS ⚡
   const handleVideoChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, promotionalVideo: { ...prev.promotionalVideo, [name]: value } }));
@@ -88,8 +74,8 @@ export default function AdminProducts() {
 
   const handleArrayChange = (field, index, key, value) => {
     const updated = [...formData[field]];
-    if (key === null) updated[index] = value; // For simple array like inTheBox
-    else updated[index][key] = value; // For object arrays
+    if (key === null) updated[index] = value; 
+    else updated[index][key] = value; 
     setFormData({ ...formData, [field]: updated });
   };
 
@@ -101,7 +87,6 @@ export default function AdminProducts() {
     setFormData({ ...formData, [field]: formData[field].filter((_, i) => i !== index) });
   };
 
-  // VARIANTS HANDLERS
   const addVariant = () => {
     setVariants([...variants, { color: '', size: '', stock: 0, price: '', imageFiles: [], imagePreviews: [], existingImages: [] }]);
   };
@@ -119,20 +104,15 @@ export default function AdminProducts() {
   const handleVariantImageChange = (index, files) => {
     const updated = [...variants];
     const newFiles = Array.from(files);
-    
     updated[index].imageFiles = [...(updated[index].imageFiles || []), ...newFiles];
-    updated[index].imagePreviews = [
-      ...(updated[index].imagePreviews || []),
-      ...newFiles.map(f => URL.createObjectURL(f))
-    ];
+    updated[index].imagePreviews = [...(updated[index].imagePreviews || []), ...newFiles.map(f => URL.createObjectURL(f))];
     setVariants(updated);
   };
 
   const removeVariantImage = (variantIndex, imageIndex, isExisting = false) => {
     const updated = [...variants];
-    if (isExisting) {
-      updated[variantIndex].existingImages = updated[variantIndex].existingImages.filter((_, i) => i !== imageIndex);
-    } else {
+    if (isExisting) updated[variantIndex].existingImages = updated[variantIndex].existingImages.filter((_, i) => i !== imageIndex);
+    else {
       updated[variantIndex].imageFiles = updated[variantIndex].imageFiles.filter((_, i) => i !== imageIndex);
       updated[variantIndex].imagePreviews = updated[variantIndex].imagePreviews.filter((_, i) => i !== imageIndex);
     }
@@ -146,15 +126,11 @@ export default function AdminProducts() {
       setEditMode(true);
       setCurrentId(product._id);
       
-      // Fetch full product details (to get techSpecs, video, etc. that aren't in grid view)
       try {
         const { data } = await axiosInstance.get(`/products/${product._id}`);
         const fullProd = data.product;
 
-        const formatDateTime = (dateString) => {
-          if (!dateString) return '';
-          return new Date(dateString).toISOString().slice(0, 16);
-        };
+        const formatDateTime = (dateString) => dateString ? new Date(dateString).toISOString().slice(0, 16) : '';
 
         setFormData({
           name: fullProd.name,
@@ -171,23 +147,22 @@ export default function AdminProducts() {
             startTime: formatDateTime(fullProd.flashDeal?.startTime),
             endTime: formatDateTime(fullProd.flashDeal?.endTime)
           },
-          // Populate Premium Fields
           promotionalVideo: fullProd.promotionalVideo || { url: '', thumbnailUrl: '' },
           inTheBox: fullProd.inTheBox?.length ? fullProd.inTheBox : [''],
-          techSpecs: fullProd.techSpecs || [],
+          // ⚡ Ensure details array exists for Tech Specs
+          techSpecs: fullProd.techSpecs?.map(t => ({
+            category: t.category || '',
+            description: t.description || '',
+            details: t.details || [] 
+          })) || [],
           highlights: fullProd.highlights || [],
           boughtTogether: fullProd.boughtTogether ? fullProd.boughtTogether.map(item => item._id || item) : []        
         });
 
-        if (fullProd.variants && fullProd.variants.length > 0) {
+        if (fullProd.variants?.length > 0) {
           setVariants(fullProd.variants.map(v => ({
-            color: v.color || '',
-            size: v.size || '',
-            stock: v.stock || 0,
-            price: v.price || '',
-            imageFiles: [],
-            imagePreviews: [],
-            existingImages: v.images || []
+            color: v.color || '', size: v.size || '', stock: v.stock || 0, price: v.price || '',
+            imageFiles: [], imagePreviews: [], existingImages: v.images || []
           })));
         }
       } catch (e) {
@@ -197,12 +172,10 @@ export default function AdminProducts() {
       setEditMode(false);
       setCurrentId(null);
       setFormData({
-        name: '', description: '', price: '', discountPrice: 0,
-        category: '', brand: '', stock: 1, isActive: true,
+        name: '', description: '', price: '', discountPrice: 0, category: '', brand: '', stock: 1, isActive: true,
         flashDeal: { isActive: false, dealPrice: '', startTime: '', endTime: '' },
         promotionalVideo: { url: '', thumbnailUrl: '' },
-        inTheBox: [''], techSpecs: [], highlights: [], 
-        boughtTogether: [] // ⚡ FIX 1: ADDED THIS HERE ⚡
+        inTheBox: [''], techSpecs: [], highlights: [], boughtTogether: [] 
       });
     }
     setShowModal(true);
@@ -221,13 +194,21 @@ export default function AdminProducts() {
       submitData.append('stock', formData.stock);
       submitData.append('isActive', formData.isActive);
       
-      // Append JSON strings
       submitData.append('flashDeal', JSON.stringify(formData.flashDeal));
       submitData.append('promotionalVideo', JSON.stringify(formData.promotionalVideo));
       submitData.append('inTheBox', JSON.stringify(formData.inTheBox.filter(i => i.trim() !== '')));
       submitData.append('techSpecs', JSON.stringify(formData.techSpecs.filter(t => t.category.trim() !== '')));
       submitData.append('highlights', JSON.stringify(formData.highlights.filter(h => h.title.trim() !== '')));
-      submitData.append('boughtTogether', JSON.stringify(formData.boughtTogether || []));
+      let cleanBoughtTogether = [];
+      if (Array.isArray(formData.boughtTogether)) {
+         cleanBoughtTogether = formData.boughtTogether.filter(id => typeof id === 'string' && id.length === 24);
+      }
+      if (cleanBoughtTogether.length > 0) {
+         submitData.append('boughtTogether', JSON.stringify(cleanBoughtTogether));
+      } else {
+         // Khali hone par hum array banate hi nahi, taaki Mongoose crash na ho
+         submitData.append('boughtTogether', ''); 
+      }
 
       const variantsData = variants.map((v) => ({
         color: v.color, size: v.size, stock: v.stock, price: v.price,
@@ -238,7 +219,7 @@ export default function AdminProducts() {
 
       let fileCount = 0;
       variants.forEach((v, variantIdx) => {
-        if (v.imageFiles && v.imageFiles.length > 0) {
+        if (v.imageFiles?.length > 0) {
           v.imageFiles.forEach((file, imgIdx) => {
             submitData.append(`variantImages_${variantIdx}_${imgIdx}`, file);
             fileCount++;
@@ -298,14 +279,10 @@ export default function AdminProducts() {
       {/* Header Section */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-serif text-[#C8A253] flex items-center gap-3">
-            <Package className="w-8 h-8" /> Product Inventory
-          </h1>
+          <h1 className="text-3xl font-serif text-[#C8A253] flex items-center gap-3"><Package className="w-8 h-8" /> Product Inventory</h1>
           <p className="text-gray-500 mt-1">Manage your products, variants, and deals</p>
         </div>
-        <button onClick={() => handleOpenModal()} className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#C8A253] to-[#b08d44] text-black font-semibold hover:shadow-lg hover:shadow-[#C8A253]/20 transition-all duration-300">
-          <Plus className="w-5 h-5" /> Add New Product
-        </button>
+        <button onClick={() => handleOpenModal()} className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#C8A253] to-[#b08d44] text-black font-semibold hover:shadow-lg hover:shadow-[#C8A253]/20 transition-all duration-300"><Plus className="w-5 h-5" /> Add New Product</button>
       </div>
 
       {/* Search & Filter Bar */}
@@ -478,7 +455,7 @@ export default function AdminProducts() {
                   </div>
                 </div>
 
-                {/* ⚡ PREMIUM CONTENT: TECH SPECS & HIGHLIGHTS ⚡ */}
+                {/* PREMIUM CONTENT: TECH SPECS & HIGHLIGHTS */}
                 <div className="bg-[#111] rounded-xl p-5 border border-zinc-800/50">
                   <h3 className="text-sm font-medium text-[#C8A253] mb-4 flex items-center gap-2"><ListChecks className="w-4 h-4" /> Premium Content (Tech Specs & Extras)</h3>
                   
@@ -497,16 +474,30 @@ export default function AdminProducts() {
                     ))}
                   </div>
 
-                  {/* Tech Specs */}
+                  {/* ⚡ TECH SPECS FIX ⚡ */}
                   <div className="mb-6">
                     <div className="flex justify-between items-center mb-2">
                       <label className="text-sm text-gray-400">Tech Specifications</label>
-                      <button type="button" onClick={() => addArrayItem('techSpecs', { category: '', description: '' })} className="text-xs text-[#C8A253] hover:text-white">+ Add Tech Spec</button>
+                      <button type="button" onClick={() => addArrayItem('techSpecs', { category: '', description: '', details: [] })} className="text-xs text-[#C8A253] hover:text-white">+ Add Tech Spec</button>
                     </div>
                     {formData.techSpecs.map((spec, i) => (
                       <div key={i} className="flex gap-2 mb-2">
                         <input placeholder="Category (e.g. Amplifiers)" value={spec.category} onChange={(e) => handleArrayChange('techSpecs', i, 'category', e.target.value)} className="w-1/3 bg-[#0A0A0A] border border-zinc-800 rounded-lg px-3 py-2 text-sm text-white focus:border-[#C8A253]" />
-                        <input placeholder="Description" value={spec.description} onChange={(e) => handleArrayChange('techSpecs', i, 'description', e.target.value)} className="flex-1 bg-[#0A0A0A] border border-zinc-800 rounded-lg px-3 py-2 text-sm text-white focus:border-[#C8A253]" />
+                        
+                        {/* ⚡ Updated details input: Maps both string description and array details ⚡ */}
+                        <input 
+                          placeholder="Details (comma separated)" 
+                          value={spec.details?.length > 0 ? spec.details.join(', ') : (spec.description || '')} 
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            const detailsArray = val.split(',').map(item => item.trim()).filter(Boolean);
+                            const updated = [...formData.techSpecs];
+                            updated[i].description = val; // fallback for older schemas
+                            updated[i].details = detailsArray; // new array format
+                            setFormData({ ...formData, techSpecs: updated });
+                          }} 
+                          className="flex-1 bg-[#0A0A0A] border border-zinc-800 rounded-lg px-3 py-2 text-sm text-white focus:border-[#C8A253]" 
+                        />
                         <button type="button" onClick={() => removeArrayItem('techSpecs', i)} className="p-2 bg-red-500/10 text-red-400 rounded-lg hover:bg-red-500/20"><Trash2 size={16}/></button>
                       </div>
                     ))}
@@ -534,20 +525,16 @@ export default function AdminProducts() {
                   </div>
                 </div>
 
-                {/* ⚡ BUY THIS TOGETHER (CROSS-SELL) SECTION ⚡ */}
+                {/* BUY THIS TOGETHER (CROSS-SELL) SECTION */}
                 <div className="bg-[#111] rounded-xl p-5 border border-zinc-800/50">
-                  <h3 className="text-sm font-medium text-[#C8A253] mb-4 flex items-center gap-2">
-                    <Package className="w-4 h-4" /> Frequently Bought Together
-                  </h3>
+                  <h3 className="text-sm font-medium text-[#C8A253] mb-4 flex items-center gap-2"><Package className="w-4 h-4" /> Frequently Bought Together</h3>
                   <p className="text-xs text-gray-500 mb-3">Select products to recommend alongside this item.</p>
-                  
-                  {/* Scrollable list of all products */}
                   <div className="h-48 overflow-y-auto bg-[#0A0A0A] border border-zinc-800 rounded-lg p-3 space-y-2 custom-scrollbar">
                     {products.filter(p => p._id !== currentId).map(p => (
                       <label key={p._id} className="flex items-center gap-3 cursor-pointer p-2 hover:bg-zinc-800/50 rounded-lg transition-colors">
                         <input 
                           type="checkbox" 
-                          checked={(formData.boughtTogether || []).includes(p._id)} // ⚡ FIX 2: SAFE FALLBACK HERE ⚡
+                          checked={(formData.boughtTogether || []).includes(p._id)} 
                           onChange={(e) => {
                             const currentList = formData.boughtTogether || [];
                             const newSelection = e.target.checked 

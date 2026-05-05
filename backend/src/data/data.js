@@ -3562,6 +3562,4574 @@ const mergedProductsBatch5 = [
     "stock": 20
   }
 ];
+const sonosBatch1 = [
+  {
+    "name": "Sonos Roam",
+    "brand": "Sonos",
+    "category": "Sonos Portable",
+    "description": "<h2>Sonos Roam: Size Defying Sound</h2><p>Experience size-defying sound at home and on the go with the lightweight, outdoor-ready <strong>Sonos Roam</strong>. Enjoy hours of music, radio, audiobooks, and more from all your favorite services, powered by a custom-designed acoustic architecture.</p><h3>Seamless Listening Everywhere</h3><p>Listen at home on WiFi and easily switch to Bluetooth when you're away. With its rugged, <strong>IP67 waterproof</strong> design, Roam is built to endure the elements while looking beautiful in your home.</p>",
+    "price": 21999,
+    "discountPrice": 21999,
+    "highlights": [
+      { "iconName": "Volume", "title": "Size-Defying Sound" },
+      { "iconName": "Wifi", "title": "WiFi & Bluetooth" },
+      { "iconName": "Droplets", "title": "IP67 Waterproof" },
+      { "iconName": "Battery", "title": "10 Hours Playtime" },
+      { "iconName": "Mic", "title": "Voice Enabled" },
+      { "iconName": "Smartphone", "title": "Apple AirPlay 2" },
+      { "iconName": "Zap", "title": "Drop Resistant" },
+      { "iconName": "Settings", "title": "Auto Trueplay™" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Two Class-H digital amplifiers tuned to the speaker's unique acoustic architecture",
+          "One custom racetrack midwoofer ensures faithful playback of mid-range frequencies",
+          "One tweeter creates a crisp, clear high-frequency response",
+          "Far-field microphone array uses advanced beamforming",
+          "Automatic Trueplay™ tuning optimizes sound for the environment",
+          "Adjustable EQ (bass, treble, and loudness) via the Sonos app"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Dimensions: 168 x 62 x 60 mm (H x W x D)",
+          "Ultra-lightweight design at just 0.43 kg (0.95 lbs)",
+          "IP67 rating (can be submerged in 1m of water for up to 30 minutes)",
+          "Tactile triangular shape for versatile orientation (vertical or horizontal)",
+          "Matte finish available in Shadow Black or Lunar White",
+          "Shock-absorbent silicone end caps protect against drops"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "18Wh battery provides up to 10 hours of continuous playback",
+          "Charges with the included USB-C cable and any 5V/1.5A or 2.1A USB power adapter",
+          "Compatible with any Qi-certified wireless charger",
+          "Sleep mode activates automatically to save power when not in use",
+          "Wakes up instantly in less than a second",
+          "Battery level easily monitored via the Sonos app"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Connects to WiFi network with any 802.11a/b/g/n/ac 2.4 or 5 GHz broadcast-capable router",
+          "Bluetooth 5.0 supports audio streaming from your smartphone, tablet, or computer",
+          "Apple AirPlay 2 works with Apple devices iOS 11.4 and higher",
+          "Amazon Alexa and Google Assistant integration built-in",
+          "Physical play/pause, volume, and microphone mute buttons",
+          "Sound Swap feature lets you send sound to the nearest Sonos speaker"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sonos Roam Portable Speaker",
+      "USB-C to USB-A Cable (1.2m)",
+      "Quick Start Guide",
+      "Legal and Safety Information",
+      "Sonos Decal"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/roam.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 21999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 21999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Sonos Roam II",
+    "brand": "Sonos",
+    "category": "Sonos Portable",
+    "description": "<h2>Sonos Roam II: The Next-Gen Adventurer</h2><p>The <strong>Sonos Roam II</strong> takes everything you love about the original and enhances it. With refined acoustic architecture and new, vibrant colorways, it delivers astonishingly rich sound whether you are hiking a trail or relaxing in your living room.</p><h3>Instant Listening</h3><p>Enjoy simplified setup and a dedicated Bluetooth button for effortless pairing. Its battery holds its charge for longer in sleep mode, ensuring that the Roam II is always ready for your next adventure.</p>",
+    "price": 18999,
+    "discountPrice": 14999,
+    "highlights": [
+      { "iconName": "Volume", "title": "Refined Acoustics" },
+      { "iconName": "Battery", "title": "Enhanced Battery Life" },
+      { "iconName": "Bluetooth", "title": "Dedicated BT Button" },
+      { "iconName": "Droplets", "title": "IP67 Waterproof" },
+      { "iconName": "Mic", "title": "Sonos Voice Control" },
+      { "iconName": "Wifi", "title": "WiFi Streaming" },
+      { "iconName": "Zap", "title": "USB-C & Qi Charging" },
+      { "iconName": "Settings", "title": "Automatic Trueplay" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Two Class-H digital amplifiers for extreme efficiency",
+          "Custom racetrack midwoofer for deep, resonant low frequencies",
+          "High-performance tweeter for crisp high-frequency separation",
+          "Advanced DSP algorithms prevent distortion at high volumes",
+          "Automatic Trueplay tuning continually optimizes the sound",
+          "Far-field microphones with advanced echo cancellation"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Dimensions: 168 x 62 x 60 mm (H x W x D)",
+          "Weight: 0.43 kg for effortless portability",
+          "Rugged IP67 rating ensures dustproof and waterproof capabilities",
+          "Silicone caps engineered to absorb drop impacts",
+          "Monochromatic finish with logo color-matched to the grille",
+          "Available in five vibrant outdoor-ready colors"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Up to 10 hours of continuous playback on a single charge",
+          "Improved sleep mode preserves battery for up to 30 days",
+          "Charges via standard USB-C connection",
+          "Compatible with the Sonos Wireless Charger (sold separately)",
+          "Supports standard Qi wireless charging pads",
+          "LED light indicates power, charge, and mute status"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "WiFi 802.11a/b/g/n/ac 2.4 or 5 GHz capability",
+          "Upgraded Bluetooth 5.2 for longer range and stability",
+          "Separate power and Bluetooth buttons for intuitive operation",
+          "Apple AirPlay 2 support for iOS devices",
+          "Sonos Voice Control and Amazon Alexa built-in",
+          "Tactile top panel buttons for play/pause and volume"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sonos Roam II Portable Speaker",
+      "USB-C to USB-C Charging Cable (1.2m)",
+      "Quick Start Guide",
+      "Legal and Safety Information",
+      "Sonos System Guide"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/roam2.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 18999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 18999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "Green", "size": "Standard", "stock": 10, "price": 18999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "Red", "size": "Standard", "stock": 10, "price": 18999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "Blue", "size": "Standard", "stock": 10, "price": 18999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 50
+  },
+  {
+    "name": "Sonos Move",
+    "brand": "Sonos",
+    "category": "Sonos Portable",
+    "description": "<h2>Sonos Move: Brilliant Sound Anywhere</h2><p>Get brilliant, room-filling sound anywhere with the weatherproof and drop-resistant <strong>Sonos Move</strong>. Engineered for a wide soundstage, it features a custom waveguide that controls high frequencies for incredible clarity.</p><h3>Built for the Outdoors</h3><p>With an IP56 rating, Move stands up to humidity, rain, snow, dust, salt spray, UV rays, and extreme heat and cold. When you're home, set it on the included charging base for continuous listening while it charges.</p>",
+    "price": 43999,
+    "discountPrice": 43999,
+    "highlights": [
+      { "iconName": "Volume", "title": "Room-Filling Sound" },
+      { "iconName": "Wifi", "title": "WiFi & Bluetooth" },
+      { "iconName": "Droplets", "title": "IP56 Weatherproof" },
+      { "iconName": "Battery", "title": "11 Hours Playtime" },
+      { "iconName": "Mic", "title": "Voice Assistant" },
+      { "iconName": "Smartphone", "title": "Apple AirPlay 2" },
+      { "iconName": "Zap", "title": "Wireless Charging Base" },
+      { "iconName": "Settings", "title": "Auto Trueplay™" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Two Class-D digital amplifiers tuned to match the drivers",
+          "One downward-firing tweeter creates a crisp, ultra-wide soundstage",
+          "One midwoofer ensures faithful playback of mid-range vocals and deep bass",
+          "Far-field microphone array uses advanced beamforming",
+          "Auto Trueplay™ tuning continuously optimizes sound",
+          "Adjustable EQ settings via the Sonos ecosystem app"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Dimensions: 240 x 160 x 126 mm (H x W x D)",
+          "Weight: 3.0 kg (6.61 lbs) including battery",
+          "IP56 rating for protection from dust particles and liquid splashes",
+          "Hard-wearing, shock-absorbent case protects from drops",
+          "Integrated ergonomic handle for easy carrying",
+          "Capacitive touch controls with LED status indicators"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "36Wh battery provides up to 11 hours of continuous playback",
+          "Included Indoor Charging Base provides seamless power docking",
+          "USB-C port supports 12V/3A, 15V/3A, or 20V/2.25A PD chargers",
+          "Replaceable battery pack ensures extended product lifespan",
+          "Battery conservation mode when off the charger",
+          "LED light array indicates battery and charging status"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Connects to WiFi networks with 802.11 b/g/n, 2.4 GHz, and 5 GHz",
+          "Bluetooth 4.2 supports streaming when away from home",
+          "Apple AirPlay 2 works with Apple devices iOS 11.4 and higher",
+          "Amazon Alexa and Google Assistant integration built-in",
+          "Physical button on the back toggles between WiFi and Bluetooth",
+          "Multi-room grouping capability with other Sonos speakers"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sonos Move Portable Speaker",
+      "Indoor Charging Base",
+      "Power Adapter",
+      "Quick Start Guide",
+      "Legal and Warranty Information"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/move.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 43999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 43999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Sonos Move 2",
+    "brand": "Sonos",
+    "category": "Sonos Portable",
+    "description": "<h2>Sonos Move 2: Upgraded Stereo Power</h2><p>The upgraded <strong>Sonos Move 2</strong> brings heart-pumping stereo sound to your outdoor adventures. Completely re-engineered inside and out, it features dual tweeters for a spacious stereo soundstage and a precision-tuned woofer for deep, impactful bass.</p><h3>Unstoppable Battery Life</h3><p>Move 2 offers more than double the battery life of its predecessor—up to 24 hours on a single charge. Its upgraded wireless charging base has a detachable adapter, making it the ultimate indoor/outdoor powerhouse.</p>",
+    "price": 44999,
+    "discountPrice": 44999,
+    "highlights": [
+      { "iconName": "Volume", "title": "Spacious Stereo Sound" },
+      { "iconName": "Battery", "title": "24 Hours Playtime" },
+      { "iconName": "Droplets", "title": "IP56 Weatherproof" },
+      { "iconName": "Wifi", "title": "WiFi 6 & Bluetooth 5.0" },
+      { "iconName": "Settings", "title": "Auto Trueplay™" },
+      { "iconName": "Zap", "title": "Power Bank Function" },
+      { "iconName": "Mic", "title": "Sonos Voice Control" },
+      { "iconName": "Smartphone", "title": "Touch Volume Slider" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Three Class-D digital amplifiers precision-tuned to the drivers",
+          "Dual angled tweeters create a crisp, wide stereo soundstage",
+          "One custom midwoofer provides deep, rich low-frequency output",
+          "Advanced Auto Trueplay continuously optimizes EQ for the space",
+          "Far-field microphone array with advanced echo cancellation",
+          "High-res audio streaming support over Wi-Fi"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Dimensions: 241 x 160 x 127 mm (H x W x D)",
+          "Weight: 3.0 kg (6.61 lbs)",
+          "IP56 certified against heavy rain, dust, and extreme temperatures",
+          "Shock-absorbent casing engineered to withstand drops",
+          "Constructed using recycled plastics for a sustainable footprint",
+          "Capacitive volume slider and playback controls on top panel"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Massive 44Wh battery provides up to 24 hours of playback",
+          "Includes an upgraded Wireless Charging Base with detachable adapter",
+          "USB-C port supports charging your mobile devices (power bank)",
+          "User-replaceable battery ensures years of extended use",
+          "Fast-charge compatible via 45W USB-C PD adapters",
+          "Battery conservation sleep mode minimizes drain"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "WiFi 6 (802.11a/b/g/n/ac/ax) for robust multi-room streaming",
+          "Bluetooth 5.0 for seamless off-grid connection",
+          "USB-C line-in support (requires Sonos Line-In Adapter)",
+          "Apple AirPlay 2 capability for Apple ecosystem users",
+          "Hardware microphone mute switch for absolute privacy",
+          "Built-in Amazon Alexa and Sonos Voice Control"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sonos Move 2 Portable Stereo Speaker",
+      "Wireless Charging Base",
+      "45W USB-C PD Power Adapter",
+      "Quick Start Guide",
+      "Safety and Legal Document"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/move2.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 44999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 44999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "Olive", "size": "Standard", "stock": 10, "price": 44999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 30
+  },
+  {
+    "name": "Sonos Era 100",
+    "brand": "Sonos",
+    "category": "Sonos Home Speakers",
+    "description": "<h2>Sonos Era 100: Next-Gen Acoustics</h2><p>Experience a paradigm shift in home audio. Featuring <strong>next-gen acoustics</strong> and unprecedented levels of connectivity, the Era 100 transforms any room with the finely tuned stereo sound and rich bass your music deserves.</p><h3>Perfectly Sized, Immensely Powerful</h3><p>Its compact, cylindrical design fits beautifully on any bookshelf or counter. Seamlessly stream via WiFi, Bluetooth, or connect directly through line-in connectivity for true <strong>high-fidelity versatility</strong>.</p>",
+    "price": 22999,
+    "discountPrice": 22999,
+    "highlights": [
+      { "iconName": "Volume", "title": "Dual-Tweeter Stereo" },
+      { "iconName": "Wifi", "title": "WiFi 6 & Bluetooth" },
+      { "iconName": "Zap", "title": "Trueplay™ Tuning" },
+      { "iconName": "Smartphone", "title": "Apple AirPlay 2" },
+      { "iconName": "Mic", "title": "Voice Enabled" },
+      { "iconName": "Settings", "title": "Touch Controls" },
+      { "iconName": "Droplets", "title": "Humidity Resistant" },
+      { "iconName": "Shield", "title": "Sustainable Build" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Three precisely tuned Class-D digital amplifiers",
+          "Dual angled tweeters for crisp, high-frequency stereo separation",
+          "One customized midwoofer for deep, impactful low-end frequencies",
+          "Advanced Trueplay™ acoustic tuning technology (iOS and Android)",
+          "Adjustable EQ settings via the Sonos ecosystem application",
+          "Custom spatial audio processing for an expanded soundstage"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Compact bookshelf architecture: 182.5 x 120 x 130.5 mm (H x W x D)",
+          "Substantial weight of 2.02 kg to reduce internal resonance",
+          "Constructed using 48% post-consumer recycled plastics",
+          "Acoustically transparent polycarbonate wraparound grille",
+          "Capacitive touch controls for volume, play, and microphone muting",
+          "Hardware microphone switch for absolute privacy"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Mains powered with auto-switching 100-240V AC universal input",
+          "Ultra-low standby power consumption for smart home efficiency",
+          "Standard IEC figure-8 power connection for discrete routing",
+          "Instant-wake technology from standby upon signal detection",
+          "Internal power supply eliminating the need for an external brick",
+          "Built-in thermal and over-voltage surge protection"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Next-generation WiFi 6 (802.11a/b/g/n/ac/ax) for zero dropout",
+          "Bluetooth 5.0 for quick mobile device streaming",
+          "USB-C line-in port for turntables (requires Sonos adapter)",
+          "Apple AirPlay 2 integration for seamless iOS casting",
+          "Far-field microphone array for advanced voice control",
+          "Over-the-air firmware updates for continuous enhancement"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sonos Era 100 Smart Speaker",
+      "Power Cable (2 meters)",
+      "Quick Start Manual",
+      "Legal and Warranty Documentation",
+      "Sonos Ecosystem Welcome Card"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/era100.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 22999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 22999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Sonos Era 300",
+    "brand": "Sonos",
+    "category": "Sonos Home Speakers",
+    "description": "<h2>Sonos Era 300: Spatial Audio Masterpiece</h2><p>The <strong>Era 300</strong> represents a breakthrough in spatial audio. Featuring six optimally positioned drivers all around the front, sides, and top, it projects sound from wall to wall and floor to ceiling, creating a deeply <strong>immersive 3D experience</strong> for Dolby Atmos Music.</p><h3>Perfectly Balanced Acoustics</h3><p>With Trueplay tuning technology, the Era 300 analyzes the acoustics of your room and fine-tunes the EQ. Experience unparalleled depth and clarity, backed by robust connectivity including WiFi 6, Bluetooth, and line-in support.</p>",
+    "price": 44999,
+    "discountPrice": 44999,
+    "highlights": [
+      { "iconName": "Star", "title": "Dolby Atmos Music" },
+      { "iconName": "Volume", "title": "6 Custom Drivers" },
+      { "iconName": "Zap", "title": "Trueplay Tuning" },
+      { "iconName": "Wifi", "title": "WiFi 6 & BT 5.0" },
+      { "iconName": "Mic", "title": "Voice Enabled" },
+      { "iconName": "Droplets", "title": "Humidity Resistant" },
+      { "iconName": "Settings", "title": "Touch Volume Slider" },
+      { "iconName": "Music", "title": "Hi-Res Audio Support" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Six Class-D digital amplifiers for spatial audio distribution",
+          "Four tweeters (front, sides, and up-firing) for immersive highs",
+          "Two woofers angled to minimize vibration and maximize bass",
+          "Directional sound waveguides for a wide, consistent soundstage",
+          "Far-field microphone array with advanced echo cancellation",
+          "Trueplay acoustic optimization for iOS and Android"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Unique 'cinched-waist' design for acoustic transparency",
+          "Dimensions: 160 x 260 x 185 mm (H x W x D)",
+          "Total weight: 4.47 kg for high-inertia stability",
+          "Acoustically transparent perforated metal grille",
+          "Capacitive volume slider and playback controls",
+          "Humidity resistant—ideal for bathrooms or covered porches"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Universal power input: 100-240 V, 50-60 Hz",
+          "Low-energy idle mode for smart home sustainability",
+          "Standard IEC power connection for secure fitment",
+          "High-performance internal DAC for 24-bit audio",
+          "Designed for constant connection and rapid wake-up",
+          "Overheat protection and voltage surge shielding"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "WiFi 6 (802.11ax) for high-bandwidth multi-room play",
+          "Bluetooth 5.0 for direct mobile device streaming",
+          "USB-C line-in port for turntable or laptop (adapter required)",
+          "Apple AirPlay 2 for seamless iOS integration",
+          "Physical Mic Mute switch for total privacy control",
+          "Direct control via the Sonos app, Spotify, and Amazon Music"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sonos Era 300 Spatial Audio Speaker",
+      "Power Cable (2m)",
+      "Quick Start Guide",
+      "Regulatory Information",
+      "Sonos Ecosystem Welcome Kit"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/era300.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 44999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 44999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Sonos Five",
+    "brand": "Sonos",
+    "category": "Sonos Home Speakers",
+    "description": "<h2>Sonos Five: The High-Fidelity Standard</h2><p>Elevate your listening experience with vividly clear, room-filling sound. The <strong>Sonos Five</strong> is the premier high-fidelity speaker for music streaming, vinyl playback, and more. Featuring an unparalleled acoustic design, it delivers <strong>studio-quality audio</strong> right in your living space.</p><h3>Smart Architectural Design</h3><p>Equipped with three high-excursion woofers, it delivers exceptionally deep bass. The perfectly sealed architecture completely eliminates internal reverb and echo, while the phased speaker array creates an impressively wide soundstage.</p>",
+    "price": 54999,
+    "discountPrice": 54999,
+    "highlights": [
+      { "iconName": "Volume", "title": "Studio-Quality Sound" },
+      { "iconName": "Star", "title": "3 High-Excursion Woofers" },
+      { "iconName": "Zap", "title": "Turntable Line-In" },
+      { "iconName": "Wifi", "title": "Apple AirPlay 2" },
+      { "iconName": "Settings", "title": "Trueplay™ Tuning" },
+      { "iconName": "Volume", "title": "Phased Speaker Array" },
+      { "iconName": "Shield", "title": "Sealed Architecture" },
+      { "iconName": "Droplets", "title": "Humidity Resistant" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Six custom-designed Class-D digital amplifiers",
+          "Three high-excursion woofers for profound, zero-distortion bass",
+          "Two precisely angled side tweeters for spatial extension",
+          "One center tweeter for crisp and clear vocal reproduction",
+          "Phased speaker array creating an ultra-wide stereo soundstage",
+          "Advanced Trueplay™ room calibration technology"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Premium large-room design: 203 x 364 x 154 mm (H x W x D)",
+          "Substantial acoustic cabinet weighing 6.36 kg",
+          "Polycarbonate grille with precision-drilled acoustic holes",
+          "Can be positioned horizontally (stereo) or vertically (mono)",
+          "Moisture resistant for use in bathrooms and covered patios",
+          "Capacitive touch interface with swipe functionality"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Mains powered with an auto-switching 100-240V AC input",
+          "Quad-core 1.3 GHz CPU for rapid audio processing",
+          "Energy-saving standby mode with instantaneous wake",
+          "Flush-fitting power cable for clean wall-mounting",
+          "Internal high-current power supply for dynamic peaks",
+          "Built-in thermal protection to safeguard internal drivers"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Reliable 802.11a/b/g/n 2.4 or 5 GHz broadcast-capable WiFi",
+          "10/100 Mbps Ethernet port for hardwired network stability",
+          "Auto-detecting 3.5 mm line-in connection for turntables",
+          "Apple AirPlay 2 compatible with iOS 11.4 and higher",
+          "Native integration with Spotify Connect and Tidal Connect",
+          "Full EQ and multi-room control via the Sonos app"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sonos Five High-Fidelity Speaker",
+      "Power Cord (2 meters)",
+      "Quick Start Guide",
+      "Legal and Warranty Information",
+      "Sonos Brand Sticker Set"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/five.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 54999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 54999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  }
+];
 
-const allproduct=[...allProducts,...mergedProducts,...mergedProductsBatch5];
+const sonosBatch2 = [
+  {
+    "name": "Sonos Ray",
+    "brand": "Sonos",
+    "category": "Sonos Home Theater",
+    "description": "<h2>Sonos Ray: Upgrade Your TV Sound</h2><p>Experience clearer, more powerful sound than ever before possible from a small standalone soundbar. The <strong>Sonos Ray</strong> delivers precisely balanced sound, including crisp dialogue and solid bass, tailored for your living room.</p><h3>Blockbuster Immersion</h3><p>Exclusive acoustic components project sound from wall to wall, placing you at the center of the story. With a compact, forward-facing design, the Ray tucks neatly into your media stand without any sound interference.</p>",
+    "price": 22999,
+    "discountPrice": 22999,
+    "highlights": [
+      { "iconName": "Tv", "title": "Crisp Dialogue" },
+      { "iconName": "Volume", "title": "Balanced Sound" },
+      { "iconName": "Wifi", "title": "WiFi Streaming" },
+      { "iconName": "Smartphone", "title": "Apple AirPlay 2" },
+      { "iconName": "Settings", "title": "Trueplay™ Tuning" },
+      { "iconName": "Shield", "title": "Compact Design" },
+      { "iconName": "Music", "title": "Optical Audio Input" },
+      { "iconName": "Zap", "title": "Night Sound Mode" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Four Class-D digital amplifiers flawlessly tuned to the acoustic architecture",
+          "Two tweeters create a crisp high-frequency response",
+          "Two high-efficiency midwoofers ensure faithful playback of mid-range and bass",
+          "Proprietary anti-distortion technology prevents rattling at high volumes",
+          "Speech Enhancement EQ settings to clarify human voices",
+          "Custom wave guides project sound from wall to wall"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Ultra-compact dimensions: 71 x 559 x 95 mm (H x W x D)",
+          "Lightweight construction at just 1.95 kg (4.29 lbs)",
+          "All acoustic components are forward-facing for enclosed media stands",
+          "Acoustically transparent polycarbonate grille",
+          "Capacitive touch controls for easy volume and playback management",
+          "Available in premium Matte Black or Matte White finishes"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Auto-switching 100-240V AC universal input",
+          "High-efficiency internal power supply for low idle draw",
+          "Designed to remain plugged in and connected to WiFi 24/7",
+          "No external power brick required for a clean setup",
+          "Instant wake capability upon receiving optical audio signal",
+          "Advanced thermal management for continuous operation"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Connects to TV via the included optical audio cable",
+          "Connects to home WiFi with any 802.11b/g/n 2.4 GHz router",
+          "Apple AirPlay 2 compatible for seamless iOS device streaming",
+          "10/100 Mbps Ethernet port for hardwired internet connectivity",
+          "Syncs with your existing TV remote using infrared (IR)",
+          "Expandable to 5.1 surround by adding Sonos rears and a Sub"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sonos Ray Soundbar",
+      "Power Cable (2 meters)",
+      "Optical Audio Cable (1.5 meters)",
+      "Quick Start Guide",
+      "Legal and Warranty Information"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/ray.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 22999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 22999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Sonos Beam Gen 2",
+    "brand": "Sonos",
+    "category": "Sonos Home Theater",
+    "description": "<h2>Sonos Beam Gen 2: Smarter, Sweeter Sound</h2><p>Elevate your entertainment with the latest generation of the <strong>Sonos Beam</strong>. Now featuring Dolby Atmos, the Beam Gen 2 maps sound in space for a 3D effect so you experience planes flying overhead and footsteps moving across the room.</p><h3>Crystal Clear Dialogue</h3><p>Tuned by Oscar-winning sound engineers, Beam ensures you never miss a word. With advanced processing, it delivers a richer, more immersive soundstage while maintaining a sleek, compact profile that blends beautifully into your home.</p>",
+    "price": 49999,
+    "discountPrice": 49999,
+    "highlights": [
+      { "iconName": "Tv", "title": "Dolby Atmos 3D" },
+      { "iconName": "Mic", "title": "Voice Assistant" },
+      { "iconName": "Wifi", "title": "HDMI eARC Support" },
+      { "iconName": "Volume", "title": "Panoramic Sound" },
+      { "iconName": "Settings", "title": "Trueplay™ Tuning" },
+      { "iconName": "Star", "title": "Speech Enhancement" },
+      { "iconName": "Smartphone", "title": "Apple AirPlay 2" },
+      { "iconName": "Zap", "title": "Night Sound Mode" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Five Class-D digital amplifiers perfectly tuned to the architecture",
+          "One center tweeter creates a crisp, high-frequency response",
+          "Four elliptical midwoofers ensure faithful playback of mid-range frequencies",
+          "Three passive radiators enhance low frequencies for balanced bass",
+          "Advanced processing enables virtual Dolby Atmos height channels",
+          "Far-field microphone array utilizes advanced beamforming"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Dimensions: 69 x 651 x 100 mm (H x W x D)",
+          "Weight: 2.8 kg (6.2 lbs) for stable acoustic placement",
+          "Precision-perforated polycarbonate grille",
+          "Compact design doesn't block your TV screen",
+          "Capacitive touch controls for easy manual operation",
+          "Available in Matte Black and Matte White"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Auto-switching 100-240V AC internal power supply",
+          "Ultra-efficient standby mode for smart home ecosystems",
+          "Detachable IEC power cable for easy cable management",
+          "Instant wake on signal detection from HDMI or WiFi",
+          "Built-in thermal protection to safeguard internal components",
+          "No external power adapter required"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "HDMI eARC for high-bandwidth uncompressed audio return",
+          "WiFi 802.11b/g/n/ac 2.4 or 5 GHz capability",
+          "Apple AirPlay 2 works with iOS devices 11.4 and higher",
+          "Native Amazon Alexa and Sonos Voice Control integration",
+          "Ethernet port for a hardwired 10/100 Mbps connection",
+          "Includes Optical Audio Adapter for older TVs"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sonos Beam (Gen 2) Soundbar",
+      "Power Cable (2 meters)",
+      "HDMI Cable (1.5 meters)",
+      "Sonos Optical Audio Adapter",
+      "Quick Start Guide"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/beam-gen2.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 49999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 49999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Sonos Arc",
+    "brand": "Sonos",
+    "category": "Sonos Home Theater",
+    "description": "<h2>Sonos Arc: The Premium Smart Soundbar</h2><p>Bring all your entertainment to life with the brilliantly realistic sound of <strong>Sonos Arc</strong>. Featuring Dolby Atmos, Arc utilizes precisely angled drivers to bounce sound off your walls and ceiling, creating an ultra-immersive 3D soundstage.</p><h3>Cinematic Design</h3><p>Wrapped in an elongated, beautifully curved design, Arc fits elegantly into any premium living space. Enjoy effortless control with your TV remote, voice commands, the Sonos app, and Apple AirPlay 2.</p>",
+    "price": 99999,
+    "discountPrice": 99999,
+    "highlights": [
+      { "iconName": "Tv", "title": "Dolby Atmos 3D" },
+      { "iconName": "Volume", "title": "11 High-Perf Drivers" },
+      { "iconName": "Mic", "title": "Voice Assistant" },
+      { "iconName": "Wifi", "title": "HDMI eARC Support" },
+      { "iconName": "Settings", "title": "Trueplay™ Tuning" },
+      { "iconName": "Star", "title": "Up-Firing Speakers" },
+      { "iconName": "Smartphone", "title": "Apple AirPlay 2" },
+      { "iconName": "Zap", "title": "Speech Enhancement" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Eleven Class-D digital amplifiers perfectly tuned to the soundbar",
+          "Eight elliptical woofers ensure rich bass and vocal clarity",
+          "Three angled silk-dome tweeters provide crisp high frequencies",
+          "Dedicated up-firing drivers for physical Dolby Atmos height channels",
+          "Far-field microphone array uses advanced echo cancellation",
+          "Speech Enhancement mode specifically amplifies dialogue"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Dimensions: 87 x 1141.7 x 115.7 mm (H x W x D)",
+          "Weight: 6.25 kg (13.78 lbs) for extreme stability",
+          "270-degree curved plastic grille for multi-directional acoustic dispersion",
+          "Magnetic sensor detects wall mounting to adjust EQ automatically",
+          "Capacitive touch controls with LED status indicators",
+          "Available in premium Matte Black or Matte White finishes"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Auto-switching 100-240 V, 50-60 Hz AC universal power supply",
+          "High-efficiency architecture with low idle power draw",
+          "Detachable power cable for easy through-wall routing",
+          "Thermal regulation designed for continuous 24/7 operation",
+          "Smart standby functionality triggers with TV power state",
+          "Infrared (IR) receiver allows sync with standard TV remotes"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "HDMI eARC connection for lossless, high-bandwidth audio return",
+          "High-speed 802.11b/g/n WiFi and 10/100 Ethernet port",
+          "Optical audio adapter included for legacy television sets",
+          "Native support for Amazon Alexa and Sonos Voice Control",
+          "Apple AirPlay 2 support for seamless casting from Apple devices",
+          "Seamless integration into Sonos multi-room setups"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sonos Arc Premium Soundbar",
+      "Power Cable (2 meters)",
+      "HDMI Cable (1.5 meters)",
+      "Optical Audio Adapter",
+      "Quick Start Guide"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/arc.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 99999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 99999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Sonos Arc Ultra",
+    "brand": "Sonos",
+    "category": "Sonos Home Theater",
+    "description": "<h2>Sonos Arc Ultra: The Ultimate 3D Soundscape</h2><p>Pushing the boundaries of home cinema, the <strong>Sonos Arc Ultra</strong> is the definitive smart soundbar for uncompromising cinephiles. Engineered with next-generation drivers, it delivers an expansive, wall-to-wall <strong>Dolby Atmos</strong> experience with unprecedented depth.</p><h3>Flawless Clarity</h3><p>With an advanced processing engine and specialized speech enhancement technology, the Arc Ultra ensures you catch every whisper and roar. Its incredibly sleek design makes it the perfect visual and acoustic match for large, premium displays.</p>",
+    "price": 99999,
+    "discountPrice": 99999,
+    "highlights": [
+      { "iconName": "Volume", "title": "Dolby Atmos 3D" },
+      { "iconName": "Mic", "title": "Speech Enhancement" },
+      { "iconName": "Wifi", "title": "WiFi 6 & eARC" },
+      { "iconName": "Star", "title": "Next-Gen Drivers" },
+      { "iconName": "Zap", "title": "Trueplay™ Tuning" },
+      { "iconName": "Tv", "title": "For Large Screens" },
+      { "iconName": "Settings", "title": "Night Sound Mode" },
+      { "iconName": "Shield", "title": "Sonos App Control" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Fourteen Class-D digital amplifiers tuned for the Ultra architecture",
+          "Advanced up-firing and side-firing driver arrays for true spatial audio",
+          "Enhanced low-frequency drivers for cinematic bass impact",
+          "Advanced far-field microphone array for flawless voice control",
+          "Support for Dolby Atmos, TrueHD, Digital Plus, and Multichannel PCM",
+          "Customizable EQ settings via the Sonos ecosystem app"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Elongated, slim profile designed to match 65-inch+ displays",
+          "Dimensions: 1141.7 x 87 x 115.7 mm (W x H x D)",
+          "Substantial weight to eliminate enclosure vibration",
+          "Seamless 270-degree curved grille for maximum acoustic transparency",
+          "Capacitive touch controls for Volume, Play, and Mic mute",
+          "Available in premium Matte Black or Matte White finishes"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Auto-switching 100-240 V, 50-60 Hz AC universal input",
+          "High-efficiency power supply with ultra-low standby draw",
+          "Internal heat-sync management for sustained high-volume play",
+          "Detachable grounded power cable for installation flexibility",
+          "Certified for continuous 24/7 operation as a smart hub",
+          "Smart power management to protect driver longevity"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "HDMI eARC for highest-bandwidth uncompressed audio return",
+          "Next-generation WiFi for interference-free wireless sync",
+          "Apple AirPlay 2 support for iOS device integration",
+          "Optical Audio input via included Sonos adapter",
+          "Ethernet port for 10/100 hardwired network connections",
+          "Built-in Amazon Alexa and Sonos Voice Control capabilities"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sonos Arc Ultra Soundbar",
+      "High-Speed HDMI eARC Cable (1.5m)",
+      "Detachable Power Cable",
+      "Sonos Optical Audio Adapter",
+      "QuickStart Guide and Warranty Info"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/arc-ultra.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 99999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 99999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Sonos Sub Mini",
+    "brand": "Sonos",
+    "category": "Sonos Home Theater",
+    "description": "<h2>Sonos Sub Mini: Bold Bass, Compact Design</h2><p>Deepen your enjoyment of TV, music, and more with the <strong>Sonos Sub Mini</strong>. This wireless subwoofer delivers surprisingly rich, clear, and balanced low-end without buzzing or rattling, perfectly sized for smaller to medium rooms.</p><h3>Cylindrical Precision</h3><p>Inside the acoustically sealed cabinet, dual custom woofers generate full-toned frequencies. The unique cylindrical design looks at home anywhere, seamlessly pairing with your Sonos Beam, Ray, Era 100, or One.</p>",
+    "price": 44999,
+    "discountPrice": 44999,
+    "highlights": [
+      { "iconName": "Volume", "title": "Bold, Deep Bass" },
+      { "iconName": "Shield", "title": "Zero Buzz or Rattle" },
+      { "iconName": "Wifi", "title": "Wireless Setup" },
+      { "iconName": "Star", "title": "Cylindrical Design" },
+      { "iconName": "Settings", "title": "Trueplay™ Tuning" },
+      { "iconName": "Zap", "title": "Force-Canceling" },
+      { "iconName": "Smartphone", "title": "Easy App Sync" },
+      { "iconName": "Music", "title": "Sealed Cabinet" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Two Class-D digital amplifiers tuned to the unique acoustic architecture",
+          "Dual 6-inch woofers face inward for a force-canceling effect",
+          "Acoustically sealed cabinet prevents distortion and enhances bass response",
+          "Low frequency response down to 25 Hz",
+          "Audio settings automatically equalize to balance Sub Mini and paired speakers",
+          "Trueplay™ software dynamically tunes to the unique acoustics of the room"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Dimensions: 305 x 230 mm (Height x Diameter)",
+          "Weight: 6.35 kg (14 lbs)",
+          "Unique cylindrical shape stands out visually but fits in tight spaces",
+          "Center tunnel efficiently moves air to maximize bass output",
+          "Available in matte black or matte white to match your Sonos system",
+          "Join button simplifies wireless synchronization"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Auto-switching 100-240 V, 50-60 Hz AC universal input",
+          "Designed to remain plugged in for instant responsiveness",
+          "Low power consumption during network standby mode",
+          "Internal power supply eliminates bulky external adapters",
+          "Power cable sits flush underneath to preserve clean aesthetics",
+          "Thermally optimized to run cool during continuous playback"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Connects to Wi-Fi network with any 802.11a/b/g/n 2.4 or 5 GHz router",
+          "10/100 port for hardwiring directly to your router if Wi-Fi is unstable",
+          "Pairs wirelessly with Sonos soundbars or non-portable speakers",
+          "Automated crossover frequency management via the Sonos DSP",
+          "Volume automatically adjusts in sync with the paired speaker",
+          "Managed entirely through the Sonos S2 app"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sonos Sub Mini Wireless Subwoofer",
+      "Power Cable (2 meters)",
+      "Quick Start Guide",
+      "Legal and Warranty Information",
+      "Sonos Microfiber Cloth"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/sub-mini.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 44999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 44999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Sonos Sub Gen 3",
+    "brand": "Sonos",
+    "category": "Sonos Home Theater",
+    "description": "<h2>Sonos Sub Gen 3: Pulse-Pounding Bass</h2><p>Hear and feel the difference with the <strong>Sonos Sub Gen 3</strong>. Engineered to take the heavy lifting off your paired speakers, this wireless subwoofer delivers <strong>chest-thumping deep bass</strong> that elevates your home theater and music experience to studio levels.</p><h3>Architectural and Acoustic Perfection</h3><p>Two highly engineered force-canceling drivers are positioned face-to-face to eliminate vibration and rattle completely. Wrapped in an iconic sculptural design with a premium gloss finish, it looks as spectacular as it sounds.</p>",
+    "price": 84999,
+    "discountPrice": 84999,
+    "highlights": [
+      { "iconName": "Volume", "title": "Force-Canceling Drivers" },
+      { "iconName": "Zap", "title": "Zero Buzz or Rattle" },
+      { "iconName": "Wifi", "title": "Wireless Setup" },
+      { "iconName": "Star", "title": "Iconic Gloss Design" },
+      { "iconName": "Settings", "title": "Trueplay™ Tuning" },
+      { "iconName": "Volume", "title": "Deep Bass to 25Hz" },
+      { "iconName": "Shield", "title": "Dual Acoustic Ports" },
+      { "iconName": "Smartphone", "title": "Easy App Pairing" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Two custom-designed Class-D digital amplifiers",
+          "Two force-canceling drivers positioned face-to-face",
+          "Zero cabinet rattle or vibration even at maximum volume",
+          "Frequency response reaches as low as an astonishing 25 Hz",
+          "Automatic equalization seamlessly pairs with designated Sonos speakers",
+          "Trueplay™ dynamically adjusts acoustic output to room geometry"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Award-winning sculptural design: 389 x 158 x 402 mm (H x W x D)",
+          "Heavy-duty construction weighing 16 kg for acoustic anchoring",
+          "Can be positioned standing upright or laid flat under furniture",
+          "High-gloss premium finish available in Black or White",
+          "Dual acoustic ports expertly tuned to enhance driver performance",
+          "Single LED indicator for system status and pairing"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Auto-switching 100-240 V, 50-60 Hz AC universal input",
+          "Upgraded memory and quad-core processing power",
+          "Extremely efficient idle mode for energy conservation",
+          "Concealed power port at the base for elegant cable management",
+          "Thermally optimized internal chamber for continuous output",
+          "No external power brick required"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Connects directly to your WiFi network via 802.11b/g/n router",
+          "Dedicated 10/100 Mbps Ethernet port for wired reliability",
+          "Pairs wirelessly with Sonos Arc, Beam, Ray, Five, or Era speakers",
+          "Expandable: Pair up to two Subs with a compatible Sonos soundbar",
+          "Simple one-button push for instant ecosystem synchronization",
+          "Phase alignment is handled automatically by the Sonos DSP"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sonos Sub (Gen 3)",
+      "Power Cable (2 meters)",
+      "Quick Start Guide",
+      "Legal and Warranty Information",
+      "Microfiber Cleaning Cloth"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/sub-gen3.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 84999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 84999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Sonos Sub Gen 4",
+    "brand": "Sonos",
+    "category": "Sonos Home Theater",
+    "description": "<h2>Sonos Sub Gen 4: The Next Evolution of Bass</h2><p>Building on the legendary foundation of its predecessor, the <strong>Sonos Sub Gen 4</strong> introduces advanced processing power and a refined matte finish. It takes the heavy lifting off your paired speakers, delivering chest-thumping deep bass that is felt as much as it is heard.</p><h3>Flawless Low-Frequency Extension</h3><p>Featuring dual force-canceling drivers, the Sub Gen 4 eliminates cabinet rattle completely. It is the ultimate foundation for your Sonos surround sound setup, ensuring that explosive movie scenes and deep musical tracks hit with absolute precision.</p>",
+    "price": 79999,
+    "discountPrice": 79999,
+    "highlights": [
+      { "iconName": "Volume", "title": "Next-Gen Processing" },
+      { "iconName": "Zap", "title": "Zero Cabinet Rattle" },
+      { "iconName": "Wifi", "title": "Instant Wireless Sync" },
+      { "iconName": "Star", "title": "New Matte Finish" },
+      { "iconName": "Settings", "title": "Auto EQ Balancing" },
+      { "iconName": "Volume", "title": "Deep Bass to 25Hz" },
+      { "iconName": "Shield", "title": "Force-Canceling" },
+      { "iconName": "Smartphone", "title": "Sonos App Control" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Dual custom-engineered Class-D digital amplifiers",
+          "Two force-canceling drivers eliminate mechanical vibration",
+          "Acoustic architecture tuned for unparalleled bass depth",
+          "Frequency response reaches down to 25 Hz",
+          "Advanced DSP automatically balances crossover with paired speakers",
+          "Trueplay™ optimization tailors bass response to room acoustics"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Dimensions: 389 x 158 x 402 mm (H x W x D)",
+          "Substantial 16 kg weight anchors the acoustic force",
+          "Updated premium Matte finish available in Black or White",
+          "Versatile orientation: stand upright or lay flat under a couch",
+          "Dual acoustic ports tuned for massive air displacement",
+          "Minimalist design with single status LED"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Auto-switching 100-240 V AC universal power input",
+          "Upgraded wireless radio and memory for future-proof connectivity",
+          "Ultra-low standby power consumption mode",
+          "Concealed power plug base for clean cable management",
+          "Thermal safety features for continuous high-volume output",
+          "No bulky external power adapters required"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Seamless 5GHz wireless connection to Sonos soundbars",
+          "Dedicated 10/100 Mbps Ethernet port for hardwired setups",
+          "Supports dual-subwoofer configurations with Sonos Arc/Arc Ultra",
+          "One-button sync for effortless network integration",
+          "Phase alignment perfectly managed by the Sonos application",
+          "Automatic firmware updates over the air"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sonos Sub (Gen 4)",
+      "Power Cable (2 meters)",
+      "Quick Start Guide",
+      "Legal and Warranty Information",
+      "Matte Finish Cleaning Guide"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/sub-gen4.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 79999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 79999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Sonos Ace Headphone",
+    "brand": "Sonos",
+    "category": "Sonos Headphones",
+    "description": "<h2>Sonos Ace: Superior Precision and Clarity</h2><p>The <strong>Sonos Ace</strong> marks the arrival of the most anticipated over-ear headphones in audio history. Experience every frequency with <strong>lossless audio streaming</strong> and world-class active noise cancellation that carves out a sanctuary in any environment.</p><h3>The Ultimate Integration</h3><p>Switch your TV audio from your Sonos soundbar to Ace with just a tap. With plush memory foam cushions, stainless steel accents, and an ultra-precise fit, these headphones are built for all-day listening and all-night binging.</p>",
+    "price": 34999,
+    "discountPrice": 34999,
+    "highlights": [
+      { "iconName": "Headphones", "title": "World-Class ANC" },
+      { "iconName": "Battery", "title": "30h Battery Life" },
+      { "iconName": "Star", "title": "Lossless Audio" },
+      { "iconName": "Bluetooth", "title": "Bluetooth 5.4" },
+      { "iconName": "Zap", "title": "Fast Charging" },
+      { "iconName": "Mic", "title": "Beamforming Mics" },
+      { "iconName": "Volume", "title": "Spatial Audio" },
+      { "iconName": "Shield", "title": "Memory Foam Fit" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Custom-designed 40 mm dynamic drivers for ultra-high fidelity",
+          "Advanced Active Noise Cancellation with Aware transparency mode",
+          "Lossless audio via Bluetooth (aptX Lossless) or USB-C wired",
+          "Spatial audio with dynamic head tracking technology",
+          "Eight beamforming microphones for superior call noise suppression",
+          "Customizable EQ and sound profiles via the Sonos app"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Ergonomic over-ear design with fold-flat earcups for travel",
+          "Weight: 312 g for balanced, lightweight wearing comfort",
+          "Premium vegan leather ear cushions wrapping memory foam",
+          "Hidden stainless steel headband sliders for a custom, snag-free fit",
+          "Integrated tactile 'Content Key' for intuitive volume and call control",
+          "Magnetic ear cushions for easy cleaning and long-term replacement"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Up to 30 hours of continuous listening with ANC enabled",
+          "Ultra-fast charging: 3 minutes gives 3 hours of playback",
+          "Full charge cycle achieved in 120 minutes via USB-C",
+          "Auto-wear detection for instant play/pause to save battery",
+          "Rechargeable 1060mAh Lithium-ion internal battery cells",
+          "USB-C Power Delivery (PD) compatible"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Latest Bluetooth 5.4 with multipoint device connection",
+          "USB-C to 3.5 mm cable included for analog high-quality sources",
+          "Sonos 'TV Audio Swap' technology works seamlessly with Sonos soundbars",
+          "Supports lossless audio over both wired and compatible wireless",
+          "Native integration with Google Assistant and Siri voice control",
+          "Automatic background firmware updates via the Sonos app"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sonos Ace Premium Headphones",
+      "Slim-Fit Felt Travel Case",
+      "USB-C to USB-C Charging Cable",
+      "USB-C to 3.5mm Audio Cable",
+      "Quick Start and Safety Guide"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/ace.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 34999, "images": [{ "url": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 34999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  }
+];
+const sonosBatch3 = [
+  {
+    "name": "Sonos Play",
+    "brand": "Sonos",
+    "category": "Sonos Home Speakers",
+    "description": "<h2>Sonos Play: The Essential Audio Experience</h2><p>Immerse yourself in rich, uncompromised sound with the classic <strong>Sonos Play</strong>. Designed to deliver deep bass and crystal-clear highs, it is the perfect foundational speaker to start or expand your multi-room audio ecosystem.</p><h3>Timeless Design, Modern Streaming</h3><p>Its sleek, monolithic design fits seamlessly into any room decor. Powered by robust WiFi connectivity, the Sonos Play ensures uninterrupted, high-fidelity streaming of all your favorite music, podcasts, and radio stations.</p>",
+    "price": 31999,
+    "discountPrice": 31999,
+    "highlights": [
+      { "iconName": "Volume", "title": "Room-Filling Sound" },
+      { "iconName": "Wifi", "title": "WiFi Streaming" },
+      { "iconName": "Settings", "title": "Trueplay™ Tuning" },
+      { "iconName": "Smartphone", "title": "Sonos App Control" },
+      { "iconName": "Star", "title": "Custom Drivers" },
+      { "iconName": "Droplets", "title": "Humidity Resistant" },
+      { "iconName": "Shield", "title": "Durable Casing" },
+      { "iconName": "Music", "title": "Multi-Room Sync" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Dual custom-designed Class-D digital amplifiers",
+          "One tweeter for crisp, clear high-frequency output",
+          "One midwoofer for faithful playback of mid-range and deep bass",
+          "Advanced Digital Signal Processing (DSP) prevents distortion",
+          "Trueplay™ software dynamically tunes the speaker to your room",
+          "Adjustable bass and treble controls via the Sonos app"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Dimensions: 161.45 x 119.7 x 119.7 mm",
+          "Weight: 1.85 kg for acoustic stability",
+          "Acoustically transparent wrap-around grille",
+          "Humidity resistant for use in bathrooms or covered patios",
+          "Capacitive touch controls for easy playback management",
+          "Available in classic Matte Black and Matte White"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Auto-switching 100-240 V AC universal power input",
+          "High-efficiency internal power supply",
+          "Low power consumption during network standby mode",
+          "No bulky external power adapters required",
+          "Thermally optimized to remain cool during long sessions",
+          "Concealed power plug connection for clean cable routing"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Connects to any 802.11b/g/n 2.4 GHz WiFi network",
+          "10/100 Mbps Ethernet port for hardwired connections",
+          "Compatible with Apple AirPlay 2 on iOS 11.4 and higher",
+          "Seamless integration with over 100 streaming services",
+          "Can be paired in stereo with a second matching speaker",
+          "Expandable to a 5.1 home theater setup as rear surrounds"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sonos Play Smart Speaker",
+      "Power Cable (2 meters)",
+      "Flat Ethernet Cable",
+      "Quick Start Guide",
+      "Legal and Warranty Information"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/play.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 31999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 31999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Sonos Era 100 SL",
+    "brand": "Sonos",
+    "category": "Sonos Home Speakers",
+    "description": "<h2>Sonos Era 100 SL: Pure Music, No Microphones</h2><p>Experience the next-generation acoustics of the Era series with absolute privacy. The <strong>Sonos Era 100 SL</strong> features the exact same dual-tweeter acoustic architecture as the standard Era 100, but without built-in microphones, ensuring your space remains strictly for listening.</p><h3>Finely Tuned Stereo</h3><p>Transform any room with finely tuned stereo sound and rich bass. Its compact design fits beautifully on a bookshelf or counter, supporting high-fidelity streaming via WiFi and Apple AirPlay 2.</p>",
+    "price": 21999,
+    "discountPrice": 21999,
+    "highlights": [
+      { "iconName": "Volume", "title": "Dual-Tweeter Stereo" },
+      { "iconName": "Shield", "title": "Microphone-Free" },
+      { "iconName": "Wifi", "title": "WiFi 6 Streaming" },
+      { "iconName": "Zap", "title": "Trueplay™ Tuning" },
+      { "iconName": "Smartphone", "title": "Apple AirPlay 2" },
+      { "iconName": "Droplets", "title": "Humidity Resistant" },
+      { "iconName": "Settings", "title": "Touch Controls" },
+      { "iconName": "Music", "title": "High-Res Audio" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Three custom Class-D digital amplifiers",
+          "Dual angled tweeters for crisp, high-frequency stereo separation",
+          "One enlarged midwoofer for deep, impactful low-end frequencies",
+          "Advanced Trueplay™ acoustic tuning via the Sonos app",
+          "Custom spatial audio processing for a wider soundstage",
+          "Zero microphone hardware guarantees absolute privacy"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Compact architecture: 182.5 x 120 x 130.5 mm (H x W x D)",
+          "Substantial weight of 2.02 kg reduces acoustic resonance",
+          "Constructed using 48% post-consumer recycled plastics",
+          "Acoustically transparent wraparound polycarbonate grille",
+          "Capacitive touch controls for volume and playback",
+          "Matte finish designed to blend into luxury interiors"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Mains powered with auto-switching 100-240V AC input",
+          "Ultra-low standby power consumption for efficiency",
+          "Standard IEC figure-8 power connection",
+          "Instant-wake technology from network standby",
+          "Internal power supply eliminates bulky adapters",
+          "Built-in thermal protection to safeguard drivers"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "WiFi 6 (802.11a/b/g/n/ac/ax) for dropout-free streaming",
+          "USB-C line-in port for wired sources (adapter required)",
+          "Apple AirPlay 2 integration for iOS devices",
+          "Direct control via Spotify Connect and Tidal Connect",
+          "Perfect for use as rear surrounds in a home theater setup",
+          "Over-the-air firmware updates via the Sonos App"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sonos Era 100 SL Speaker",
+      "Power Cable (2 meters)",
+      "Quick Start Manual",
+      "Legal and Warranty Documentation",
+      "Sonos Ecosystem Welcome Card"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/era100sl.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 21999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 21999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Sonos Era 100 Pro (Pair)",
+    "brand": "Sonos",
+    "category": "Sonos Home Speakers",
+    "description": "<h2>Sonos Era 100 Pro: Commercial Grade Performance</h2><p>Designed specifically for premium commercial spaces and advanced custom installations, the <strong>Sonos Era 100 Pro (Pair)</strong> brings next-generation acoustics to a professional tier. Experience flawless stereo sound distribution engineered to run continuously with rock-solid stability.</p><h3>Power Over Ethernet (PoE+)</h3><p>Streamline your installation. The Pro variant supports PoE+, allowing you to send both power and high-resolution data over a single Ethernet cable, making it the ultimate solution for cafes, boutiques, and high-end smart homes.</p>",
+    "price": 120000,
+    "discountPrice": 120000,
+    "highlights": [
+      { "iconName": "Zap", "title": "PoE+ Support" },
+      { "iconName": "Volume", "title": "Dual-Tweeter Stereo" },
+      { "iconName": "Settings", "title": "Professional Grade" },
+      { "iconName": "Shield", "title": "Secure Surface Mount" },
+      { "iconName": "Wifi", "title": "Hardwired Reliability" },
+      { "iconName": "Star", "title": "Continuous Operation" },
+      { "iconName": "Smartphone", "title": "Sonos Pro Dashboard" },
+      { "iconName": "Music", "title": "Custom EQ Tuning" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Three custom Class-D digital amplifiers per speaker",
+          "Dual angled tweeters for ultra-wide sound dispersion",
+          "Enhanced midwoofer optimized for background and foreground music",
+          "Advanced DSP optimized for 24/7 commercial operation",
+          "Trueplay™ acoustic tuning via iOS for challenging room acoustics",
+          "Volume limiting capabilities for commercial environments"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Dimensions: 182.5 x 120 x 130.5 mm per speaker",
+          "Integrated threaded mount for secure commercial brackets",
+          "Acoustically transparent, tamper-resistant polycarbonate grille",
+          "Constructed using fire-retardant, high-durability plastics",
+          "Capacitive touch controls can be locked out via the app",
+          "Sold exclusively as a matched pair"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Supports Power over Ethernet (PoE+) via RJ45 interface",
+          "Alternative mains power via USB-C to AC adapter",
+          "Ultra-efficient power management for multi-speaker networks",
+          "Thermal monitoring prevents overheating in enclosed spaces",
+          "Instant failover protection for uninterrupted ambiance",
+          "Designed strictly for hardwired infrastructure"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Gigabit Ethernet interface for zero-latency sync across zones",
+          "Compatible with Sonos Pro remote management dashboard",
+          "Apple AirPlay 2 capability for instant casting",
+          "Locked-down Bluetooth prevents unauthorized guest pairing",
+          "Dante/AES67 compatibility via third-party bridges",
+          "Granular zone grouping and scheduling via the Sonos App"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Two (2) Sonos Era 100 Pro Speakers",
+      "Two (2) Surface Mount Brackets",
+      "Ethernet Weatherproofing Sleeves",
+      "Installation and Wiring Guide",
+      "Commercial Warranty Document"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/era100pro.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 120000, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 120000, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Sonos In Ceiling Speaker (Set) 6 Inch",
+    "brand": "Sonos",
+    "category": "Sonos Architectural",
+    "description": "<h2>Sonos Architectural: Invisible Premium Sound</h2><p>Experience crystal-clear, room-filling sound from above with the <strong>Sonos In-Ceiling Speaker Set (6 Inch)</strong> by Sonance. Designed to blend seamlessly into your ceiling, these passive speakers deliver high-fidelity audio without compromising your interior design.</p><h3>Optimized by Sonos Amp</h3><p>When powered by the Sonos Amp (sold separately), these speakers unlock Trueplay™ tuning, which accounts for the size, construction, and layout of the room, adjusting the EQ for the best possible sound.</p>",
+    "price": 85000,
+    "discountPrice": 85000,
+    "highlights": [
+      { "iconName": "Volume", "title": "Ambient Soundstage" },
+      { "iconName": "Shield", "title": "Flush Installation" },
+      { "iconName": "Zap", "title": "Powered by Amp" },
+      { "iconName": "Star", "title": "Paintable Grilles" },
+      { "iconName": "Settings", "title": "Trueplay™ Ready" },
+      { "iconName": "Volume", "title": "6-Inch Woofers" },
+      { "iconName": "Music", "title": "Passive Architecture" },
+      { "iconName": "Shield", "title": "By Sonance" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "One 1-inch pivoting polyurethane dome tweeter per speaker",
+          "One 6.5-inch high-excursion polypropylene woofer per speaker",
+          "Frequency Response: 44 Hz – 20 kHz (±3dB)",
+          "Nominal Impedance: 8 Ohms nominal",
+          "Sensitivity: 89dB SPL (2.83V/1 meter)",
+          "Trueplay™ optimization when connected to Sonos Amp"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Dimensions: 235.4 mm diameter x 120.1 mm depth",
+          "Cut-out Dimension: 210 mm diameter",
+          "Weight: 2.27 kg per speaker",
+          "Specially designed round, paintable steel grilles",
+          "Flush-mount aesthetic blends perfectly into drywall",
+          "Spring-loaded speaker terminals for secure wiring"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Passive speaker design (requires external amplification)",
+          "Recommended Amplifier Power: 5W to 130W per channel",
+          "Perfectly paired with the 125W per channel Sonos Amp",
+          "Can wire up to three pairs (6 speakers) to a single Sonos Amp",
+          "Zero internal power consumption",
+          "No battery; permanent hardwired installation"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Standard bare-wire speaker cable connection (14-16 AWG recommended)",
+          "No built-in wireless connectivity (handled by connected Amp)",
+          "Volume, EQ, and multi-room grouping managed via Sonos App (with Amp)",
+          "Apple AirPlay 2 capability (when driven by Sonos Amp)",
+          "Pivoting tweeter allows directional high-frequency targeting",
+          "Seamlessly integrates into whole-home Sonos ecosystems"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Two (2) In-Ceiling 6-Inch Speakers",
+      "Two (2) Paintable Magnetic Grilles",
+      "Cut-out Template for Installation",
+      "Detailed Installation Manual",
+      "Sonance Warranty Document"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/in-ceiling.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }
+    ],
+    "variants": [
+      { "color": "White", "size": "Standard", "stock": 10, "price": 85000, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 10
+  },
+  {
+    "name": "Sonos Outdoor Speaker (Set)",
+    "brand": "Sonos",
+    "category": "Sonos Architectural",
+    "description": "<h2>Sonos Outdoor by Sonance: Weather Any Storm</h2><p>Bring high-fidelity audio to your backyard, patio, or pool with the <strong>Sonos Outdoor Speaker Set</strong>. Built in partnership with architectural audio experts Sonance, these passive speakers are engineered to withstand humidity, water, salt spray, heat, UV rays, and freezing temperatures.</p><h3>Expansive Outdoor Audio</h3><p>Enjoy detailed sound outside your home. When paired with the Sonos Amp, you can connect multiple sets and utilize the Sonos ecosystem to stream Apple AirPlay 2, Spotify, and more to your entire backyard.</p>",
+    "price": 115000,
+    "discountPrice": 115000,
+    "highlights": [
+      { "iconName": "Droplets", "title": "Weatherproof Build" },
+      { "iconName": "Volume", "title": "Expansive Acoustics" },
+      { "iconName": "Zap", "title": "Powered by Amp" },
+      { "iconName": "Shield", "title": "UV & Salt Resistant" },
+      { "iconName": "Settings", "title": "Adjustable Bracket" },
+      { "iconName": "Music", "title": "Passive Architecture" },
+      { "iconName": "Wifi", "title": "App Control (via Amp)" },
+      { "iconName": "Star", "title": "By Sonance" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "One 1-inch cloth dome, polyurethane tweeter per speaker",
+          "One 6.5-inch high-excursion polypropylene woofer per speaker",
+          "Frequency Response: 55 Hz – 20 kHz (±3dB)",
+          "Nominal Impedance: 8 Ohms nominal",
+          "Sensitivity: 89dB SPL (2.83V/1 meter)",
+          "Engineered for wide dispersion in open-air environments"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Dimensions: 329.2 x 191 x 199 mm (H x W x D)",
+          "Weight: 3.99 kg per speaker",
+          "High-density, UV-resistant composite enclosure",
+          "Corrosion-resistant powder-coated aluminum grille",
+          "Engineered to withstand IP66-level weather extremes",
+          "Available in architecturally neutral Black or White"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Passive speaker design (requires external amplification)",
+          "Recommended Amplifier Power: 5W to 130W per channel",
+          "Designed specifically for the 125W per channel Sonos Amp",
+          "Can wire up to three pairs (6 speakers) to a single Sonos Amp",
+          "Front-mounted sealed wire terminals prevent corrosion",
+          "No battery; requires permanent outdoor wiring"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Heavy-duty bare-wire connection (Direct burial 14-16 AWG recommended)",
+          "No built-in wireless connectivity (streaming handled by connected Amp)",
+          "Multi-room grouping managed via Sonos App (with Amp)",
+          "Apple AirPlay 2 capability (when driven by Sonos Amp)",
+          "Included FastMount® bracket allows 180-degree pivoting",
+          "Seamlessly extends the Sonos indoor ecosystem outdoors"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Two (2) Sonos Outdoor Speakers",
+      "Two (2) FastMount® Wall Brackets",
+      "Wiring Terminal Covers",
+      "Installation Manual",
+      "Sonance Warranty Document"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/outdoor.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 115000, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 115000, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Sonos AMP",
+    "brand": "Sonos",
+    "category": "Sonos Components",
+    "description": "<h2>Sonos AMP: The Versatile Powerhouse</h2><p>Upgrade your wired speakers with the <strong>Sonos Amp</strong>. This versatile amplifier brings the entire Sonos streaming ecosystem to your architectural, floor-standing, outdoor, or bookshelf speakers. With 125 Watts per channel, it delivers high-fidelity sound to the most demanding speakers.</p><h3>Modern Connectivity</h3><p>Connect your TV via HDMI ARC to create a killer stereo setup, or use the analog line-in for a turntable. The Amp easily fits into any standard AV rack and allows you to build out a comprehensive smart home audio system.</p>",
+    "price": 74999,
+    "discountPrice": 74999,
+    "highlights": [
+      { "iconName": "Zap", "title": "125W Per Channel" },
+      { "iconName": "Tv", "title": "HDMI ARC for TV" },
+      { "iconName": "Wifi", "title": "WiFi & Ethernet" },
+      { "iconName": "Music", "title": "Subwoofer Output" },
+      { "iconName": "Settings", "title": "Rack-Mountable" },
+      { "iconName": "Smartphone", "title": "Apple AirPlay 2" },
+      { "iconName": "Volume", "title": "Drives 6 Speakers" },
+      { "iconName": "Shield", "title": "Thermal Management" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Class-D digital amplifier providing 125W per channel at 8 ohms",
+          "Advanced DSP ensures clean output without distortion",
+          "Supports high-fidelity lossless audio streaming",
+          "Auto-detecting RCA subwoofer output with adjustable crossover",
+          "Can power up to three pairs of Sonos Architectural speakers",
+          "Adjustable bass and treble controls via the Sonos App"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Dimensions: 64 x 217 x 217 mm (H x W x D)",
+          "Weight: 2.1 kg (4.6 lbs) in a dense, monolithic block",
+          "Matte black finish with a subtle circular top vent",
+          "Custom-designed heat sink for silent, fan-less cooling",
+          "Standard rack mountable (fits two side-by-side in a 1U rack)",
+          "Capacitive touch controls on the front panel"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Auto-switching 100-240 V, 50-60 Hz AC universal input",
+          "No external power brick; standard IEC connection",
+          "Highly efficient standby mode for smart home ecosystems",
+          "Continuous thermal monitoring to prevent overheating",
+          "Gold-plated custom banana plugs for secure power transfer",
+          "Instant wake on signal detection from HDMI or Line-In"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "HDMI ARC connection integrates seamlessly with modern TVs",
+          "Analog RCA line-in for turntables or CD players",
+          "Dual 10/100 Ethernet ports for daisy-chaining multiple Amps",
+          "802.11b/g/n Wi-Fi connectivity for wireless streaming",
+          "Apple AirPlay 2 compatible",
+          "Accepts standard bare speaker wire or included banana plugs"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sonos Amp",
+      "Four (4) Custom Banana Plugs",
+      "AC Power Cord",
+      "Quick Start Guide",
+      "Legal and Warranty Information"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/amp.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 74999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 10
+  },
+  {
+    "name": "Sonos Port",
+    "brand": "Sonos",
+    "category": "Sonos Components",
+    "description": "<h2>Sonos Port: The Streaming Upgrade</h2><p>The <strong>Sonos Port</strong> is the versatile streaming component for your existing stereo or receiver. Simply plug it into your traditional audio equipment to instantly unlock the entire Sonos ecosystem, including Apple AirPlay 2, Spotify Connect, and multi-room grouping.</p><h3>Audiophile Grade Conversion</h3><p>Featuring a 12V trigger and a premium digital-to-analog converter (DAC), the Port automatically wakes your amplifier and delivers clear, highly detailed audio. It’s the perfect way to modernize your classic Hi-Fi setup.</p>",
+    "price": 49999,
+    "discountPrice": 49999,
+    "highlights": [
+      { "iconName": "Wifi", "title": "Network Streamer" },
+      { "iconName": "Zap", "title": "12V Trigger Output" },
+      { "iconName": "Music", "title": "Analog RCA In/Out" },
+      { "iconName": "Star", "title": "Digital Coaxial Out" },
+      { "iconName": "Settings", "title": "Audiophile DAC" },
+      { "iconName": "Smartphone", "title": "Apple AirPlay 2" },
+      { "iconName": "Volume", "title": "Multi-Room Sync" },
+      { "iconName": "Shield", "title": "Rack-Mountable" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Premium Digital-to-Analog Converter (DAC) for clear sound",
+          "Line-in allows you to bring your turntable into the Sonos app",
+          "Line-out (Analog RCA or Digital Coaxial) to connect to receivers",
+          "Adjustable bass and treble controls via the Sonos App",
+          "Can output fixed or variable volume levels",
+          "Bit-perfect streaming guarantees lossless fidelity"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Dimensions: 41 x 138 x 138 mm (H x W x D)",
+          "Weight: 0.47 kg (1.04 lbs)",
+          "Minimalist matte black polycarbonate enclosure",
+          "Fits perfectly on standard AV receiver racks (3 fit in 1U)",
+          "Single LED light indicates status and network connection",
+          "No physical buttons on the device; strictly app-controlled"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Auto-switching 100-240 V, 50-60 Hz AC universal input",
+          "Ultra-low power consumption in network standby",
+          "12V trigger output automatically turns on your amplifier",
+          "No bulky external power adapter required",
+          "Cool-running architecture for stacked rack installations",
+          "Surge protection built into the internal power supply"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Dual 10/100 Ethernet ports for hardwiring and daisy-chaining",
+          "802.11b/g/n Wi-Fi connectivity for wireless streaming",
+          "Apple AirPlay 2 compatible for iOS devices",
+          "Line-In (RCA) and Line-Out (RCA & Coaxial)",
+          "Seamless integration with third-party smart home systems",
+          "Controlled entirely via the Sonos App on iOS/Android"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sonos Port",
+      "Power Supply Cable",
+      "RCA Audio Cable",
+      "Quick Start Guide",
+      "Legal and Warranty Information"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/port.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 49999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 10
+  },
+  {
+    "name": "Sonos Premium Set with Arc Ultra and Sub 4",
+    "brand": "Sonos",
+    "category": "Sonos Home Theater",
+    "description": "<h2>Sonos Premium Set: The Ultimate Audio Duo</h2><p>Experience the absolute zenith of home cinema. By pairing the revolutionary <strong>Arc Ultra</strong> with the chest-thumping power of the <strong>Sub 4</strong>, this premium set transforms your living room into a world-class theater. Enjoy uncompromised <strong>Dolby Atmos 3D</strong> spatial audio that wraps entirely around you.</p><h3>Flawless Synergy</h3><p>Engineered to work in perfect harmony, the Arc Ultra delivers crystal clear dialogue and soaring highs, while the Sub 4 anchors the soundstage with deep, zero-distortion bass. Setup is effortlessly wireless, leaving you with nothing but pristine aesthetic and breathtaking sound.</p>",
+    "price": 179998,
+    "discountPrice": 179998,
+    "highlights": [
+      { "iconName": "Tv", "title": "Dolby Atmos Cinema" },
+      { "iconName": "Zap", "title": "Deep Bass (Sub 4)" },
+      { "iconName": "Wifi", "title": "Wireless Syncing" },
+      { "iconName": "Smartphone", "title": "App Controlled" },
+      { "iconName": "Volume", "title": "Speech Enhancement" },
+      { "iconName": "Star", "title": "Trueplay™ Tuning" },
+      { "iconName": "Settings", "title": "HDMI eARC Support" },
+      { "iconName": "Mic", "title": "Voice Assistant Ready" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Arc Ultra: 14 Class-D amplifiers powering specialized 3D drivers",
+          "Sub 4: Dual force-canceling drivers for zero cabinet buzz",
+          "True Dolby Atmos, TrueHD, and Digital Plus decoding",
+          "Speech Enhancement EQ for crystal clear cinematic dialogue",
+          "Frequency response ranging from a subterranean 25Hz to 22kHz",
+          "Unified Trueplay™ acoustic calibration for seamless blending"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Arc Ultra: Ultra-wide 1141.7mm profile for massive soundstage",
+          "Sub 4: Sculptural, vibration-free cabinet design",
+          "Both units feature premium, acoustically transparent grilles",
+          "Available in perfectly matched Matte Black or Matte White",
+          "Arc Ultra includes a magnetic sensor to detect wall mounting",
+          "Sub 4 can be placed upright or laid flat under furniture"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Dual auto-switching 100-240V universal internal power supplies",
+          "Ultra-low standby power consumption for the entire ecosystem",
+          "Instant wake-on-signal functionality via HDMI connection",
+          "High-current delivery for explosive cinematic audio peaks",
+          "No external power bricks required for either unit",
+          "Intelligent thermal management for continuous 24/7 operation"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "HDMI eARC connection from TV directly to the Arc Ultra",
+          "Dedicated 5GHz wireless connection automatically links the Sub 4",
+          "Apple AirPlay 2 and Spotify Connect native integration",
+          "Far-field microphone array on Arc Ultra for voice commands",
+          "Seamless synchronization with universal TV remote controls",
+          "Full EQ and crossover management via the Sonos application"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sonos Arc Ultra Premium Soundbar",
+      "Sonos Sub 4 Wireless Subwoofer",
+      "Two (2) Heavy-Duty Power Cables",
+      "High-Speed HDMI eARC Cable (1.5m)",
+      "Optical Audio Adapter",
+      "Quick Start Guide and Warranty Pack"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/premium-set.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 179998, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 179998, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  }
+];
+const sonosBatch4 = [
+  {
+    "name": "Sonos In Ceiling Speaker (Set) 8 Inch",
+    "brand": "Sonos",
+    "category": "Sonos Architectural",
+    "description": "<h2>Sonos Architectural: Larger Than Life Overhead</h2><p>Step up to massive overhead sound with the <strong>Sonos In-Ceiling Speaker Set (8 Inch)</strong>. Engineered in collaboration with Sonance, these larger 8-inch passive speakers deliver incredibly deep bass and an expansive soundstage that completely hides within your ceiling.</p><h3>Trueplay™ Perfected</h3><p>When paired with the powerful Sonos Amp, you unlock Trueplay™ tuning, optimizing the frequency response to the exact size, construction, and layout of your room for uncompromised acoustic brilliance.</p>",
+    "price": 125000,
+    "discountPrice": 125000,
+    "highlights": [
+      { "iconName": "Volume", "title": "Massive 8-inch Woofers" },
+      { "iconName": "Shield", "title": "Flush Installation" },
+      { "iconName": "Zap", "title": "Powered by Amp" },
+      { "iconName": "Star", "title": "Paintable Grilles" },
+      { "iconName": "Settings", "title": "Trueplay™ Ready" },
+      { "iconName": "Mic", "title": "Pivoting Tweeters" },
+      { "iconName": "Music", "title": "Passive Architecture" },
+      { "iconName": "Shield", "title": "By Sonance" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "One 1.2-inch pivoting polyurethane dome tweeter per speaker",
+          "One massive 8-inch high-excursion polypropylene woofer per speaker",
+          "Frequency Response: 32 Hz – 20 kHz (±3dB) for deep bass",
+          "Nominal Impedance: 8 Ohms nominal",
+          "Sensitivity: 90dB SPL (2.83V/1 meter) for high efficiency",
+          "Trueplay™ optimization enabled when connected to Sonos Amp"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Dimensions: 283 mm diameter x 135 mm depth",
+          "Cut-out Dimension: 258 mm diameter",
+          "Weight: 3.12 kg per speaker for structural stability",
+          "Specially designed round, paintable steel grilles included",
+          "Flush-mount aesthetic blends seamlessly into modern drywall",
+          "Heavy-duty spring-loaded speaker terminals for secure wiring"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Passive speaker design (requires external amplification unit)",
+          "Recommended Amplifier Power: 5W to 150W per channel",
+          "Perfectly paired with the 125W per channel Sonos Amp",
+          "Can wire up to three pairs (6 speakers) to a single Sonos Amp",
+          "Zero internal power consumption while idle",
+          "No battery required; permanent architectural hardwiring"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Standard bare-wire speaker cable connection (14-16 AWG recommended)",
+          "No built-in wireless connectivity (streaming handled by Amp)",
+          "Volume, EQ, and multi-room grouping managed via Sonos App",
+          "Apple AirPlay 2 capability (when driven by connected Sonos Amp)",
+          "Pivoting tweeter allows directional high-frequency targeting",
+          "Integrates effortlessly into whole-home smart ecosystems"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Two (2) In-Ceiling 8-Inch Speakers",
+      "Two (2) Paintable Magnetic Grilles",
+      "Cut-out Template for Installation",
+      "Detailed Installation Manual",
+      "Sonance Warranty Document"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/in-ceiling-8.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }
+    ],
+    "variants": [
+      { "color": "White", "size": "Standard", "stock": 10, "price": 125000, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 10
+  },
+  {
+    "name": "Sonos In Wall Speaker (Set)",
+    "brand": "Sonos",
+    "category": "Sonos Architectural",
+    "description": "<h2>Sonos In-Wall: Bold Sound, Zero Footprint</h2><p>Designed to deliver brilliant sound for TV, movies, and music, the <strong>Sonos In-Wall Speaker Set</strong> disappears into your room's walls. Created in partnership with Sonance, these architectural speakers provide a focused, directional audio experience without cluttering your floor space.</p><h3>Cinematic Integration</h3><p>Perfect for creating a hidden home theater, they feature a specially designed grille that can be painted to match your walls perfectly. Connect them to the Sonos Amp for Trueplay™ tuning and instant access to all streaming services.</p>",
+    "price": 85000,
+    "discountPrice": 85000,
+    "highlights": [
+      { "iconName": "Volume", "title": "Directional Acoustics" },
+      { "iconName": "Shield", "title": "In-Wall Hidden Design" },
+      { "iconName": "Zap", "title": "Powered by Amp" },
+      { "iconName": "Star", "title": "Paintable Grilles" },
+      { "iconName": "Settings", "title": "Trueplay™ Ready" },
+      { "iconName": "Tv", "title": "Ideal for Home Theater" },
+      { "iconName": "Music", "title": "Passive Architecture" },
+      { "iconName": "Shield", "title": "Engineered by Sonance" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "One 1-inch pivoting polyurethane dome tweeter for precise highs",
+          "One 6.5-inch high-excursion polypropylene woofer for rich bass",
+          "Frequency Response: 44 Hz – 20 kHz (±3dB)",
+          "Nominal Impedance: 8 Ohms nominal",
+          "Sensitivity: 89dB SPL (2.83V/1 meter) for optimal clarity",
+          "Trueplay™ optimization active when connected to Sonos Amp"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Dimensions: 299.7 x 199.9 x 89.9 mm (H x W x D)",
+          "Cut-out Dimension: 273 x 173 mm",
+          "Weight: 2.09 kg per speaker",
+          "Includes rectangular, paintable steel grilles with minimal bezels",
+          "Flush-mount aesthetic blends perfectly into drywall",
+          "Gold-plated spring-loaded speaker terminals"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Passive speaker design (requires external amplification unit)",
+          "Recommended Amplifier Power: 5W to 130W per channel",
+          "Perfectly paired with the 125W per channel Sonos Amp",
+          "Can wire up to three pairs (6 speakers) to a single Sonos Amp",
+          "Zero internal power consumption while idle",
+          "No battery required; permanent architectural wiring"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Standard bare-wire speaker cable connection (14-16 AWG recommended)",
+          "No built-in wireless connectivity (handled by connected Amp)",
+          "Volume, EQ, and multi-room grouping managed via Sonos App",
+          "Apple AirPlay 2 capability (when driven by Sonos Amp)",
+          "Directional tweeter allows precise targeting to the listening area",
+          "Seamlessly integrates into whole-home Sonos ecosystems"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Two (2) In-Wall 6.5-Inch Speakers",
+      "Two (2) Paintable Magnetic Grilles",
+      "Cut-out Template for Installation",
+      "Detailed Installation Manual",
+      "Sonance Warranty Document"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/in-wall.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "White", "size": "Standard", "stock": 10, "price": 85000, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 10
+  },
+  {
+    "name": "Sonos Surround Set with Arc Ultra + Sub 4 + 2x Era 300",
+    "brand": "Sonos",
+    "category": "Sonos Home Theater",
+    "description": "<h2>Sonos Surround Set: The Pinnacle of Dolby Atmos</h2><p>Experience the absolute height of cinematic immersion. This ultimate bundle pairs the revolutionary <strong>Arc Ultra</strong> soundbar, the earth-shaking <strong>Sub Gen 4</strong>, and two powerful <strong>Era 300</strong> spatial audio speakers to create a true, uncompromised 7.1.4 home theater setup.</p><h3>Sound from Every Angle</h3><p>With precise up-firing, side-firing, and forward-firing drivers across the room, sound comes at you from every conceivable direction. Enjoy a flawlessly synchronized wireless setup that redefines movies, music, and gaming.</p>",
+    "price": 269996,
+    "discountPrice": 269996,
+    "highlights": [
+      { "iconName": "Tv", "title": "True 7.1.4 Atmos" },
+      { "iconName": "Star", "title": "Spatial Audio Rears" },
+      { "iconName": "Volume", "title": "Zero-Distortion Bass" },
+      { "iconName": "Wifi", "title": "Wireless Synchronization" },
+      { "iconName": "Zap", "title": "Trueplay™ Tuning" },
+      { "iconName": "Mic", "title": "Voice Assistant" },
+      { "iconName": "Smartphone", "title": "App Controlled" },
+      { "iconName": "Settings", "title": "HDMI eARC Support" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Combined system architecture delivers true 7.1.4 spatial audio",
+          "Arc Ultra processes dedicated center, front, and virtual height channels",
+          "Era 300 rears project side, rear, and upward-firing height channels",
+          "Sub 4 manages deep low-frequency effects down to an earth-shaking 25Hz",
+          "Uncompressed Dolby Atmos, TrueHD, and Digital Plus decoding",
+          "Unified Trueplay tuning automatically balances all 4 speakers simultaneously"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Arc Ultra features an ultra-slim profile to sit below modern televisions",
+          "Sub 4 utilizes a sculptural, force-canceling cabinet to prevent rattle",
+          "Era 300 rears feature an hourglass design for omnidirectional output",
+          "All components finished in matching premium matte polycarbonate",
+          "Acoustically transparent grilles ensure zero high-frequency degradation",
+          "Flexible placement options: stands, wall mounts, or media consoles"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Four independent auto-switching 100-240V internal power supplies",
+          "Intelligent low-power standby mode for the entire home theater ecosystem",
+          "Instant wake-on-signal functionality via HDMI CEC connection",
+          "High-current delivery guarantees explosive dynamics without clipping",
+          "Individual thermal management systems per speaker unit for safety",
+          "No external power bricks required, ensuring clean cable management"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Primary audio connection via single HDMI eARC from TV to Arc Ultra",
+          "Dedicated low-latency 5GHz wireless network links the Sub and surrounds",
+          "Apple AirPlay 2 and Spotify Connect native integration for music",
+          "Far-field microphone arrays on Arc Ultra and Era 300s for voice commands",
+          "Seamless synchronization with universal TV remote controls for volume",
+          "Comprehensive multi-room expansion capabilities via the Sonos application"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "1x Sonos Arc Ultra Soundbar",
+      "1x Sonos Sub 4 Wireless Subwoofer",
+      "2x Sonos Era 300 Spatial Audio Speakers",
+      "Four (4) Required Power Cables",
+      "High-Speed HDMI eARC Cable",
+      "Setup Guides and Warranty Documentation"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/surround-arc-era300.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 269996, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 269996, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Sonos Premium Set with Arc Ultra + Sub 4 + 2x Era 100",
+    "brand": "Sonos",
+    "category": "Sonos Home Theater",
+    "description": "<h2>Sonos Premium Set: Unmatched 5.1.2 Immersion</h2><p>Transform your living room into a cinematic powerhouse with this comprehensive bundle. Combining the processing power of the <strong>Arc Ultra</strong> soundbar, the deep impact of the <strong>Sub 4</strong>, and the precise stereo separation of two <strong>Era 100</strong> rear speakers.</p><h3>Flawless Wireless Integration</h3><p>Enjoy a setup that is as beautiful as it sounds. With Trueplay tuning and a dedicated 5GHz wireless link connecting all components, you get zero-latency surround sound without the clutter of speaker wire.</p>",
+    "price": 225996,
+    "discountPrice": 225996,
+    "highlights": [
+      { "iconName": "Tv", "title": "5.1.2 Surround Audio" },
+      { "iconName": "Star", "title": "Dual-Tweeter Rears" },
+      { "iconName": "Volume", "title": "Chest-Thumping Bass" },
+      { "iconName": "Wifi", "title": "Zero Latency Sync" },
+      { "iconName": "Zap", "title": "Trueplay™ Auto EQ" },
+      { "iconName": "Mic", "title": "Voice Assistant" },
+      { "iconName": "Smartphone", "title": "Apple AirPlay 2" },
+      { "iconName": "Settings", "title": "HDMI eARC Support" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "System delivers immersive 5.1.2 surround sound architecture",
+          "Arc Ultra processes dedicated center, front, and virtual height channels",
+          "Sub 4 manages deep low-frequency effects down to 25Hz",
+          "Era 100 rears provide discrete left/right directional surround effects",
+          "Unified Trueplay tuning automatically balances all 4 speakers simultaneously",
+          "Uncompressed Dolby Atmos, TrueHD, and Digital Plus decoding"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Arc Ultra: Ultra-wide profile optimized for large modern televisions",
+          "Sub 4: Sculptural, force-canceling cabinet prevents surface rattle",
+          "Era 100: Compact cylindrical design perfect for stands or shelves",
+          "All components finished in matching premium matte polycarbonate",
+          "Acoustically transparent grilles ensure clear high-frequency output",
+          "Unified design language blends into high-end interiors"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Four independent auto-switching 100-240V internal power supplies",
+          "Intelligent low-power standby mode for the entire ecosystem",
+          "Instant wake-on-signal functionality via HDMI CEC",
+          "High-current delivery guarantees explosive dynamics without clipping",
+          "Individual thermal management systems per speaker unit",
+          "No external power bricks required, ensuring clean cable management"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Primary audio connection via single HDMI eARC to the Arc Ultra",
+          "Dedicated 5GHz wireless network links the Sub and surrounds",
+          "Apple AirPlay 2 and Spotify Connect native integration",
+          "Far-field microphone arrays on Arc Ultra and Era 100s",
+          "Seamless synchronization with universal TV remote controls",
+          "Comprehensive multi-room expansion capabilities via Sonos App"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "1x Sonos Arc Ultra Soundbar",
+      "1x Sonos Sub 4 Wireless Subwoofer",
+      "2x Sonos Era 100 Speakers",
+      "Four (4) Required Power Cables",
+      "High-Speed HDMI eARC Cable",
+      "Setup Guides and Warranty Pack"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/premium-arc-era100.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 225996, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 225996, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Sonos Entertainment Set with Sonos Beam and Sub Mini",
+    "brand": "Sonos",
+    "category": "Sonos Home Theater",
+    "description": "<h2>Sonos Entertainment Set: Big Sound, Small Footprint</h2><p>Elevate your TV, music, and gaming experiences without dominating your space. This perfectly balanced set pairs the smart, panoramic sound of the <strong>Sonos Beam Gen 2</strong> with the bold, zero-distortion bass of the <strong>Sub Mini</strong>.</p><h3>Perfect for Medium Spaces</h3><p>Engineered for smaller to medium-sized rooms, this bundle delivers an immersive <strong>virtual Dolby Atmos</strong> experience. With quick wireless setup and Trueplay tuning, you'll be feeling every explosion and hearing every whisper in minutes.</p>",
+    "price": 94998,
+    "discountPrice": 94998,
+    "highlights": [
+      { "iconName": "Tv", "title": "Virtual Dolby Atmos" },
+      { "iconName": "Volume", "title": "Zero-Buzz Bass" },
+      { "iconName": "Wifi", "title": "Easy Wireless Sync" },
+      { "iconName": "Mic", "title": "Voice Assistant" },
+      { "iconName": "Star", "title": "Speech Enhancement" },
+      { "iconName": "Settings", "title": "Trueplay™ Tuning" },
+      { "iconName": "Smartphone", "title": "Apple AirPlay 2" },
+      { "iconName": "Shield", "title": "Compact Design" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Beam: Five Class-D amplifiers for panoramic sound projection",
+          "Sub Mini: Dual custom woofers in a force-canceling layout",
+          "Virtual Dolby Atmos 3D mapping for height channel illusion",
+          "Sub Mini handles frequencies down to 25Hz to free up the Beam",
+          "Speech Enhancement EQ for dialogue clarity over loud scenes",
+          "Advanced DSP for perfectly synchronized crossover blending"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Beam: Compact profile fits under almost any television",
+          "Sub Mini: Unique cylindrical design (230mm diameter)",
+          "Acoustically transparent polycarbonate grilles on both units",
+          "Force-canceling architecture prevents Sub Mini from rattling",
+          "Capacitive touch controls integrated onto the Beam",
+          "Available in matching Matte Black or Matte White finishes"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Auto-switching 100-240V internal power supplies for both",
+          "Energy-efficient standby mode for smart home integration",
+          "Instant wake functionality via HDMI CEC protocol",
+          "No external power bricks to clutter your media console",
+          "Class-D topology ensures cool operation during long sessions",
+          "Built-in protection against voltage spikes"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "HDMI eARC connection from TV to the Sonos Beam",
+          "Sub Mini connects securely via a private 5GHz wireless link",
+          "Far-field microphone array on the Beam for voice control",
+          "Seamless Apple AirPlay 2 and Spotify Connect integration",
+          "Syncs with your existing TV remote for volume control",
+          "Expandable via the Sonos app (add rear speakers later)"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sonos Beam (Gen 2) Soundbar",
+      "Sonos Sub Mini Wireless Subwoofer",
+      "Two (2) Power Cables",
+      "HDMI Cable (1.5m)",
+      "Optical Audio Adapter",
+      "Quick Start Guide"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/beam-submini.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 94998, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 94998, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Home Theatre Completion Set",
+    "brand": "Sonos",
+    "category": "Sonos Home Theater",
+    "description": "<h2>Home Theatre Completion Set: Finish What You Started</h2><p>Already own a Sonos soundbar? This is the ultimate upgrade pack. The <strong>Home Theatre Completion Set</strong> adds the foundational deep bass of the <strong>Sonos Sub Mini</strong> and the immersive rear surround channels of two <strong>Sonos Era 100</strong> speakers.</p><h3>Total Sonic Envelopment</h3><p>Instantly transform a standard soundbar into a full-fledged cinematic powerhouse. The Sub relieves your soundbar of low-frequency duties, producing clearer dialogue, while the rear speakers put you directly in the center of the action.</p>",
+    "price": 90997,
+    "discountPrice": 90997,
+    "highlights": [
+      { "iconName": "Star", "title": "Deep Bass Add-on" },
+      { "iconName": "Volume", "title": "Rear Surround Audio" },
+      { "iconName": "Zap", "title": "Zero-Buzz Subwoofer" },
+      { "iconName": "Wifi", "title": "Wireless Syncing" },
+      { "iconName": "Settings", "title": "Trueplay™ Tuning" },
+      { "iconName": "Shield", "title": "Compact Footprint" },
+      { "iconName": "Mic", "title": "Voice Assistant Ready" },
+      { "iconName": "Smartphone", "title": "App Configured" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Sub Mini features two force-canceling drivers for vibration-free bass",
+          "Era 100s feature dual-angled tweeters for crisp surround effects",
+          "System handles all low-frequency effects (LFE) down to 25Hz",
+          "Offloads bass frequencies from your existing soundbar for better mids",
+          "Expands soundstage to create true rear directional audio queues",
+          "Trueplay adjusts the new speakers to perfectly match your soundbar"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Sub Mini features a unique cylindrical design saving floor space",
+          "Era 100s feature a compact design ideal for speaker stands",
+          "All components match existing Sonos soundbars in finish and material",
+          "Acoustically transparent grilles on all components protect internal drivers",
+          "Matte finish designed to blend seamlessly into luxury living rooms",
+          "Humidity resistant components for long-term durability"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Three separate auto-switching 100-240V internal power supplies",
+          "Smart standby modes trigger when the TV is turned off",
+          "High-efficiency Class-D amplification across all included speakers",
+          "Zero external power bricks required for a clean installation",
+          "Thermal protection circuitry prevents overheating during heavy use",
+          "Instant wake-on-wireless-signal from the master soundbar"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Connects to your existing Sonos soundbar via a dedicated 5GHz network",
+          "Zero noticeable latency between video action and surround sound effects",
+          "Era 100s feature capacitive touch controls for independent volume adjustment",
+          "Physical microphone disconnect switches on the Era 100 rears",
+          "Entire system can be managed via the primary Sonos application",
+          "Maintains Apple AirPlay 2 capability for the whole room group"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "1x Sonos Sub Mini Wireless Subwoofer",
+      "2x Sonos Era 100 Speakers",
+      "Three (3) Power Cables",
+      "Quick Start Expansion Guide",
+      "Legal and Warranty Documents"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/ht-completion.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 90997, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 90997, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Ultimate Home Theatre Completion Set",
+    "brand": "Sonos",
+    "category": "Sonos Home Theater",
+    "description": "<h2>Ultimate Completion Set: Uncompromised Power</h2><p>If you already own a premium Sonos soundbar like the Arc, this is how you achieve perfection. The <strong>Ultimate Home Theatre Completion Set</strong> adds the massive force-canceling power of the <strong>Sub Gen 3/4</strong> and the breathtaking Dolby Atmos spatial audio of two <strong>Era 300</strong> rear speakers.</p><h3>Immersive 7.1.4 Upgrade</h3><p>By adding dedicated up-firing and side-firing rear channels alongside earth-shaking sub-bass, your existing soundbar is instantly upgraded to a full-fledged 7.1.4 Dolby Atmos theater setup.</p>",
+    "price": 169997,
+    "discountPrice": 169997,
+    "highlights": [
+      { "iconName": "Star", "title": "Ultimate Bass Add-on" },
+      { "iconName": "Volume", "title": "Spatial Audio Rears" },
+      { "iconName": "Zap", "title": "Force-Canceling Sub" },
+      { "iconName": "Wifi", "title": "Zero Latency Sync" },
+      { "iconName": "Settings", "title": "Trueplay™ Tuning" },
+      { "iconName": "Shield", "title": "Premium Aesthetics" },
+      { "iconName": "Mic", "title": "Voice Assistant Ready" },
+      { "iconName": "Smartphone", "title": "App Configured" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Sub features massive force-canceling drivers for vibration-free sub-bass",
+          "Era 300s feature up-firing, side-firing, and forward-firing drivers",
+          "Transforms existing Arc setups into physical 7.1.4 Atmos",
+          "Sub handles all LFE down to 25Hz, clearing up soundbar midrange",
+          "Creates deeply immersive spatial audio tracks for music and movies",
+          "Trueplay adjusts the expansion speakers to perfectly match your room"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Sub features an award-winning sculptural design (389 x 158 x 402 mm)",
+          "Era 300s feature an iconic hourglass design (160 x 260 x 185 mm)",
+          "Premium matte finishes designed to match existing Sonos products",
+          "Acoustically transparent grilles on all components",
+          "Sub can be positioned upright or laid flat under furniture",
+          "High-end build quality prevents any mechanical rattling"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Three separate auto-switching 100-240V internal power supplies",
+          "Smart standby modes trigger instantly when the TV is turned off",
+          "High-efficiency Class-D amplification powering heavy driver loads",
+          "Zero external power bricks required for a clean room aesthetic",
+          "Thermal protection circuitry prevents overheating during heavy use",
+          "Instant wake-on-wireless-signal from the master soundbar"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Connects to your existing soundbar via a dedicated 5GHz wireless network",
+          "Flawless synchronization between screen action and rear/sub effects",
+          "Era 300s feature capacitive touch volume sliders",
+          "Hardware microphone disconnect switches on the Era 300 rears",
+          "Crossover and individual channel volumes managed via Sonos App",
+          "Maintains whole-home ecosystem grouping and AirPlay 2 capability"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "1x Sonos Sub (Gen 3/4) Wireless Subwoofer",
+      "2x Sonos Era 300 Spatial Audio Speakers",
+      "Three (3) Heavy-Duty Power Cables",
+      "Quick Start Expansion Guide",
+      "Legal and Warranty Documents"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/ultimate-completion.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 169997, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 169997, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Premium Personal Entertainment Set with Arc Ultra",
+    "brand": "Sonos",
+    "category": "Sonos Home Theater",
+    "description": "<h2>Personal Entertainment Set: Cinema Meets Sanctuary</h2><p>Experience the ultimate audio flexibility. This premium bundle pairs the industry-leading <strong>Arc Ultra</strong> Dolby Atmos soundbar with the groundbreaking <strong>Sonos Ace</strong> headphones. Enjoy room-filling cinematic audio with family, and seamlessly swap to private, lossless listening when the house goes to sleep.</p><h3>TV Audio Swap</h3><p>With just a single button press on the Sonos Ace, the audio from your Arc Ultra instantly transfers to your headphones, maintaining full spatial audio and head-tracking capabilities for a personal movie theater experience.</p>",
+    "price": 295999,
+    "discountPrice": 295999,
+    "highlights": [
+      { "iconName": "Tv", "title": "Dolby Atmos Cinema" },
+      { "iconName": "Headphones", "title": "Lossless Private Audio" },
+      { "iconName": "Zap", "title": "Instant TV Audio Swap" },
+      { "iconName": "Wifi", "title": "WiFi 6 & Bluetooth" },
+      { "iconName": "Star", "title": "Dynamic Head Tracking" },
+      { "iconName": "Volume", "title": "Active Noise Cancelling" },
+      { "iconName": "Mic", "title": "Speech Enhancement" },
+      { "iconName": "Smartphone", "title": "Sonos App Sync" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Arc Ultra: 14 Class-D amplifiers for wall-to-wall spatial audio",
+          "Ace: Custom 40mm drivers for ultra-high-fidelity personal listening",
+          "Seamless handover of Dolby Atmos metadata between bar and headphones",
+          "Ace features dynamic head tracking for immersive, localized sound",
+          "Arc Ultra features Speech Enhancement for crystal clear dialogue",
+          "Ace features world-class Active Noise Cancelling (ANC)"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Arc Ultra: 1141.7 mm width, perfectly sized for 65-inch+ televisions",
+          "Ace: 312 g lightweight over-ear design with memory foam cushions",
+          "Arc Ultra features an acoustically transparent, 270-degree curved grille",
+          "Ace features hidden stainless steel headband sliders for a snag-free fit",
+          "Both feature premium matte finishes (Black or White) for a cohesive look",
+          "Arc Ultra includes a magnetic wall-mount sensor for auto-EQ"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Arc Ultra: Mains powered with 100-240V universal AC input",
+          "Ace: 30 hours of continuous wireless headphone battery life",
+          "Ace: Ultra-fast USB-C charging (3 mins gives 3 hours of play)",
+          "Arc Ultra features ultra-low power network standby mode",
+          "Ace features wear-detection to auto-pause and save battery",
+          "No external power brick required for the soundbar"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Arc Ultra connects to TV via high-bandwidth HDMI eARC",
+          "Ace utilizes exclusive Wi-Fi technology to swap audio from the Arc",
+          "Ace supports Bluetooth 5.4 for standard mobile device connection",
+          "Arc Ultra supports Apple AirPlay 2 and Spotify Connect",
+          "Tactile 'Content Key' on Ace instantly triggers the TV Audio Swap",
+          "Both devices managed and updated via the Sonos Ecosystem App"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sonos Arc Ultra Soundbar",
+      "Sonos Ace Premium Headphones",
+      "Ace Felt Travel Case",
+      "HDMI eARC Cable and Power Cable",
+      "USB-C Charging & Audio Cables",
+      "Quick Start Guides"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/personal-entertainment.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 295999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "White", "size": "Standard", "stock": 10, "price": 295999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  }
+];
+const devialetBatch1 = [
+  {
+    "name": "Devialet Gemini II",
+    "brand": "Devialet",
+    "category": "Premium Audio",
+    "description": "<h2>Devialet Gemini II: Pure Sound in Motion</h2><p>Experience the next generation of true wireless earbuds. The <strong>Devialet Gemini II</strong> combines compact design with high-fidelity sound engineering. Built with Devialet’s proprietary acoustic expertise, it delivers a rich, balanced listening experience with exceptional clarity and depth.</p><h3>Intelligent Isolation</h3><p>Designed for real-world environments, it features advanced <strong>Adaptive Noise Cancellation™</strong> that intelligently adjusts in real-time to your surroundings. Enhanced with Active Wind Reduction (AWR®), your calls remain clear and natural, even in challenging outdoor conditions.</p>",
+    "price": 41999,
+    "discountPrice": 41999,
+    "highlights": [
+      { "iconName": "Headphones", "title": "Adaptive ANC™" },
+      { "iconName": "Star", "title": "Titanium Drivers" },
+      { "iconName": "Mic", "title": "Active Wind Reduction" },
+      { "iconName": "Bluetooth", "title": "Multipoint Bluetooth" },
+      { "iconName": "Zap", "title": "Ultra-Low Distortion" },
+      { "iconName": "Battery", "title": "22 Hours Playtime" },
+      { "iconName": "Droplets", "title": "IPX4 Water Resistant" },
+      { "iconName": "Settings", "title": "Touch Controls" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Custom-engineered 10mm titanium-coated drivers",
+          "Advanced Adaptive Noise Cancellation™ (ANC) algorithm",
+          "Active Wind Reduction (AWR®) for crystal clear voice calls",
+          "Ultra-low distortion acoustic architecture for high volumes",
+          "Frequency Response designed for deep bass and sparkling highs",
+          "Internal Delay Compensation (IDC®) enhances noise cancellation"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Redesigned compact form factor, 40% smaller than previous generation",
+          "Ergonomic in-ear design optimized for extended listening sessions",
+          "Includes multiple silicone ear tip options for a secure fit",
+          "IPX4 rating protects against sweat and environmental splashes",
+          "Premium minimalist aesthetic matching Devialet's luxury profile",
+          "Available in sophisticated Matte Black and Iconic White"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Up to 5 hours of continuous playback on a single earbud charge",
+          "Total of 22 hours of playback combined with the charging case",
+          "Supports fast charging via universal USB-C connection",
+          "Wireless charging compatible case (Qi-certified)",
+          "High-density Lithium-ion battery cells for longevity",
+          "Smart standby mode preserves power when not in use"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Bluetooth 5.2 with reliable Multipoint connectivity",
+          "Seamlessly switch between two paired devices simultaneously",
+          "Intuitive touch controls for music, calls, and ANC toggling",
+          "Compatible with the Devialet App (iOS and Android)",
+          "Support for high-fidelity aptX and AAC wireless codecs",
+          "Auto-pause and auto-play in-ear detection sensors"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Devialet Gemini II True Wireless Earbuds",
+      "Wireless Charging Case",
+      "USB-C Charging Cable",
+      "Silicone Ear Tips (XS, S, M, L)",
+      "Quick Start Guide and Warranty"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.devialet.com/demo/gemini2.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb" }
+    ],
+    "variants": [
+      { "color": "Matte Black", "size": "Standard", "stock": 10, "price": 41999, "images": [{ "url": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb" }] },
+      { "color": "Iconic White", "size": "Standard", "stock": 10, "price": 41999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Devialet Gemini II Opéra de Paris",
+    "brand": "Devialet",
+    "category": "Premium Audio",
+    "description": "<h2>Devialet Gemini II Opéra de Paris: The Art of Sound</h2><p>The <strong>Opéra de Paris</strong> edition represents the perfect fusion of advanced acoustic engineering and timeless French luxury. Developed in collaboration with the prestigious Opéra National de Paris, this exclusive edition elevates the Gemini II into a true statement piece.</p><h3>Golden Perfection</h3><p>Finished with hand-applied <strong>22-carat gold-plated</strong> detailing, it reflects a heritage of craftsmanship and refinement. Beyond its stunning aesthetics, it houses custom titanium-coated drivers and Adaptive Noise Cancellation™ for an uncompromising listening sanctuary.</p>",
+    "price": 61999,
+    "discountPrice": 61999,
+    "highlights": [
+      { "iconName": "Star", "title": "22-Carat Gold Details" },
+      { "iconName": "Headphones", "title": "Adaptive ANC™" },
+      { "iconName": "Mic", "title": "Active Wind Reduction" },
+      { "iconName": "Bluetooth", "title": "Multipoint Bluetooth" },
+      { "iconName": "Volume", "title": "Titanium Drivers" },
+      { "iconName": "Battery", "title": "22 Hours Playtime" },
+      { "iconName": "Shield", "title": "Collector’s Edition" },
+      { "iconName": "Settings", "title": "Touch Controls" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Custom-engineered 10mm titanium-coated drivers",
+          "Advanced Adaptive Noise Cancellation™ (ANC) algorithm",
+          "Active Wind Reduction (AWR®) for crystal clear voice calls",
+          "Ultra-low distortion acoustic architecture for pristine fidelity",
+          "Rich bass, detailed mids, and sparkling highs with precision",
+          "Internal Delay Compensation (IDC®) enhances noise cancellation"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Hand-applied 22-carat gold-plated finish on the charging case",
+          "Exclusive Opéra National de Paris branding and design language",
+          "Redesigned compact form factor, 40% smaller than generation one",
+          "Secure ergonomic fit with multiple ear tip options",
+          "IPX4 water resistance for protection against elements",
+          "Designed for customers who value rarity and prestige"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Up to 5 hours of continuous playback on a single charge",
+          "Total of 22 hours of playback combined with the gold charging case",
+          "Supports fast charging via universal USB-C connection",
+          "Wireless charging compatible case (Qi-certified)",
+          "High-density Lithium-ion battery cells for longevity",
+          "Smart standby mode preserves power when not in use"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Bluetooth 5.2 with seamless Multipoint connectivity",
+          "Connect to multiple devices and switch effortlessly between them",
+          "Intuitive touch controls for music, calls, and ANC toggling",
+          "Compatible with the Devialet App (iOS and Android)",
+          "Support for high-fidelity wireless audio codecs",
+          "Auto-pause and auto-play in-ear detection sensors"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Gemini II Opéra de Paris Earbuds",
+      "22-Carat Gold-Plated Charging Case",
+      "USB-C Charging Cable",
+      "Silicone Ear Tips (XS, S, M, L)",
+      "Certificate of Authenticity"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.devialet.com/demo/gemini2-opera.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Gold & White", "size": "Standard", "stock": 10, "price": 61999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 10
+  },
+  {
+    "name": "Devialet Mania",
+    "brand": "Devialet",
+    "category": "Premium Audio",
+    "description": "<h2>Devialet Mania: Metamorphic Sound</h2><p>The <strong>Devialet Mania</strong> is a portable high-fidelity speaker that brings together powerful sound, intelligent acoustic technology, and refined design. Engineered to adapt to its surroundings, it delivers an immersive, room-filling experience whether placed indoors or outdoors.</p><h3>Intelligent Acoustics</h3><p>At the heart of Mania is a six-driver system and signature <strong>Active Stereo Calibration (ASC)</strong> technology. It continuously analyzes its environment and automatically adjusts the sound output, ensuring optimal performance regardless of placement.</p>",
+    "price": 103999,
+    "discountPrice": 103999,
+    "highlights": [
+      { "iconName": "Volume", "title": "360° Stereo Sound" },
+      { "iconName": "Settings", "title": "Active Stereo Calib." },
+      { "iconName": "Star", "title": "6-Driver System" },
+      { "iconName": "Wifi", "title": "Wi-Fi & Bluetooth" },
+      { "iconName": "Battery", "title": "10 Hours Battery" },
+      { "iconName": "Droplets", "title": "IPX4 Splash Resistant" },
+      { "iconName": "Smartphone", "title": "AirPlay 2 & Spotify" },
+      { "iconName": "Shield", "title": "Integrated Handle" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Six-driver precision acoustic system",
+          "Dual push-push woofers for deep, zero-distortion bass",
+          "Four aluminum full-range drivers for expansive soundstage",
+          "Active Stereo Calibration (ASC) real-time acoustic mapping",
+          "Frequency response covering deep lows to detailed highs",
+          "Cross-stereo architecture for true 360° immersion"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Compact, spherical design for optimal sound dispersion",
+          "Dimensions optimized for easy transport and placement",
+          "Built-in rigid carrying handle integrated into the chassis",
+          "Premium woven acoustic fabric covering",
+          "IPX4 rating ensures resistance to water splashes",
+          "Available in sophisticated Matte Black and Light Grey"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Built-in high-capacity battery for portable use",
+          "Up to 10 hours of uninterrupted playback throughout the day",
+          "Charges via USB-C or the dedicated charging dock (sold separately)",
+          "Intelligent power management for extended longevity",
+          "LED battery level and status indicator on the control panel",
+          "Instant wake functionality from sleep mode"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Dual-band Wi-Fi for high-resolution home streaming",
+          "Bluetooth connectivity for seamless outdoor listening",
+          "Apple AirPlay 2 and Spotify Connect native support",
+          "Elegant touch interface with LED feedback",
+          "Multi-room compatibility within the Devialet ecosystem",
+          "Amazon Alexa voice assistant integration built-in"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Devialet Mania Portable Speaker",
+      "USB-C Power Cable",
+      "Power Adapter",
+      "Speaker Protective Bag",
+      "Quick Start Guide"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.devialet.com/demo/mania.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }
+    ],
+    "variants": [
+      { "color": "Matte Black", "size": "Standard", "stock": 10, "price": 103999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "Light Grey", "size": "Standard", "stock": 10, "price": 103999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Devialet Mania Opéra de Paris",
+    "brand": "Devialet",
+    "category": "Premium Audio",
+    "description": "<h2>Devialet Mania Opéra de Paris: The Sound of Luxury</h2><p>The <strong>Mania Opéra de Paris</strong> edition is a refined expression of high-fidelity sound and Parisian luxury. Developed in collaboration with the prestigious Opéra National de Paris, this exclusive variant transforms the portable speaker into a true statement piece.</p><h3>Golden Era Acoustics</h3><p>Accented with hand-applied <strong>22-carat gold-plated detailing</strong>, it embodies elegance while maintaining Devialet’s signature performance. With Active Stereo Calibration (ASC) and a powerful six-driver system, it adapts to its surroundings in real-time for perfect playback anywhere.</p>",
+    "price": 114999,
+    "discountPrice": 114999,
+    "highlights": [
+      { "iconName": "Star", "title": "22-Carat Gold Details" },
+      { "iconName": "Settings", "title": "Active Stereo Calib." },
+      { "iconName": "Volume", "title": "6-Driver System" },
+      { "iconName": "Wifi", "title": "Wi-Fi & Bluetooth" },
+      { "iconName": "Battery", "title": "10 Hours Battery" },
+      { "iconName": "Shield", "title": "Opéra de Paris Ed." },
+      { "iconName": "Smartphone", "title": "AirPlay 2 & Spotify" },
+      { "iconName": "Droplets", "title": "IPX4 Splash Resistant" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Six-driver precision acoustic architecture",
+          "Dual push-push woofers eliminate mechanical vibration",
+          "Four full-range drivers for expansive, clear soundstage",
+          "Active Stereo Calibration (ASC) real-time acoustic mapping",
+          "Cross-stereo architecture for immersive 360° audio",
+          "Pristine, distortion-free output at high volumes"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Signature 22-carat gold-plated accents",
+          "Exclusive Opéra National de Paris design elements",
+          "Built-in rigid carrying handle for elegant portability",
+          "Premium woven acoustic fabric covering",
+          "IPX4 rating ensures resistance to water splashes",
+          "Designed as a statement piece for luxury interiors"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Built-in high-capacity battery for portable use",
+          "Up to 10 hours of uninterrupted playback",
+          "Includes the Devialet Mania Station (charging dock)",
+          "Intelligent power management for extended longevity",
+          "LED battery level and status indicator",
+          "Instant wake functionality from sleep mode"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Dual-band Wi-Fi for high-resolution home streaming",
+          "Bluetooth connectivity for seamless outdoor listening",
+          "Apple AirPlay 2 and Spotify Connect native support",
+          "Elegant touch interface with LED feedback",
+          "Multi-room compatibility within the Devialet ecosystem",
+          "Amazon Alexa voice assistant integration built-in"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Devialet Mania Opéra de Paris Speaker",
+      "Devialet Mania Station (Wireless Dock)",
+      "USB-C Power Cable & Adapter",
+      "Speaker Protective Bag",
+      "Certificate of Authenticity"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.devialet.com/demo/mania-opera.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Gold & White", "size": "Standard", "stock": 10, "price": 114999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 10
+  },
+  {
+    "name": "Devialet Mania Opera Rouge",
+    "brand": "Devialet",
+    "category": "Premium Audio",
+    "description": "<h2>Devialet Mania Opera Rouge: Bold and Expressive</h2><p>The <strong>Devialet Mania Opéra Rouge</strong> is a bold reinterpretation of portable high-fidelity sound. Created as a striking statement variant within the Opéra collection, it delivers the same powerful performance as the Mania while introducing a deeply expressive, vibrant aesthetic.</p><h3>Uncompromising Acoustic Power</h3><p>Beneath its bold red exterior lies a sophisticated six-driver acoustic system. Featuring Active Stereo Calibration (ASC), the speaker adapts its sound output in real-time based on placement, ensuring perfect harmony between design and performance.</p>",
+    "price": 124999,
+    "discountPrice": 124999,
+    "highlights": [
+      { "iconName": "Star", "title": "Striking Rouge Finish" },
+      { "iconName": "Settings", "title": "Active Stereo Calib." },
+      { "iconName": "Volume", "title": "6-Driver System" },
+      { "iconName": "Wifi", "title": "Wi-Fi & Bluetooth" },
+      { "iconName": "Battery", "title": "10 Hours Battery" },
+      { "iconName": "Shield", "title": "Integrated Handle" },
+      { "iconName": "Smartphone", "title": "AirPlay 2 & Spotify" },
+      { "iconName": "Droplets", "title": "IPX4 Splash Resistant" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Six-driver precision acoustic architecture",
+          "Dual push-push woofers eliminate mechanical vibration",
+          "Four full-range drivers for expansive, clear soundstage",
+          "Active Stereo Calibration (ASC) real-time acoustic mapping",
+          "Cross-stereo architecture for immersive 360° audio",
+          "Pristine, distortion-free output at high volumes"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Exclusive, vibrant Opera Rouge aesthetic finish",
+          "Built-in rigid carrying handle for elegant portability",
+          "Premium woven acoustic fabric covering",
+          "IPX4 rating ensures resistance to water splashes",
+          "Designed as a bold statement piece for contemporary interiors",
+          "Compact, spherical design for optimal sound dispersion"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Built-in high-capacity battery for portable use",
+          "Up to 10 hours of uninterrupted playback",
+          "Includes the Devialet Mania Station (charging dock)",
+          "Intelligent power management for extended longevity",
+          "LED battery level and status indicator",
+          "Instant wake functionality from sleep mode"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Dual-band Wi-Fi for high-resolution home streaming",
+          "Bluetooth connectivity for seamless outdoor listening",
+          "Apple AirPlay 2 and Spotify Connect native support",
+          "Elegant touch interface with LED feedback",
+          "Multi-room compatibility within the Devialet ecosystem",
+          "Amazon Alexa voice assistant integration built-in"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Devialet Mania Opera Rouge Speaker",
+      "Devialet Mania Station (Wireless Dock)",
+      "USB-C Power Cable & Adapter",
+      "Speaker Protective Bag",
+      "Quick Start Guide"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.devialet.com/demo/mania-rouge.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }
+    ],
+    "variants": [
+      { "color": "Rouge Red", "size": "Standard", "stock": 10, "price": 124999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 10
+  },
+  {
+    "name": "Devialet Dione",
+    "brand": "Devialet",
+    "category": "Premium Audio",
+    "description": "<h2>Devialet Dione: Cinematic Immersion</h2><p>The <strong>Devialet Dione</strong> is an intensely immersive, all-in-one Dolby Atmos 5.1.2 soundbar engineered to elevate your viewing into a visceral cinematic experience. It combines powerful performance and intelligent processing without the need for an external subwoofer.</p><h3>The ORB® Innovation</h3><p>At the center sits the ORB®—a unique rotating sphere dedicated to dialogue clarity. The system automatically detects its orientation (wall-mounted or shelf) and optimizes sound output accordingly, delivering ultra-low distortion and an expansive 3D soundstage.</p>",
+    "price": 124999,
+    "discountPrice": 124999,
+    "highlights": [
+      { "iconName": "Tv", "title": "Dolby Atmos 5.1.2" },
+      { "iconName": "Volume", "title": "17 Custom Drivers" },
+      { "iconName": "Star", "title": "ORB® Central Sphere" },
+      { "iconName": "Zap", "title": "Integrated Subwoofers" },
+      { "iconName": "Settings", "title": "Auto Orientation" },
+      { "iconName": "Wifi", "title": "Wi-Fi & eARC" },
+      { "iconName": "Smartphone", "title": "AirPlay 2 & Spotify" },
+      { "iconName": "Shield", "title": "Architectural Design" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "17 high-performance neodymium drivers (woofers and full-range)",
+          "8 integrated subwoofers for deep, impactful low frequencies",
+          "Dolby Atmos 5.1.2 architecture for vertical height immersion",
+          "Devialet proprietary acoustic processing for ultra-low distortion",
+          "ORB® center channel ensures ultra-clear vocals and dialogue",
+          "SPACE™ upscaling technology transforms stereo into 5.1.2"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Sleek, architectural single-unit setup: 1200 x 77 x 165 mm",
+          "Substantial 12 kg weight provides rock-solid acoustic stability",
+          "Adaptive orientation detects wall-mounted or shelf placement",
+          "Premium acoustic fabric and anodized aluminum finish",
+          "ORB® sphere physically rotates to maintain acoustic alignment",
+          "Minimalist installation with no clutter or external boxes"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Mains powered: Internal 950W peak high-current power supply",
+          "ADH® amplification for analog warmth and digital efficiency",
+          "Dynamic power management ensures cool, reliable operation",
+          "Universal 110-240V voltage compatibility",
+          "Advanced thermal management protects internal amplifiers",
+          "Instant wake functionality linked to television power state"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "HDMI eARC with full CEC support for seamless TV integration",
+          "Optical audio input for legacy home entertainment systems",
+          "Wi-Fi and Bluetooth 5.0 wireless streaming capabilities",
+          "Apple AirPlay 2, Spotify Connect, and UPnP built-in",
+          "Smart Calibration and DSP optimization via Devialet App",
+          "Multi-room support within the Devialet ecosystem"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Devialet Dione Premium Soundbar",
+      "High-Speed HDMI eARC Cable",
+      "Optical TOSLINK Audio Cable",
+      "Power Cable",
+      "Wall Mount Kit and Installation Guide"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.devialet.com/demo/dione.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "Standard", "stock": 10, "price": 124999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 10
+  },
+  {
+    "name": "Devialet Dione Opéra de Paris",
+    "brand": "Devialet",
+    "category": "Premium Audio",
+    "description": "<h2>Devialet Dione Opéra de Paris: The Pinnacle of Cinema</h2><p>The <strong>Dione Opéra de Paris</strong> edition represents the zenith of home theatre audio, combining cutting-edge acoustic engineering with the elegance of French luxury. Created in collaboration with the prestigious Opéra National de Paris, it transforms a high-performance soundbar into a true statement piece.</p><h3>Golden ORB® Centerpiece</h3><p>At its center lies the iconic ORB® channel, enhanced with hand-applied <strong>22-carat gold-plated detailing</strong>. It delivers an uncompromising Dolby Atmos 5.1.2 experience with 17 high-end drivers, providing room-shaking bass and immaculate vocal clarity in one stunning unit.</p>",
+    "price": 229999,
+    "discountPrice": 229999,
+    "highlights": [
+      { "iconName": "Star", "title": "22-Carat Gold ORB®" },
+      { "iconName": "Tv", "title": "Dolby Atmos 5.1.2" },
+      { "iconName": "Volume", "title": "17 Custom Drivers" },
+      { "iconName": "Zap", "title": "Integrated Subwoofers" },
+      { "iconName": "Settings", "title": "Auto Orientation" },
+      { "iconName": "Wifi", "title": "Wi-Fi & eARC" },
+      { "iconName": "Smartphone", "title": "AirPlay 2 & Spotify" },
+      { "iconName": "Shield", "title": "Parisian Heritage" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "17 high-performance neodymium drivers for massive soundstage",
+          "8 integrated subwoofers eliminate the need for external bass units",
+          "Dolby Atmos 5.1.2 architecture for vertical 3D audio immersion",
+          "Devialet proprietary acoustic processing for ultra-low distortion",
+          "ORB® center channel ensures ultra-clear vocals and dialogue",
+          "SPACE™ upscaling technology transforms stereo into 5.1.2"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Signature 22-carat gold-plated detailing on the central ORB®",
+          "Sleek, architectural single-unit setup: 1200 x 77 x 165 mm",
+          "Adaptive orientation detects wall-mounted or shelf placement",
+          "ORB® sphere physically rotates to maintain acoustic alignment",
+          "Premium acoustic fabric and anodized aluminum finish",
+          "A collector’s edition statement piece for luxury interiors"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Mains powered: Internal 950W peak high-current power supply",
+          "ADH® amplification for analog warmth and digital efficiency",
+          "Dynamic power management ensures cool, reliable operation",
+          "Universal 110-240V voltage compatibility",
+          "Advanced thermal management protects internal amplifiers",
+          "Instant wake functionality linked to television power state"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "HDMI eARC with full CEC support for seamless TV integration",
+          "Optical audio input for legacy home entertainment systems",
+          "Wi-Fi and Bluetooth wireless streaming capabilities",
+          "Apple AirPlay 2, Spotify Connect, and UPnP built-in",
+          "Smart Calibration and DSP optimization via Devialet App",
+          "Multi-room support within the Devialet ecosystem"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Devialet Dione Opéra de Paris Soundbar",
+      "High-Speed HDMI eARC Cable",
+      "Optical TOSLINK Audio Cable",
+      "Power Cable",
+      "Wall Mount Kit and Certificate of Authenticity"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.devialet.com/demo/dione-opera.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }
+    ],
+    "variants": [
+      { "color": "Gold & Dark Grey", "size": "Standard", "stock": 5, "price": 229999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 5
+  },
+  {
+    "name": "Devialet Phantom II 95 dB",
+    "brand": "Devialet",
+    "category": "Premium Audio",
+    "description": "<h2>Devialet Phantom II 95 dB: Compact Power</h2><p>The <strong>Phantom II 95 dB</strong> delivers powerful, room-filling sound in an astonishingly compact form factor. Ideal for modern spaces where size and performance must coexist, it represents a monumental leap in acoustic engineering.</p><h3>Unreasonable Sound</h3><p>Experience Devialet’s patented ADH® Hybrid Amplification and SAM® technologies working in tandem. The result is zero distortion, zero saturation, and zero background noise. It produces deep, controlled bass that feels rich and impactful without overwhelming the delicate balance of your music.</p>",
+    "price": 146999,
+    "discountPrice": 146999,
+    "highlights": [
+      { "iconName": "Volume", "title": "95 dB SPL Power" },
+      { "iconName": "Zap", "title": "Zero Distortion" },
+      { "iconName": "Star", "title": "Aluminum Woofers" },
+      { "iconName": "Settings", "title": "ADH® Amplification" },
+      { "iconName": "Wifi", "title": "AirPlay 2 & Spotify" },
+      { "iconName": "Smartphone", "title": "App Controlled" },
+      { "iconName": "Shield", "title": "Compact Sculptural" },
+      { "iconName": "Music", "title": "Stereo Pairing Ready" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Maximum Sound Level: 95 dB SPL at 1 meter",
+          "High-Excursion Aluminium Woofers for deep, controlled bass",
+          "ADH® (Analog Digital Hybrid) amplification technology",
+          "SAM® (Speaker Active Matching) ensures perfect driver alignment",
+          "Wide Frequency Response accurately reproduces every nuance",
+          "Zero Distortion, Zero Saturation, Zero Background Noise"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Minimalist sculptural design enhances modern interiors",
+          "Compact architecture: 157 x 168 x 219 mm (W x H x D)",
+          "Weight: 4.3 kg for dense, vibration-free stability",
+          "High-pressure sealed enclosure for acoustic efficiency",
+          "Available in sophisticated Matte Black or Iconic White",
+          "Capacitive touch controls discreetly integrated on top"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Mains powered: 100-240V internal switching power supply",
+          "Custom energy-efficient power stage for instantaneous transients",
+          "Auto-standby mode automatically preserves electronic life",
+          "Advanced thermal management without noisy internal fans",
+          "No external power brick required",
+          "Gold-plated internal contacts for maximum conductivity"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Versatile Wireless Streaming: AirPlay 2, Spotify Connect, UPnP",
+          "Dual-band Wi-Fi and Bluetooth connectivity built-in",
+          "Optical input and analog 3.5mm jack for wired sources",
+          "Stereo Pairing capability via the Devialet App",
+          "Seamless Multi-Room integration with other Devialet speakers",
+          "Quick setup and comprehensive EQ control via smartphone"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Devialet Phantom II 95 dB Speaker",
+      "Power Cable",
+      "Quick Start Guide",
+      "Warranty Documentation",
+      "Microfiber Cleaning Cloth"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.devialet.com/demo/phantom2-95.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Iconic White", "size": "Standard", "stock": 10, "price": 146999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "Matte Black", "size": "Standard", "stock": 10, "price": 146999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Devialet Phantom II 98 dB",
+    "brand": "Devialet",
+    "category": "Premium Audio",
+    "description": "<h2>Devialet Phantom II 98 dB: Monumental Performance</h2><p>Despite its compact footprint, the <strong>Phantom II 98 dB</strong> delivers room-filling sound with impressive acoustic power. It pushes the boundaries of physical engineering, capturing subtle nuances across the spectrum, from delicate highs to powerful, chest-thumping lows.</p><h3>Purity at High Volumes</h3><p>Devialet’s patented ADH® Hybrid Amplification system combines the precision of digital with the richness of analog. Coupled with SAM® processing, the Phantom II maintains absolute clarity even at higher volumes, delivering a pure and immersive listening experience.</p>",
+    "price": 175000,
+    "discountPrice": 175000,
+    "highlights": [
+      { "iconName": "Volume", "title": "98 dB SPL Power" },
+      { "iconName": "Star", "title": "High-Excursion Bass" },
+      { "iconName": "Zap", "title": "Zero Distortion" },
+      { "iconName": "Settings", "title": "SAM® Processing" },
+      { "iconName": "Wifi", "title": "AirPlay 2 & UPnP" },
+      { "iconName": "Smartphone", "title": "Plug-and-Play App" },
+      { "iconName": "Shield", "title": "Sculptural Aesthetic" },
+      { "iconName": "Music", "title": "Stereo Pairing Ready" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Maximum Sound Level: 98 dB SPL at 1 meter",
+          "High-Excursion Aluminium Woofers for massive low-end air movement",
+          "ADH® Hybrid Amplification Technology for ultra-clean sound",
+          "SAM® (Speaker Active Matching) preserves the original recording",
+          "Wide Frequency Response and unmatched detail retrieval",
+          "Zero Distortion, Zero Saturation, Zero Background Noise"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Minimalist sculptural aesthetic integrates into modern interiors",
+          "Compact architecture: 157 x 168 x 219 mm (W x H x D)",
+          "Weight: 4.3 kg for immense structural rigidity against acoustic pressure",
+          "Hermetically sealed enclosure prevents air leakage",
+          "Available in premium Matte Black or Iconic White",
+          "Capacitive touch playback controls integrated directly on the shell"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Mains powered: 100-240V internal switching power supply",
+          "High-current delivery system for massive acoustic transients",
+          "Energy-saving auto-standby mode when audio stops",
+          "Advanced passive thermal dissipation prevents overheating",
+          "Custom filtered power input to eliminate AC line noise",
+          "No external power brick required"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Multiple Streaming Options: AirPlay 2, Spotify Connect, UPnP",
+          "Dual-band Wi-Fi and Bluetooth capability built-in",
+          "Optical input and analog 3.5mm jack for physical sources",
+          "Stereo Pairing for true left-right separation via the app",
+          "Multi-Room & Wireless Ecosystem synchronization",
+          "Plug-and-play setup with intuitive controls via Devialet app"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Devialet Phantom II 98 dB Speaker",
+      "Heavy-Duty Power Cable",
+      "Quick Start Guide",
+      "Warranty Documentation",
+      "Microfiber Cleaning Cloth"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.devialet.com/demo/phantom2-98.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }
+    ],
+    "variants": [
+      { "color": "Iconic White", "size": "Standard", "stock": 10, "price": 175000, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "Matte Black", "size": "Standard", "stock": 10, "price": 175000, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  },
+  {
+    "name": "Devialet Phantom I 103 dB",
+    "brand": "Devialet",
+    "category": "Premium Audio",
+    "description": "<h2>Devialet Phantom I 103 dB: High-Impact Performance</h2><p>Engineered to deliver powerful, room-filling sound with remarkable clarity, the <strong>Phantom I 103 dB</strong> is ideal for medium to large living spaces. Its iconic sculptural design is a bold fusion of engineering and art, making it a visual and acoustic statement.</p><h3>Heart Bass Implosion</h3><p>Devialet's patented Heart Bass Implosion® (HBI) technology utilizes dual opposed woofers to generate deep, physical bass with extreme precision. Combined with ADH® amplification, it eliminates distortion even at staggering volumes, presenting audio exactly as the artist intended.</p>",
+    "price": 251999,
+    "discountPrice": 251999,
+    "highlights": [
+      { "iconName": "Volume", "title": "103 dB SPL Power" },
+      { "iconName": "Star", "title": "Heart Bass Implosion®" },
+      { "iconName": "Zap", "title": "Zero Distortion" },
+      { "iconName": "Settings", "title": "ADH® Amplification" },
+      { "iconName": "Wifi", "title": "AirPlay 2 & UPnP" },
+      { "iconName": "Shield", "title": "Sculptural Design" },
+      { "iconName": "Smartphone", "title": "Devialet Remote Included" },
+      { "iconName": "Music", "title": "Expansive Soundstage" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Maximum Sound Level: 103 dB SPL at 1 meter",
+          "Heart Bass Implosion® (HBI) Technology with dual opposed woofers",
+          "ADH® Hybrid Amplification System for high efficiency",
+          "SAM® (Speaker Active Matching) Processing for faithful reproduction",
+          "Ultra-Low Distortion Performance at all volume levels",
+          "High Dynamic Range Capability for extreme realism"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Iconic Sculptural Design: 252 x 255 x 342 mm (W x H x D)",
+          "Extreme internal density resulting in a weight of 11.4 kg",
+          "Side plates meticulously finished in Light Chrome or Matte Black",
+          "High-excursion lateral woofers visibly react to bass frequencies",
+          "Advanced Thermal & Pressure Management enclosures",
+          "Engineered using composite glass fiber and internal aluminum"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Universal 100-240V AC mains powered internal supply",
+          "High-current power stage designed for massive transient peaks",
+          "Intelligent auto-standby functionality preserves energy",
+          "Proprietary power filtering eliminates AC line noise injection",
+          "Advanced passive thermal dissipation (no internal cooling fans)",
+          "Gold-plated internal contacts for maximum conductivity"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "High-Resolution Streaming: AirPlay 2, Spotify Connect, UPnP",
+          "Dual-band Wi-Fi (a/b/g/n/ac) and Gigabit Ethernet connection",
+          "Optical TOSLINK input for television or CD player connection",
+          "Bluetooth A2DP and AVRCP profiles with high-res codec support",
+          "Includes the Devialet Remote 2.0 with precision haptic volume ring",
+          "Multi-Room Ecosystem Integration via the Devialet application"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Devialet Phantom I 103 dB Speaker",
+      "Devialet Remote (Matching Finish)",
+      "Premium Power Cable",
+      "Quick Start Guide",
+      "Bespoke Protective Pouch"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.devialet.com/demo/phantom1-103.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Light Chrome", "size": "Standard", "stock": 10, "price": 251999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "Matte Black", "size": "Standard", "stock": 10, "price": 251999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 20
+  }
+];
+const finalBatchProducts = [
+  {
+    "name": "Devialet Phantom I 108 dB",
+    "brand": "Devialet",
+    "category": "Premium Audio",
+    "description": "<h2>Devialet Phantom I 108 dB: Extreme Acoustic Power</h2><p>Designed to deliver high-impact, room-filling sound, the <strong>Phantom I 108 dB</strong> energizes large spaces with absolute ease. Every detail of the original recording is captured with flawless precision, from quiet passages to powerful, chest-thumping crescendos.</p><h3>Unmatched Fidelity</h3><p>Devialet’s patented Heart Bass Implosion® (HBI) and ADH® amplification systems combine to produce deep, physical bass and sparkling highs with zero distortion, zero saturation, and zero background noise. This is pure, unadulterated acoustic perfection.</p>",
+    "price": 367999,
+    "discountPrice": 367999,
+    "highlights": [
+      { "iconName": "Volume", "title": "108 dB SPL Power" },
+      { "iconName": "Star", "title": "Heart Bass Implosion" },
+      { "iconName": "Settings", "title": "ADH® Amplification" },
+      { "iconName": "Zap", "title": "Zero Distortion" },
+      { "iconName": "Wifi", "title": "AirPlay 2 & Spotify" },
+      { "iconName": "Shield", "title": "Sculptural Aesthetic" },
+      { "iconName": "Bluetooth", "title": "High-Res Bluetooth" },
+      { "iconName": "Music", "title": "Stereo Pairing" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Maximum Sound Level: 108 dB SPL at 1 meter",
+          "Heart Bass Implosion® (HBI) with extreme excursion lateral woofers",
+          "ADH® Hybrid Amplification combining analog warmth with digital control",
+          "SAM® (Speaker Active Matching) for flawless driver alignment",
+          "Ultra-low distortion performance across all frequency ranges",
+          "Expansive soundstage and precise vocal imaging"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Iconic spherical design for zero acoustic diffraction",
+          "Dimensions: 252 x 255 x 342 mm (W x H x D)",
+          "Extreme internal density resulting in a weight of 11.4 kg",
+          "Hermetically sealed enclosure withstands massive internal pressure",
+          "Premium side plating available in Gold or Dark Chrome",
+          "Engineered using composite glass fiber and internal aluminum"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Universal 100-240V AC internal switching power supply",
+          "High-current power stage handles massive acoustic transients",
+          "Advanced passive thermal dissipation prevents overheating",
+          "Intelligent auto-standby mode preserves electronic life",
+          "Custom filtered power input eliminates AC line noise",
+          "No external power brick required for clean installation"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Dual-band Wi-Fi (a/b/g/n/ac) and Gigabit Ethernet built-in",
+          "Bluetooth A2DP/AVRCP with high-resolution codec support",
+          "Optical TOSLINK input for direct digital connections",
+          "Seamless Multi-Room integration via the Devialet application",
+          "Apple AirPlay 2, Spotify Connect, and UPnP ready",
+          "Includes Devialet Remote 2.0 with precision haptic control"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Devialet Phantom I 108 dB Speaker",
+      "Devialet Remote (Matching Color)",
+      "Premium Heavy-Duty Power Cable",
+      "Bespoke Protective Pouch",
+      "Quick Start Guide and Warranty"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.devialet.com/demo/phantom1-108.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Gold", "size": "Standard", "stock": 5, "price": 367999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "Dark Chrome", "size": "Standard", "stock": 5, "price": 367999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 10
+  },
+  {
+    "name": "Devialet Phantom Ultimate 98 dB",
+    "brand": "Devialet",
+    "category": "Premium Audio",
+    "description": "<h2>Devialet Phantom Ultimate 98 dB: Next-Generation Sound</h2><p>Built on Devialet’s evolved architecture, the <strong>Phantom Ultimate 98 dB</strong> delivers powerful, room-filling sound with enhanced clarity, control, and efficiency. It is the perfect balance of compact design and monumental acoustic output.</p><h3>Refined Precision</h3><p>With refined ADH® Hybrid Amplification and advanced SAM® Signal Processing, the Phantom Ultimate continuously adapts in real time to match speaker behavior, ensuring highly accurate, distortion-free audio reproduction across all listening levels.</p>",
+    "price": 199999,
+    "discountPrice": 199999,
+    "highlights": [
+      { "iconName": "Volume", "title": "98 dB SPL Output" },
+      { "iconName": "Settings", "title": "Refined ADH®" },
+      { "iconName": "Star", "title": "Advanced SAM®" },
+      { "iconName": "Zap", "title": "Ultra-Low Distortion" },
+      { "iconName": "Wifi", "title": "Seamless Streaming" },
+      { "iconName": "Smartphone", "title": "Devialet App Sync" },
+      { "iconName": "Shield", "title": "Ultimate Architecture" },
+      { "iconName": "Music", "title": "Stereo Pairing Ready" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Maximum Sound Level: 98 dB SPL at 1 meter",
+          "Refined ADH® Hybrid Amplification for improved efficiency",
+          "Advanced SAM® Signal Processing for perfect driver alignment",
+          "Deep, controlled bass with massive air displacement",
+          "Expanded soundstage with accurate vocal and instrument separation",
+          "Ultra-low distortion maintained across extreme volume levels"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Optimized spherical architecture for modern luxury spaces",
+          "Dimensions: 157 x 168 x 219 mm (W x H x D)",
+          "Substantial weight anchors the speaker against vibration",
+          "Hermetically sealed enclosure prevents acoustic leakage",
+          "Available in premium Light Pearl and Deep Forest finishes",
+          "Seamless integration with Devialet mounting accessories"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Mains powered via a 100-240V universal internal supply",
+          "Improved output stability and energy efficiency",
+          "Intelligent auto-standby functionality preserves lifespan",
+          "Advanced thermal dissipation system (fanless design)",
+          "No external power brick required for minimalist setups",
+          "Power filtering prevents AC line noise from entering the signal"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Dual-band Wi-Fi (a/b/g/n/ac) for high-resolution streaming",
+          "Apple AirPlay 2, Spotify Connect, and UPnP built-in",
+          "Bluetooth A2DP/AVRCP for quick mobile connections",
+          "Optical TOSLINK input for wired digital audio sources",
+          "Stereo pairing capability for true left-right separation",
+          "Future-ready software platform supports over-the-air updates"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Devialet Phantom Ultimate 98 dB Speaker",
+      "Premium Power Cable",
+      "Quick Start Guide",
+      "Warranty Documentation",
+      "Microfiber Cleaning Cloth"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.devialet.com/demo/phantom-ultimate98.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }
+    ],
+    "variants": [
+      { "color": "Light Pearl", "size": "Standard", "stock": 5, "price": 199999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "Deep Forest", "size": "Standard", "stock": 5, "price": 199999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 10
+  },
+  {
+    "name": "Devialet Phantom Ultimate 98 dB Opéra de Paris",
+    "brand": "Devialet",
+    "category": "Premium Audio",
+    "description": "<h2>Devialet Phantom Ultimate 98 dB Opéra de Paris</h2><p>Combining Devialet’s next-generation Ultimate architecture with iconic Parisian craftsmanship, the <strong>Opéra de Paris</strong> edition is a collector's masterpiece. It serves as a premium visual centerpiece for high-end residential spaces while delivering flawless 98 dB acoustic performance.</p><h3>Golden Heritage</h3><p>Hand-finished with <strong>22-carat gold-plated detailing</strong>, it perfectly marries advanced acoustic engineering—like ADH® and SAM® technologies—with timeless luxury, offering deep bass and crystal-clear audio.</p>",
+    "price": 232999,
+    "discountPrice": 232999,
+    "highlights": [
+      { "iconName": "Star", "title": "22-Carat Gold Detail" },
+      { "iconName": "Volume", "title": "98 dB SPL Output" },
+      { "iconName": "Shield", "title": "Parisian Heritage" },
+      { "iconName": "Zap", "title": "Ultra-Low Distortion" },
+      { "iconName": "Settings", "title": "Refined ADH®" },
+      { "iconName": "Wifi", "title": "Seamless Streaming" },
+      { "iconName": "Music", "title": "Stereo Pairing Ready" },
+      { "iconName": "Smartphone", "title": "Devialet App Sync" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Maximum Sound Level: 98 dB SPL at 1 meter",
+          "Refined ADH® Hybrid Amplification for analog warmth and digital power",
+          "Advanced SAM® Signal Processing for perfect mechanical alignment",
+          "Deep, controlled bass handling massive dynamic shifts",
+          "Expanded soundstage with zero acoustic diffraction",
+          "Ultra-low distortion maintained across all volume levels"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Signature 22-carat gold-plated side panels applied by hand",
+          "Exclusive Opéra National de Paris branding and aesthetic",
+          "Dimensions: 157 x 168 x 219 mm (W x H x D)",
+          "Hermetically sealed enclosure to withstand internal air pressure",
+          "A collector’s edition luxury positioning for statement interiors",
+          "Seamless integration with specific Devialet accessories"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Mains powered via a 100-240V universal internal supply",
+          "Improved output stability and energy efficiency",
+          "Intelligent auto-standby functionality preserves lifespan",
+          "Advanced thermal dissipation system (fanless design)",
+          "No external power brick required for minimalist setups",
+          "Power filtering prevents AC line noise from entering the signal"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Dual-band Wi-Fi (a/b/g/n/ac) for high-resolution streaming",
+          "Apple AirPlay 2, Spotify Connect, and UPnP built-in",
+          "Bluetooth A2DP/AVRCP for quick mobile connections",
+          "Optical TOSLINK input for wired digital audio sources",
+          "Stereo pairing capability for true left-right separation",
+          "Future-ready software platform supports over-the-air updates"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Phantom Ultimate 98 dB Opéra de Paris",
+      "Premium Power Cable",
+      "Certificate of Authenticity",
+      "Warranty Documentation",
+      "Microfiber Cleaning Cloth"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.devialet.com/demo/phantom-ultimate98-opera.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Opéra de Paris (Gold)", "size": "Standard", "stock": 5, "price": 232999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 5
+  },
+  {
+    "name": "Devialet Phantom I 108 dB (Ultimate Edition)",
+    "brand": "Devialet",
+    "category": "Premium Audio",
+    "description": "<h2>Devialet Phantom I Ultimate Edition: The Absolute Pinnacle</h2><p>Designed for large spaces and high-impact listening experiences, the <strong>Phantom I 108 dB Ultimate Edition</strong> delivers extreme, room-shaking sound with exceptional clarity. It is built on Devialet’s most advanced platform, enhancing responsiveness and overall acoustic performance.</p><h3>Unmatched Architectural Power</h3><p>Featuring Heart Bass Implosion® (HBI) and enhanced ADH® amplification, the dual opposed woofers generate physical bass with unmatched precision. Available in exclusive Light Pearl and Deep Forest finishes, it is a true luxury sculptural design statement.</p>",
+    "price": 408999,
+    "discountPrice": 408999,
+    "highlights": [
+      { "iconName": "Volume", "title": "108 dB SPL Power" },
+      { "iconName": "Star", "title": "Ultimate Architecture" },
+      { "iconName": "Settings", "title": "Enhanced ADH®" },
+      { "iconName": "Zap", "title": "Heart Bass Implosion" },
+      { "iconName": "Wifi", "title": "High-Res Streaming" },
+      { "iconName": "Shield", "title": "Sculptural Statement" },
+      { "iconName": "Smartphone", "title": "Devialet App Sync" },
+      { "iconName": "Music", "title": "Stereo Pairing Ready" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Flagship Acoustic Power: 108 dB SPL at 1 meter",
+          "Heart Bass Implosion® (HBI) Technology with dual opposed woofers",
+          "Enhanced ADH® Hybrid Amplification for maximum fidelity",
+          "Advanced SAM® (Speaker Active Matching) for real-time driver alignment",
+          "Ultra-Low Distortion even at extreme volume levels",
+          "Expanded Soundstage capturing the highest dynamic ranges"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Iconic spherical design prevents surface sound diffraction",
+          "Substantial acoustic density resulting in a weight of 11.4 kg",
+          "Hermetically sealed structure to withstand massive air pressure",
+          "Available in exclusive Light Pearl and Deep Forest finishes",
+          "Optimized for large and ultra-premium architectural spaces",
+          "Seamless integration with Devialet mounting accessories"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Universal 100-240V AC internal switching power supply",
+          "Improved output stability and thermal management for heavy use",
+          "Advanced passive heat dissipation ensures silent operation",
+          "Intelligent auto-standby mode preserves electronic lifespan",
+          "Gold-plated internal power contacts for extreme signal integrity",
+          "No external power adapter required for a clean aesthetic"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Dual-band Wi-Fi (a/b/g/n/ac) and Gigabit Ethernet built-in",
+          "Bluetooth A2DP/AVRCP with high-resolution codec support",
+          "Optical TOSLINK input for direct digital connections",
+          "Seamless Multi-Room integration via the Devialet application",
+          "Apple AirPlay 2, Spotify Connect, and UPnP ready",
+          "Future-ready software platform supports over-the-air updates"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Phantom I 108 dB Ultimate Edition",
+      "Devialet Remote (Matching Finish)",
+      "Premium Heavy-Duty Power Cable",
+      "Bespoke Protective Pouch",
+      "Quick Start Guide and Warranty"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.devialet.com/demo/phantom1-ultimate.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }
+    ],
+    "variants": [
+      { "color": "Light Pearl", "size": "Standard", "stock": 5, "price": 408999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "Deep Forest", "size": "Standard", "stock": 5, "price": 408999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 10
+  },
+  {
+    "name": "Devialet Phantom I 108 dB (Ultimate Edition) Opéra de Paris",
+    "brand": "Devialet",
+    "category": "Premium Audio",
+    "description": "<h2>Devialet Phantom I Ultimate Opéra de Paris: The Crown Jewel</h2><p>Representing the absolute pinnacle of Devialet design, the <strong>Ultimate Edition Opéra de Paris</strong> combines cutting-edge audio with iconic Parisian craftsmanship. Designed to stand out in premium residences, it delivers room-shaking 108 dB sound draped in exquisite gold.</p><h3>Hand-Crafted Luxury</h3><p>The side plates are meticulously adorned with hand-applied <strong>22-carat gold-plated detailing</strong> by master gilders in Paris. Underneath this breathtaking exterior lies Devialet’s most advanced platform, producing a staggering, distortion-free acoustic experience.</p>",
+    "price": 482999,
+    "discountPrice": 482999,
+    "highlights": [
+      { "iconName": "Star", "title": "22-Carat Gold Detail" },
+      { "iconName": "Volume", "title": "108 dB SPL Power" },
+      { "iconName": "Shield", "title": "Ultimate Architecture" },
+      { "iconName": "Zap", "title": "Heart Bass Implosion" },
+      { "iconName": "Wifi", "title": "High-Res Streaming" },
+      { "iconName": "Settings", "title": "Enhanced ADH®" },
+      { "iconName": "Smartphone", "title": "Devialet App Sync" },
+      { "iconName": "Music", "title": "Collector's Edition" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Flagship Acoustic Power: 108 dB SPL at 1 meter",
+          "Heart Bass Implosion® (HBI) Technology with dual opposed woofers",
+          "Enhanced ADH® Hybrid Amplification for maximum fidelity",
+          "Advanced SAM® (Speaker Active Matching) for real-time driver alignment",
+          "Ultra-Low Distortion even at extreme volume levels",
+          "Expanded Soundstage capturing the highest dynamic ranges"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Hand-applied 22-Carat Gold-Plated signature detailing",
+          "Iconic spherical design prevents surface sound diffraction",
+          "Substantial acoustic density resulting in a weight of 11.4 kg",
+          "Hermetically sealed structure to withstand massive air pressure",
+          "A collector’s edition designed for statement interiors",
+          "Seamless integration with Devialet mounting accessories"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Universal 100-240V AC internal switching power supply",
+          "Improved output stability and thermal management for heavy use",
+          "Advanced passive heat dissipation ensures silent operation",
+          "Intelligent auto-standby mode preserves electronic lifespan",
+          "Gold-plated internal power contacts for extreme signal integrity",
+          "No external power adapter required for a clean aesthetic"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Dual-band Wi-Fi (a/b/g/n/ac) and Gigabit Ethernet built-in",
+          "Bluetooth A2DP/AVRCP with high-resolution codec support",
+          "Optical TOSLINK input for direct digital connections",
+          "Seamless Multi-Room integration via the Devialet application",
+          "Apple AirPlay 2, Spotify Connect, and UPnP ready",
+          "Future-ready software platform supports over-the-air updates"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Phantom I Ultimate Opéra de Paris",
+      "Devialet Remote (Gold Accented)",
+      "Premium Heavy-Duty Power Cable",
+      "Certificate of Authenticity",
+      "Microfiber Cleaning Cloth",
+      "Bespoke Protective Pouch"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.devialet.com/demo/phantom-ultimate-opera.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Opéra de Paris (Gold)", "size": "Standard", "stock": 5, "price": 482999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 5
+  },
+  {
+    "name": "Devialet Arch",
+    "brand": "Devialet",
+    "category": "Devialet Accessories",
+    "description": "<h2>Devialet Arch: The Wireless Bridge</h2><p>The <strong>Devialet Arch</strong> is the newest milestone in the quest to bring pure sound to everyone. This minimalist monolithic box acts as a high-fidelity wireless bridge, allowing you to connect legacy audio sources—including turntables—directly to your Phantom speaker system without running long cables.</p><h3>Audiophile Analog-to-Digital</h3><p>Featuring an integrated, ultra-high-quality phono stage, the Arch accepts direct connection from a turntable and perfectly digitizes the analog signal, beaming it wirelessly to your speakers with zero degradation.</p>",
+    "price": 75000,
+    "discountPrice": 75000,
+    "highlights": [
+      { "iconName": "Settings", "title": "Phono Stage Built-in" },
+      { "iconName": "Zap", "title": "High-Quality Streaming" },
+      { "iconName": "Wifi", "title": "Wireless Bridge" },
+      { "iconName": "Shield", "title": "Monolithic Design" },
+      { "iconName": "Volume", "title": "Audiophile ADC" },
+      { "iconName": "Star", "title": "Perfect Sync" },
+      { "iconName": "Music", "title": "Vinyl Ready" },
+      { "iconName": "Smartphone", "title": "App Controlled" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Built-in MM/MC compatible Phono pre-amplifier stage",
+          "Audiophile-grade Analog-to-Digital Converter (ADC)",
+          "Supports digital sampling rates up to 24-bit/96kHz",
+          "Zero-latency transmission protocol prevents audio drift",
+          "Preserves the warmth of analog sources while eliminating noise",
+          "Can also be configured for standard Line-In level signals"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Radically minimalist monolithic design: 110 x 110 x 30 mm",
+          "Weight: 0.4 kg, providing a dense, premium feel",
+          "Seamless white matte polycarbonate exterior casing",
+          "Anti-slip vibration-damping silicone rubber base",
+          "No visible buttons; operates entirely via app control",
+          "Single discreet LED indicator for network and power status"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Powered via an included universal 100-240V AC adapter",
+          "Ultra-low power consumption when in network standby",
+          "Internal circuitry isolated from power supply noise",
+          "Auto-wake functionality when analog signal is detected",
+          "No internal battery; designed for permanent installation",
+          "Thermal efficiency ensures the unit remains cool to the touch"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Inputs: RCA Left/Right analog inputs with a dedicated Phono ground peg",
+          "Network: Dual-band Wi-Fi (a/b/g/n/ac) and 10/100 Ethernet port",
+          "Streams directly to Phantom I and Phantom II over local network",
+          "Configuration and input switching managed via Devialet App",
+          "Can handle digital coaxial inputs via a specialized adapter cable",
+          "Over-the-air firmware update capability for future enhancements"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Devialet Arch Wireless Bridge",
+      "Dedicated Power Supply Cable",
+      "RCA to Digital Coaxial Adapter",
+      "Quick Start Network Guide",
+      "International Warranty Card"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.devialet.com/demo/arch.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }
+    ],
+    "variants": [
+      { "color": "Iconic White", "size": "Standard", "stock": 10, "price": 75000, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 10
+  },
+  {
+    "name": "Devialet Cocoon",
+    "brand": "Devialet",
+    "category": "Devialet Accessories",
+    "description": "<h2>Devialet Cocoon: Custom-Made Protection</h2><p>Take your Devialet speaker anywhere with absolute peace of mind. The <strong>Cocoon</strong> is a high-tech carrying case that guarantees flawless protection while on the move. Crafted to exactly mirror the curves of your speaker, it represents the intersection of French luxury luggage and acoustic safeguarding.</p><h3>Premium Materials</h3><p>Made from an ultra-robust composite core and covered with <strong>natural wool felt</strong>, Cocoon acts as an impenetrable shield. Genuine leather straps and aluminum hardware ensure it carries as beautifully as it protects.</p>",
+    "price": 40000,
+    "discountPrice": 40000,
+    "highlights": [
+      { "iconName": "Shield", "title": "Ultimate Protection" },
+      { "iconName": "Star", "title": "Premium Wool Felt" },
+      { "iconName": "Settings", "title": "Custom Fit Interior" },
+      { "iconName": "Zap", "title": "Shock Absorbent" },
+      { "iconName": "Shield", "title": "Aluminum Hardware" },
+      { "iconName": "Star", "title": "Leather Handles" },
+      { "iconName": "Volume", "title": "Water Repellent" },
+      { "iconName": "Settings", "title": "Accessory Pouch" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Designed solely for transport, not for acoustic playback",
+          "Internal padded contours protect the sensitive lateral bass drivers",
+          "Rigid outer shell prevents compression damage to the front tweeter",
+          "Soft inner lining protects the flawless exterior finish from scratches",
+          "Prevents dust and particle ingress during long-term storage",
+          "Maintains the pristine acoustic calibration by preventing shock"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Custom-molded exact fit depending on speaker variant",
+          "Exterior clad in luxurious, naturally water-repellent wool felt",
+          "Ultra-robust hardened composite inner shell",
+          "Genuine French leather carrying handles for ergonomic transport",
+          "Custom-forged aluminum carabiners and zipper pulls",
+          "Base features rubberized feet to stand upright securely"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Includes a dedicated internal compartment for the power cable",
+          "Safely isolates the metal plug to prevent scratching the speaker",
+          "Maintains the integrity of the power cord during travel",
+          "No internal electronics or batteries included in the case",
+          "Thermally insulating wool protects the speaker from temperature extremes",
+          "Designed to carry the Devialet Remote in a secure pocket"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Heavy-duty waterproof zipper secures the entire enclosure",
+          "Optional padded shoulder strap for hands-free carrying",
+          "Quick-access design allows for rapid packing and unpacking",
+          "Internal straps securely lock the speaker chassis in place",
+          "Does not interfere with any speaker ports while stored",
+          "Travel-ready size suitable for car trunks or overhead bins"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Devialet Cocoon Carrying Case",
+      "Detachable Leather Shoulder Strap",
+      "Removable Accessory Pouch",
+      "Authenticity Certificate",
+      "Care and Maintenance Guide"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.devialet.com/demo/cocoon.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Charcoal Grey", "size": "For Phantom I", "stock": 10, "price": 40000, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "Jupiter Orange", "size": "For Phantom II", "stock": 10, "price": 31999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "Light Grey", "size": "For Mania", "stock": 10, "price": 13999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 30
+  },
+  {
+    "name": "Devialet Tree",
+    "brand": "Devialet",
+    "category": "Devialet Accessories",
+    "description": "<h2>Devialet Tree: Elevate Your Sound</h2><p>The <strong>Devialet Tree</strong> is not just a stand; it is a vital acoustic extension. It raises your Phantom to the ideal listening height with absolute precision, ensuring that the ultra-dense sound hits you exactly as intended. A seamless blend of high-end aesthetics and acoustic engineering.</p><h3>Architectural Integration</h3><p>Designed in Devialet's Parisian studios, Tree perfectly conceals all cables within its ultra-resistant cast aluminum column, maintaining the flawless, alien aesthetic of the speaker while providing unshakeable acoustic stability.</p>",
+    "price": 51999,
+    "discountPrice": 51999,
+    "highlights": [
+      { "iconName": "Star", "title": "Iconic Design" },
+      { "iconName": "Settings", "title": "Thermal Dissipation" },
+      { "iconName": "Zap", "title": "Hidden Cable Routing" },
+      { "iconName": "Volume", "title": "Acoustic Elevation" },
+      { "iconName": "Shield", "title": "Aluminum Base" },
+      { "iconName": "Music", "title": "Perfect Stereo Setup" },
+      { "iconName": "Settings", "title": "Anti-Vibration Fit" },
+      { "iconName": "Droplets", "title": "Flawless Finish" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Elevates the speaker tweeter to the exact optimal ear level",
+          "Decouples the speaker from the floor to prevent bass resonance",
+          "Maintains perfect spherical sound dispersion",
+          "Zero rattling or mechanical noise during high-excursion bass",
+          "Provides the perfect baseline for a dual-speaker stereo image",
+          "Eliminates floor boundary acoustic interference completely"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Perfectly contoured mounting bracket specific to the speaker model",
+          "Ultra-resistant, weighted cast aluminum base for maximum stability",
+          "Height and weight varies precisely by speaker size (Phantom I/II/Ultimate)",
+          "Matches the finish and design language of the chosen Phantom",
+          "Integrated anti-vibration silicone footing pads",
+          "Sleek, refined silhouette that enhances modern interiors"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Internal routing channel completely conceals the power cable",
+          "Acts as a passive heat sink to aid in thermal dissipation",
+          "Eliminates cable trip hazards and floor clutter",
+          "Secure locking mechanism prevents accidental power disconnect",
+          "Maintains optimal operating temperature for the speaker",
+          "Preserves the pristine visual lines of the power setup"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Hidden channel accommodates Ethernet and optical wiring",
+          "Preserves unhindered Wi-Fi antenna broadcast radius",
+          "Maintains clear line-of-sight for Bluetooth connectivity",
+          "No metallic interference with internal wireless electronics",
+          "Allows full physical access to the rear speaker ports",
+          "Tool-free or simple installation process"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Devialet Tree Base",
+      "Devialet Tree Column",
+      "Power Cable Extension",
+      "Hex Key Assembly Tool",
+      "Assembly Guide and Documentation"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.devialet.com/demo/tree.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }
+    ],
+    "variants": [
+      { "color": "Iconic White", "size": "For Phantom I", "stock": 10, "price": 51999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "Matte Black", "size": "For Phantom I", "stock": 10, "price": 51999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "Light Pearl", "size": "For Ultimate 108 dB", "stock": 10, "price": 49999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "Deep Forest", "size": "For Ultimate 108 dB", "stock": 10, "price": 49999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "Iconic White", "size": "For Ultimate 108 dB", "stock": 10, "price": 49999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "Iconic White", "size": "For Phantom II 98 dB", "stock": 10, "price": 27000, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "Matte Black", "size": "For Phantom II 98 dB", "stock": 10, "price": 27000, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "Light Pearl", "size": "For Ultimate 98 dB", "stock": 10, "price": 29999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "Deep Forest", "size": "For Ultimate 98 dB", "stock": 10, "price": 29999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "Iconic White", "size": "For Ultimate 98 dB", "stock": 10, "price": 29999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 100
+  },
+  {
+    "name": "Devialet Treepod",
+    "brand": "Devialet",
+    "category": "Devialet Accessories",
+    "description": "<h2>Devialet Treepod: Aesthetic Acoustic Support</h2><p>Merging industrial design with organic warmth, the <strong>Treepod</strong> is a striking base for the Phantom series. Featuring a precision tripod architecture and hand-polished accents, it is both an exceptional acoustic stand and a masterpiece of design.</p><h3>Flawless Integration</h3><p>The Treepod elevates your Phantom, decoupling it from surfaces to ensure the extreme low-frequencies remain pure and tight. It seamlessly attaches to the speaker, creating a floating illusion that defines modern luxury.</p>",
+    "price": 38000,
+    "discountPrice": 38000,
+    "highlights": [
+      { "iconName": "Star", "title": "Minimalist Tripod" },
+      { "iconName": "Settings", "title": "Acoustic Elevation" },
+      { "iconName": "Shield", "title": "Aluminum Cast Core" },
+      { "iconName": "Zap", "title": "Thermal Sink" },
+      { "iconName": "Volume", "title": "Bass Decoupling" },
+      { "iconName": "Star", "title": "Hand-Polished Finish" },
+      { "iconName": "Music", "title": "Zero Diffraction" },
+      { "iconName": "Settings", "title": "Secure Locking" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Effectively decouples the speaker from desks or low tables",
+          "Prevents surface sympathetic resonance during heavy bass",
+          "Maintains the spherical, omnidirectional sound dispersion",
+          "Elevates drivers for a clearer mid-range line of sight",
+          "Acoustically inert legs prevent vibration transfer",
+          "Perfect for creating a near-field audiophile listening setup"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Three-leg precision structure for unshakeable stability",
+          "Central connecting block forged from hand-polished aluminum cast",
+          "Lightweight yet incredibly rigid structural design",
+          "Flawless locking mechanism tailored exactly to the specific Phantom model",
+          "Wood or premium metal finish depending on variant",
+          "Sustainably sourced and assembled materials"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Solid aluminum core acts as an effective passive heat sink",
+          "Draws thermal energy away from the Phantom's internal amplifiers",
+          "Allows unrestricted airflow underneath the speaker chassis",
+          "Features a dedicated rear routing slot for the power cable",
+          "Keeps power lines neatly managed and off the immediate surface",
+          "Maintains safety standards by securing the high-current cable"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Open architectural design leaves all rear ports easily accessible",
+          "No metallic shielding to interfere with Wi-Fi or Bluetooth",
+          "Optical cables can be routed discreetly alongside the power line",
+          "Allows for rapid physical connection/disconnection of ethernet",
+          "Preserves the touch-sensitive control area on the Phantom",
+          "Simple and instant installation process"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Devialet Treepod Aluminum Core",
+      "Three (3) Structural Legs",
+      "Mounting Screws and Hex Key",
+      "Quick Assembly Guide",
+      "Authenticity Card"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.devialet.com/demo/treepod.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "Iconic White", "size": "For Phantom I", "stock": 10, "price": 38000, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "Matte Black", "size": "For Phantom I", "stock": 10, "price": 38000, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "Light Pearl", "size": "For Ultimate 108 dB", "stock": 10, "price": 39999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "Deep Forest", "size": "For Ultimate 108 dB", "stock": 10, "price": 39999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] }
+    ],
+    "isActive": true,
+    "stock": 40
+  },
+  {
+    "name": "Devialet Gecko",
+    "brand": "Devialet",
+    "category": "Devialet Accessories",
+    "description": "<h2>Devialet Gecko: Radical Wall Mount</h2><p>The <strong>Gecko</strong> wall mount is an incredible piece of engineering designed to defy gravity. Its radically minimalist design guarantees absolute precision, stability, and perfect mechanical resistance to hold the immense power of your Phantom flush against your wall.</p><h3>Acoustic Isolation</h3><p>Crafted from powder-coated aluminum, the Gecko isolates your speaker from the wall structure, allowing the sound to project freely without structural rattling. It enables horizontal panning so you can aim the sound stage perfectly into the room.</p>",
+    "price": 29500,
+    "discountPrice": 29500,
+    "highlights": [
+      { "iconName": "Settings", "title": "Ultra-Secure Mount" },
+      { "iconName": "Star", "title": "Minimalist Design" },
+      { "iconName": "Volume", "title": "Acoustic Isolation" },
+      { "iconName": "Settings", "title": "Pan Adjustable" },
+      { "iconName": "Shield", "title": "Cast Aluminum Build" },
+      { "iconName": "Zap", "title": "Concealed Wiring" },
+      { "iconName": "Music", "title": "Zero Wall Resonance" },
+      { "iconName": "Droplets", "title": "Powder-Coated Finish" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Physically isolates the Phantom to prevent wall resonance",
+          "Allows ±45 degree horizontal panning for perfect stereo imaging",
+          "Projects sound out from the wall to maintain spherical dispersion",
+          "Zero rattling even at maximum dB SPL output",
+          "Eliminates bass-trap corners by allowing precise angling",
+          "Preserves the full clarity and impact of the Heart Bass Implosion"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Constructed from a single block of powder-coated cast aluminum",
+          "Engineered to support massive speaker weights safely",
+          "Available in premium finishes matching specific Phantom models",
+          "Minimalist floating design aesthetic creates a visual centerpiece",
+          "Heavy-duty locking mechanism secures the speaker chassis",
+          "Professional installation ready for luxury residences"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Designed for seamless integration with in-wall wiring",
+          "Central hollow conduit allows power cables to pass through unseen",
+          "Acts as a solid thermal conduit away from the rear heatsink",
+          "Ensures the power cable cannot be accidentally disconnected",
+          "Safe for continuous high-current power delivery",
+          "Meets strict fire and safety standards for wall mounts"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Rear conduit supports optical and ethernet cable routing",
+          "Leaves the rear panel fully accessible for reset or pairing",
+          "Does not introduce metallic Faraday cage effects to Wi-Fi",
+          "Maintains Bluetooth line-of-sight for direct mobile streaming",
+          "Simplifies multi-channel theater or stereo pair installations",
+          "Provides a clean, wire-free aesthetic from the front"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Devialet Gecko Wall Mount",
+      "Wall Anchor and Heavy-Duty Screw Set",
+      "Speaker Attachment Bracket",
+      "Installation Template",
+      "Detailed Assembly Manual"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.devialet.com/demo/gecko.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }
+    ],
+    "variants": [
+      { "color": "White Ceramic", "size": "For Phantom I", "stock": 10, "price": 29500, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "Light Pearl", "size": "For Ultimate 108 dB", "stock": 10, "price": 29999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "Deep Forest", "size": "For Ultimate 108 dB", "stock": 10, "price": 29999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "Iconic White", "size": "For Ultimate 108 dB", "stock": 10, "price": 29999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "White Ceramic", "size": "For Ultimate 98 dB", "stock": 10, "price": 19000, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "Light Pearl", "size": "For Ultimate 98 dB", "stock": 10, "price": 29999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "Deep Forest", "size": "For Ultimate 98 dB", "stock": 10, "price": 29999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "Iconic White", "size": "For Ultimate 98 dB", "stock": 10, "price": 29999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 80
+  },
+  {
+    "name": "Devialet Remote",
+    "brand": "Devialet",
+    "category": "Devialet Accessories",
+    "description": "<h2>Devialet Remote: Absolute Control</h2><p>Control the immense power of your Devialet speakers with extreme precision. The <strong>Devialet Remote</strong> seamlessly integrates into your setup, offering a deeply satisfying physical interface for volume control and playback management. It is a masterpiece of minimalist technology.</p><h3>Tactile Precision</h3><p>Featuring a smooth, heavy-weighted volume ring and an integrated LED matrix screen, the Remote gives you instant visual and physical feedback. Connects wirelessly via Bluetooth Low Energy for instant, zero-latency response.</p>",
+    "price": 27000,
+    "discountPrice": 27000,
+    "highlights": [
+      { "iconName": "Settings", "title": "Precision Control" },
+      { "iconName": "Bluetooth", "title": "BLE Connection" },
+      { "iconName": "Battery", "title": "Rechargeable Battery" },
+      { "iconName": "Star", "title": "LED Matrix Display" },
+      { "iconName": "Volume", "title": "Haptic Volume Ring" },
+      { "iconName": "Zap", "title": "Zero Latency" },
+      { "iconName": "Shield", "title": "Stainless Steel Base" },
+      { "iconName": "Music", "title": "Play/Pause Touch" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Provides ultra-fine, granular control over Devialet volume levels",
+          "Controls playback (Play, Pause, Skip) with a simple touch",
+          "Instantly mutes the speaker system for unexpected interruptions",
+          "Zero-latency response ensures volume changes are instantaneous",
+          "Can control a single speaker or a fully grouped multi-room setup",
+          "Operates silently with a smooth, damped rotational mechanism"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Minimalist, puck-shaped design: 80 mm diameter x 21 mm height",
+          "Substantial weight provides a premium, non-slip desk feel",
+          "Rotational ring crafted from bead-blasted aluminum",
+          "Base constructed from high-grade stainless steel with rubber footing",
+          "Top surface features an elegant dot-matrix LED display",
+          "Available in finishes perfectly matched to Phantom models"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Built-in rechargeable Lithium-ion battery for true wireless use",
+          "Ultra-low power consumption provides months of use on a single charge",
+          "Charges conveniently via the included USB cable",
+          "Auto-sleep mode activates immediately when not in use",
+          "LED matrix displays battery status when running low",
+          "Can be used continuously while plugged into a power source"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Utilizes Bluetooth Low Energy (BLE) for reliable, long-range connection",
+          "Specifically optimized pairing for Phantom I, II, and Ultimate",
+          "Capacitive touch interface on the top glass panel",
+          "Rotational ring for absolute volume adjustment",
+          "Over-the-air firmware updates via the Devialet mobile app",
+          "Standalone pairing button located on the base"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Devialet Remote",
+      "USB Charging Cable",
+      "Quick Setup Guide",
+      "Safety and Compliance Leaflet",
+      "International Warranty Card"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.devialet.com/demo/remote.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }
+    ],
+    "variants": [
+      { "color": "Iconic White", "size": "For Phantom I", "stock": 10, "price": 27000, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "Matte Black", "size": "For Phantom I", "stock": 10, "price": 27000, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "Iconic White", "size": "For Phantom II", "stock": 10, "price": 27000, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "Matte Black", "size": "For Phantom II", "stock": 10, "price": 27000, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "Aluminium", "size": "For Phantom Ultimate", "stock": 10, "price": 24999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 50
+  },
+  {
+    "name": "Sanus Floor Stand",
+    "brand": "Sonos",
+    "category": "Sonos Accessories",
+    "description": "<h2>Sanus Floor Stand: Elevate Your Sonos</h2><p>Designed specifically for Sonos speakers, the <strong>Sanus Floor Stand</strong> holds your speaker at the exact optimal listening height. Whether you're setting up a stereo pair for music or positioning rear surrounds for your home theater, this stand delivers uncompromised acoustic positioning.</p><h3>Clean and Secure</h3><p>Constructed from premium steel and aluminum, it provides a solid, vibration-free base. The integrated cable management track completely conceals the power cord, keeping your room looking immaculate.</p>",
+    "price": 7999,
+    "discountPrice": 7999,
+    "highlights": [
+      { "iconName": "Settings", "title": "Optimal Ear Height" },
+      { "iconName": "Zap", "title": "Cable Management" },
+      { "iconName": "Shield", "title": "Steel Construction" },
+      { "iconName": "Volume", "title": "Acoustic Decoupling" },
+      { "iconName": "Star", "title": "Color Matched" },
+      { "iconName": "Music", "title": "Perfect for Surrounds" },
+      { "iconName": "Settings", "title": "Secure Locking" },
+      { "iconName": "Shield", "title": "Anti-Vibration Base" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Acoustically inert materials prevent mechanical resonance",
+          "Positions tweeter at the exact optimal seated listening height",
+          "Decreases floor boundary interference for cleaner bass",
+          "Maintains the speaker's Trueplay tuning calibration",
+          "Reduces low-frequency bass trapping in room corners",
+          "Pure mechanical decoupling isolates speaker from floor vibrations"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Solid powder-coated steel and aluminum construction",
+          "Height varies slightly based on specific Sonos model compatibility",
+          "Heavy weighted base ensures extreme stability",
+          "Includes anti-scratch rubber feet for hardwood floors",
+          "Integrated vertical cable management track",
+          "Color-matched exactly to Sonos Black and White finishes"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Fully passive stand architecture",
+          "Zero electrical power consumption",
+          "Hollow column allows seamless routing of AC power cables",
+          "Safe grounding materials utilized throughout",
+          "No internal battery or wiring required",
+          "Heat resistant finish will not warp from speaker warmth"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Physical locking mechanism secures the speaker to the stand",
+          "Custom molded specifically for Era 100, Era 300, or Five",
+          "Easy 15-minute tool-free or minimal-tool assembly",
+          "Includes all required screws and mounting hardware",
+          "Easily repositionable from room to room",
+          "Firm base footprint prevents tipping in high-traffic areas"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sanus Floor Stand Base",
+      "Vertical Support Column",
+      "Speaker Mounting Bracket",
+      "Assembly Hardware Kit",
+      "Installation Instructions"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/sanus-stand.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }
+    ],
+    "variants": [
+      { "color": "Black", "size": "For Sonos Era 100", "stock": 10, "price": 7999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "White", "size": "For Sonos Era 300", "stock": 10, "price": 15999, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "Black", "size": "For Sonos Five", "stock": 10, "price": 12999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 30
+  },
+  {
+    "name": "Sanus Wall Mount",
+    "brand": "Sonos",
+    "category": "Sonos Accessories",
+    "description": "<h2>Sanus Wall Mount: Invisible Audio Integration</h2><p>Free up your media console and mount your Sonos speaker securely with the <strong>Sanus Wall Mount</strong>. Specifically engineered for Sonos soundbars and portable speakers, it provides a flush, floating aesthetic that complements your television perfectly.</p><h3>Acoustically Optimized</h3><p>Unlike generic mounts, this is designed to eliminate wall rattle and preserve the acoustic projection of your speaker, ensuring that upward-firing Atmos drivers remain completely unobstructed.</p>",
+    "price": 6999,
+    "discountPrice": 6999,
+    "highlights": [
+      { "iconName": "Settings", "title": "Flush Wall Mount" },
+      { "iconName": "Shield", "title": "Zero Wall Rattle" },
+      { "iconName": "Zap", "title": "Cable Routing" },
+      { "iconName": "Volume", "title": "Preserves Acoustics" },
+      { "iconName": "Star", "title": "Color Matched" },
+      { "iconName": "Music", "title": "Unobstructed Atmos" },
+      { "iconName": "Settings", "title": "Sliding Adjustment" },
+      { "iconName": "Shield", "title": "Heavy-Duty Steel" }
+    ],
+    "techSpecs": [
+      {
+        "category": "Audio",
+        "details": [
+          "Flush mounting preserves the speaker's forward acoustic projection",
+          "Vibration-damping pads completely eliminate drywall rattle",
+          "Unobstructed path for far-field microphone arrays",
+          "Preserves spatial audio from upward-firing Atmos drivers",
+          "Solid anchoring against the wall enhances bass response",
+          "Acoustically transparent structural design"
+        ]
+      },
+      {
+        "category": "Dimensions & Build",
+        "details": [
+          "Low-profile, nearly invisible mounting architecture",
+          "Constructed from premium powder-coated heavy-gauge steel",
+          "Precision-engineered cutouts for rear speaker ports",
+          "Weight capacity safely exceeds the weight of the speaker",
+          "Minimalist aesthetic does not distract from the TV",
+          "Color-matched finishing to blend with Sonos units"
+        ]
+      },
+      {
+        "category": "Power & Battery",
+        "details": [
+          "Fully passive hardware accessory",
+          "Zero electrical interference with the speaker",
+          "Strategic cutouts allow for clean power cable routing",
+          "Safe for routing in-wall rated electrical cables",
+          "No internal battery or power requirements",
+          "Thermal dissipation friendly for the soundbar's heat sync"
+        ]
+      },
+      {
+        "category": "Connectivity & Controls",
+        "details": [
+          "Includes wall bracket and speaker locking mechanism",
+          "Specifically molded for Sonos Arc, Beam, or Move",
+          "Installs securely into drywall, concrete, or wood studs",
+          "Includes a wall-mounting template for perfect placement",
+          "Sliding lateral adjustment allows for perfect TV leveling",
+          "Secure release latch for easy speaker removal"
+        ]
+      }
+    ],
+    "inTheBox": [
+      "Sanus Wall Mount Bracket",
+      "Wall Anchors and Screws",
+      "Speaker Attachment Hardware",
+      "Mounting Template",
+      "Installation Guide"
+    ],
+    "promotionalVideo": {
+      "url": "https://www.sonos.com/demo/sanus-mount.mp4",
+      "thumbnailUrl": "https://images.unsplash.com/photo-1545454675-3531b543be5d"
+    },
+    "images": [
+      { "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }
+    ],
+    "variants": [
+      { "color": "White", "size": "For Sonos Arc", "stock": 10, "price": 8499, "images": [{ "url": "https://images.unsplash.com/photo-1545454675-3531b543be5d" }] },
+      { "color": "Black", "size": "For Sonos Beam", "stock": 10, "price": 6999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] },
+      { "color": "Black", "size": "For Sonos Move", "stock": 10, "price": 6999, "images": [{ "url": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1" }] }
+    ],
+    "isActive": true,
+    "stock": 30
+  }
+];
+
+const allproduct=[...allProducts,...mergedProducts,...mergedProductsBatch5, ...sonosBatch1,...sonosBatch2,...sonosBatch3,...sonosBatch4,...devialetBatch1,...finalBatchProducts];
 module.exports=allproduct;

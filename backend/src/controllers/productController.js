@@ -35,6 +35,20 @@ exports.createProduct = wrapAsync(async (req, res, next) => {
     if (req.body.inTheBox) productData.inTheBox = JSON.parse(req.body.inTheBox);
     if (req.body.promotionalVideo) productData.promotionalVideo = JSON.parse(req.body.promotionalVideo);
 
+    // ⚡ FIX: BOUGHT TOGETHER PARSING ⚡
+    if (req.body.boughtTogether !== undefined) {
+        try {
+            if (req.body.boughtTogether === '') {
+                productData.boughtTogether = [];
+            } else {
+                const parsedBT = JSON.parse(req.body.boughtTogether);
+                productData.boughtTogether = Array.isArray(parsedBT) ? parsedBT.filter(id => id && id.length === 24) : [];
+            }
+        } catch (e) {
+            productData.boughtTogether = [];
+        }
+    }
+
     const variantImageFiles = req.files?.filter(f => f.fieldname.startsWith('variantImages_')) || [];
 
     if (req.body.variants) {
@@ -56,12 +70,10 @@ exports.createProduct = wrapAsync(async (req, res, next) => {
             });
 
             for (const variantFile of thisVariantImages) {
-                // Optimize image with Sharp
                 const optimizedBuffer = await sharp(variantFile.buffer)
                     .webp({ quality: 80 }) 
                     .toBuffer();
 
-                // CLOUDFLARE R2 UPLOAD
                 const key = `Products/${Date.now()}-${Math.random().toString(36).substr(2, 5)}.webp`;
                 
                 await r2.send(new PutObjectCommand({
@@ -77,7 +89,6 @@ exports.createProduct = wrapAsync(async (req, res, next) => {
         }
         productData.variants = processedVariants;
         
-        // Product ki main 'images' array mein first variant ki first image daal do (Display ke liye)
         if (processedVariants[0]?.images?.length > 0) {
             productData.images = [processedVariants[0].images[0]];
         }
@@ -97,7 +108,6 @@ exports.getAllProducts = wrapAsync(async (req, res, next) => {
     if (category) filter.category = { $in: category.split(',') };
     if (brand) filter.brand = { $in: brand.split(',') };
     
-    // Note: Premium fields (techSpecs, etc.) yahan get nahi kar rahe taaki API fast rahe. Wo details page par milenge.
     const products = await Product.find(filter)
         .select('name price discountPrice images brand category flashDeal variants ratings highlights')
         .lean(); 
@@ -106,13 +116,12 @@ exports.getAllProducts = wrapAsync(async (req, res, next) => {
 });
 
 // -------------------------------------------------------------------
-// 3. GET SINGLE PRODUCT (This will automatically fetch all Premium Fields)
+// 3. GET SINGLE PRODUCT
 // -------------------------------------------------------------------
 exports.getProductDetails = wrapAsync(async (req, res, next) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) throw new ExpressError(400, 'Invalid ID');
 
-    // ⚡ product details API saara naya data (techSpecs, video, etc) apne aap bhej degi kyunki lean() use hua hai
     const product = await Product.findById(id).populate('boughtTogether', 'name price discountPrice images brand category').lean();
     if (!product) throw new ExpressError(404, 'Product not found');
 
@@ -146,8 +155,26 @@ exports.updateProduct = wrapAsync(async (req, res, next) => {
     if (req.body.inTheBox) req.body.inTheBox = JSON.parse(req.body.inTheBox);
     if (req.body.promotionalVideo) req.body.promotionalVideo = JSON.parse(req.body.promotionalVideo);
 
+    // ⚡ FIX: BOUGHT TOGETHER SANITIZATION ⚡
+    if (req.body.boughtTogether !== undefined) {
+        try {
+            // Agar Frontend ne khali string bheji hai
+            if (req.body.boughtTogether === '') {
+                req.body.boughtTogether = [];
+            } 
+            // Agar Frontend ne JSON string bheji hai (jaise "['id']")
+            else if (typeof req.body.boughtTogether === 'string') {
+                const parsedBT = JSON.parse(req.body.boughtTogether);
+                req.body.boughtTogether = Array.isArray(parsedBT) ? parsedBT.filter(id => id && id.length === 24) : [];
+            }
+        } catch (e) {
+            req.body.boughtTogether = [];
+        }
+    }
+
+    // ⚡ FIX: Mongoose Warning removed by using returnDocument: 'after' instead of new: true
     const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, {
-        new: true,
+        returnDocument: 'after',
         runValidators: true,
     });
 
@@ -169,18 +196,15 @@ exports.deleteProduct = wrapAsync(async (req, res, next) => {
 exports.getAdminProducts = async (req, res, next) => {
     try {
         console.log("👉 Database se admin products fetch ho rahe hain...");
-        
         const products = await Product.find();
-        
         console.log(`✅ Success! ${products.length} products found.`);
         res.status(200).json({ success: true, count: products.length, products });
-        
     } catch (error) {
-        // Yeh line exact error bata degi ki DB kyu phat raha hai!
         console.error("🔥 ERROR IN getAdminProducts:", error); 
         res.status(500).json({ success: false, message: error.message });
     }
 };
+
 // -------------------------------------------------------------------
 // 7. TOGGLE FEATURED STATUS
 // -------------------------------------------------------------------
