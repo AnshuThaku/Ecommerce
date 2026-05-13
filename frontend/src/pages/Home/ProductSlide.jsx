@@ -205,8 +205,8 @@ export default function ProductSlide() {
           const { data } = await axiosInstance.get('/products');
           responseData = data;
         } else {
-          const response = await fetch('/products');
-          responseData = await response.json().catch(() => ({}));
+          const { data } = await axiosInstance.get('/products');
+          responseData = data || {};
         }
         
         if (responseData?.success && responseData.products) {

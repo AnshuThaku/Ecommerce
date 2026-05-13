@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axiosInstance from '../../utils/axiosInstance';
 import Toast from '../../components/Toast';
 import { useAuth } from '../../context/AuthContext';
 
@@ -63,11 +63,9 @@ const SetupPassword = () => {
 
     setLoading(true);
     try {
-      const token = localStorage.getItem('authToken');
-      const response = await axios.put(
-        '/api/auth/update-password',
-        { currentPassword: formData.currentPassword, newPassword: formData.newPassword },
-        { headers: { Authorization: `Bearer ${token}` } }
+      const response = await axiosInstance.put(
+        '/auth/update-password',
+        { currentPassword: formData.currentPassword, newPassword: formData.newPassword }
       );
       if (response.data.success) {
         setToast({ type: 'success', message: 'Password updated! Redirecting to dashboard...' });

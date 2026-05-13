@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import axiosInstance from '../utils/axiosInstance';
 
 const AuthContext = createContext(null);
 
@@ -43,7 +44,7 @@ export function AuthProvider({ children }) {
   const logout = useCallback(async () => {
     try {
       // Call the backend to clear the HTTP-Only cookie
-      await fetch('/api/auth/logout'); 
+      await axiosInstance.get('/auth/logout'); 
     } catch(err) {
       console.error(err);
     }

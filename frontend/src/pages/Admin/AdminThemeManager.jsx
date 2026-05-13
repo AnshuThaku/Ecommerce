@@ -1,6 +1,6 @@
 // src/pages/Admin/AdminThemeManager.jsx
 import React, { useState } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../utils/axiosInstance';
 import { Calendar, Tag, Save, PartyPopper, Clock, Sparkles, ChevronDown } from 'lucide-react';
 
 const FESTIVAL_PREVIEWS = {
@@ -34,9 +34,7 @@ export default function AdminThemeManager() {
     
     try {
       const token = localStorage.getItem('token'); 
-      const response = await axios.post('http://localhost:8080/api/theme/create', formData, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const response = await axiosInstance.post('/theme/create', formData);
       
       if(response.data.success) {
         setStatus({ type: 'success', message: '✨ Magic applied! Theme successfully scheduled.' });

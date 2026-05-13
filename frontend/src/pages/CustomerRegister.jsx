@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import axiosInstance from '../utils/axiosInstance';
 import Toast from '../components/Toast';
 import { useAuth } from '../context/AuthContext';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -48,7 +48,7 @@ export default function CustomerRegister() {
     setLoading(true);
     try {
       // ⚡ FIX 3: Backend ko formData ke sath captchaToken bhi bhejna hai
-      const response = await axios.post('/api/auth/register', {
+      const response = await axiosInstance.post('/auth/register', {
         ...formData,
         captchaToken: captchaToken // Backend me ye key check kar lena (captchaToken ya token)
       });
