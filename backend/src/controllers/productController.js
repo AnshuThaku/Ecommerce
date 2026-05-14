@@ -140,6 +140,9 @@ exports.getProductDetails = wrapAsync(async (req, res, next) => {
 // -------------------------------------------------------------------
 // 4. UPDATE PRODUCT
 // -------------------------------------------------------------------
+// -------------------------------------------------------------------
+// 4. UPDATE PRODUCT (FIXED: Added Image Upload Logic)
+// -------------------------------------------------------------------
 exports.updateProduct = wrapAsync(async (req, res, next) => {
     let product = await Product.findById(req.params.id);
     if (!product) throw new ExpressError(404, 'Product not found');
@@ -148,22 +151,18 @@ exports.updateProduct = wrapAsync(async (req, res, next) => {
     
     // ⚡ PARSE PREMIUM FIELDS ON UPDATE ⚡
     if (req.body.flashDeal) req.body.flashDeal = JSON.parse(req.body.flashDeal);
-    if (req.body.variants) req.body.variants = JSON.parse(req.body.variants);
     if (req.body.techSpecs) req.body.techSpecs = JSON.parse(req.body.techSpecs);
     if (req.body.lifestyleFeatures) req.body.lifestyleFeatures = JSON.parse(req.body.lifestyleFeatures);
     if (req.body.highlights) req.body.highlights = JSON.parse(req.body.highlights);
     if (req.body.inTheBox) req.body.inTheBox = JSON.parse(req.body.inTheBox);
     if (req.body.promotionalVideo) req.body.promotionalVideo = JSON.parse(req.body.promotionalVideo);
 
-    // ⚡ FIX: BOUGHT TOGETHER SANITIZATION ⚡
+    // ⚡ SANITIZE BOUGHT TOGETHER ⚡
     if (req.body.boughtTogether !== undefined) {
         try {
-            // Agar Frontend ne khali string bheji hai
             if (req.body.boughtTogether === '') {
                 req.body.boughtTogether = [];
-            } 
-            // Agar Frontend ne JSON string bheji hai (jaise "['id']")
-            else if (typeof req.body.boughtTogether === 'string') {
+            } else if (typeof req.body.boughtTogether === 'string') {
                 const parsedBT = JSON.parse(req.body.boughtTogether);
                 req.body.boughtTogether = Array.isArray(parsedBT) ? parsedBT.filter(id => id && id.length === 24) : [];
             }
@@ -172,7 +171,61 @@ exports.updateProduct = wrapAsync(async (req, res, next) => {
         }
     }
 
-    // ⚡ FIX: Mongoose Warning removed by using returnDocument: 'after' instead of new: true
+    // ⚡ THE MISSING MAGIC: IMAGE UPLOAD LOGIC FOR UPDATE ⚡
+    const variantImageFiles = req.files?.filter(f => f.fieldname.startsWith('variantImages_')) || [];
+
+    // Pehle se parse hoke aayega kyuki frontend stringify karke bhejta hai
+    if (req.body.variants) {
+        const variantsData = typeof req.body.variants === 'string' ? JSON.parse(req.body.variants) : req.body.variants;
+        const processedVariants = [];
+
+        for (let i = 0; i < variantsData.length; i++) {
+            const v = variantsData[i];
+            
+            // Purani images ko maintain rakho jo frontend ne retain ki hain
+            const variant = {
+                color: v.color, size: v.size,
+                stock: Number(v.stock) || 0,
+                price: v.price ? Number(v.price) : null,
+                images: v.existingImages || [] 
+            };
+
+            // Is variant ki nayi aayi hui images filter karo
+            const thisVariantImages = variantImageFiles.filter(f => {
+                const match = f.fieldname.match(/^variantImages_(\d+)_(\d+)$/);
+                return match && parseInt(match[1]) === i;
+            });
+
+            // Nayi images compress karke R2 par upload karo
+            for (const variantFile of thisVariantImages) {
+                const optimizedBuffer = await sharp(variantFile.buffer)
+                    .webp({ quality: 80 }) 
+                    .toBuffer();
+
+                const key = `Products/${Date.now()}-${Math.random().toString(36).substr(2, 5)}.webp`;
+                
+                await r2.send(new PutObjectCommand({
+                    Bucket: process.env.R2_BUCKET_NAME,
+                    Key: key,
+                    Body: optimizedBuffer, 
+                    ContentType: 'image/webp',
+                }));
+
+                // Upload hone ke baad nayi image variant array me daal do
+                variant.images.push({ public_id: key, url: `${process.env.R2_PUBLIC_URL}/${key}` });
+            }
+            processedVariants.push(variant);
+        }
+        
+        // Final variants array aur main product images update karo
+        req.body.variants = processedVariants;
+
+        if (processedVariants[0]?.images?.length > 0) {
+            req.body.images = [processedVariants[0].images[0]];
+        }
+    }
+
+    // ⚡ Ab save karo saari images aur text ke sath
     const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, {
         returnDocument: 'after',
         runValidators: true,
